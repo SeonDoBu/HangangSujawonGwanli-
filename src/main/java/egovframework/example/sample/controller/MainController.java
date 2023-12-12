@@ -9,13 +9,23 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MainController {
 	
-	@RequestMapping(value = "home")
+	@RequestMapping(value = "home.do")
 	public String home() {
 		return "home";
 	}
 	
-	@RequestMapping(value = "info")
+	@RequestMapping(value = "info.do")
 	public String info() {
 		return "info";
+	}
+	
+	@RequestMapping(value = "findId.do")
+	public String findIdForm() {
+		return "findIdPwForm";
+	}
+	
+	@RequestMapping(value = "findPw.do")
+	public String findPwForm() {
+		return "findIdPwForm";
 	}
 }

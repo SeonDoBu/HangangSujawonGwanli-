@@ -1,32 +1,33 @@
 <%@ page language="Java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/components/header.jsp"%>	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-	crossorigin="anonymous" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="/css/mainCss.css">
 
 <script type="text/javascript">
 	function pageMove(id) {
 		console.log("실행");
 		if (id === 1) {
-			location.href = 'info';
+			location.href = 'info.do';
 		} else {
-			location.href = 'notice';
+			location.href = 'notice.do';
 		}
 
+	}
+
+	function findIdPw() {
+		console.log("실행");
+	    var width = 500;
+	    var height = 400;
+	    var left = (window.screen.width / 2) - (width / 2);
+	    var top = (window.screen.height / 4);
+	    var windowStatus = 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top + ', scrollbars=yes, status=yes, resizable=yes, titlebar=yes';
+	    const url = 'findId.do'
+
+	    	window.open(url, "hello popup", windowStatus);
 	}
 </script>
 </head>
@@ -80,7 +81,10 @@
 					<button type="submit">L&nbsp;O&nbsp;G&nbsp;I&nbsp;N</button>
 				</div>
 				<div class="col main-second-id-pw-search-box">
-					<p>ID찾기&nbsp;|&nbsp;PW찾기</p>
+					<p>
+						<a onclick="findIdPw()">ID찾기</a>&nbsp;|&nbsp;<a
+							onclick="findIdPw()">PW찾기</a>
+					</p>
 				</div>
 			</div>
 		</div>
