@@ -17,7 +17,7 @@ public class DeptController {
 	public String find(Model model) throws Exception {
 		System.out.println("find 컨트롤러 시작!!");
 		
-		int deptno = 1;
+		int deptno = 2;
 		
 		Dept findUser = ds.findOnd(deptno);
 		
@@ -32,7 +32,7 @@ public class DeptController {
 	public String count(Model model) throws Exception {
 		System.out.println("count 컨트롤러 시작!!");
 
-		int totalCnt = ds.count();
+		int totalCnt = ds.count();  
 
 		model.addAttribute("cnt", totalCnt);
 
