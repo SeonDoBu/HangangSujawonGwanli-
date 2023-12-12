@@ -303,7 +303,7 @@
 	font-weight: bolder;
 }
 
-.main-find-auth-second option{
+.main-find-auth-second option {
 	font-size: 16px;
 	font-weight: bolder;
 }
@@ -372,4 +372,69 @@
 	width: 100px;
 	margin: 6px auto 6px 10px;
 	background-color: white;
+}
+
+.main-join-auth-box {
+	/* 	border: 1px solid red; */
+	height: 50px;
+	margin: -40px 0px -74px 0px;
+	padding: 0px;
+}
+
+.main-join-auth-first {
+	/* 	border: 1px solid #ff0080; */
+	width: 30%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.main-join-auth-first p {
+	font-size: 24px;
+	font-weight: bolder;
+	color: black;
+	margin-bottom: 0px;
+	margin-top: 4px;
+	margin-bottom: 0px;
+}
+
+.main-join-auth-second {
+	/* 	border: 1px solid #0000ff; */
+	
+}
+
+.main-join-auth-second input {
+	width: 120%;
+	height: 46px;
+}
+
+.main-join-auth-second select {
+	width: 120%;
+	height: 46px;
+	border: 2px solid #8C8C8C;
+	font-size: 18px;
+	font-weight: bolder;
+}
+
+.main-join-auth-second option {
+	font-size: 18px;
+	font-weight: bolder;
+}
+
+.main-second-join-btn-box {
+	/* 	border: 1px solid red; */
+	width: 100%;
+	height: 50px;
+	text-align: center;
+}
+
+.main-second-join-btn-box button {
+	width: 320px;
+	height: 40px;
+	border: 2px solid #003399;
+	border-radius: 8px;
+	background-color: #003399;
+	font-size: 16px;
+	font-weight: bold;
+	color: white;
+	margin: -30px 10px auto 10px;
 }

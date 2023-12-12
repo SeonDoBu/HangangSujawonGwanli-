@@ -35,6 +35,18 @@
 		}
 
 	}
+	
+    function loginLink() {
+        console.log("로그인 클릭됨");
+		location.href = 'home.do';
+
+    }
+
+    function signupLink() {
+        console.log("회원가입 클릭됨");
+		location.href = 'joinForm.do';
+    }
+
 </script>
 </head>
 <body>
@@ -58,7 +70,7 @@
 			<div class="row row-cols-1 main-second-box">
 				<div class="col main-second-title-box">
 					<p>
-						로그인&nbsp;&nbsp;&nbsp;<span>회원가입</span>
+						<a onclick="loginLink()">로그인</a>&nbsp;&nbsp;&nbsp;<span><a onclick="signupLink()">회원가입</a></span>
 					</p>
 				</div>
 				<div class="col main-second-md-title-box">
@@ -88,8 +100,8 @@
 				</div>
 				<div class="col main-second-id-pw-search-box">
 					<p>
-						<a onclick="findIdPw(1)">ID찾기</a>&nbsp;|&nbsp;<a
-							onclick="findIdPw(2)">PW찾기</a>
+						<a onclick="findIdPw(1)">ID찾기</a>&nbsp;|&nbsp;
+						<a onclick="findIdPw(2)">PW찾기</a>
 					</p>
 				</div>
 			</div>

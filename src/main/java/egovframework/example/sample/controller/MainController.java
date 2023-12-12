@@ -32,4 +32,12 @@ public class MainController {
 		model.addAttribute("searchPw", searchPw);
 		return "findIdPwForm";
 	}
+	
+	@RequestMapping(value = "joinForm.do")
+	public String joinForm(Model model) {
+		int searchPw = 1;
+		
+		model.addAttribute("searchPw", searchPw);
+		return "joinForm";
+	}
 }
