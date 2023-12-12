@@ -30,9 +30,9 @@ public class EgovConfigDatasource {
     public DataSource dataSource() {
     	DriverManagerDataSource dataSource = new DriverManagerDataSource();
     	dataSource.setDriverClassName("org.postgresql.Driver");
-    	dataSource.setUrl("jdbc:postgresql://localhost:5432/member");
-    	dataSource.setUsername("scott");
-    	dataSource.setPassword("tiger");
+    	dataSource.setUrl("jdbc:postgresql://localhost:5432/sundoB");
+    	dataSource.setUsername("sundoB");
+    	dataSource.setPassword("sundo");
     	return dataSource;
     }
 
