@@ -1,0 +1,8 @@
+server:
+  port: 8382
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+ 
+    

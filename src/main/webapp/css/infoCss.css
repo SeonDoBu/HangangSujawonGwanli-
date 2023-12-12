@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+.info-container {
+	/* 	border: 1px solid black; */
+	margin-top: 20px;
+}
+
+.info-content-box {
+	/* 	border: 1px solid #ff0080; */
+	
+}
+
+.info-hr-custom {
+	border: 2px solid black;
+	width: 100%;
+	margin-bottom: 40px;
+}
+
+.info-first-box {
+	/* 	border: 1px solid blue; */
+	height: 52px;
+	margin-left: 0px;
+	margin-bottom: 20px;
+	padding: 0px;
+}
+
+.info-first-image-box {
+	/* 	border: 1px solid red; */
+	width: 100px;
+	margin-left: 0px;
+}
+
+.info-first-image-box img {
+	width: 90px;
+	height: 48px;
+}
+
+.info-first-title-box {
+	/* 	border: 1px solid #408080; */
+	margin-left: -24px;
+}
+
+.info-first-title-box p {
+	font-size: 30px;
+	font-weight: bolder;
+	margin: 0px;
+}
+
+.info-second-box {
+	/* 	border: 1px solid #008000; */
+	height: 350px;
+}
+
+.info-second-box p {
+	font-size: 22px;
+	font-weight: bolder;
+	color: #353535;
+	margin-left: 60px;
+}
+
+.info-third-box {
+	/* 	border: 1px solid #ff8000; */
+	height: 350px;
+}
+
+.info-third-box p {
+	font-size: 22px;
+	font-weight: bolder;
+	color: #353535;
+	margin-left: 60px;
+}
+
+.info-fourth-box {
+/* 	border: 1px solid #ff8000; */
+	display: flex;
+	justify-content: flex-end;
+}
+
+.info-fourth-box button {
+	border: 2px solid #003399;
+	border-radius: 8px;
+	background-color: #003399;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+}
