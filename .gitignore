@@ -56,3 +56,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# config package
+egovframework/example/config/*.class
