@@ -9,6 +9,8 @@
 <body>
 
 	<h2>${testcount } 명</h2>
-
+	
+	<a href="facility">수자원시설물관리</a>
+	
 </body>
 </html>

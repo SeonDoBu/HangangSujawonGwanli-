@@ -22,4 +22,19 @@ public class TestController {
 		
 		return "test";
 	}
+	
+	// 테스트  -> 형택형
+	@GetMapping("/fatest")
+	public String fatest() {
+		return "facility/fatest";
+	}
+	
+	// 점검 이력통계 
+	
+	// 고장 및 조치 통계 
+	@GetMapping("/faBreak")
+	public String faBreak() {
+		return "facilityStat/faBreak";
+	}
+	
 }
