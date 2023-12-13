@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="sluicePopHeader.jsp" %>
-<%@ include file="../../components/header.jsp" %>    
+<%@ include file="../../components/header.jsp" %>     
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,11 +10,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="">
 <div class="container" style="margin-top:50px;
  border: solid; 1px; border-color: black; ">
 
-<h1 style="margin-top: 10px;">관측소 등록 </h1>
+<h1 style="margin-top: 10px;">관측소 정보 </h1>
 
 <hr style="border-style: 3px;">
 
@@ -40,12 +40,14 @@
 </div>
 <div class="cotainer" style="margin-top: 150px;">
 
-<button type="submit" style="margin: 30px; background-color: #000042; color: white;"> 등록 </button>
+<button type="submit" style="margin: 30px; background-color: #000042; color: white;"> 수정 </button>
+<button type="submit" style="margin: 30px;"> 삭제 </button>
 </div>
 </div>
 </div>
 
 </div>
-</form>
+
+
 </body>
 </html>

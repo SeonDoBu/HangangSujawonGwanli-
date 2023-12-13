@@ -20,7 +20,7 @@
   
   <body>
 <div>
-<ul class="nav nav-underline" style="background-color: #062e6f; height: 80px; " >
+<ul class="nav nav-underline" style="background-color: #000042; height: 80px; " >
   <li class="nav-item">
     <h2 style="color: #FFFFFF; margin-left: 150px;" >실시간 수문정보 관리  시스템</h2>
   </li>
@@ -29,14 +29,26 @@
   </li>
 
 
-
+<!-- 헤더 드롭다운 할까 ?  -->
+<!-- <div>
+<div class="dropdown">
+  <button class="btn dropdown-toggle"   style="background-color: #062e6f; color: #FFFFFF;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    관측소
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">목록</a></li>
+    <li><a class="dropdown-item" href="#"></a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
+</div> -->
   
     <li class="nav-item" style="margin-left: 30px;">
-    <a class="nav-link " href="sluiceList" style="color: #FFFFFF;">관측소 목록</a>
+    <a class="nav-link " href="sluiceList" style="color: #FFFFFF;">관측소</a>
   </li>
   
     <li class="nav-item">
-    <a class="nav-link " href="#" style="color: #FFFFFF;">수자원 목록</a>
+    <a class="nav-link " href="#" style="color: #FFFFFF;">수자원</a>
   </li>
   
 

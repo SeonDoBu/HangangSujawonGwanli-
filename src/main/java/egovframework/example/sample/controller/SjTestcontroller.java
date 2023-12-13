@@ -38,4 +38,26 @@ public class SjTestcontroller {
 		return "sluice/sluiceInsert";	
 	}
 	
+	@GetMapping(value = "/sluiceDetail")
+	public String sumoonDetail(Model model) {
+		
+		
+
+		return "sluice/sluiceDetail";	
+	}
+	@GetMapping(value = "/sluiceTypeList")
+	public String sumoonType(Model model) {
+		
+		
+
+		return "sluice/sluiceTypeList";	
+	}
+	@GetMapping(value = "/sluiceTypeUpdate")
+	public String sumoonTypeUpdate(Model model) {
+		
+		
+
+		return "sluice/sluiceTypeUpdate";	
+	}
+	
 }

@@ -13,7 +13,7 @@
 <style type="text/css">
 .sidebar10 {
 	width: 80px;
-	background-color: #062e6f;
+	background-color: #000042;
 	height: 1920px;
 	float: left;
 

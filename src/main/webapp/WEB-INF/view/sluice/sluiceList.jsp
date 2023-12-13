@@ -10,10 +10,17 @@ window.close();
 
  
  function showpopup(){
-	 window.open("sluiceInsert","pop","width=900,height=600,left=350,top=200");
+	 window.open("sluiceInsert","pop","width=900,height=750,left=350,top=200");
 	 
  }
 
+ function showpopDetail(){
+	 window.open("sluiceDetail","pop","width=900,height=750,left=350,top=200");
+	 
+ }
+
+ 
+ 
 </script>
 <head>
 <meta charset="UTF-8">
@@ -53,14 +60,14 @@ window.close();
 	<option>행정3</option>
 </select>
 관측소명 <input type="text" placeholder="관측소명을 입력하세요." > 
-<button type="button" style="background-color : 062e6f;"  > 검색</button>
+<button type="button" style="background-color: #000042; color: white; " > 검색</button>
 </div>
 </form>
 </div>
 
 <div class="text-end" style="margin-right: 200px; margin-top: 20px;">
 
-<button type="button" style="background-color: 062e6f;" onclick="showpopup()"> 등록</button>
+<button type="button" style="background-color: #000042; color: white;" onclick="showpopup()"> 등록</button>
 
 <button type="button" style="background-color: gray;"> 저장</button>
 </div>
@@ -82,14 +89,14 @@ window.close();
   <tbody class="table-group-divider">
     <tr>
       <th scope="row">1</th>
-      <td><a href="#">관측소명</a></td>
+      <td><a href="" onclick="showpopDetail()">관측소명</a></td>
       <td>15613215</td>
       <td>213.15615</td>
       <td>37.156165</td>
       <!-- choose or if -->
       <td>강우량</td>
       <td>관측</td>
-      <td><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+      <td><a href="sluiceTypeList"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 </svg></a></td>    
     </tr>
