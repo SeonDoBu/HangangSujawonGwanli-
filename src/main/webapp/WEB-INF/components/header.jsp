@@ -17,4 +17,5 @@
 <!-- CSS -->	    
 <link rel="stylesheet" type="text/css" href="/css/mainCss.css">
 <link rel="stylesheet" type="text/css" href="/css/infoCss.css">
+<link rel="stylesheet" type="text/css" href="/css/noticeCss.css">
 	    

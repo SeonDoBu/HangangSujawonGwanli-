@@ -214,9 +214,9 @@
 .main-second-login-btn-box button {
 	width: 320px;
 	height: 40px;
-	border: 2px solid #003399;
+	border: 2px solid #002266;
 	border-radius: 8px;
-	background-color: #003399;
+	background-color: #002266;
 	font-size: 16px;
 	font-weight: bold;
 	color: white;
@@ -358,16 +358,16 @@
 }
 
 .main-find-btn-first {
-	border: 2px solid #003399;
+	border: 2px solid #002266;
 	border-radius: 10px;
 	width: 100px;
 	margin: 6px 10px 6px auto;
-	background-color: #003399;
+	background-color: #002266;
 	color: white;
 }
 
 .main-find-btn-second {
-	border: 2px solid #003399;
+	border: 2px solid #002266;
 	border-radius: 10px;
 	width: 100px;
 	margin: 6px auto 6px 10px;
@@ -430,9 +430,9 @@
 .main-second-join-btn-box button {
 	width: 320px;
 	height: 40px;
-	border: 2px solid #003399;
+	border: 2px solid #002266;
 	border-radius: 8px;
-	background-color: #003399;
+	background-color: #002266;
 	font-size: 16px;
 	font-weight: bold;
 	color: white;

@@ -20,6 +20,16 @@ public class MainController {
 		return "info";
 	}
 
+	@RequestMapping(value = "notice.do")
+	public String notice() {
+		return "notice";
+	}
+	
+	@RequestMapping(value = "noticeDetail.do")
+	public String noticeDetail() {
+		return "noticeDetail";
+	}
+
 	@RequestMapping(value = "findId.do")
 	public String findIdForm() {
 		return "findIdPwForm";
@@ -32,11 +42,11 @@ public class MainController {
 		model.addAttribute("searchPw", searchPw);
 		return "findIdPwForm";
 	}
-	
+
 	@RequestMapping(value = "joinForm.do")
 	public String joinForm(Model model) {
 		int searchPw = 1;
-		
+
 		model.addAttribute("searchPw", searchPw);
 		return "joinForm";
 	}
