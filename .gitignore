@@ -66,3 +66,6 @@ egovframework/example/config/*.class
 
 # Maven
 pom.xml
+
+# Maven target 디렉토리 무시
+target/
