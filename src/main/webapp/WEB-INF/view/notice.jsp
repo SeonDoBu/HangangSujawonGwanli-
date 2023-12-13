@@ -32,7 +32,8 @@
 						<option>전체</option>
 						<option>제목</option>
 						<option>제목+내용</option>
-					</select> <input type="text" name="" placeholder="검색어를 입력해주세요.">
+					</select> 
+					<input type="text" name="" placeholder="검색어를 입력해주세요.">
 					<button>&nbsp;조회&nbsp;</button>
 				</div>
 			</div>

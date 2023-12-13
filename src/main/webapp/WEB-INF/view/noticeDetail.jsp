@@ -10,36 +10,48 @@
 <script type="text/javascript">
 	function pageMove() {
 		console.log("실행");
-		location.href = 'home.do';
+		location.href = 'notice.do';
 	}
 </script>
 </head>
 <body>
-	<div class="container notcie-container">
-		<div class="row row-cols-1 notice-content-box">
-			<div class="row row-cols-2 notice-first-box">
-				<div class="cols notice-first-image-box">
+	<div class="container notcieDetail-container">
+		<div class="row row-cols-1 notcieDetail-content-box">
+			<div class="row row-cols-2 notcieDetail-first-box">
+				<div class="cols notcieDetail-first-image-box">
 					<img alt="..." src="/images/info_icon1.png">
 				</div>
-				<div class="cols notice-first-title-box">
+				<div class="cols notcieDetail-first-title-box">
 					<p>공지사항</p>
 				</div>
 			</div>
-			<div class="row row-cols-4 notice-second-box">
-				<div class="cols notice-second-keyword-box">
-					<p>조건</p>
-					<select>
-						<option>전체</option>
-						<option>제목</option>
-						<option>제목+내용</option>
-					</select> <input type="text" name="" placeholder="검색어를 입력해주세요.">
-					<button>&nbsp;조회&nbsp;</button>
-				</div>
+			<div class="row row-cols-1 notcieDetail-second-box">
+				<table class="table notcieDetail-second-table">
+					<tr>
+						<th>제목</th>
+						<td colspan="3"><input type="text"></td>
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<td><input type="text"></td>
+						<th>작성일자</th>
+						<td><input type="text"></td>
+					</tr>
+					<tr>
+						<th>첨부파일</th>
+						<td colspan="3"><input type="text"></td>
+					</tr>
+				</table>
 			</div>
-			<div class="row row-cols-1 notice-third-box">
+			<div class="row row-cols-1 notcieDetail-third-box">
+				<table class="table notcieDetail-third-table">
+					<tr>
+						<td>어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구</td>
+					</tr>
+				</table>
 			</div>
-			<div class="row row-cols-1 notice-fourth-box">
-				<button onclick="pageMove()">&nbsp;&nbsp;메인으로&nbsp;&nbsp;</button>
+			<div class="row row-cols-1 notcieDetail-fourth-box">
+				<button onclick="pageMove()">&nbsp;&nbsp;목록으로&nbsp;&nbsp;</button>
 			</div>
 		</div>
 	</div>
