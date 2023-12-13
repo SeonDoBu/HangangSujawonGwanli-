@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/components/header.jsp"%>	
+<%@ include file="/WEB-INF/components/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,17 +18,35 @@
 
 	}
 
-	function findIdPw() {
+	function findIdPw(findId) {
 		console.log("실행");
 	    var width = 500;
-	    var height = 400;
+	    var height = 380;
 	    var left = (window.screen.width / 2) - (width / 2);
 	    var top = (window.screen.height / 4);
 	    var windowStatus = 'width=' + width + ', height=' + height + ', left=' + left + ', top=' + top + ', scrollbars=yes, status=yes, resizable=yes, titlebar=yes';
-	    const url = 'findId.do'
+	    const idUrl = 'findId.do'
+	    const pwUrl = 'findPw.do'
+	    
+		if (findId === 1) {
+	    	window.open(idUrl, "hello popup", windowStatus);
+		} else {
+	    	window.open(pwUrl, "hello popup", windowStatus);
+		}
 
-	    	window.open(url, "hello popup", windowStatus);
 	}
+	
+    function loginLink() {
+        console.log("로그인 클릭됨");
+		location.href = 'home.do';
+
+    }
+
+    function signupLink() {
+        console.log("회원가입 클릭됨");
+		location.href = 'joinForm.do';
+    }
+
 </script>
 </head>
 <body>
@@ -52,7 +70,7 @@
 			<div class="row row-cols-1 main-second-box">
 				<div class="col main-second-title-box">
 					<p>
-						로그인&nbsp;&nbsp;&nbsp;<span>회원가입</span>
+						<a onclick="loginLink()">로그인</a>&nbsp;&nbsp;&nbsp;<span><a onclick="signupLink()">회원가입</a></span>
 					</p>
 				</div>
 				<div class="col main-second-md-title-box">
@@ -82,8 +100,8 @@
 				</div>
 				<div class="col main-second-id-pw-search-box">
 					<p>
-						<a onclick="findIdPw()">ID찾기</a>&nbsp;|&nbsp;<a
-							onclick="findIdPw()">PW찾기</a>
+						<a onclick="findIdPw(1)">ID찾기</a>&nbsp;|&nbsp;
+						<a onclick="findIdPw(2)">PW찾기</a>
 					</p>
 				</div>
 			</div>
