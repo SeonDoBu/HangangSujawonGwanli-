@@ -4,4 +4,7 @@
 <sqlMapConfig>
 	<sqlMap resource="egovframework/sqlmap/example/mappers/Test.xml"/>
 	<sqlMap resource="egovframework/sqlmap/example/mappers/Siseol.xml"/>
+	<sqlMap resource="egovframework/sqlmap/example/mappers/Sluice.xml"/>
+	<sqlMap resource="egovframework/sqlmap/example/mappers/ObservData.xml"/>
+	<sqlMap resource="egovframework/sqlmap/example/mappers/Bookmark.xml"/>
 </sqlMapConfig>
