@@ -4,5 +4,5 @@
 <sqlMapConfig>
 	<sqlMap resource="egovframework/sqlmap/example/mappers/Dept.xml"/>
 	<sqlMap resource="egovframework/sqlmap/example/mappers/Test.xml"/>
-	<sqlMap resource="egovframework/sqlmap/example/mappers/Siseol.xml "/>
+	<sqlMap resource="egovframework/sqlmap/example/mappers/Siseol.xml"/>
 </sqlMapConfig>

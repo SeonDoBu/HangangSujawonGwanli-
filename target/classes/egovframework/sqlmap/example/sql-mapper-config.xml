@@ -6,5 +6,6 @@
 		<typeAlias alias="egovMap" type="org.egovframe.rte.psl.dataaccess.util.EgovMap"/>
 		<typeAlias alias="Dept"    type="egovframework.example.sample.dto.Dept"/>
 		<typeAlias alias="Test"    type="egovframework.example.sample.dto.Test"/>
+		<typeAlias alias="Siseol"    type="egovframework.example.sample.dto.Siseol"/>
     </typeAliases>
 </configuration>
