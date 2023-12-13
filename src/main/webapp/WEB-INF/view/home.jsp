@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>한강수자원관리플랫폼</title>
 
 <script type="text/javascript">
 	function pageMove(id) {
@@ -46,6 +46,11 @@
         console.log("회원가입 클릭됨");
 		location.href = 'joinForm.do';
     }
+    
+    function successLogin() {
+        console.log("로그인 성공!");
+		location.href = 'adminInfo.do';		
+	}
 
 </script>
 </head>
@@ -70,7 +75,8 @@
 			<div class="row row-cols-1 main-second-box">
 				<div class="col main-second-title-box">
 					<p>
-						<a onclick="loginLink()">로그인</a>&nbsp;&nbsp;&nbsp;<span><a onclick="signupLink()">회원가입</a></span>
+						<a onclick="loginLink()">로그인</a>&nbsp;&nbsp;&nbsp;<span><a
+							onclick="signupLink()">회원가입</a></span>
 					</p>
 				</div>
 				<div class="col main-second-md-title-box">
@@ -96,12 +102,12 @@
 					<input type="password" name="">
 				</div>
 				<div class="col main-second-login-btn-box">
-					<button type="submit">L&nbsp;O&nbsp;G&nbsp;I&nbsp;N</button>
+					<button type="submit" onclick="successLogin()">L&nbsp;O&nbsp;G&nbsp;I&nbsp;N</button>
 				</div>
 				<div class="col main-second-id-pw-search-box">
 					<p>
-						<a onclick="findIdPw(1)">ID찾기</a>&nbsp;|&nbsp;
-						<a onclick="findIdPw(2)">PW찾기</a>
+						<a onclick="findIdPw(1)">ID찾기</a>&nbsp;|&nbsp; <a
+							onclick="findIdPw(2)">PW찾기</a>
 					</p>
 				</div>
 			</div>
