@@ -6,4 +6,9 @@
 		from siseol
 	</select>
 	
+	<select id="siseolList" resultType="Siseol">
+		select *
+		from   siseol
+	</select>
+	
 </mapper>
