@@ -1,5 +1,6 @@
 package egovframework.example.sample.controller;
 
+
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ public class HtController {
 			System.out.println("htController Exception -> " + e.getMessage());
 		}
 
+
 		return "/facility/siseolTest";
 	}
 	
@@ -44,6 +46,7 @@ public class HtController {
 		}
 
 		return "/facility/fatest";
+
 	}
 
 }
