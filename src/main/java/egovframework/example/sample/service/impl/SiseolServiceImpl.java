@@ -5,6 +5,9 @@ import java.util.List;
 import org.egovframe.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import org.springframework.stereotype.Service;
 
+import egovframework.example.sample.dto.Commoncode;
+import egovframework.example.sample.dto.District;
+import egovframework.example.sample.dto.Gigwan;
 import egovframework.example.sample.dto.Siseol;
 import egovframework.example.sample.service.SiseolService;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +39,45 @@ public class SiseolServiceImpl extends EgovAbstractServiceImpl implements Siseol
 			System.out.println("SiseolService siseolList list---> " + list);
 		}catch (Exception e) {
 			System.out.println("SiseolServiceImpl siseolList Exception -> " + e.getMessage());
+		}
+		return list;
+	}
+
+	@Override
+	public List<Commoncode> commonList() {
+		System.out.println("SiseolServiceImpl siseolList start...");
+		List<Commoncode> list = null;
+		try {
+			list = siseolMapper.commonList();
+			System.out.println("SiseolService commonlList list---> " + list);
+		}catch (Exception e) {
+			System.out.println("SiseolServiceImpl commonList Exception -> " + e.getMessage());
+		}
+		return list;
+	}
+
+	@Override
+	public List<District> districtList() {
+		System.out.println("SiseolServiceImpl siseolList start...");
+		List<District> list = null;
+		try {
+			list = siseolMapper.districtList();
+			System.out.println("SiseolService districtList list---> " + list);
+		}catch (Exception e) {
+			System.out.println("SiseolServiceImpl districtList Exception -> " + e.getMessage());
+		}
+		return list;
+	}
+
+	@Override
+	public List<Gigwan> gigwanList() {
+		System.out.println("SiseolServiceImpl siseolList start...");
+		List<Gigwan> list = null;
+		try {
+			list = siseolMapper.gigwanList();
+			System.out.println("SiseolService gigwanList list---> " + list);
+		}catch (Exception e) {
+			System.out.println("SiseolServiceImpl gigwanList Exception -> " + e.getMessage());
 		}
 		return list;
 	}

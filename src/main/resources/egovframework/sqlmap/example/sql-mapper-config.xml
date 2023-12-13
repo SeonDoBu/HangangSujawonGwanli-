@@ -9,5 +9,8 @@
 		<typeAlias alias="Sluice"        type="egovframework.example.sample.dto.Sluice"/>
 		<typeAlias alias="ObservData"    type="egovframework.example.sample.dto.ObservData"/>
 		<typeAlias alias="Bookmark"      type="egovframework.example.sample.dto.Bookmark"/>
+		<typeAlias alias="District"      type="egovframework.example.sample.dto.District"/>
+		<typeAlias alias="Commoncode"    type="egovframework.example.sample.dto.Commoncode"/>
+		<typeAlias alias="Gigwan"    type="egovframework.example.sample.dto.Gigwan"/>
     </typeAliases>
 </configuration>

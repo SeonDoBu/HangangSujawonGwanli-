@@ -11,4 +11,21 @@
 		from   siseol
 	</select>
 	
+	<select id="commonList" resultType="Commoncode">
+		SELECT *
+		FROM Commoncode
+		WHERE big_code = 55
+		AND NOT (small_code = 999);
+	</select>
+	
+	<select id="districtList" resultType="District">
+		select *
+		from   District
+	</select>
+	
+	<select id="gigwanList" resultType="Gigwan">
+		select *
+		from   Gigwan
+	</select>
+	
 </mapper>

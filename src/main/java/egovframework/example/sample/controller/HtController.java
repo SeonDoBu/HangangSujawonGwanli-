@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import egovframework.example.sample.dto.Commoncode;
+import egovframework.example.sample.dto.District;
+import egovframework.example.sample.dto.Gigwan;
 import egovframework.example.sample.dto.Siseol;
 import egovframework.example.sample.service.SiseolService;
 import lombok.RequiredArgsConstructor;
@@ -37,10 +40,22 @@ public class HtController {
 	public String checkResult(Model model) {
 		System.out.println("htController checkResult Start...");
 		try {
-			List<Siseol> list = siseolService.siseolList();
-			System.out.println("htController list--> " + list);
+			List<Siseol> siseolList = siseolService.siseolList();
+			System.out.println("htController siseolList--> " + siseolList);
+			
+			List<Commoncode> commonList = siseolService.commonList();
+			System.out.println("htController commonList--> " + commonList);
+			
+			List<District> districtList = siseolService.districtList();
+			System.out.println("htController districtList--> " + districtList);
+			
+			List<Gigwan> gigwanList = siseolService.gigwanList();
+			System.out.println("htController districtList--> " + districtList);
 
-			model.addAttribute("list", list);
+			model.addAttribute("siseolList", siseolList);
+			model.addAttribute("commonList", commonList);
+			model.addAttribute("districtList", districtList);
+			model.addAttribute("gigwanList", gigwanList);
 		} catch (Exception e) {
 			System.out.println("htController Exception -> " + e.getMessage());
 		}

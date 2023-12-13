@@ -13,4 +13,9 @@ public class Siseol {
 	private double mapx;		// 경도
 	private double mapy;		// 위도
 	private String address;		// 주소
+	
+	//조회용
+	private String siseolName;	   // 시설물명
+	private String gigwanName;	   // 기관명
+	private String districtName;   // 행정구역명
 }
