@@ -81,6 +81,32 @@ public class SiseolServiceImpl extends EgovAbstractServiceImpl implements Siseol
 		}
 		return list;
 	}
+
+	@Override
+	public int selectedCount(Siseol siseol) {
+		System.out.println("SiseolService selectedCount Start...");
+		int result = 0;
+		try {
+			result = siseolMapper.selectedSiseolCount(siseol);
+			System.out.println("SiseolService selectedCount End...");
+		}catch (Exception e) {
+			System.out.println("SiseolServiceImpl count Exception -> " + e.getMessage());
+		}
+		return result;
+	}
+
+	@Override
+	public List<Siseol> selectedSiseolList(Siseol siseol) {
+		System.out.println("SiseolServiceImpl selectedSiseolList start...");
+		List<Siseol> list = null;
+		try {
+			list = siseolMapper.selectedSiseolList(siseol);
+			System.out.println("SiseolService selectedSiseolList list---> " + list);
+		}catch (Exception e) {
+			System.out.println("SiseolServiceImpl selectedSiseolList Exception -> " + e.getMessage());
+		}
+		return list;
+	}
 	
 	
 }

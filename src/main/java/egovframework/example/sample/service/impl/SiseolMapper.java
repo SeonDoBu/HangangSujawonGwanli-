@@ -17,5 +17,7 @@ public interface SiseolMapper {
 	List<Commoncode>  commonList();
 	List<District>    districtList();
 	List<Gigwan>      gigwanList();
+	int 			  selectedSiseolCount(Siseol siseol);
+	List<Siseol>      selectedSiseolList(Siseol siseol);
 	
 }

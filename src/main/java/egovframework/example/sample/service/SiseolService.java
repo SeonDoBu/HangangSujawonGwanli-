@@ -14,5 +14,7 @@ public interface SiseolService {
 	List<Commoncode> commonList();
 	List<District>   districtList();
 	List<Gigwan>     gigwanList();
+	int              selectedCount(Siseol siseol);
+	List<Siseol>     selectedSiseolList(Siseol siseol);
 
 }
