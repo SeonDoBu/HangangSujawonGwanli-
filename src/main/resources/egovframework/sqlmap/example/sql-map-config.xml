@@ -7,4 +7,6 @@
 	<sqlMap resource="egovframework/sqlmap/example/mappers/Sluice.xml"/>
 	<sqlMap resource="egovframework/sqlmap/example/mappers/ObservData.xml"/>
 	<sqlMap resource="egovframework/sqlmap/example/mappers/Bookmark.xml"/>
+	<sqlMap resource="egovframework/sqlmap/example/mappers/Commoncode.xml"/>
+	<sqlMap resource="egovframework/sqlmap/example/mappers/District.xml"/>
 </sqlMapConfig>
