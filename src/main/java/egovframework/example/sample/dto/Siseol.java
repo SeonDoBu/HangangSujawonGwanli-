@@ -15,6 +15,7 @@ public class Siseol {
 	private String address;		// 주소
 	
 	//조회용
+	private int    start;	private int end;  private int currentPage; // 페이징
 	private String siseolName;	   // 시설물명
 	private String gigwanName;	   // 기관명
 	private String districtName;   // 행정구역명

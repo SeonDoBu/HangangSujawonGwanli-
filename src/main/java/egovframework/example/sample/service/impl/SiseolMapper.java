@@ -13,7 +13,7 @@ import egovframework.example.sample.dto.Siseol;
 public interface SiseolMapper {
 
 	int               siseolCount();
-	List<Siseol>      siseolList();
+	List<Siseol>      siseolList(Siseol siseol);
 	List<Commoncode>  commonList();
 	List<District>    districtList();
 	List<Gigwan>      gigwanList();

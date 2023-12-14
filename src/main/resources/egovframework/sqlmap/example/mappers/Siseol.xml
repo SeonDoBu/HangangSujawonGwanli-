@@ -6,9 +6,21 @@
 		from siseol
 	</select>
 	
-	<select id="siseolList" resultType="Siseol">
-		select *
-		from   siseol
+	<select id="siseolList" parameterType="Siseol" resultType="Siseol">
+		SELECT b.*
+		FROM
+		(
+			SELECT  ROW_NUMBER() OVER (ORDER BY siseol_id) AS rn, a.*
+			FROM
+			   (
+				SELECT s.*, d.name AS districtName, g.name AS gigwanName, c.content AS siseolName
+				FROM SISEOL s
+				JOIN COMMONCODE c ON s.small_code = c.small_code AND s.big_code = c.big_code
+				JOIN DISTRICT d ON s.district_id = d.district_id
+				JOIN GIGWAN g ON s.gigwan_id = g.gigwan_id
+				)a
+		)b
+		WHERE rn BETWEEN #{start} and #{end}
 	</select>
 	
 	<select id="commonList" resultType="Commoncode">

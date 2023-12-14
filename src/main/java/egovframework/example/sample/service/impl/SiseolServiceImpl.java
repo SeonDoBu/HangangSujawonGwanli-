@@ -31,11 +31,11 @@ public class SiseolServiceImpl extends EgovAbstractServiceImpl implements Siseol
 	}
 
 	@Override
-	public List<Siseol> siseolList() {
+	public List<Siseol> siseolList(Siseol siseol) {
 		System.out.println("SiseolServiceImpl siseolList start...");
 		List<Siseol> list = null;
 		try {
-			list = siseolMapper.siseolList();
+			list = siseolMapper.siseolList(siseol);
 			System.out.println("SiseolService siseolList list---> " + list);
 		}catch (Exception e) {
 			System.out.println("SiseolServiceImpl siseolList Exception -> " + e.getMessage());

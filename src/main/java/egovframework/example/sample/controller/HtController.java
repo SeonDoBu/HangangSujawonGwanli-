@@ -11,6 +11,7 @@ import egovframework.example.sample.dto.Commoncode;
 import egovframework.example.sample.dto.District;
 import egovframework.example.sample.dto.Gigwan;
 import egovframework.example.sample.dto.Siseol;
+import egovframework.example.sample.service.Paging;
 import egovframework.example.sample.service.SiseolService;
 import lombok.RequiredArgsConstructor;
 
@@ -37,10 +38,19 @@ public class HtController {
 	}
 	
 	@RequestMapping("checkResult.do")
-	public String checkResult(Model model) {
+	public String checkResult(Model model, String currentPage, Siseol siseol) {
 		System.out.println("htController checkResult Start...");
 		try {
-			List<Siseol> siseolList = siseolService.siseolList();
+			
+			int totalSiseol = siseolService.count();
+			// Paging 작업 
+			Paging page = new Paging(totalSiseol, currentPage);
+			System.out.println("page.getStart()-->"+page.getStart() );
+			System.out.println("page.getEnd()-->"+page.getEnd() );
+			siseol.setStart(page.getStart());
+			siseol.setEnd(page.getEnd());
+			
+			List<Siseol> siseolList = siseolService.siseolList(siseol);
 			System.out.println("htController siseolList--> " + siseolList);
 			
 			List<Commoncode> commonList = siseolService.commonList();
@@ -56,6 +66,7 @@ public class HtController {
 			model.addAttribute("commonList", commonList);
 			model.addAttribute("districtList", districtList);
 			model.addAttribute("gigwanList", gigwanList);
+			model.addAttribute("page", page);
 		} catch (Exception e) {
 			System.out.println("htController Exception -> " + e.getMessage());
 		}

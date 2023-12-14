@@ -90,36 +90,38 @@
 			</tr>
 			</thead>
 			<tbody>
-			<tr>
-				<c:forEach var="list" items="${siseolList}" varStatus="status">
-					<td>${status.index}</td>
-					<td>${list.}</td>
+			<c:forEach var="list" items="${siseolList}" varStatus="status">
+				<tr>
+					<td>${status.index + 1 + (page.currentPage - 1) * page.rowPage}</td>
+					<td>${list.siseolName}</td>
 					<td>${list.siseol_id}</td>
-					<td>${list.siseol_id}</td>
-					<td>${list.siseol_id}</td>
+					<td>${list.districtName}</td>
+					<td>${list.gigwanName}</td>
 					<td>
 						<button style="background: white; color: #191D31; border-radius: 5px;">입력</button>
 					</td>
-				</c:forEach>
-			</tr>
+				</tr>
+			</c:forEach>
 			</tbody>
 		</table>
 	</div>
 	
 	
-	<div id="page">
-	<nav aria-label="Page navigation example">
-	  <ul class="pagination justify-content-center">
-	    <li class="page-item"><a class="page-link" href="#">이전</a></li>
-	    <li class="page-item"><a class="page-link" href="#">1</a></li>
-	    <li class="page-item"><a class="page-link" href="#">2</a></li>
-	    <li class="page-item"><a class="page-link" href="#">3</a></li>
-	    <li class="page-item"><a class="page-link" href="#">다음</a></li>
-	  </ul>
-	</nav>
+	<div id="page" style="text-align: center;">
+	  <nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<c:if test="${page.startPage > page.pageBlock}">
+				<li class="page-item"><a class="page-link" href="checkResult.do?currentPage=${page.startPage-page.pageBlock}">이전</a></li>
+			</c:if>
+			<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+				<li class="page-item"><a class="page-link" href="checkResult.do?currentPage=${i}">${i}</a></li>
+			</c:forEach>
+			<c:if test="${page.endPage < page.totalPage}">
+				<li class="page-item"><a class="page-link" href="checkResult.do?currentPage=${page.startPage+page.pageBlock}">다음</a></li>
+			</c:if>
+		</ul>
+	  </nav>
 	</div>
-
 	
-
 </body>
 </html>
