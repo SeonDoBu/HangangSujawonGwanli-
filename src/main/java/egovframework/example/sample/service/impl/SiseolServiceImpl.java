@@ -11,9 +11,11 @@ import egovframework.example.sample.dto.Gigwan;
 import egovframework.example.sample.dto.Siseol;
 import egovframework.example.sample.service.SiseolService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class SiseolServiceImpl extends EgovAbstractServiceImpl implements SiseolService {
 	private final SiseolMapper siseolMapper;
 
@@ -106,6 +108,22 @@ public class SiseolServiceImpl extends EgovAbstractServiceImpl implements Siseol
 			System.out.println("SiseolServiceImpl selectedSiseolList Exception -> " + e.getMessage());
 		}
 		return list;
+	}
+
+	// siseolId에 해당하는 시설물 정보를 가져오는 메소드 by 나희
+	@Override
+	public Siseol siseolDetail(int siseolId) {
+		log.info("siseolDetail Start...");
+		Siseol siseol = new Siseol();
+		try {
+			siseol = siseolMapper.siseolDetail(siseolId);
+			// log.info("siseolDetail => " + siseol.getSiseolName();
+		} catch (Exception e) {
+			log.info("siseolDetail " + e.getMessage());
+		} finally {
+			log.info("siseolDetail End...");
+		}
+		return siseol;
 	}
 	
 	

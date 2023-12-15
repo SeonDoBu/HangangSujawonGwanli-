@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="sluiceMapHeader.jsp" %>
 <%@ include file="../../components/header.jsp" %>
 <!DOCTYPE html>
@@ -8,6 +7,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>수자원정보 목록</title>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript">
+		function detailPopup(siseolId) {
+			var url = 'sujawonDetail.do?siseolId='+siseolId;
+			var windowStatus = 'width=900, height=750, left=350, top=200';
+			
+			window.open(url, 'detailPopup', windowStatus);
+		}
+		
+		function insertPopup() {
+			var url = 'sujawonInsertForm.do';
+			var windowStatus = 'width=900, height=750, left=350, top=200';
+			
+			window.open(url, 'insertPopup', windowStatus);
+		}
+	</script>
 </head>
 <body>
 	<div class="container col-10">
@@ -45,7 +60,7 @@
 		</div>
 		
 		<div class="text-end" style="margin-right: 200px; margin-top: 20px;">
-			<button type="button" style="background-color: #000042; color: white;" onclick="showpopup()">등록</button>
+			<button type="button" style="background-color: #000042; color: white;" onclick="insertPopup()">등록</button>
 			<button type="button" style="background-color: gray;">저장</button>
 		</div>
 		
@@ -69,7 +84,7 @@
 					<tr>
 						<td>${num}</td>
 						<td><input type="hidden" name="small_code" value="${siseol.small_code}">${siseol.siseolName}</td>
-						<td>${siseol.siseol_id}</td>
+						<td><a onclick="detailPopup(this.textContent)">${siseol.siseol_id}</a></td>
 						<td>${siseol.mapy}</td>
 						<td>${siseol.mapx}</td>
 						<td><input type="hidden" name="district_id" value="${siseol.district_id}">${siseol.districtName}</td>

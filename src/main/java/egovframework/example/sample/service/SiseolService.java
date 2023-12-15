@@ -16,5 +16,6 @@ public interface SiseolService {
 	List<Gigwan>     gigwanList();
 	int              selectedCount(Siseol siseol);
 	List<Siseol>     selectedSiseolList(Siseol siseol);
+	Siseol           siseolDetail(int siseolId);
 
 }

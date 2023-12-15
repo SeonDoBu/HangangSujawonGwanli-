@@ -19,5 +19,6 @@ public interface SiseolMapper {
 	List<Gigwan>      gigwanList();
 	int 			  selectedSiseolCount(Siseol siseol);
 	List<Siseol>      selectedSiseolList(Siseol siseol);
+	Siseol            siseolDetail(int siseolId);
 	
 }

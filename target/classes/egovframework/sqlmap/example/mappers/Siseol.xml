@@ -74,5 +74,15 @@
 		select *
 		from   Gigwan
 	</select>
+	
+	<!-- 시설물 코드에 해당하는 시설물의 정보를 조회 by 나희 -->
+	<select id="siseolDetail" parameterType="int" resultType="Siseol">
+		SELECT s.*,
+	   		   (SELECT content FROM commoncode c WHERE c.big_code = s.big_code AND c.small_code = s.small_code) AS siseolName,
+	   		   (SELECT name FROM gigwan g WHERE g.gigwan_id = s.gigwan_id) AS gigwanName, 
+	   		   (SELECT name FROM district d WHERE d.district_id = s.district_id) AS districtName
+		FROM   siseol s
+		WHERE  s.siseol_id = #{siseolId};
+	</select>
 
 </mapper>

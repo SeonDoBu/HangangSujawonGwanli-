@@ -36,11 +36,12 @@ public class SluiceController {
 
 	// 수자원시설물 목록으로 이동 by 나희
 	@RequestMapping(value = "sujawonList.do")
-	public String sujawonList(Siseol siseol, Commoncode cc, String currentPage, Model model) {
+	public String sujawonList(Siseol siseol, String currentPage, Model model) {
 		log.info("sujawonList.do Start...");
 		try {
 			// 시설물 종류 select box 옵션 만들기
-			cc.setBig_code(2); // 시설물 종류 대분류 강제 지정
+			Commoncode cc = new Commoncode();
+			cc.setBig_code(2); // 시설물 종류 big_code 강제 지정
 			List<Commoncode> siseolType = commoncodeService.commoncodeList(cc);
 			
 			// 행정구역 select box 옵션 만들기
@@ -73,7 +74,28 @@ public class SluiceController {
 	}
 
 	@RequestMapping(value = "sujawonDetail.do")
-	public String sujawonDetail() {
+	public String sujawonDetail(int siseolId, Model model) {
+		log.info("sujawonDetail Start...");
+		try {
+			// 시설물 종류 select box 옵션 만들기
+			Commoncode cc = new Commoncode();
+			cc.setBig_code(2); // 시설물 종류 big_code 강제 지정
+			List<Commoncode> siseolType = commoncodeService.commoncodeList(cc);
+						
+			// 행정구역 select box 옵션 만들기
+			List<District> districtList = districtService.districtList();
+			
+			Siseol siseol = siseolSerivce.siseolDetail(siseolId);
+			
+			model.addAttribute("siseolType", siseolType);
+			model.addAttribute("districtList", districtList);
+			model.addAttribute("siseol", siseol);
+			
+		} catch (Exception e) {
+			log.info("sujawonDetail " + e.getMessage());
+		} finally {
+			log.info("sujawonDetail End...");
+		}
 		return "sluice/sujawonDetail";
 	}
 
