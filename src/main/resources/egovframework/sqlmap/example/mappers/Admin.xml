@@ -56,4 +56,20 @@
 		    a.user_id, a.big_code, a.small_code;
 	</select>
 	
+	<select id="getNoticeAllCount" resultType="int">
+		select count(*)
+		from notice
+	</select>
+	
+	<select id="getNoticeAllList" resultType="Notice">
+		select *
+		from notice
+	</select>
+
+	<select id="getNoticeFindOne" parameterType="int"
+		resultType="Notice">
+		select *
+		from notice
+		where notice_id = #{noticeId}
+	</select>	
 </mapper>

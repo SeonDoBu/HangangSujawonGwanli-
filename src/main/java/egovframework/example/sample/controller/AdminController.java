@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import egovframework.example.sample.dto.Notice;
 import egovframework.example.sample.dto.Paging;
 import egovframework.example.sample.dto.Users;
 import egovframework.example.sample.service.AdminService;
@@ -35,7 +36,6 @@ public class AdminController {
 			log.info("AdminController adminInfo userAllList.size : {}", userAllList.size());
 
 			model.addAttribute("userAllList", userAllList);
-
 			model.addAttribute("page", page);
 		} catch (Exception e) {
 
@@ -58,5 +58,55 @@ public class AdminController {
 		}
 
 		return "admin/adminInfo";
+	}
+
+	@RequestMapping(value = "adminNotice.do")
+	public String adminNotice(Notice notice, String currentPage, Model model) {
+		log.info("AdminController adminNotice start!");
+		int countNotice = as.getNoticeAllCount();
+		List<Notice> noticeAllList = null;
+		
+		Paging page = new Paging(countNotice, currentPage);
+		notice.setStart(page.getStart());
+		notice.setEnd(page.getEnd());
+		log.info("AdminController adminNotice page : {}", page);
+		
+		try {
+			noticeAllList = as.getNoticeAllList();
+			log.info("AdminController noticeAllList.size : {}", noticeAllList.size());
+			
+			model.addAttribute("noticeAllList", noticeAllList);
+			model.addAttribute("page", page);
+		} catch (Exception e) {
+			log.error("AdminController adminNotice Error : {}", e.getMessage());
+		}
+		log.info("AdminController adminNotice end..");
+		
+		return "admin/adminNotice";
+	}
+	
+	@RequestMapping(value = "adminNoticeDetail.do")
+	public String adminNoticeDetail(Notice notice, String currentPage, Model model) {
+		log.info("AdminController adminNoticeDetail start!");
+		int countNotice = as.getNoticeAllCount();
+		List<Notice> noticeAllList = null;
+		
+		Paging page = new Paging(countNotice, currentPage);
+		notice.setStart(page.getStart());
+		notice.setEnd(page.getEnd());
+		log.info("AdminController adminNoticeDetail page : {}", page);
+		
+		try {
+			noticeAllList = as.getNoticeAllList();
+			log.info("AdminController noticeAllList.size : {}", noticeAllList.size());
+			
+			model.addAttribute("noticeAllList", noticeAllList);
+			model.addAttribute("page", page);
+		} catch (Exception e) {
+			log.error("AdminController adminNoticeDetail Error : {}", e.getMessage());
+		}
+		log.info("AdminController adminNoticeDetail end..");
+		
+		return "admin/adminNoticeDetail";
 	}
 }

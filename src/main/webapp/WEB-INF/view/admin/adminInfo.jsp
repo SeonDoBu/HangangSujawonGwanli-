@@ -17,6 +17,8 @@
 			location.href = 'adminInfo.do?pageId=' + pageCode;
 		} else if (pageCode == 2) {
 			location.href = 'adminInfo.do?pageId=' + pageCode;
+		} else if (pageCode == 3) {
+			location.href = 'adminNotice.do';
 		} else {
 			location.href = 'home.do';
 		} 
@@ -80,8 +82,8 @@
 				사용자관리</a>
 			<div class="collapse admin-sidebar-content-box" id="collapseExample">
 				<div class="card card-body admin-sidebar-card-box">
-					<a class="btn" onclick="adminPageMobe(1)">사용자관리</a> <a class="btn"
-						onclick="adminPageMobe(2)">기관관리</a>
+					<a class="btn" onclick="adminPageMobe(1)">사용자관리</a>
+                    <a class="btn" onclick="adminPageMobe(2)">기관관리</a>
 				</div>
 			</div>
 		</div>
@@ -91,7 +93,7 @@
 				운영관리</a>
 			<div class="collapse admin-sidebar-content-box" id="collapseExample2">
 				<div class="card card-body admin-sidebar-card-box">
-					<a class="btn">공지사항</a>
+					<a class="btn" onclick="adminPageMobe(3)">공지사항</a>
 				</div>
 			</div>
 		</div>

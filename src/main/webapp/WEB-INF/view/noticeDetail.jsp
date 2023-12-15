@@ -29,24 +29,26 @@
 				<table class="table notcieDetail-second-table">
 					<tr>
 						<th>제목</th>
-						<td colspan="3"><input type="text"></td>
+						<td colspan="3"><input type="text" value="${noticeFindOne.title }"></td>
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<td><input type="text"></td>
+						<td><input type="text" value="${noticeFindOne.user_id }"></td>
 						<th>작성일자</th>
-						<td><input type="text"></td>
+						<!-- Data pattern 변환 -->
+						<fmt:formatDate var="created_date" value="${noticeFindOne.created_date}" pattern="yyyy-MM-dd" />					
+						<td><input type="text" value="${created_date}"></td>
 					</tr>
 					<tr>
 						<th>첨부파일</th>
-						<td colspan="3"><input type="text"></td>
+						<td colspan="3"><input type="text" value="${noticeFindOne.file_name }"></td>
 					</tr>
 				</table>
 			</div>
 			<div class="row row-cols-1 notcieDetail-third-box">
 				<table class="table notcieDetail-third-table">
 					<tr>
-						<td>어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구</td>
+						<td>${noticeFindOne.content }</td>
 					</tr>
 				</table>
 			</div>

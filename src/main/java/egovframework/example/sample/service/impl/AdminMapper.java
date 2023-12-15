@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
 
+import egovframework.example.sample.dto.Notice;
 import egovframework.example.sample.dto.Users;
 
 @Mapper
@@ -14,5 +15,12 @@ public interface AdminMapper {
 	int getUsetAllCount();
 
 	Users getUserFindOne(String userId);
+	
+	int getNoticeAllCount();
+
+	List<Notice> getNoticeAllList();
+
+	Notice getNoticeFindOne(int noticeId);
+
 
 }

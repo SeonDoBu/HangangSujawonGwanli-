@@ -37,6 +37,10 @@
 					<button>&nbsp;조회&nbsp;</button>
 				</div>
 			</div>
+			
+			<!-- 글번호 Logic -->
+			<c:set var="num" value="${page.total-page.start+1 }"/>
+			
 			<div class="row row-cols-1 notice-third-box">
 				<table class="table notice-third-table">
 					<tr>
@@ -45,76 +49,23 @@
 						<th>조회수</th>
 						<th>첨부파일</th>
 					</tr>
-					<tr>
-						<td>1</td>
-						<td><a href="noticeDetail.do">어쩌구저쩌구어쩌구</a></td>
-						<td>2023-12-13 12:00:00</td>
-						<td>12</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>어쩌구저쩌구어쩌구</td>
-						<td>2023-12-13 12:00:00</td>
-						<td>12</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>어쩌구저쩌구어쩌구</td>
-						<td>2023-12-13 12:00:00</td>
-						<td>12</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>어쩌구저쩌구어쩌구</td>
-						<td>2023-12-13 12:00:00</td>
-						<td>12</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>어쩌구저쩌구어쩌구</td>
-						<td>2023-12-13 12:00:00</td>
-						<td>12</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>6</td>
-						<td>어쩌구저쩌구어쩌구</td>
-						<td>2023-12-13 12:00:00</td>
-						<td>12</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>7</td>
-						<td>어쩌구저쩌구어쩌구</td>
-						<td>2023-12-13 12:00:00</td>
-						<td>12</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>8</td>
-						<td>어쩌구저쩌구어쩌구</td>
-						<td>2023-12-13 12:00:00</td>
-						<td>12</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>9</td>
-						<td>어쩌구저쩌구어쩌구</td>
-						<td>2023-12-13 12:00:00</td>
-						<td>12</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>10</td>
-						<td>어쩌구저쩌구어쩌구</td>
-						<td>2023-12-13 12:00:00</td>
-						<td>12</td>
-						<td>-</td>
-					</tr>
+					<c:forEach var="notices" items="${noticeAllList }">
+						<tr>
+							<td>${num }</td>
+							<c:set var="num" value="${num -1 }"/>	
+							<td><a href="noticeDetail.do?noticeId=${notices.notice_id }">${notices.title }</a></td>
+							<td>
+								<fmt:formatDate value="${notices.created_date }" type="date"
+										        pattern="YYYY-MM-dd hh:mm:ss"/>
+							</td>
+							<td>${notices.readcount }</td>
+							<c:choose>
+								<c:when test="${notices.file_name eq null}">
+									<td>-</td>
+								</c:when>
+							</c:choose>
+						</tr>
+					</c:forEach>
 				</table>
 			</div>
 			<div class="row row-cols-1 notice-fourth-box">
