@@ -4,14 +4,23 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import egovframework.example.sample.dto.Commoncode;
 import egovframework.example.sample.dto.District;
+<<<<<<< Updated upstream
 import egovframework.example.sample.dto.Paging;
+=======
+import egovframework.example.sample.dto.ObservData;
+>>>>>>> Stashed changes
 import egovframework.example.sample.dto.Siseol;
 import egovframework.example.sample.service.CommoncodeService;
 import egovframework.example.sample.service.DistrictService;
+import egovframework.example.sample.service.ObservDataService;
 import egovframework.example.sample.service.SiseolService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,12 +38,24 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SluiceController {
 
+<<<<<<< Updated upstream
 	private final CommoncodeService commoncodeService;
 	private final DistrictService   districtService;
 	private final SiseolService     siseolSerivce;
 	private final SluiceService     ss;
 
 	// 수자원시설물 목록으로 이동 by 나희
+=======
+
+	private final CommoncodeService commoncodeService;
+	private final DistrictService   districtService;
+	private final SiseolService     siseolSerivce;
+	private final SluiceService 	ss;
+	private final ObservDataService obs;
+	
+	
+	// 수자원시설물 목록으로 이동
+>>>>>>> Stashed changes
 	@RequestMapping(value = "sujawonList.do")
 	public String sujawonList(Siseol siseol, String currentPage, Model model) {
 		log.info("sujawonList.do Start...");
@@ -124,11 +145,33 @@ public class SluiceController {
 		return "sujawonStatistics";
 	}
 
+<<<<<<< Updated upstream
 	@GetMapping(value = "/sluiceList")
 	public String SluiceList(Sluice sluice, Model model) {
 
+=======
+	
+	
+	
+	@GetMapping(value = "/sluiceMain")
+	public String SluiceMain(Model model) {
+	
+	
+	return "sluice/sluiceMain";
+	
+	}
+	
+	
+	@GetMapping(value = "/sluiceList")
+	public String SluiceList(Sluice sluice,ObservData observData,  Model model) {
+	
+>>>>>>> Stashed changes
 		int SluiceCount = ss.sluiceCount();
+		int ObservCount = obs.observCount();
+		
+		
 		List<Sluice> SluiceList = ss.sluiceList(sluice);
+<<<<<<< Updated upstream
 
 		/* System.out.println(SluiceList); */
 
@@ -138,6 +181,19 @@ public class SluiceController {
 
 		return "sluice/sluiceList";
 
+=======
+		List<ObservData> ObservDataList = obs.observDataList(observData);
+		/* System.out.println(SluiceList); */
+		//조회 
+		model.addAttribute("SluiceList",SluiceList);
+		model.addAttribute("ObservDataList",ObservDataList);
+		//count
+		model.addAttribute("SluiceCount",SluiceCount);
+		model.addAttribute("ObservCount",ObservCount);
+		
+	return "sluice/sluiceList";
+	
+>>>>>>> Stashed changes
 	}
 
 	@GetMapping("sluiceInsert")
@@ -184,4 +240,40 @@ public class SluiceController {
 		
 	}
 	
+<<<<<<< Updated upstream
+=======
+	
+	
+	
+	
+	//관측 데이터 시작 
+	@GetMapping(value = "/ObservDataList")
+	public String ObservDataList(Sluice sluice,ObservData observData,Model model) {
+	
+		int SluiceCount = ss.sluiceCount();
+		int ObservCount = obs.observCount();
+		
+		
+		List<Sluice> SluiceList = ss.sluiceList(sluice);
+		List<ObservData> ObservDataList = obs.observDataList(observData);
+		
+		System.out.println("========================"+ObservDataList);
+		System.out.println("========================="+observData.getName());
+		System.out.println("-------------");
+		/* System.out.println(SluiceList); */
+		//조회 
+		model.addAttribute("SluiceList",SluiceList);
+		model.addAttribute("ObservDataList",ObservDataList);
+		model.addAttribute("ObservData",observData);
+		//count
+		model.addAttribute("SluiceCount",SluiceCount);
+		
+		model.addAttribute("ObservCount",ObservCount);
+		
+	return "sluice/sluiceTypeList";
+	
+	}
+	
+
+>>>>>>> Stashed changes
 }

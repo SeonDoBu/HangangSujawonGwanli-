@@ -40,7 +40,7 @@ public class SluiceServiceImpl extends EgovAbstractServiceImpl implements Sluice
 		
 		try {
 			
-			sluiceList = sm.sluiceList("sluiceList", sluice);
+			sluiceList = sm.sluiceList(sluice);
 			
 		} catch (Exception e) {
 			System.out.println("SluiceListServiceImpl SuliceList e.getmessage()->"+e.getMessage());
@@ -65,7 +65,7 @@ public class SluiceServiceImpl extends EgovAbstractServiceImpl implements Sluice
 		
 		try {
 			
-			insertSluice = sm.insertSluice("insertSluice",sluice);
+			insertSluice = sm.insertSluice(sluice);
 			
 		} catch (Exception e) {
 			System.out.println("SluiceListServiceImpl InsertSluice e.getMesaage()->"+e.getMessage());
@@ -80,7 +80,7 @@ public class SluiceServiceImpl extends EgovAbstractServiceImpl implements Sluice
 		Sluice sluice = new Sluice();
 		
 		try {
-			sluice = sm.sluiceDetail("sluiceDetail",sluice_id);
+			sluice = sm.sluiceDetail(sluice_id);
 			
 			
 		} catch (Exception e) {
@@ -99,7 +99,8 @@ public class SluiceServiceImpl extends EgovAbstractServiceImpl implements Sluice
 		
 		try {
 			
-			updateCount = sm.updateSluice("updateSluice",sluice);
+			log.info("updateSluice =>"+sluice.getSluice_id());
+			updateCount = sm.updateSluice(sluice);
 			
 			
 			

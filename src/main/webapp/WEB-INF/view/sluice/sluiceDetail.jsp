@@ -26,7 +26,7 @@
 관측소명 <input class="col-5" name="name" value="${sluice.name }" style="margin: 10px;" type="text">
 <div>
 
-표준 코드 <input type="number" name="sluice_id" value="${sluice.sluice_id }">
+표준 코드 <input type="hidden" name="sluice_id" value="${sluice.sluice_id }">
 </div>
 <div style="margin: 10px;">
 위도 <input type="number" step="0.000000001" name="mapy" value="${sluice.mapy }" style="margin-right: 40px; margin-left: 30px;">

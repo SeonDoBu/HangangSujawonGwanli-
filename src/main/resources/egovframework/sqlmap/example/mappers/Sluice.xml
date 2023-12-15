@@ -11,8 +11,8 @@
 	</select>
 	<insert id="insertSluice" parameterType="Sluice">
 		INSERT INTO 
-		sluice (sluice_id,name,mapy,mapx,area,adress)
-		values (#{sluice_id},#{name},#{mapy},#{mapx},#{area},#{adress})
+		sluice (sluice_id,name,mapy,mapx,area,address)
+		values (#{sluice_id},#{name},#{mapy},#{mapx},#{area},#{address})
 	</insert>
 	<select id="sluiceDetail" parameterType="int" resultType="Sluice">
 		SELECT * 
@@ -22,12 +22,14 @@
 	<update id="updateSluice" parameterType="Sluice">
 		UPDATE sluice
 		SET
-		sluice_id = #{sluice_id},
 		name = #{name},
 		mapy = #{mapy},
 		mapx = #{mapx},
 		area = #{area},
-		adress = #{adress}
+		address = #{address}
+		WHERE sluice_id = #{sluice_id}
 	</update>
+
+
 
 </mapper>

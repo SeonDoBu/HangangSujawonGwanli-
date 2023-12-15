@@ -52,8 +52,10 @@
 
 <div class="container" style="margin-top:30px; border: 1px; border-color: gray;">
 
-<h1>시자료 </h1>
-<h1>관측소 명 : {sluicename}</h1>
+<h1>시자료  </h1> <input>
+
+<h1>관측소 명 :</h1>
+
 <br>
 
 (단위: mm) <button type="button" style="float: right; margin-right: 10px;" class="btn btn-secondary">저장</button> 
@@ -66,7 +68,7 @@
   <thead class="table-light">
     <tr>
       <th scope="col" colspan="2">관측일시</th>
-      <th></th>
+      
      <th>0</th>
      <th>1</th>
      <th>2</th>
@@ -95,13 +97,35 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row" colspan="2">foreach돌령</th>
-      <td></td>
-      <td></td>
-      <td></td>
+  	<c:forEach var="obs" items="${ObservDataList}">
+    <tr>  
+      <td scope="row" colspan="2">${obs.data_ymd }</td>
+     		<td>${obs.value00}</td>
+			<td>${obs.value01}</td>
+			<td>${obs.value02}</td>
+			<td>${obs.value03}</td>
+			<td>${obs.value04}</td>
+			<td>${obs.value05}</td>
+			<td>${obs.value06}</td>
+			<td>${obs.value07}</td>
+			<td>${obs.value08}</td>
+			<td>${obs.value09}</td>
+			<td>${obs.value10}</td>
+			<td>${obs.value11}</td>
+			<td>${obs.value12}</td>
+			<td>${obs.value13}</td>
+			<td>${obs.value14}</td>
+			<td>${obs.value15}</td>
+			<td>${obs.value16}</td>
+			<td>${obs.value17}</td>
+			<td>${obs.value18}</td>
+			<td>${obs.value19}</td>
+			<td>${obs.value20}</td>
+			<td>${obs.value21}</td>
+			<td>${obs.value22}</td>
+			<td>${obs.value23}</td>
     </tr>
- 
+ 	</c:forEach>
   </tbody>
 </table>
 

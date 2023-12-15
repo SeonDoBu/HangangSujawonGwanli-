@@ -1,10 +1,10 @@
 package egovframework.example.sample.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class ObservData {
 	private int    sluice_id;	// 수문코드(PFK)
 	private String data_ymd;	// 관측연월일(PK)
@@ -33,4 +33,8 @@ public class ObservData {
 	private double value21;		// 값21
 	private double value22;		// 값22
 	private double value23;		// 값23
+	
+	//조회용
+	private String name;
+	
 }

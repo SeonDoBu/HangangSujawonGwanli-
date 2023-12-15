@@ -10,10 +10,10 @@ import egovframework.example.sample.dto.Sluice;
 public interface SluiceMapper {
 
 	int sluiceCount();
-	List<Sluice> sluiceList(String string, Sluice sluice);
+	List<Sluice> sluiceList(Sluice sluice);
 	
-	int insertSluice(String string, Sluice sluice);
-	Sluice sluiceDetail(String string, int sluice_id);
-	int updateSluice(String string, Sluice sluice);
+	int insertSluice(Sluice sluice);
+	Sluice sluiceDetail(int sluice_id);
+	int updateSluice(Sluice sluice);
 	
 }
