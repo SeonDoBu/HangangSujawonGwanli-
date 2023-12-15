@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+<<<<<<< Updated upstream
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import egovframework.example.sample.dto.Commoncode;
@@ -12,6 +13,14 @@ import egovframework.example.sample.dto.Siseol;
 import egovframework.example.sample.service.CommoncodeService;
 import egovframework.example.sample.service.DistrictService;
 import egovframework.example.sample.service.SiseolService;
+=======
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import egovframework.example.sample.dto.Sluice;
+import egovframework.example.sample.service.SluiceService;
+>>>>>>> Stashed changes
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SluiceController {
 
+<<<<<<< Updated upstream
 	private final CommoncodeService commoncodeService;
 	private final DistrictService   districtService;
 	private final SiseolService     siseolSerivce;
@@ -73,4 +83,77 @@ public class SluiceController {
 	public String sujawonStatistics() {
 		return "sujawonStatistics";
 	}
+=======
+	private final SluiceService ss;
+	
+	@GetMapping(value = "/sluiceList")
+	public String SluiceList(Sluice sluice, Model model) {
+	
+		int SluiceCount = ss.sluiceCount();
+		List<Sluice> SluiceList = ss.sluiceList(sluice);
+		
+		/* System.out.println(SluiceList); */
+		 
+		model.addAttribute("SluiceList",SluiceList);
+		
+		model.addAttribute("SluiceCount",SluiceCount);
+		
+		
+	return "sluice/sluiceList";
+	
+	}
+	
+	@GetMapping("sluiceInsert")
+	public String insertFormMove(Model model) {
+		
+		
+		return "/sluice/sluiceInsert";
+	}
+	
+	
+	
+	@PostMapping(value = "sluiceInsert1")
+	public String sluiceInsert(@ModelAttribute Sluice sluice ,Model model, Sluice sluice_id) {
+		
+		int insertResult = 0;
+		
+		insertResult = ss.insertSluice(sluice);
+		
+		System.out.println(sluice.getSluice_id());
+		System.out.println(sluice.getClass());
+
+		return "/sluice/sluiceInsert";	
+	}
+	@GetMapping(value = "/sluiceDetail")
+	public String sluiceDetail(int sluice_id,Model model) {
+		System.out.println("sluiceDetail start");
+		
+		Sluice sluice = ss.sluiceDetail(sluice_id);
+		
+		
+		
+		model.addAttribute("sluice",sluice);
+		
+
+		return "sluice/sluiceDetail";	
+	}
+	
+	@PostMapping(value = "updateSluice")
+	public String updateSluice(@ModelAttribute Sluice sluice, Model model) {
+		
+		int updateCount = ss.updateSluice(sluice);
+		
+		System.out.println("updateSluice"+sluice.getMapx());
+		System.out.println("updateSluice"+sluice.getSluice_id());
+		model.addAttribute("upcnt",updateCount);
+		model.addAttribute("sluice",sluice);
+		
+		return "redirect:sluiceList";
+		
+	}
+	
+	
+	
+	
+>>>>>>> Stashed changes
 }
