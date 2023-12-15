@@ -47,7 +47,7 @@ public class SluiceController {
 			List<District> districtList = districtService.districtList();
 			
 			// 조건에 해당하는 시설물 총 개수 구하기
-			int totalSiseol = siseolSerivce.count();
+			int totalSiseol = siseolSerivce.count(siseol);
 			
 			// 페이징 처리
 			Paging page = new Paging(totalSiseol, currentPage);

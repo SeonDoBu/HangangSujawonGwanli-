@@ -118,25 +118,19 @@
 			<form action="siseoulList.do" id="frm" onsubmit="return chk()">
 				<input type="hidden" name="big_code" value="${commonList[0].big_code}"> 
 				<div id="con-text">
-					시설물 종류 : 	
-					<select name="small_code" id="small_code2">
-						<option selected>전체</option>
-						<c:forEach var="list" items="${commonList}">
-							<option <c:if test ="${siseol.small_code eq list.small_code}"> selected="selected"</c:if>
-							value="${list.small_code}">${list.content}</option>
-						</c:forEach>
+					점검일자 : 	
+					<input type="date" name="insp_date">
+					&nbsp;&nbsp;&nbsp;
+					
+					기상상황 : 
+					<select name="weather">
+						<option selected>맑음</option>
+						<option>흐림</option>
+						<option>눈</option>
+						<option>비</option>
 					</select>&nbsp;&nbsp;&nbsp;
 					
-					행정구역 : 
-					<select name="district_id" id="district_id2">
-						<option selected>전체</option>
-						<c:forEach var="list" items="${districtList}">
-							<option <c:if test ="${siseol.district_id eq list.district_id}"> selected="selected"</c:if>
-							value="${list.district_id}">${list.name}</option>
-						</c:forEach>
-					</select>&nbsp;&nbsp;&nbsp;
-					
-					관리기관 : 
+					점검자 소속 : 
 					<select name="gigwan_id" id="gigwan_id2">
 						<option selected>전체</option>
 						<c:forEach var="list" items="${gigwanList}">
@@ -179,8 +173,7 @@
 					<td>${list.districtName}</td>
 					<td>${list.gigwanName}</td>
 					<td>
-						<!-- <button style="background: white; color: #191D31; border-radius: 5px;">입력</button> -->
-					 <button style="background: white; color: #191D31; border-radius: 5px;"><a href="siseoulWriteForm.do" style="text-decoration: none; color: #000;">입력</a></button>
+						<button style="background: white; color: #191D31; border-radius: 5px;">입력</button>
 					</td>
 				</tr>
 			</c:forEach>
