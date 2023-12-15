@@ -64,20 +64,45 @@
 			</thead>
 			<tbody class="table-group-divider">
 				<c:if test="${siseolList.size() == 0}"><td colspan="7">해당하는 시설물이 없습니다.</td></c:if>
-				<c:set var="num" value="1"/> <!-- todo: ${page.start}로 바꾸기 -->
+				<c:set var="num" value="${page.start}"/>
 				<c:forEach var="siseol" items="${siseolList}">
 					<tr>
 						<td>${num}</td>
-						<td>${siseol.small_code}</td> <!-- todo: content로 바꾸기 -->
+						<td><input type="hidden" name="small_code" value="${siseol.small_code}">${siseol.siseolName}</td>
 						<td>${siseol.siseol_id}</td>
 						<td>${siseol.mapy}</td>
 						<td>${siseol.mapx}</td>
-						<td>${siseol.district_id}</td> <!-- todo: content로 바꾸기 -->
-						<td>${siseol.gigwan_id}</td> <!-- todo: name으로 바꾸기 -->
+						<td><input type="hidden" name="district_id" value="${siseol.district_id}">${siseol.districtName}</td>
+						<td><input type="hidden" name="gigwan_id" value="${siseol.gigwan_id}">${siseol.gigwanName}</td>
 					</tr>
+					<c:set var="num" value="${num + 1}"/>
 				</c:forEach>
 			</tbody>
 		</table>
+		
+		<nav aria-label="Page navigation example text-center" style="margin-top: 20px; margin-left: 200px;">
+			<ul class="pagination">
+				<c:if test="${page.startPage > page.pageBlock}">
+					<li class="page-item">
+						<a class="page-link" href="sujawonList.do?currentPage=${page.startPage - page.pageBlock}" aria-label="이전">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+					<li class="page-item">
+						<a class="page-link" href="sujawonList.do?currentPage=${i}">${i}</a>
+					</li>
+				</c:forEach>
+				<c:if test="${page.endPage < page.totalPage}">
+					<li class="page-item">
+						<a class="page-link" href="sujawonList.do?currentPage=${page.startPage + page.pageBlock}" aria-label="다음">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</c:if>
+			</ul>
+		</nav>
 	</div>
 </body>
 </html>

@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import egovframework.example.sample.dto.Commoncode;
 import egovframework.example.sample.dto.District;
+import egovframework.example.sample.dto.Paging;
 import egovframework.example.sample.dto.Siseol;
 import egovframework.example.sample.service.CommoncodeService;
 import egovframework.example.sample.service.DistrictService;
@@ -30,60 +30,77 @@ import lombok.extern.slf4j.Slf4j;
 public class SluiceController {
 
 	private final CommoncodeService commoncodeService;
-	private final DistrictService districtService;
-	private final SiseolService siseolSerivce;
+	private final DistrictService   districtService;
+	private final SiseolService     siseolSerivce;
+	private final SluiceService     ss;
 
-	// 수자원시설물 목록으로 이동
+	// 수자원시설물 목록으로 이동 by 나희
 	@RequestMapping(value = "sujawonList.do")
 	public String sujawonList(Siseol siseol, Commoncode cc, String currentPage, Model model) {
 		log.info("sujawonList.do Start...");
 		try {
-			cc.setBig_code(12); // 시설물 종류 대분류 강제 지정
+			// 시설물 종류 select box 옵션 만들기
+			cc.setBig_code(2); // 시설물 종류 대분류 강제 지정
 			List<Commoncode> siseolType = commoncodeService.commoncodeList(cc);
+			
+			// 행정구역 select box 옵션 만들기
 			List<District> districtList = districtService.districtList();
+			
+			// 조건에 해당하는 시설물 총 개수 구하기
+			int totalSiseol = siseolSerivce.count();
+			
+			// 페이징 처리
+			Paging page = new Paging(totalSiseol, currentPage);
+			siseol.setStart(page.getStart());
+			siseol.setEnd(page.getEnd());
+			
+			// 조건에 해당하는 시설물 리스트 가져오기
 			List<Siseol> siseolList = siseolSerivce.siseolList(siseol);
-
+			
+			model.addAttribute("page", page);
+			model.addAttribute("totalSiseol", totalSiseol);
 			model.addAttribute("siseolType", siseolType);
 			model.addAttribute("districtList", districtList);
 			model.addAttribute("siseolList", siseolList);
+			model.addAttribute("currentPage", currentPage);
+			
 		} catch (Exception e) {
 			log.info("sujawonList.do" + e.getMessage());
+		} finally {
+			log.info("sujawonList.do End...");
 		}
-		log.info("sujawonList.do End...");
 		return "sluice/sujawonList";
 	}
 
 	@RequestMapping(value = "sujawonDetail.do")
 	public String sujawonDetail() {
-		return "sujawonDetail";
+		return "sluice/sujawonDetail";
 	}
 
 	@RequestMapping(value = "sujawonInsertForm.do")
 	public String sujawonInsertForm() {
-		return "sujawonInsert";
+		return "sluice/sujawonInsert";
 	}
 
 	@RequestMapping(value = "sujawonInsert.do")
 	public String sujawonInsert() {
-		return "sujawonList";
+		return "sluice/sujawonList";
 	}
 
 	@RequestMapping(value = "sujawonUpdate.do")
 	public String sujawonUpdate() {
-		return "sujawonDetail";
+		return "sluice/sujawonDetail";
 	}
 
 	@RequestMapping(value = "sujawonDelete.do")
 	public String sujawonDelete() {
-		return "sujawonList";
+		return "sluice/sujawonList";
 	}
 
 	@RequestMapping(value = "sujawonStatistics.do")
 	public String sujawonStatistics() {
 		return "sujawonStatistics";
 	}
-
-	private final SluiceService ss;
 
 	@GetMapping(value = "/sluiceList")
 	public String SluiceList(Sluice sluice, Model model) {
@@ -144,5 +161,5 @@ public class SluiceController {
 		return "redirect:sluiceList";
 		
 	}
-
+	
 }
