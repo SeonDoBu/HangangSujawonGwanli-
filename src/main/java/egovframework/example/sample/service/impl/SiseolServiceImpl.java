@@ -18,11 +18,11 @@ public class SiseolServiceImpl extends EgovAbstractServiceImpl implements Siseol
 	private final SiseolMapper siseolMapper;
 
 	@Override
-	public int count() {
+	public int count(Siseol siseol) {
 		System.out.println("SiseolService count Start...");
 		int result = 0;
 		try {
-			result = siseolMapper.siseolCount();
+			result = siseolMapper.siseolCount(siseol);
 			System.out.println("SiseolService count End...");
 		}catch (Exception e) {
 			System.out.println("SiseolServiceImpl count Exception -> " + e.getMessage());

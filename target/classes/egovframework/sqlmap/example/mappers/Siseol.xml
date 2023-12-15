@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.example.sample.service.impl.SiseolMapper">
-	<select id="siseolCount" resultType="int">
+
+	<select id="siseolCount" parameterType="Siseol" resultType="int">
 		select count(*)
-		from siseol
+		from    siseol
+		<where>
+			<if test="big_code != 0">
+				 big_code = ${big_code}
+			</if>
+			<if test="small_code != 0">
+				  AND small_code = ${small_code}
+			</if>
+			<if test="district_id != 0">
+				  AND district_id = ${district_id}
+			</if>
+			<if test="gigwan_id != 0">
+				  AND gigwan_id   = ${gigwan_id}
+			</if>
+			<if test="siseol_id != 0">
+				  AND siseol_id   = ${siseol_id}
+			</if>
+		</where>
 	</select>
 	
 	<select id="siseolList" parameterType="Siseol" resultType="Siseol">
@@ -18,6 +36,23 @@
 				JOIN COMMONCODE c ON s.small_code = c.small_code AND s.big_code = c.big_code
 				JOIN DISTRICT d ON s.district_id = d.district_id
 				JOIN GIGWAN g ON s.gigwan_id = g.gigwan_id
+				<where>
+					<if test="big_code != 0">
+						 s.big_code = ${big_code}
+					</if>
+					<if test="small_code != 0">
+						  AND s.small_code = ${small_code}
+					</if>
+					<if test="district_id != 0">
+						  AND s.district_id = ${district_id}
+					</if>
+					<if test="gigwan_id != 0">
+						  AND s.gigwan_id   = ${gigwan_id}
+					</if>
+					<if test="siseol_id != 0">
+						  AND s.siseol_id   = ${siseol_id}
+					</if>
+				</where> 
 				)a
 		)b
 		WHERE rn BETWEEN #{start} and #{end}
@@ -39,53 +74,5 @@
 		select *
 		from   Gigwan
 	</select>
-	
-	<select id="selectedSiseolCount" parameterType="Siseol" resultType="int">
-		select count(*)
-		from    siseol
-		where   big_code = 55
-		<if test="small_code != 0">
-			  AND small_code = ${small_code}
-		</if>
-		<if test="district_id != 0">
-			  AND district_id = ${district_id}
-		</if>
-		<if test="gigwan_id != 0">
-			  AND gigwan_id   = ${gigwan_id}
-		</if>
-		<if test="siseol_id != 0">
-			  AND siseol_id   = ${siseol_id}
-		</if>
-	</select>
-	
-	<select id="selectedSiseolList"  parameterType="Siseol" resultType="Siseol">
-		SELECT b.*
-		FROM
-		(
-			SELECT  ROW_NUMBER() OVER (ORDER BY siseol_id) AS rn, a.*
-			FROM
-			   (
-				SELECT s.*, d.name AS districtName, g.name AS gigwanName, c.content AS siseolName
-				FROM SISEOL s
-				JOIN COMMONCODE c ON s.small_code = c.small_code AND s.big_code = c.big_code
-				JOIN DISTRICT d ON s.district_id = d.district_id
-				JOIN GIGWAN g ON s.gigwan_id = g.gigwan_id
-				WHERE s.big_code = 55
-				<if test="small_code != 0">
-					  AND s.small_code = ${small_code}
-				</if>
-				<if test="district_id != 0">
-					  AND s.district_id = ${district_id}
-				</if>
-				<if test="gigwan_id != 0">
-					  AND s.gigwan_id   = ${gigwan_id}
-				</if>
-				<if test="siseol_id != 0">
-					  AND s.siseol_id   = ${siseol_id}
-				</if>
-				)a
-		)b
-		WHERE rn BETWEEN #{start} and #{end}
-	</select>
-	
+
 </mapper>

@@ -9,7 +9,7 @@ import egovframework.example.sample.dto.Siseol;
 
 public interface SiseolService {
 
-	int              count();
+	int              count(Siseol siseol);
 	List<Siseol>     siseolList(Siseol siseol);
 	List<Commoncode> commonList();
 	List<District>   districtList();

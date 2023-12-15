@@ -16,12 +16,14 @@
 		border: solid 2px;
 		border-radius: 10px; 
 	}
+	
 	/* 검색 카드  내용*/	
 	#con-text{
 		margin-top: 10px;
 		margin-bottom: 10px;
 		font-weight: bold;
 	}
+	
 	/* 테이블 */	
 	#con-table{
 		margin: 50px;
@@ -73,6 +75,35 @@
 	    form.submit();
 	}
 	
+ 	function navigatePage(currentPage) {
+	    var params = [];
+	
+	    var smallCode = $('#small_code2').val();
+	    var districtId = $('#district_id2').val();
+	    var gigwanId = $('#gigwan_id2').val();
+	    var siseolId = $('#siseol_id2').val();
+	
+	    if (smallCode && smallCode !== "전체") {
+	      params.push("small_code=" + encodeURIComponent(smallCode));
+	    }
+	    if (districtId && districtId !== "전체") {
+	      params.push("district_id=" + encodeURIComponent(districtId));
+	    }
+	    if (gigwanId && gigwanId !== "전체") {
+	      params.push("gigwan_id=" + encodeURIComponent(gigwanId));
+	    }
+	    if (siseolId && siseolId !== "0") {
+	      params.push("siseol_id=" + encodeURIComponent(siseolId));
+	    }
+	
+	    if (params.length > 0) {
+	      var paramString = params.join("&");
+	      location.href = "siseoulList.do?currentPage=" + currentPage + "&" + paramString;
+	    } else {
+	      location.href = "siseoulList.do?currentPage=" + currentPage;
+	    }
+	}
+ 	
 	
 	function chk() {
 		return false;
@@ -84,13 +115,15 @@
 	<div id="con">
 	 <div class="card card-product ">
         <div class="card-body py-8 ">
-			<form action="selectedSiseolList.do" id="frm" onsubmit="return chk()"> 
+			<form action="siseoulList.do" id="frm" onsubmit="return chk()">
+				<input type="hidden" name="big_code" value="${commonList[0].big_code}"> 
 				<div id="con-text">
 					시설물 종류 : 	
 					<select name="small_code" id="small_code2">
 						<option selected>전체</option>
 						<c:forEach var="list" items="${commonList}">
-							<option value="${list.small_code}">${list.content}</option>
+							<option <c:if test ="${siseol.small_code eq list.small_code}"> selected="selected"</c:if>
+							value="${list.small_code}">${list.content}</option>
 						</c:forEach>
 					</select>&nbsp;&nbsp;&nbsp;
 					
@@ -98,7 +131,8 @@
 					<select name="district_id" id="district_id2">
 						<option selected>전체</option>
 						<c:forEach var="list" items="${districtList}">
-							<option value="${list.district_id}">${list.name}</option>
+							<option <c:if test ="${siseol.district_id eq list.district_id}"> selected="selected"</c:if>
+							value="${list.district_id}">${list.name}</option>
 						</c:forEach>
 					</select>&nbsp;&nbsp;&nbsp;
 					
@@ -106,12 +140,14 @@
 					<select name="gigwan_id" id="gigwan_id2">
 						<option selected>전체</option>
 						<c:forEach var="list" items="${gigwanList}">
-							<option value="${list.gigwan_id}">${list.name}</option>
+							<option 
+							<c:if test ="${siseol.gigwan_id eq list.gigwan_id}"> selected="selected"</c:if>value="${list.gigwan_id}">${list.name}</option>
 						</c:forEach>
 					</select>&nbsp;&nbsp;&nbsp;
 					
 					시설물 코드 : 
-					<input type="text" name="siseol_id" id="siseol_id2"  placeholder="XXXXXXXXX" style="width: 120px;">
+					<input type="text" <c:if test="${siseol.siseol_id != '0'}">value="${siseol.siseol_id}"</c:if>
+					name="siseol_id" id="siseol_id2"  style="width: 120px;">
 
 					&nbsp;&nbsp;
 					<button style="background: #191D31; color: white;"  onclick="submitForm()">검색</button>
@@ -156,13 +192,13 @@
 	  <nav aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
 			<c:if test="${page.startPage > page.pageBlock}">
-				<li class="page-item"><a class="page-link" href="siseoulList.do?currentPage=${page.startPage-page.pageBlock}">이전</a></li>
+				<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="navigatePage(${page.startPage-page.pageBlock})">이전</a></li>
 			</c:if>
 			<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
-				<li class="page-item"><a class="page-link" href="siseoulList.do?currentPage=${i}">${i}</a></li>
+				<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="navigatePage(${i})">${i}</a></li>
 			</c:forEach>
 			<c:if test="${page.endPage < page.totalPage}">
-				<li class="page-item"><a class="page-link" href="siseoulList.do?currentPage=${page.startPage+page.pageBlock}">다음</a></li>
+				<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="navigatePage(${page.startPage+page.pageBlock})">다음</a></li>
 			</c:if>
 		</ul>
 	  </nav>
