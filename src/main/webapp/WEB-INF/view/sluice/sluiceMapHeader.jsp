@@ -48,7 +48,7 @@
   </li>
   
     <li class="nav-item">
-    <a class="nav-link " href="#" style="color: #FFFFFF;">수자원</a>
+    <a class="nav-link " href="sujawonList.do" style="color: #FFFFFF;">수자원</a>
   </li>
   
 
