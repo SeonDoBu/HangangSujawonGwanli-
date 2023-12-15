@@ -71,6 +71,7 @@ public class HtController {
 			model.addAttribute("commonList", commonList);
 			model.addAttribute("districtList", districtList);
 			model.addAttribute("gigwanList", gigwanList);
+			model.addAttribute("siseol", siseol);
 			model.addAttribute("page", page);
 		} catch (Exception e) {
 			System.out.println("htController Exception -> " + e.getMessage());
@@ -115,6 +116,7 @@ public class HtController {
 			model.addAttribute("commonList", commonList);
 			model.addAttribute("districtList", districtList);
 			model.addAttribute("gigwanList", gigwanList);
+			model.addAttribute("siseol", siseol);
 			model.addAttribute("page", page);
 		} catch (Exception e) {
 			System.out.println("htController Exception -> " + e.getMessage());

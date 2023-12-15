@@ -44,16 +44,16 @@
 		select count(*)
 		from    siseol
 		where   big_code = 55
-		<if test="small_code != null">
+		<if test="small_code != 0">
 			  AND small_code = ${small_code}
 		</if>
-		<if test="district_id != null">
+		<if test="district_id != 0">
 			  AND district_id = ${district_id}
 		</if>
-		<if test="gigwan_id != null">
+		<if test="gigwan_id != 0">
 			  AND gigwan_id   = ${gigwan_id}
 		</if>
-		<if test="siseol_id != null">
+		<if test="siseol_id != 0">
 			  AND siseol_id   = ${siseol_id}
 		</if>
 	</select>
@@ -71,16 +71,16 @@
 				JOIN DISTRICT d ON s.district_id = d.district_id
 				JOIN GIGWAN g ON s.gigwan_id = g.gigwan_id
 				WHERE s.big_code = 55
-				<if test="small_code != null">
+				<if test="small_code != 0">
 					  AND s.small_code = ${small_code}
 				</if>
-				<if test="district_id != null">
+				<if test="district_id != 0">
 					  AND s.district_id = ${district_id}
 				</if>
-				<if test="gigwan_id != null">
+				<if test="gigwan_id != 0">
 					  AND s.gigwan_id   = ${gigwan_id}
 				</if>
-				<if test="siseol_id != null">
+				<if test="siseol_id != 0">
 					  AND s.siseol_id   = ${siseol_id}
 				</if>
 				)a

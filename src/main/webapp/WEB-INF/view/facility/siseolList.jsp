@@ -35,28 +35,47 @@
 	}
 
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	function submitForm() {
-	    // 선택된 옵션 값 가져오기
-	    var smallCode = document.getElementById("smallCodeSelect").value;
-	    var districtId = document.getElementById("districtSelect").value;
-	    var gigwanId = document.getElementById("gigwanSelect").value;
-	    var siseolId = document.getElementsByName("siseol_id")[0].value;
-	    alert("시작한다.")
+ 	function submitForm() {
+		 // 폼 요소 가져오기
+        var form = document.getElementById("frm");
+
+        // 모든 파라미터를 제거
+        var smallCodeInput = form.querySelector('select[name="small_code"]');
+        var districtIdInput = form.querySelector('select[name="district_id"]');
+        var gigwanIdInput = form.querySelector('select[name="gigwan_id"]');
+        var siseolIdInput = form.querySelector('input[name="siseol_id"]');
+		
+	 	// 선택된 옵션 값 가져오기
+        var form = document.getElementById("frm");
+	    var smallCode = $('#small_code2').val();
+	    var districtId = $('#district_id2').val();
+		var gigwanId = $('#gigwan_id2').val();
+	    var siseolId = $('#siseol_id2').val();
 	    
 	    // "전체" 옵션인 경우 해당 파라미터 제외
 	    if (smallCode === "전체") {
-	        document.getElementById("searchForm").removeChild(document.getElementById("smallCodeSelect"));
+	    	// small_code 파라미터 제거
+	    	smallCodeInput.remove();
 	    }
 	    if (districtId === "전체") {
-	        document.getElementById("searchForm").removeChild(document.getElementById("districtSelect"));
+	    	 districtIdInput.remove();
 	    }
 	    if (gigwanId === "전체") {
-	        document.getElementById("searchForm").removeChild(document.getElementById("gigwanSelect"));
+	    	gigwanIdInput.remove();
+	    }
+	    if (siseolId === "") {
+	    	siseolIdInput.remove();
 	    }
 	    
 	    // 폼 서밋
-	    document.getElementById("searchForm").submit();
+	    form.submit();
+	}
+	
+	
+	function chk() {
+		return false;
 	}
 </script>
 </head>
@@ -65,10 +84,10 @@
 	<div id="con">
 	 <div class="card card-product ">
         <div class="card-body py-8 ">
-			<form action="selectedSiseolList.do" id="searchForm">
+			<form action="selectedSiseolList.do" id="frm" onsubmit="return chk()"> 
 				<div id="con-text">
 					시설물 종류 : 	
-					<select name="small_code">
+					<select name="small_code" id="small_code2">
 						<option selected>전체</option>
 						<c:forEach var="list" items="${commonList}">
 							<option value="${list.small_code}">${list.content}</option>
@@ -76,7 +95,7 @@
 					</select>&nbsp;&nbsp;&nbsp;
 					
 					행정구역 : 
-					<select name="district_id">
+					<select name="district_id" id="district_id2">
 						<option selected>전체</option>
 						<c:forEach var="list" items="${districtList}">
 							<option value="${list.district_id}">${list.name}</option>
@@ -84,7 +103,7 @@
 					</select>&nbsp;&nbsp;&nbsp;
 					
 					관리기관 : 
-					<select name="gigwan_id">
+					<select name="gigwan_id" id="gigwan_id2">
 						<option selected>전체</option>
 						<c:forEach var="list" items="${gigwanList}">
 							<option value="${list.gigwan_id}">${list.name}</option>
@@ -92,10 +111,11 @@
 					</select>&nbsp;&nbsp;&nbsp;
 					
 					시설물 코드 : 
-					<input type="text" name="siseol_id"  placeholder="XXXXXXXXX" style="width: 120px;">
+					<input type="text" name="siseol_id" id="siseol_id2"  placeholder="XXXXXXXXX" style="width: 120px;">
 
 					&nbsp;&nbsp;
-					<button style="background: #191D31; color: white;" type="button" onclick="submitForm()">검색</button>
+					<button style="background: #191D31; color: white;"  onclick="submitForm()">검색</button>
+					<!-- <input type="submit"  style="background: #191D31; color: white;"  value="검색"> -->
 				</div>	
 			</form>
 		  </div>
