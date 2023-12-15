@@ -1,11 +1,9 @@
-package egovframework.example.sample.service;
+package egovframework.example.sample.dto;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 @Data
 public class Paging {
 	//			현재 페이지							페이지 당 게시글 수

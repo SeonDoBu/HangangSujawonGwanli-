@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.example.sample.service.impl.AdminMapper">
+	
+	<select id="getUsetAllCount" resultType="int">
+		select count(*)
+		from users
+		<if test="name != null and name != ''">
+		where name = #{name}
+		</if>	
+	</select>
+	
+	<select id="getUserFindOne" parameterType="String" resultType="Users">
+		SELECT
+		    a.user_id,
+		    a.big_code,
+		    a.small_code,
+			MAX(a.gigwan_id) AS gigwan_id,
+			MAX(a.password) AS password,
+			MAX(a.name) AS name,
+			MAX(a.email) AS email,
+		    MAX(a.tel) AS tel,
+			MAX(a.dept) AS dept,
+			MAX(a.position) AS dept,
+			MAX(a.status) AS status,
+		    MAX(b.content) AS content
+		FROM
+		    users a
+		JOIN
+		    commoncode b ON a.big_code = b.big_code AND a.small_code = b.small_code
+			and a.user_id = #{userId}
+		GROUP BY
+		    a.user_id, a.big_code, a.small_code;		
+	</select>	
+	
+	<select id="getUserAllList" resultType="Users">
+		select
+		    ROW_NUMBER() OVER () AS rn,
+		    a.user_id,
+		    a.big_code,
+		    a.small_code,
+			MAX(a.gigwan_id) AS gigwan_id,
+			MAX(a.password) AS password,
+			MAX(a.name) AS name,
+			MAX(a.email) AS email,
+		    MAX(a.tel) AS tel,
+			MAX(a.dept) AS dept,
+			MAX(a.position) AS dept,
+			MAX(a.status) AS status,
+		    MAX(b.content) AS content
+		from
+		    users a
+		join
+		    commoncode b on a.big_code = b.big_code and a.small_code = b.small_code
+		group by
+		    a.user_id, a.big_code, a.small_code;
+	</select>
+	
+</mapper>

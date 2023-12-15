@@ -72,11 +72,12 @@
 					<button onclick="pageMove(2)">&nbsp;&nbsp;공지사항&nbsp;&nbsp;</button>
 				</div>
 			</div>
+			
 			<div class="row row-cols-1 main-second-box">
 				<div class="col main-second-title-box">
 					<p>
-						<a onclick="loginLink()">로그인</a>&nbsp;&nbsp;&nbsp;<span><a
-							onclick="signupLink()">회원가입</a></span>
+						<a role="button" onclick="loginLink()">로그인</a>&nbsp;&nbsp;&nbsp;<span>
+						<a role="button" onclick="signupLink()">회원가입</a></span>
 					</p>
 				</div>
 				<div class="col main-second-md-title-box">
@@ -95,22 +96,104 @@
 				</div>
 				<div class="col main-second-id-box">
 					<p>ID</p>
-					<input type="text" name="">
+					<input type="text" name="user_id">
 				</div>
 				<div class="col main-second-pw-box">
 					<p>PASSWORD</p>
-					<input type="password" name="">
+					<input type="password" name="password">
 				</div>
 				<div class="col main-second-login-btn-box">
 					<button type="submit" onclick="successLogin()">L&nbsp;O&nbsp;G&nbsp;I&nbsp;N</button>
 				</div>
 				<div class="col main-second-id-pw-search-box">
 					<p>
-						<a onclick="findIdPw(1)">ID찾기</a>&nbsp;|&nbsp; <a
-							onclick="findIdPw(2)">PW찾기</a>
+						<a role="button" data-bs-toggle="modal"
+						   data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">ID찾기</a>&nbsp;|&nbsp; 
+						<a role="button" data-bs-toggle="modal"
+						   data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap">PW찾기</a>
 					</p>
 				</div>
 			</div>
+			
+			<!-- ID 모달창 -->
+			<div class="modal fade" id="exampleModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header admin-modal-header-box">
+							<p class="modal-title" id="exampleModalLabel">ID&nbsp;찾기</p>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<form action="#">
+								<div class="mb-3 admin-modal-content-box">
+									<label for="authId" class="col-form-label">권한</label> 
+									<select class="form-select" id="authId" name="auth">
+										<option>권한1</option>
+										<option>권한2</option>
+										<option>관리자</option>
+									</select>
+								</div>
+								<div class="mb-3 admin-modal-content-box">
+									<label for="nameId" class="col-form-label">성명</label> 
+									<input type="text" class="form-control" id="nameId" name="name">
+								</div>
+								<div class="mb-3 admin-modal-content-box">
+									<label for="emailId" class="col-form-label">EMAIL</label> 
+									<input type="text" class="form-control" id="emailId" name="email">
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer admin-modal-btn-box">
+							<button type="submit">확인</button>
+							<button type="button" data-bs-dismiss="modal">취소</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- PW 모달창 -->
+			<div class="modal fade" id="exampleModal2" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header admin-modal-header-box">
+							<p class="modal-title" id="exampleModalLabel">PW&nbsp;찾기</p>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<form action="#">
+								<div class="mb-3 admin-modal-content-box">
+									<label for="authPw" class="col-form-label">권한</label> 
+									<select class="form-select" id="authPw" name="auth">
+										<option>권한1</option>
+										<option>권한2</option>
+										<option>관리자</option>
+									</select>
+								</div>
+								<div class="mb-3 admin-modal-content-box">
+									<label for="user_id" class="col-form-label">ID</label> 
+									<input type="text" class="form-control" id="user_id" name="user_id">
+								</div>
+								<div class="mb-3 admin-modal-content-box">
+									<label for="namePw" class="col-form-label">성명</label> <input
+										type="text" class="form-control" id="namePw" name="name">
+								</div>
+								<div class="mb-3 admin-modal-content-box">
+									<label for="emailPw" class="col-form-label">EMAIL</label> <input
+										type="text" class="form-control" id="emailPw" name="email">
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer admin-modal-btn-box">
+							<button type="submit">확인</button>
+							<button type="button" data-bs-dismiss="modal">취소</button>
+						</div>
+					</div>
+				</div>
+			</div>							
 		</div>
 	</div>
 </body>

@@ -14,6 +14,9 @@
 	    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
 	    crossorigin="anonymous"></script> 
 
+<!-- jQuery 라이브러리 불러오기 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <!-- CSS -->	    
 <link rel="stylesheet" type="text/css" href="/css/mainCss.css">
 <link rel="stylesheet" type="text/css" href="/css/infoCss.css">

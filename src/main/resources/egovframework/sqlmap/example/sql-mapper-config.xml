@@ -12,5 +12,6 @@
 		<typeAlias alias="District"      type="egovframework.example.sample.dto.District"/>
 		<typeAlias alias="Commoncode"    type="egovframework.example.sample.dto.Commoncode"/>
 		<typeAlias alias="Gigwan"        type="egovframework.example.sample.dto.Gigwan"/>
+		<typeAlias alias="Users"        type="egovframework.example.sample.dto.Users"/>
     </typeAliases>
 </configuration>

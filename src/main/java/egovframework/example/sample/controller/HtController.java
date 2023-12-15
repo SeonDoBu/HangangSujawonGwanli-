@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import egovframework.example.sample.dto.Commoncode;
 import egovframework.example.sample.dto.District;
 import egovframework.example.sample.dto.Gigwan;
+import egovframework.example.sample.dto.Paging;
 import egovframework.example.sample.dto.Siseol;
-import egovframework.example.sample.service.Paging;
 import egovframework.example.sample.service.SiseolService;
 import lombok.RequiredArgsConstructor;
 
