@@ -21,7 +21,7 @@
 			<if test="siseol_id != 0">
 				  AND siseol_id   = ${siseol_id}
 			</if>
-		</where>
+		</where>   
 	</select>
 	
 	<select id="siseolList" parameterType="Siseol" resultType="Siseol">
@@ -61,7 +61,7 @@
 	<select id="commonList" resultType="Commoncode">
 		SELECT *
 		FROM Commoncode
-		WHERE big_code = 55
+		WHERE big_code = 2
 		AND NOT (small_code = 999);
 	</select>
 	

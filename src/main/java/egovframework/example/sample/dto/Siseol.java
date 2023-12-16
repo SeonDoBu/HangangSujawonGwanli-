@@ -19,4 +19,5 @@ public class Siseol {
 	private String siseolName;	   // 시설물명
 	private String gigwanName;	   // 기관명
 	private String districtName;   // 행정구역명
+	
 }

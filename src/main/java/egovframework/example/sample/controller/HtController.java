@@ -12,6 +12,7 @@ import egovframework.example.sample.dto.District;
 import egovframework.example.sample.dto.Gigwan;
 import egovframework.example.sample.dto.Paging;
 import egovframework.example.sample.dto.Siseol;
+import egovframework.example.sample.dto.Users;
 import egovframework.example.sample.service.SiseolService;
 import lombok.RequiredArgsConstructor;
 
@@ -81,11 +82,49 @@ public class HtController {
 
 	}
 	
-	// 시설물 리스트조회
-		@RequestMapping("siseoulWriteForm.do")
-		public String siseoulWriteForm(Model model, String currentPage, Siseol siseol) {
-			
-			
-			return "/facility/siseolWriteForm";
+	// 점검이력 작성폼
+	@RequestMapping("siseoulWriteForm.do")
+	public String siseoulWriteForm(Model model, String currentPage, Users users) {
+		System.out.println("htController siseoulWriteForm Start...");
+		
+		//임시로 넣기
+		users.setDept("생산부");
+		users.setPosition("사원");
+		users.setName("조형택");
+		
+		try {
+			model.addAttribute("users", users);
+		}catch (Exception e) {
+			System.out.println("htController siseoulWriteForm Exception -> " + e.getMessage());
 		}
+		
+		return "/facility/siseolWriteForm";
+	}
+	
+	// 점검이력 작성폼
+	@RequestMapping("siseoulWriteForm.do")
+	public String siseoulWriteAction(Model model, String currentPage, Users users) {
+		System.out.println("htController siseoulWriteAction Start...");
+		
+		//임시로 넣기
+		users.setDept("생산부");
+		users.setPosition("사원");
+		users.setName("조형택");
+		
+		try {
+			model.addAttribute("users", users);
+		}catch (Exception e) {
+			System.out.println("htController siseoulWriteAction Exception -> " + e.getMessage());
+		}
+		
+		return "/facility/siseolWriteAction";
+	}
+	
+	// 점검 이력조회
+	@RequestMapping("siseoulHistoryCheck.do")
+	public String kkk(Model model, String currentPage, Siseol siseol) {
+		
+		
+		return "/facility/siseoulHistoryCheck";
+	}
 }

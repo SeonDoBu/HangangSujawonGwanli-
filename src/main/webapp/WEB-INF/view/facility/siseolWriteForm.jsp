@@ -36,87 +36,65 @@
     margin: 50px;
 	}
 
-</style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
- 	function submitForm() {
-		 // 폼 요소 가져오기
-        var form = document.getElementById("frm");
+	ul {
+	  list-style-type: none; /* 리스트 아이템 앞의 점 제거 */
+	  padding-left: 0; /* 왼쪽 여백 제거 */
+	}
+	
+	/* li 요소의 스타일 변경 (선택적) */
+	li {
+	  margin-bottom: 5px; /* 리스트 아이템 간격을 추가로 조절할 수 있습니다. */
+	}
+	/* 구분 열 너비 조정 */
+	th:nth-child(1), td:nth-child(1) {
+	  width: 10%; /* 원하는 너비로 조정 */
+	}
+	
+	/* 점검항목 열 너비 조정 */
+	th:nth-child(2), td:nth-child(2) {
+	  width: 40%; /* 원하는 너비로 조정 */
+	}
+	
+	/* 평가점수 열 너비 조정 */
+	th:nth-child(3), td:nth-child(3) {
+	  width: 10%; /* 원하는 너비로 조정 */
+	}
+	
+	/* 비고 열 너비 조정 */
+	th:nth-child(4), td:nth-child(4) {
+	  width: 40%; /* 원하는 너비로 조정 */
+	}
+	
+	  /* 파일 업로드 스타일 */
+	  #file-upload {
+	    margin-top: 20px;
+	  }
+	
+	  #file-upload label {
+	    display: block;
+	    font-weight: bold;
+	    margin-bottom: 10px;
+	  }
+	
+	  #file-upload .custom-file-upload {
+	    background-color: #191D31;
+	    color: white;
+	    border: none;
+	    padding: 5px 10px;
+	    border-radius: 5px;
+	    cursor: pointer;
+	  }
 
-        // 모든 파라미터를 제거
-        var smallCodeInput = form.querySelector('select[name="small_code"]');
-        var districtIdInput = form.querySelector('select[name="district_id"]');
-        var gigwanIdInput = form.querySelector('select[name="gigwan_id"]');
-        var siseolIdInput = form.querySelector('input[name="siseol_id"]');
-		
-	 	// 선택된 옵션 값 가져오기
-        var form = document.getElementById("frm");
-	    var smallCode = $('#small_code2').val();
-	    var districtId = $('#district_id2').val();
-		var gigwanId = $('#gigwan_id2').val();
-	    var siseolId = $('#siseol_id2').val();
-	    
-	    // "전체" 옵션인 경우 해당 파라미터 제외
-	    if (smallCode === "전체") {
-	    	// small_code 파라미터 제거
-	    	smallCodeInput.remove();
-	    }
-	    if (districtId === "전체") {
-	    	 districtIdInput.remove();
-	    }
-	    if (gigwanId === "전체") {
-	    	gigwanIdInput.remove();
-	    }
-	    if (siseolId === "") {
-	    	siseolIdInput.remove();
-	    }
-	    
-	    // 폼 서밋
-	    form.submit();
-	}
-	
- 	function navigatePage(currentPage) {
-	    var params = [];
-	
-	    var smallCode = $('#small_code2').val();
-	    var districtId = $('#district_id2').val();
-	    var gigwanId = $('#gigwan_id2').val();
-	    var siseolId = $('#siseol_id2').val();
-	
-	    if (smallCode && smallCode !== "전체") {
-	      params.push("small_code=" + encodeURIComponent(smallCode));
-	    }
-	    if (districtId && districtId !== "전체") {
-	      params.push("district_id=" + encodeURIComponent(districtId));
-	    }
-	    if (gigwanId && gigwanId !== "전체") {
-	      params.push("gigwan_id=" + encodeURIComponent(gigwanId));
-	    }
-	    if (siseolId && siseolId !== "0") {
-	      params.push("siseol_id=" + encodeURIComponent(siseolId));
-	    }
-	
-	    if (params.length > 0) {
-	      var paramString = params.join("&");
-	      location.href = "siseoulList.do?currentPage=" + currentPage + "&" + paramString;
-	    } else {
-	      location.href = "siseoulList.do?currentPage=" + currentPage;
-	    }
-	}
- 	
-	
-	function chk() {
-		return false;
-	}
-</script>
+
+
+</style>
+
 </head>
 <body>
-	
+	<form action="siseoulList.do">
 	<div id="con">
 	 <div class="card card-product ">
         <div class="card-body py-8 ">
-			<form action="siseoulList.do" id="frm" onsubmit="return chk()">
-				<input type="hidden" name="big_code" value="${commonList[0].big_code}"> 
 				<div id="con-text">
 					점검일자 : 	
 					<input type="date" name="insp_date">
@@ -130,73 +108,228 @@
 						<option>비</option>
 					</select>&nbsp;&nbsp;&nbsp;
 					
-					점검자 소속 : 
-					<select name="gigwan_id" id="gigwan_id2">
-						<option selected>전체</option>
-						<c:forEach var="list" items="${gigwanList}">
-							<option 
-							<c:if test ="${siseol.gigwan_id eq list.gigwan_id}"> selected="selected"</c:if>value="${list.gigwan_id}">${list.name}</option>
-						</c:forEach>
-					</select>&nbsp;&nbsp;&nbsp;
+					점검자 소속 : ${users.dept}
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					
-					시설물 코드 : 
-					<input type="text" <c:if test="${siseol.siseol_id != '0'}">value="${siseol.siseol_id}"</c:if>
-					name="siseol_id" id="siseol_id2"  style="width: 120px;">
-
-					&nbsp;&nbsp;
-					<button style="background: #191D31; color: white;"  onclick="submitForm()">검색</button>
-					<!-- <input type="submit"  style="background: #191D31; color: white;"  value="검색"> -->
+					직급 : ${users.position}
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					
+					이름 : ${users.name}
+					
 				</div>	
-			</form>
 		  </div>
 	   </div>	
 	</div>
 	
 	<div id="con-table">
-		 <table class="table">
+		 <table class="table" id="table2">
 		   <thead class="table-light">
 			<tr>
-				<th>번호</th>
-				<th>시설물 종류</th>
-				<th>시설물 코드</th>
-				<th>행정구역</th>
-				<th>관리기관</th>
-				<th>결과작성</th>
+				<th>구분</th>
+				<th>점검항목</th>
+				<th>평가점수</th>
+				<th>비고</th>
 			</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="list" items="${siseolList}" varStatus="status">
-				<tr>
-					<td>${status.index + 1 + (page.currentPage - 1) * page.rowPage}</td>
-					<td>${list.siseolName}</td>
-					<td>${list.siseol_id}</td>
-					<td>${list.districtName}</td>
-					<td>${list.gigwanName}</td>
-					<td>
-						<button style="background: white; color: #191D31; border-radius: 5px;">입력</button>
-					</td>
-				</tr>
-			</c:forEach>
+			  <tr>
+			    <th>상류면</th>
+			    <td >
+			      <ul>
+			        <li>수문 열림</li>
+			        <li>균열</li>
+			        <li>박락</li>
+			        <li>기타사항</li>
+			      </ul>
+			    </td>
+			    <td>
+			      <ul>
+			       <li>
+			    	<select name="up1_score">
+			    		<option selected value="a">a</option>
+			    		<option value="b">b</option>
+			    		<option value="c">c</option>
+			    	</select>
+			       </li>
+			       <li>
+			    	<select name="up2_score">
+			    		<option selected value="a">a</option>
+			    		<option value="b">b</option>
+			    		<option value="c">c</option>
+			    	</select>
+			       </li>
+			       <li>
+			    	<select name="up3_score">
+			    		<option selected value="a">a</option>
+			    		<option value="b">b</option>
+			    		<option value="c">c</option>
+			    	</select>
+			       </li>
+			       <li>
+			    	<select name="up4_score">
+			    		<option selected value="a">a</option>
+			    		<option value="b">b</option>
+			    		<option value="c">c</option>
+			    	</select>
+			       </li>	
+			      </ul>
+			    </td>
+			    <td>
+			      <ul>
+			        <li>
+			          <input type="text" name="up1_note">
+			        </li>
+			        <li>
+			          <input type="text" name="up2_note">
+			        </li>
+			        <li>
+			          <input type="text" name="up3_note">
+			        </li>
+			        <li>
+			          <input type="text" name="up4_note">
+			        </li>
+			      </ul>
+			    </td>
+			  </tr>
+			  <tr>
+			    <th>하류면</th>
+			    <td>
+			      <ul>
+			        <li>균열 및 단차</li>
+			        <li>수축 및 수평시공이름부를 통한 누수</li>
+			        <li>균열 및 박락</li>
+			        <li>기타사항</li>
+			      </ul>
+			    </td>
+			    <td>
+			      <ul>
+			       <li>
+			    	<select name="down1_score">
+			    		<option selected value="a">a</option>
+			    		<option value="b">b</option>
+			    		<option value="c">c</option>
+			    	</select>
+			       </li>
+			       <li>
+			    	<select name="down2_score">
+			    		<option selected value="a">a</option>
+			    		<option value="b">b</option>
+			    		<option value="c">c</option>
+			    	</select>
+			       </li>
+			       <li>
+			    	<select name="down3_score">
+			    		<option selected value="a">a</option>
+			    		<option value="b">b</option>
+			    		<option value="c">c</option>
+			    	</select>
+			       </li>
+			       <li>
+			    	<select name="down4_score">
+			    		<option selected value="a">a</option>
+			    		<option value="b">b</option>
+			    		<option value="c">c</option>
+			    	</select>
+			       </li>	
+			      </ul>
+			    </td>
+			    <td>
+			      <ul>
+			        <li>
+			          <input type="text" name="down1_note">
+			        </li>
+			        <li>
+			          <input type="text" name="down2_note">
+			        </li>
+			        <li>
+			          <input type="text" name="down3_note">
+			        </li>
+			        <li>
+			          <input type="text" name="down4_note">
+			        </li>
+			      </ul>
+			    </td>
+			  </tr>
+			  <tr>
+			    <th>검사량</th>
+			    <td>
+			      <ul>
+			        <li>횡방향 검사량에서의 균열</li>
+			        <li>상류 종방향 검사량에서의 균열</li>
+			      </ul>
+			    </td>
+			    <td>
+			      <ul>
+			       <li>
+			    	<select name="inspec1_score">
+			    		<option selected value="a">a</option>
+			    		<option value="b">b</option>
+			    		<option value="c">c</option>
+			    	</select>
+			       </li>
+			       <li>
+			    	<select name="inspec2_score">
+			    		<option selected value="a">a</option>
+			    		<option value="b">b</option>
+			    		<option value="c">c</option>
+			    	</select>
+			       </li>
+			      </ul>
+			    </td>
+			    <td>
+			      <ul>
+			        <li>
+			          <input type="text" name="inspec1_note">
+			        </li>
+			        <li>
+			          <input type="text" name="inspec2_note">
+			        </li>
+			      </ul>
+			    </td>
+			  </tr>
 			</tbody>
 		</table>
 	</div>
+	<div id="con-table">
+		 <table class="table" id="table2">
+		  <tr>
+		  	<th>
+		  		점검결과 : 
+		  	</th>
+		  	<td >
+			  <textarea name="insp_result" id="text1" rows="3" style="width: 100%;"></textarea>
+			</td>
+		  </tr>
+		  <tr>
+		  	<th>
+		  		특이사항 : 
+		  	</th>
+		  	<td >
+			  <textarea name="special_note" id="text1" rows="3" style="width: 100%;"></textarea>
+			</td>
+		  </tr>
+		  <tr>
+		  	<th>
+		  		점검일지 : 
+		  	</th>
+		  	<td>
+			  <textarea name="insp_record" rows="3" style="width: 80%; float: left;"></textarea>
+		      <div id="file-upload">
+			    <label for="file">파일 업로드:</label>
+			    <input type="file" name="file" id="file">
+			  </div>
+			</td>
+		  </tr>
+		</table>
 	
-	
-	<div id="page" style="text-align: center;">
-	  <nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center">
-			<c:if test="${page.startPage > page.pageBlock}">
-				<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="navigatePage(${page.startPage-page.pageBlock})">이전</a></li>
-			</c:if>
-			<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
-				<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="navigatePage(${i})">${i}</a></li>
-			</c:forEach>
-			<c:if test="${page.endPage < page.totalPage}">
-				<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="navigatePage(${page.startPage+page.pageBlock})">다음</a></li>
-			</c:if>
-		</ul>
-	  </nav>
+		<div>
+		 <button style="background: white; color: #191D31; border-radius: 5px;"><a href="siseoulList.do" style="text-decoration: none; color: #000;">목록</a></button>
+		 <button style="background: white; color: #191D31; border-radius: 5px;"><a href="siseoulWriteForm.do" style="text-decoration: none; color: #000;">삭제</a></button>
+		 <button type="reset" style="background: white; color: #191D31; border-radius: 5px;">초기화</button>
+		 <button type="submit" style="background: white; color: #191D31; border-radius: 5px;">저장</button>
+  		 
+  		</div>
 	</div>
-	
+  </form>
 </body>
 </html>
