@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import egovframework.example.sample.dto.Commoncode;
 import egovframework.example.sample.dto.District;
 import egovframework.example.sample.dto.Gigwan;
+import egovframework.example.sample.dto.Inspection;
 import egovframework.example.sample.dto.Paging;
 import egovframework.example.sample.dto.Siseol;
-import egovframework.example.sample.dto.Users;
 import egovframework.example.sample.service.SiseolService;
 import lombok.RequiredArgsConstructor;
 
@@ -84,16 +84,17 @@ public class HtController {
 	
 	// 점검이력 작성폼
 	@RequestMapping("siseoulWriteForm.do")
-	public String siseoulWriteForm(Model model, String currentPage, Users users) {
+	public String siseoulWriteForm(Model model, String currentPage, Inspection inspection) {
 		System.out.println("htController siseoulWriteForm Start...");
 		
 		//임시로 넣기
-		users.setDept("생산부");
-		users.setPosition("사원");
-		users.setName("조형택");
+		inspection.setDept("생산부");
+		inspection.setPosition("사원");
+		inspection.setName("조형택");
+		inspection.setUser_id("user1");
 		
 		try {
-			model.addAttribute("users", users);
+			model.addAttribute("inspection", inspection);
 		}catch (Exception e) {
 			System.out.println("htController siseoulWriteForm Exception -> " + e.getMessage());
 		}
@@ -102,17 +103,20 @@ public class HtController {
 	}
 	
 	// 점검이력 작성폼
-	@RequestMapping("siseoulWriteForm.do")
-	public String siseoulWriteAction(Model model, String currentPage, Users users) {
+	@RequestMapping("siseoulWriteAction.do")
+	public String siseoulWriteAction(Model model, Inspection inspection) {
 		System.out.println("htController siseoulWriteAction Start...");
 		
 		//임시로 넣기
-		users.setDept("생산부");
-		users.setPosition("사원");
-		users.setName("조형택");
+		inspection.setDept("생산부");
+		inspection.setPosition("사원");
+		inspection.setName("조형택");
 		
 		try {
-			model.addAttribute("users", users);
+			int result = siseolService.inspectionInsert(inspection);
+			System.out.println("siseoulWriteAction result --> " + result);
+			
+			model.addAttribute("result", result);
 		}catch (Exception e) {
 			System.out.println("htController siseoulWriteAction Exception -> " + e.getMessage());
 		}

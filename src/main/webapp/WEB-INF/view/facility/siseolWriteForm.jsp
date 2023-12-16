@@ -91,7 +91,9 @@
 
 </head>
 <body>
-	<form action="siseoulList.do">
+	<form action="siseoulWriteAction.do">
+	<input type="hidden" name="user_id" value="${inspection.user_id}">
+	<input type="hidden" name="siseol_id" value="${inspection.siseol_id}">
 	<div id="con">
 	 <div class="card card-product ">
         <div class="card-body py-8 ">
@@ -108,13 +110,13 @@
 						<option>비</option>
 					</select>&nbsp;&nbsp;&nbsp;
 					
-					점검자 소속 : ${users.dept}
+					점검자 소속 : ${inspection.dept}
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					
-					직급 : ${users.position}
+					직급 : ${inspection.position}
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					
-					이름 : ${users.name}
+					이름 : ${inspection.name}
 					
 				</div>	
 		  </div>
@@ -314,17 +316,17 @@
 		  	</th>
 		  	<td>
 			  <textarea name="insp_record" rows="3" style="width: 80%; float: left;"></textarea>
-		      <div id="file-upload">
+		      <!-- <div id="file-upload">
 			    <label for="file">파일 업로드:</label>
 			    <input type="file" name="file" id="file">
-			  </div>
+			  </div> -->
 			</td>
 		  </tr>
 		</table>
 	
 		<div>
-		 <button style="background: white; color: #191D31; border-radius: 5px;"><a href="siseoulList.do" style="text-decoration: none; color: #000;">목록</a></button>
-		 <button style="background: white; color: #191D31; border-radius: 5px;"><a href="siseoulWriteForm.do" style="text-decoration: none; color: #000;">삭제</a></button>
+		<!--  <button style="background: white; color: #191D31; border-radius: 5px;"><a href="siseoulList.do" style="text-decoration: none; color: #000;">목록</a></button>
+		 <button style="background: white; color: #191D31; border-radius: 5px;"><a href="siseoulWriteForm.do" style="text-decoration: none; color: #000;">삭제</a></button> -->
 		 <button type="reset" style="background: white; color: #191D31; border-radius: 5px;">초기화</button>
 		 <button type="submit" style="background: white; color: #191D31; border-radius: 5px;">저장</button>
   		 

@@ -7,6 +7,7 @@ import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
 import egovframework.example.sample.dto.Commoncode;
 import egovframework.example.sample.dto.District;
 import egovframework.example.sample.dto.Gigwan;
+import egovframework.example.sample.dto.Inspection;
 import egovframework.example.sample.dto.Siseol;
 
 @Mapper
@@ -20,5 +21,6 @@ public interface SiseolMapper {
 	int 			  selectedSiseolCount(Siseol siseol);
 	List<Siseol>      selectedSiseolList(Siseol siseol);
 	Siseol            siseolDetail(int siseolId);
+	int inspectionInsert(Inspection inspection);
 	
 }

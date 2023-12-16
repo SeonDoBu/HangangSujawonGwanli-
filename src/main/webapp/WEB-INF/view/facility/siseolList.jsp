@@ -180,7 +180,7 @@
 					<td>${list.gigwanName}</td>
 					<td>
 						<!-- <button style="background: white; color: #191D31; border-radius: 5px;">입력</button> -->
-					 <button style="background: white; color: #191D31; border-radius: 5px;"><a href="siseoulWriteForm.do" style="text-decoration: none; color: #000;">입력</a></button>
+					 <button style="background: white; color: #191D31; border-radius: 5px;"><a href="siseoulWriteForm.do?siseol_id=${list.siseol_id}" style="text-decoration: none; color: #000;">입력</a></button>
 					</td>
 				</tr>
 			</c:forEach>
