@@ -14,9 +14,10 @@ public class Sluice {
 	private String address;		// 세부주소
 	private double mapx;		// 경도
 	private double mapy;		// 위도
-	
+	private String is_deleted; //삭제여부
 	
 	//조회용
+	private int    start;	private int end;  private int currentPage; // 페이징
 	private String data_ymd;
 	private String type;
 	private int 	value00;

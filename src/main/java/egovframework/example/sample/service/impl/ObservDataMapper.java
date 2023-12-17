@@ -14,6 +14,8 @@ public interface ObservDataMapper {
 
 	List<ObservData> observDataList(ObservData observData);
 
+	ObservData observdataDetail(int sluice_id, String data_ymd);
+
 	
 
 	

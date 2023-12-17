@@ -5,13 +5,27 @@
 		<result property="sluice_id" column="sluice_id"/>
 	</resultMap>
 	 -->
+	<select id="observCount" resultType="int">
+		SELECT COUNT(*)
+		FROM Observ_data
+	</select>
 
 	<select id="observDataList" resultType="ObservData" parameterType="ObservData">
-		SELECT  s.name,ob.*
-		from sluice s ,observ_data ob 
-		where s.sluice_id = ob.sluice_id
-		and ob.sluice_id = ${sluice_id};
+		SELECT *
+		from observ_data 
+		where sluice_id = #{sluice_id}
+		and type= #{type}
 	</select>
+	
+	<select id="observdataDetail" resultType="int">
+			SELECT *
+			FROM observ_data
+			where sluice_id = #{sluice_id}
+			and data_ymd = #{data_ymd};
+				
+	
+	</select>
+	
 
 
 </mapper>

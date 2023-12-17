@@ -52,9 +52,9 @@
 
 <div class="container" style="margin-top:30px; border: 1px; border-color: gray;">
 
-<h1>시자료  </h1> <input>
+<h1>시자료  </h1>
 
-<h1>관측소 명 :</h1>
+<h1>관측소 명 :${sluice.name }  </h1>
 
 <br>
 
@@ -131,23 +131,30 @@
 
 </div>
 <div  >
-<nav aria-label="Page navigation example" style="margin-left: 500px;">
-  <ul class="pagination ">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+<nav aria-label="Page navigation example text-center" style="margin-top: 20px; margin-left: 200px;">
+			<ul class="pagination">
+				<c:if test="${page.startPage > page.pageBlock}">
+					<li class="page-item">
+		
+						<a class="page-link" href="ObservDataList?currentPage=${page.startPage - page.pageBlock}&sluice_id=${sluice.sluice_id }&type=${ObservData.type}" aria-label="이전">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+					<li class="page-item">
+						<a class="page-link" href="ObservDataList?currentPage=${i}&sluice_id=${sluice.sluice_id }&type=${ObservData.type}">${i}</a>
+					</li>
+				</c:forEach>
+				<c:if test="${page.endPage < page.totalPage}">
+					<li class="page-item">
+						<a class="page-link" href="ObservDataList?currentPage=${page.startPage + page.pageBlock}&sluice_id=${sluice.sluice_id }&type=${ObservData.type}" aria-label="다음">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</c:if>
+			</ul>
+		</nav>
 
 </div>
 

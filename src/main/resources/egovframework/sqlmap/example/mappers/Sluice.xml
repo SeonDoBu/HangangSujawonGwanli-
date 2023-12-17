@@ -6,8 +6,11 @@
 		from sluice
 	</select>
 	<select id="sluiceList" resultType="Sluice">
-		select *
-		from sluice
+		select DISTINCT s.* , ob.type  
+		from  observ_data ob 
+		right JOIN 	sluice s 
+		ON  ob.sluice_id = s.sluice_id 
+		order by name 
 	</select>
 	<insert id="insertSluice" parameterType="Sluice">
 		INSERT INTO 
@@ -26,7 +29,9 @@
 		mapy = #{mapy},
 		mapx = #{mapx},
 		area = #{area},
-		address = #{address}
+		address = #{address},
+		is_deleted = #{is_deleted}
+		
 		WHERE sluice_id = #{sluice_id}
 	</update>
 

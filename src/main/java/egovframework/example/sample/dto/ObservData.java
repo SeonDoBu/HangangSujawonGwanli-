@@ -35,6 +35,7 @@ public class ObservData {
 	private double value23;		// 값23
 	
 	//조회용
+	private int    start;	private int end;  private int currentPage; // 페이징
 	private String name;
 	
 }

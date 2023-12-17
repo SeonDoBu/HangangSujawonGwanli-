@@ -57,4 +57,25 @@ public class ObservDataServiceImpl extends EgovAbstractServiceImpl implements Ob
 		return observDataList;
 	}
 
+	@Override
+	public ObservData observdataDetail(int sluice_id,String type, String data_ymd) {
+		
+		ObservData observDataD = new ObservData();
+		
+		try {
+			observDataD = obm.observdataDetail(sluice_id,data_ymd);
+			
+			
+		} catch (Exception e) {
+			System.out.println("ObservDataServiceImpl observDataList e.getMessage()->"+e.getMessage());
+		}
+		
+		
+		
+		
+		return observDataD;
+	}
+
+	
+	
 }

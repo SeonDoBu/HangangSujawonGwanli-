@@ -136,7 +136,7 @@ public class SluiceController {
 
 	
 	
-	
+	//수문 지도 메인 맵핑
 	@GetMapping(value = "/sluiceMain")
 	public String SluiceMain(Model model) {
 	
@@ -146,20 +146,27 @@ public class SluiceController {
 	}
 	
 	
+	
+	
 	@GetMapping(value = "sluiceList")
-	public String SluiceList(Sluice sluice,ObservData observData,  Model model) {
+	public String SluiceList(Sluice sluice,ObservData observData, Model model) {
 	
 
 		int SluiceCount = ss.sluiceCount();
 		int ObservCount = obs.observCount();
-		
-		
+
 		List<Sluice> SluiceList = ss.sluiceList(sluice);
 		List<ObservData> ObservDataList = obs.observDataList(observData);
+		System.out.println("1234455"+observData.getType());
+		System.out.println("observDataList"+ObservDataList.getClass());
+		
+		
 		/* System.out.println(SluiceList); */
 		//조회 
+	
 		model.addAttribute("SluiceList",SluiceList);
 		model.addAttribute("ObservDataList",ObservDataList);
+		model.addAttribute("ObservData",observData);
 		//count
 		model.addAttribute("SluiceCount",SluiceCount);
 		model.addAttribute("ObservCount",ObservCount);
@@ -193,7 +200,9 @@ public class SluiceController {
 		System.out.println("sluiceDetail start");
 
 		Sluice sluice = ss.sluiceDetail(sluice_id);
-
+		
+		System.out.println("sluiceDetail"+sluice_id);
+		
 		model.addAttribute("sluice", sluice);
 
 		return "sluice/sluiceDetail";
@@ -219,7 +228,7 @@ public class SluiceController {
 	
 	//관측 데이터 시작 
 	@GetMapping(value = "/ObservDataList")
-	public String ObservDataList(Sluice sluice,ObservData observData,Model model) {
+	public String ObservDataList(Sluice sluice,int sluice_id,ObservData observData,String currentPage, Model model) {
 	
 		int SluiceCount = ss.sluiceCount();
 		int ObservCount = obs.observCount();
@@ -227,15 +236,33 @@ public class SluiceController {
 		
 		List<Sluice> SluiceList = ss.sluiceList(sluice);
 		List<ObservData> ObservDataList = obs.observDataList(observData);
-		
-		System.out.println("========================"+ObservDataList);
-		System.out.println("========================="+observData.getName());
-		System.out.println("-------------");
+		System.out.println("SluiceList"+SluiceList);
+		System.out.println("sluice"+sluice);
+		//이름 가져오기 
+		Sluice sluice2 = ss.sluiceDetail(sluice_id);
+		// 페이징 처리
+		Paging page = new Paging(ObservCount, currentPage);
+		observData.setStart(page.getStart());
+		observData.setEnd(page.getEnd());
+		/*
+		 * System.out.println("========================"+ObservDataList);
+		 * System.out.println("========================="+observData.getName());
+		 * System.out.println("===============sluice"+sluice2.getName());
+		 * System.out.println("-------------");
+		 */
 		/* System.out.println(SluiceList); */
+		System.out.println("===================="+observData.getType());
+		System.out.println("================"+ObservDataList);
+		
+		
+		model.addAttribute("page",page);
+		model.addAttribute("currentPage",currentPage);
+		
 		//조회 
 		model.addAttribute("SluiceList",SluiceList);
 		model.addAttribute("ObservDataList",ObservDataList);
 		model.addAttribute("ObservData",observData);
+		model.addAttribute("sluice",sluice2);
 		//count
 		model.addAttribute("SluiceCount",SluiceCount);
 		
@@ -244,6 +271,19 @@ public class SluiceController {
 	return "sluice/sluiceTypeList";
 	
 	}
+	@GetMapping(value = "/observdataDetail")
+	public String observdataDetail(int sluice_id,String type,String data_ymd, Model model) {
+		System.out.println("sluiceDetail start");
+
+		ObservData observDataD = obs.observdataDetail(sluice_id,type,data_ymd);
+
+		model.addAttribute("observDataD", observDataD);
+
+		return "sluice/sluiceDetail";
+	}
+
+	
+	
 	
 
 

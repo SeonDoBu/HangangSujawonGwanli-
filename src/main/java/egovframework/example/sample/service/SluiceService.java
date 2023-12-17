@@ -2,6 +2,7 @@ package egovframework.example.sample.service;
 
 import java.util.List;
 
+import egovframework.example.sample.dto.ObservData;
 import egovframework.example.sample.dto.Sluice;
 
 public interface SluiceService {
@@ -14,6 +15,8 @@ public interface SluiceService {
 	Sluice sluiceDetail(int sluice_id);
 
 	int updateSluice(Sluice sluice);
+
+
 	
 	
 }

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.egovframe.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import org.springframework.stereotype.Service;
 
+import egovframework.example.sample.dto.ObservData;
 import egovframework.example.sample.dto.Sluice;
 import egovframework.example.sample.service.SluiceService;
 import lombok.RequiredArgsConstructor;
@@ -81,15 +82,9 @@ public class SluiceServiceImpl extends EgovAbstractServiceImpl implements Sluice
 		
 		try {
 			sluice = sm.sluiceDetail(sluice_id);
-			
-			
 		} catch (Exception e) {
 			System.out.println("SluiceListServiceImpl sluiceDetail e.getMessage()->"+e.getMessage());
 		}
-		
-		
-		
-		
 		return sluice;
 	}
 
@@ -110,6 +105,7 @@ public class SluiceServiceImpl extends EgovAbstractServiceImpl implements Sluice
 
 		return updateCount;
 	}
+
 
 
 	
