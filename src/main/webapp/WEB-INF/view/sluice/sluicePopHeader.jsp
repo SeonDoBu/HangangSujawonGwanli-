@@ -16,6 +16,17 @@
   }
   
   </style>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript">
+  	function closeAndRedirect(type) {
+  		if(type == 'a') {
+  			opener.parent.location = 'sluiceList';
+  		} else if(type == 'b') {
+  			opener.parent.location = 'sujawonList.do';
+  		}
+  		window.close();
+  	}
+  </script>
   </head>
   
   <body>
@@ -28,11 +39,11 @@
 
   
     <li class="nav-item" style="margin-left: 30px;">
-    <a class="nav-link " href="sluiceList" style="color: #FFFFFF;">관측소 목록</a>
+    <a class="nav-link " style="color: #FFFFFF;" onclick="closeAndRedirect('a')">관측소 목록</a>
   </li>
   
     <li class="nav-item">
-    <a class="nav-link " href="sujawonList.do" style="color: #FFFFFF;">수자원 목록</a>
+    <a class="nav-link " style="color: #FFFFFF;" onclick="closeAndRedirect('b')">수자원 목록</a>
   </li>
   
 </ul>
