@@ -3,8 +3,9 @@
 <mapper namespace="egovframework.example.sample.service.impl.GigwanMapper">
 
 	<select id="gigwanList" resultType="Gigwan">
-		SELECT *
-		FROM   gigwan
+		SELECT   *
+		FROM     gigwan
+		ORDER BY name
 	</select>
 	
 </mapper>

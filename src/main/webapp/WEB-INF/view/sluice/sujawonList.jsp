@@ -55,9 +55,14 @@
 							</c:forEach>
 						</select>
 					<label>관리기관</label>
-						<select>
+						<select name="gigwan_id">
 							<option value="0">전체</option>
-						</select>
+							<c:forEach var="gigwan" items="${gigwanList}">
+								<option value="${gigwan.gigwan_id}" ${siseol.gigwan_id == gigwan.gigwan_id? 'selected':''}>
+									${gigwan.name}
+								</option>
+							</c:forEach>
+					</select>
 					<label>행정구역</label>
 						<select name="district_id">
 							<option value="0">전체</option>
