@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+    
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,28 +12,36 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>수자원시설물관리정보시스템</title>
+		
+		<!-- 부트스트랩 폰트 아이콘 -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">		
+
+		<!-- 구글 폰트 -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
-        <!-- Core theme CSS (includes Bootstrap)-->
 
+        <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../../css/facility.css" rel="stylesheet" />
    		
    		  <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="../js/scripts.js"></script>
    		
         <style>
             /* 사이드바 제목 */
             #sideHead {
-                background-color: #191D31;
+                background-color:  #000042;
                 color: white;
                 font-weight: bold;
             }
 
             /* 헤더  */
             #head {
-                background-color: #191D31;
+                background-color:  #000042;
                 color: white;
             }
         </style>
@@ -64,7 +76,7 @@
                 <nav class="navbar navbar-expand-lg  border-bottom" id="head">
                     <div class="container-fluid">
 
-						<div style="background:#191D31; color: white; font-weight: bold;">
+						<div style="background: #000042; color: white; font-weight: bold;">
 							<h4>수자원시설물관리정보시스템</h4>
 						</div>
 						
@@ -87,7 +99,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                              	  <a class="nav-link" href="#!" style="color: white; font-weight: bold;">고장/소치결과보고</a>
+                              	  <a class="nav-link" href="troubleList.do" style="color: white; font-weight: bold;" ><u>고장/조치결과보고</u></a>
                                 </li>
 
                             </ul>

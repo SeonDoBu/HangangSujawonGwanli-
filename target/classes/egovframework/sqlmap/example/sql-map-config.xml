@@ -2,9 +2,9 @@
 <!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 3.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
 
 <sqlMapConfig>
-	<sqlMap resource="egovframework/sqlmap/example/mappers/Test.xml"/>
 	<sqlMap resource="egovframework/sqlmap/example/mappers/Siseol.xml"/>
 	<sqlMap resource="egovframework/sqlmap/example/mappers/Sluice.xml"/>
 	<sqlMap resource="egovframework/sqlmap/example/mappers/ObservData.xml"/>
 	<sqlMap resource="egovframework/sqlmap/example/mappers/Bookmark.xml"/>
+	<sqlMap resource="egovframework/sqlmap/example/mappers/Facility.xml"/>
 </sqlMapConfig>

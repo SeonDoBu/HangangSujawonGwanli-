@@ -23,7 +23,7 @@
 	 <div class="card card-product ">
         <div class="card-body py-8 ">
         
-        asdsadsa
+        점검이력통계
         
         </div>
        </div> 
