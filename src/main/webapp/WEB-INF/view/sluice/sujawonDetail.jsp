@@ -62,7 +62,13 @@
 				</div>
 				<div>
 					<label>운영기관</label>
-					<input type="text" name="gigwanName" value="${siseol.gigwanName}">
+					<select name="gigwan_id">
+						<c:forEach var="gigwan" items="${gigwanList}">
+							<option value="${gigwan.gigwan_id}" ${siseol.gigwan_id == gigwan.gigwan_id? 'selected':''}>
+								${gigwan.name}
+							</option>
+						</c:forEach>
+					</select>
 				</div>
 				<div>
 					<label>시설물 종류</label>

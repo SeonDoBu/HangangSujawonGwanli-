@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import egovframework.example.sample.dto.Commoncode;
 import egovframework.example.sample.dto.District;
-
+import egovframework.example.sample.dto.Gigwan;
 import egovframework.example.sample.dto.Paging;
 
 import egovframework.example.sample.dto.ObservData;
@@ -17,6 +17,7 @@ import egovframework.example.sample.dto.ObservData;
 import egovframework.example.sample.dto.Siseol;
 import egovframework.example.sample.service.CommoncodeService;
 import egovframework.example.sample.service.DistrictService;
+import egovframework.example.sample.service.GigwanService;
 import egovframework.example.sample.service.ObservDataService;
 import egovframework.example.sample.service.SiseolService;
 
@@ -40,6 +41,7 @@ public class SluiceController {
 	private final SiseolService     siseolSerivce;
 	private final SluiceService 	ss;
 	private final ObservDataService obs;
+	private final GigwanService     gigwanService;
 	
 
 	// 수자원시설물 목록으로 이동 by 나희
@@ -52,7 +54,8 @@ public class SluiceController {
 			cc.setBig_code(2); // 시설물 종류 big_code 강제 지정
 			List<Commoncode> siseolType = commoncodeService.commoncodeList(cc);
 			
-			// todo : 관리기관 select box 옵션 만들기
+			// 관리기관 select box 옵션 만들기
+			List<Gigwan> gigwanList = gigwanService.gigwanList();
 			
 			// 행정구역 select box 옵션 만들기
 			List<District> districtList = districtService.districtList();
@@ -71,6 +74,7 @@ public class SluiceController {
 			model.addAttribute("page", page);
 			model.addAttribute("totalSiseol", totalSiseol);
 			model.addAttribute("siseolType", siseolType);
+			model.addAttribute("gigwanList", gigwanList);
 			model.addAttribute("districtList", districtList);
 			model.addAttribute("siseolList", siseolList);
 			model.addAttribute("currentPage", currentPage);
@@ -93,7 +97,8 @@ public class SluiceController {
 			cc.setBig_code(2); // 시설물 종류 big_code 강제 지정
 			List<Commoncode> siseolType = commoncodeService.commoncodeList(cc);
 			
-			// todo : 관리기관 select box 옵션 만들기
+			// 관리기관 select box 옵션 만들기
+			List<Gigwan> gigwanList = gigwanService.gigwanList();
 			
 			// 행정구역 select box 옵션 만들기
 			List<District> districtList = districtService.districtList();
@@ -102,6 +107,7 @@ public class SluiceController {
 			Siseol siseol = siseolSerivce.siseolDetail(siseolId);
 			
 			model.addAttribute("siseolType", siseolType);
+			model.addAttribute("gigwanList", gigwanList);
 			model.addAttribute("districtList", districtList);
 			model.addAttribute("siseol", siseol);
 			
@@ -123,12 +129,14 @@ public class SluiceController {
 			cc.setBig_code(2); // 시설물 종류 big_code 강제 지정
 			List<Commoncode> siseolType = commoncodeService.commoncodeList(cc);
 				
-			// todo : 관리기관 select box 옵션 만들기
+			// 관리기관 select box 옵션 만들기
+			List<Gigwan> gigwanList = gigwanService.gigwanList();
 			
 			// 행정구역 select box 옵션 만들기
 			List<District> districtList = districtService.districtList();
 		
 			model.addAttribute("siseolType", siseolType);
+			model.addAttribute("gigwanList", gigwanList);
 			model.addAttribute("districtList", districtList);
 		} catch (Exception e) {
 			log.info("sujawonInsertForm " + e.getMessage());

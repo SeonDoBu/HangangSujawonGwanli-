@@ -47,7 +47,11 @@
 				</div>
 				<div>
 					<label>운영기관</label>
-					<!-- 추가 예정 -->
+					<select name="gigwan_id">
+						<c:forEach var="gigwan" items="${gigwanList}">
+							<option value="${gigwan.gigwan_id}">${gigwan.name}</option>
+						</c:forEach>
+					</select>
 				</div>
 				<div>
 					<label>시설물 종류</label>
