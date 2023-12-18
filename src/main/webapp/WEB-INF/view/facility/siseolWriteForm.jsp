@@ -299,7 +299,7 @@
 		  		점검결과 : 
 		  	</th>
 		  	<td >
-			  <textarea name="insp_result" id="text1" rows="3" style="width: 100%;"></textarea>
+			  <textarea name="insp_result"  rows="3" style="width: 100%;"></textarea>
 			</td>
 		  </tr>
 		  <tr>
@@ -307,7 +307,7 @@
 		  		특이사항 : 
 		  	</th>
 		  	<td >
-			  <textarea name="special_note" id="text1" rows="3" style="width: 100%;"></textarea>
+			  <textarea name="special_note"  rows="3" style="width: 100%;"></textarea>
 			</td>
 		  </tr>
 		  <tr>

@@ -7,6 +7,7 @@ import egovframework.example.sample.dto.District;
 import egovframework.example.sample.dto.Gigwan;
 import egovframework.example.sample.dto.Inspection;
 import egovframework.example.sample.dto.Siseol;
+import egovframework.example.sample.dto.Users;
 
 public interface SiseolService {
 
@@ -19,8 +20,14 @@ public interface SiseolService {
 	List<Siseol>     selectedSiseolList(Siseol siseol);
 	Siseol           siseolDetail(int siseolId);
 	int              inspectionInsert(Inspection inspection);
+
 	int              siseolInsert(Siseol siseol);
 	int              siseolUpdate(Siseol siseol);
 	int              siseolDelete(int siseolId);
+
+	List<Users>      userList();
+	List<Inspection> inspectionList(Inspection inspection);
+	int              inspectionCount(Inspection inspection);
+
 
 }

@@ -7,19 +7,19 @@
 		from    siseol
 		<where>
 			<if test="big_code != 0">
-				 big_code = ${big_code}
+				 big_code = #{big_code}
 			</if>
 			<if test="small_code != 0">
-				  AND small_code = ${small_code}
+				  AND small_code = #{small_code}
 			</if>
 			<if test="district_id != 0">
-				  AND district_id = ${district_id}
+				  AND district_id = #{district_id}
 			</if>
 			<if test="gigwan_id != 0">
-				  AND gigwan_id   = ${gigwan_id}
+				  AND gigwan_id   = #{gigwan_id}
 			</if>
 			<if test="siseol_id != 0">
-				  AND siseol_id   = ${siseol_id}
+				  AND siseol_id   = #{siseol_id}
 			</if>
 		</where>   
 	</select>
@@ -38,19 +38,19 @@
 				JOIN GIGWAN g ON s.gigwan_id = g.gigwan_id
 				<where>
 					<if test="big_code != 0">
-						 s.big_code = ${big_code}
+						 s.big_code = #{big_code}
 					</if>
 					<if test="small_code != 0">
-						  AND s.small_code = ${small_code}
+						  AND s.small_code = #{small_code}
 					</if>
 					<if test="district_id != 0">
-						  AND s.district_id = ${district_id}
+						  AND s.district_id = #{district_id}
 					</if>
 					<if test="gigwan_id != 0">
-						  AND s.gigwan_id   = ${gigwan_id}
+						  AND s.gigwan_id   = #{gigwan_id}
 					</if>
 					<if test="siseol_id != 0">
-						  AND s.siseol_id   = ${siseol_id}
+						  AND s.siseol_id   = #{siseol_id}
 					</if>
 				</where> 
 				)a
@@ -86,17 +86,18 @@
 	</select>
 	
 	<insert id="inspectionInsert" parameterType="Inspection" >
-		INSERT INTO INSPECTION (INSP_ID, USER_ID, SISEOL_ID, INSP_DATE, WEATHER, INSP_RESULT, SPECIAL_NOTE, INSP_RECORD,
-		UP1_SCORE, UP1_NOTE, UP2_SCORE, UP2_NOTE, UP3_SCORE, UP3_NOTE, UP4_SCORE, UP4_NOTE, DOWN1_SCORE, DOWN1_NOTE,
-		DOWN2_SCORE, DOWN2_NOTE, DOWN3_SCORE, DOWN3_NOTE, DOWN4_SCORE, DOWN4_NOTE, INSPEC1_SCORE, INSPEC1_NOTE,
-		INSPEC2_SCORE, INSPEC2_NOTE)
+		INSERT INTO INSPECTION (insp_id, user_id, siseol_id, insp_date, weather, insp_result, special_note, insp_record,
+		up1_score, up1_note, up2_score, up2_note, up3_score, up3_note, up4_score, up4_note, down1_score, down1_note,
+		down2_score, down2_note, down3_score, down3_note, down4_score, down4_note, inspec1_score, inspec1_note,
+		inspec2_score, inspec2_note)
 		VALUES
-		((SELECT MAX(INSP_ID) + 1 FROM INSPECTION), #{USER_ID}, #{SISEOL_ID}, #{INSP_DATE}, #{WEATHER}, #{INSP_RESULT}, #{SPECIAL_NOTE}, #{INSP_RECORD}, 
-		#{UP1_SCORE}, #{UP1_NOTE}, #{UP2_SCORE}, #{UP2_NOTE}, #{UP3_SCORE}, #{UP3_NOTE}, #{UP4_SCORE}, #{UP4_NOTE}, 
-		#{DOWN1_SCORE}, #{DOWN1_NOTE}, #{DOWN2_SCORE}, #{DOWN2_NOTE}, #{DOWN3_SCORE}, #{DOWN3_NOTE}, #{DOWN4_SCORE}, #{DOWN4_NOTE}, 
-		#{INSPEC1_SCORE}, #{INSPEC1_NOTE}, #{INSPEC2_SCORE}, #{INSPEC2_NOTE});
+		(nextval('seq_inspection'), #{user_id}, #{siseol_id}, #{insp_date}, #{weather}, #{insp_result}, #{special_note}, #{insp_record}, 
+		#{up1_score}, #{up1_note}, #{up2_score}, #{up2_note}, #{up3_score}, #{up3_note}, #{up4_score}, #{up4_note}, 
+		#{down1_score}, #{down1_note}, #{down2_score}, #{down2_note}, #{down3_score}, #{down3_note}, #{down4_score}, #{down4_note}, 
+		#{inspec1_score}, #{inspec1_note}, #{inspec2_score}, #{inspec2_note});
 	</insert>
 	
+
 	<!-- 시설물 정보 insert by 나희 -->
 	<insert id="siseolInsert" parameterType="Siseol">
 		INSERT INTO siseol(siseol_id, big_code, small_code, district_id, gigwan_id, mapx, mapy, address, is_deleted) 
@@ -118,4 +119,51 @@
 		WHERE  siseol_id = #{siseolId}
 	</update>
 
+	<select id="userList" resultType="Users">
+		select dept
+		from users
+		GROUP BY dept
+	</select>
+
+
+	<select id="inspectionCount" resultType="int">
+		select count(*)
+		from inspection
+	</select>
+	
+	<select id="inspectionList" resultType="int">
+		SELECT b.*
+		FROM
+		(
+			SELECT  ROW_NUMBER() OVER (ORDER BY insp_date) AS rn, a.*
+			FROM
+			   (
+				SELECT s.*, i.insp_date, i.user_id, d.name AS districtName, g.name AS gigwanName, c.content AS siseolName
+				FROM inspection i
+				JOIN SISEOL s ON s.siseol_id = i.siseol_id
+				JOIN COMMONCODE c ON s.small_code = c.small_code AND s.big_code = c.big_code
+				JOIN DISTRICT d ON s.district_id = d.district_id
+				JOIN GIGWAN g ON s.gigwan_id = g.gigwan_id
+				<where>
+					<if test="big_code != 0">
+						 s.big_code = #{big_code}
+					</if>
+					<if test="small_code != 0">
+						  AND s.small_code = #{small_code}
+					</if>
+					<if test="district_id != 0">
+						  AND s.district_id = #{district_id}
+					</if>
+					<if test="gigwan_id != 0">
+						  AND s.gigwan_id   = #{gigwan_id}
+					</if>
+					<if test="siseol_id != 0">
+						  AND s.siseol_id   = #{siseol_id}
+					</if>
+					
+				</where> 
+				)a
+		)b
+		WHERE rn BETWEEN #{start} and #{end}
+	</select>
 </mapper>

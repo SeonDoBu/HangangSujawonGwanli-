@@ -14,6 +14,6 @@
 		<typeAlias alias="Gigwan"        type="egovframework.example.sample.dto.Gigwan"/>
 		<typeAlias alias="Users"         type="egovframework.example.sample.dto.Users"/>
 		<typeAlias alias="Notice"        type="egovframework.example.sample.dto.Notice"/>
-		<typeAlias alias="Inspection"    type="egovframework.example.sample.dto.Inspection"/>
+		<typeAlias alias="Inspection"   type="egovframework.example.sample.dto.Inspection"/>
     </typeAliases>
 </configuration>

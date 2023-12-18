@@ -122,8 +122,8 @@
 					<select name="small_code" id="small_code2">
 						<option selected>전체</option>
 						<c:forEach var="list" items="${commonList}">
-							<option <c:if test ="${siseol.small_code eq list.small_code}"> selected="selected"</c:if>
-							value="${list.small_code}">${list.content}</option>
+							<option <c:if test ="${inspection.small_code eq list.small_code}"> selected="selected"</c:if>
+							value="${inspection.small_code}">${inspection.content}</option>
 						</c:forEach>
 					</select>&nbsp;&nbsp;&nbsp;
 					
@@ -145,6 +145,15 @@
 						</c:forEach>
 					</select>&nbsp;&nbsp;&nbsp;
 					
+					점검자 소속 : 
+					<select>
+						<option selected>전체</option>
+						<c:forEach var="list" items="${userList}">
+							<option>${list.dept}</option>
+						</c:forEach>
+					</select>&nbsp;&nbsp;&nbsp;
+					
+					 <br> <br>
 					시설물 코드 : 
 					<input type="text" <c:if test="${siseol.siseol_id != '0'}">value="${siseol.siseol_id}"</c:if>
 					name="siseol_id" id="siseol_id2"  style="width: 120px;">
