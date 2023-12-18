@@ -82,7 +82,7 @@
 	   		   (SELECT name FROM gigwan g WHERE g.gigwan_id = s.gigwan_id) AS gigwanName, 
 	   		   (SELECT name FROM district d WHERE d.district_id = s.district_id) AS districtName
 		FROM   siseol s
-		WHERE  s.siseol_id = #{siseolId};
+		WHERE  s.siseol_id = #{siseolId}
 	</select>
 	
 	<insert id="inspectionInsert" parameterType="Inspection" >
@@ -96,5 +96,26 @@
 		#{DOWN1_SCORE}, #{DOWN1_NOTE}, #{DOWN2_SCORE}, #{DOWN2_NOTE}, #{DOWN3_SCORE}, #{DOWN3_NOTE}, #{DOWN4_SCORE}, #{DOWN4_NOTE}, 
 		#{INSPEC1_SCORE}, #{INSPEC1_NOTE}, #{INSPEC2_SCORE}, #{INSPEC2_NOTE});
 	</insert>
+	
+	<!-- 시설물 정보 insert by 나희 -->
+	<insert id="siseolInsert" parameterType="Siseol">
+		INSERT INTO siseol(siseol_id, big_code, small_code, district_id, gigwan_id, mapx, mapy, address, is_deleted) 
+		VALUES(#{siseol_id}, 2, #{small_code}, #{district_id}, #{gigwan_id}, #{mapx}, #{mapy}, #{address}, 0)
+	</insert>
+	
+	<!-- 시설물 정보 update by 나희 -->
+	<update id="siseolUpdate" parameterType="Siseol">
+		UPDATE siseol
+		SET    small_code = #{small_code}, district_id = #{district_id}, gigwan_id = #{gigwan_id},
+		       mapx = #{mapx}, mapy = #{mapy}, address = #{address}
+		WHERE  siseol_id = #{siseol_id}
+	</update>
+	
+	<!-- 시설물 정보 delete(is_deleted 값 변경) by 나희 -->
+	<update id="siseolDelete" parameterType="int">
+		UPDATE siseol
+		SET    is_deleted = '1'
+		WHERE  siseol_id = #{siseolId}
+	</update>
 
 </mapper>

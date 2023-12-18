@@ -7,8 +7,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>수자원정보 목록</title>
-	<script type="text/javascript" src="js/jquery.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script type="text/javascript">
+		
+		document.addEventListener("DOMContentLoaded", (event) => {
+			var msg = $('#msg').val();
+			if(msg != '' && msg != null) {
+				alert(msg);
+				window.self.close();
+			}
+		})
+		
+		// 상세정보 조회 팝업 실행
 		function detailPopup(siseolId) {
 			var url = 'sujawonDetail.do?siseolId='+siseolId;
 			var windowStatus = 'width=900, height=750, left=350, top=200';
@@ -16,6 +26,7 @@
 			window.open(url, 'detailPopup', windowStatus);
 		}
 		
+		// 정보 등록 팝업 실행
 		function insertPopup() {
 			var url = 'sujawonInsertForm.do';
 			var windowStatus = 'width=900, height=750, left=350, top=200';
@@ -28,11 +39,13 @@
 	<div class="container col-10">
 		<br>
 		<!-- section1: 탭 -->
-		<h1><a>정보</a> | <a>통계</a></h1>
+		<h1><a href="sujawonList.do">정보</a> | <a href="sujawonStatistics.do">통계</a></h1>
 		
 		<!-- section2: 검색폼 -->
 		<div style="border: 1px; black;">
 			<form action="">
+				<input type="hidden" id="msg" value="${msg}">
+				
 				<div class="container col-12 d-block">
 					<label>시설물종류</label>
 						<select name="small_code">
@@ -43,11 +56,11 @@
 						</select>
 					<label>관리기관</label>
 						<select>
-							<option value="">전체</option>
+							<option value="0">전체</option>
 						</select>
 					<label>행정구역</label>
 						<select name="district_id">
-							<option value="">전체</option>
+							<option value="0">전체</option>
 							<c:forEach var="dist" items="${districtList}">
 								<option value="${dist.district_id}">${dist.name}</option>
 							</c:forEach>
@@ -118,6 +131,7 @@
 				</c:if>
 			</ul>
 		</nav>
+		
 	</div>
 </body>
 </html>

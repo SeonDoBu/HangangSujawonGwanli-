@@ -21,6 +21,9 @@ public interface SiseolMapper {
 	int 			  selectedSiseolCount(Siseol siseol);
 	List<Siseol>      selectedSiseolList(Siseol siseol);
 	Siseol            siseolDetail(int siseolId);
-	int inspectionInsert(Inspection inspection);
+	int               inspectionInsert(Inspection inspection);
+	int               siseolInsert(Siseol siseol);
+	int               siseolUpdate(Siseol siseol);
+	int               siseolDelete(int siseolId);
 	
 }

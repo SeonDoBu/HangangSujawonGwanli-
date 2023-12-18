@@ -35,17 +35,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SluiceController {
 
-	// 수자원시설물 목록으로 이동 by 나희
 	private final CommoncodeService commoncodeService;
 	private final DistrictService   districtService;
 	private final SiseolService     siseolSerivce;
 	private final SluiceService 	ss;
 	private final ObservDataService obs;
 	
-	
-	// 수자원시설물 목록으로 이동
 
-	@RequestMapping(value = "sujawonList.do")
+	// 수자원시설물 목록으로 이동 by 나희
+	@GetMapping(value = "sujawonList.do")
 	public String sujawonList(Siseol siseol, String currentPage, Model model) {
 		log.info("sujawonList.do Start...");
 		try {
@@ -53,6 +51,8 @@ public class SluiceController {
 			Commoncode cc = new Commoncode();
 			cc.setBig_code(2); // 시설물 종류 big_code 강제 지정
 			List<Commoncode> siseolType = commoncodeService.commoncodeList(cc);
+			
+			// todo : 관리기관 select box 옵션 만들기
 			
 			// 행정구역 select box 옵션 만들기
 			List<District> districtList = districtService.districtList();
@@ -83,7 +83,8 @@ public class SluiceController {
 		return "sluice/sujawonList";
 	}
 
-	@RequestMapping(value = "sujawonDetail.do")
+	// 수자원시설물 상세정보 페이지로 이동 by 나희
+	@GetMapping(value = "sujawonDetail.do")
 	public String sujawonDetail(int siseolId, Model model) {
 		log.info("sujawonDetail Start...");
 		try {
@@ -91,10 +92,13 @@ public class SluiceController {
 			Commoncode cc = new Commoncode();
 			cc.setBig_code(2); // 시설물 종류 big_code 강제 지정
 			List<Commoncode> siseolType = commoncodeService.commoncodeList(cc);
-						
+			
+			// todo : 관리기관 select box 옵션 만들기
+			
 			// 행정구역 select box 옵션 만들기
 			List<District> districtList = districtService.districtList();
 			
+			// siseolId에 해당하는 시설물 정보 가져오기
 			Siseol siseol = siseolSerivce.siseolDetail(siseolId);
 			
 			model.addAttribute("siseolType", siseolType);
@@ -109,29 +113,110 @@ public class SluiceController {
 		return "sluice/sujawonDetail";
 	}
 
-	@RequestMapping(value = "sujawonInsertForm.do")
-	public String sujawonInsertForm() {
+	// 수자원시설물 정보 새 등록 페이지로 이동 by 나희
+	@GetMapping(value = "sujawonInsertForm.do")
+	public String sujawonInsertForm(Model model) {
+		log.info("sujawonInsertForm Start...");
+		try {
+			// 시설물 종류 select box 옵션 만들기
+			Commoncode cc = new Commoncode();
+			cc.setBig_code(2); // 시설물 종류 big_code 강제 지정
+			List<Commoncode> siseolType = commoncodeService.commoncodeList(cc);
+				
+			// todo : 관리기관 select box 옵션 만들기
+			
+			// 행정구역 select box 옵션 만들기
+			List<District> districtList = districtService.districtList();
+		
+			model.addAttribute("siseolType", siseolType);
+			model.addAttribute("districtList", districtList);
+		} catch (Exception e) {
+			log.info("sujawonInsertForm " + e.getMessage());
+		} finally {
+			log.info("sujawonInsertForm End...");
+		}
 		return "sluice/sujawonInsert";
 	}
 
-	@RequestMapping(value = "sujawonInsert.do")
-	public String sujawonInsert() {
+	// 수자원시설물 정보 등록 by 나희
+	@PostMapping(value = "sujawonInsert.do")
+	public String sujawonInsert(Siseol siseol, Model model) {
+		log.info("sujawonInsert Start...");
+		int result = 0;
+		try {
+			result = siseolSerivce.siseolInsert(siseol);
+			log.info("sujawonInsert result => " + result);
+			// insert한 result 값에 따라 다른 msg 출력
+			if(result == 1) {
+				model.addAttribute("msg", "성공적으로 등록되었습니다.");
+			} else {
+				model.addAttribute("msg", "등록에 실패하였습니다.");
+				// return "forward:sujawonInsertForm.do";
+			}
+		} catch (Exception e) {
+			log.info("sujawonInsert " + e.getMessage());
+		} finally {
+			log.info("sujawonInsert End...");
+		}
+		return "sluice/sujawonInsert";
+	}
+
+	// 수자원시설물 정보 수정 by 나희
+	@PostMapping(value = "sujawonUpdate.do")
+	public String sujawonUpdate(Siseol siseol, Model model) {
+		log.info("sujawonUpdate Start...");
+		int result = 0;
+		try {
+			result = siseolSerivce.siseolUpdate(siseol);
+			log.info("sujawonUpdate result => " + result);
+			// update한 result 값에 따라 다른 msg 출력
+			if(result == 1) {
+				// model.addAttribute("successMsg", "성공적으로 수정하였습니다.");
+				model.addAttribute("msg", "성공적으로 수정하였습니다.");
+			} else {
+				// model.addAttribute("failMsg", "수정에 실패하였습니다.");
+				model.addAttribute("msg", "수정에 실패하였습니다.");
+			}
+		} catch (Exception e) {
+			log.info("sujawonUpdate " + e.getMessage());
+		} finally {
+			log.info("sujawonUpdate End...");
+		}
+		// return "forward:/sujawonDetail.do?siseolId="+siseol.getSiseol_id();
 		return "sluice/sujawonList";
 	}
 
-	@RequestMapping(value = "sujawonUpdate.do")
-	public String sujawonUpdate() {
-		return "sluice/sujawonDetail";
-	}
-
-	@RequestMapping(value = "sujawonDelete.do")
-	public String sujawonDelete() {
-		return "sluice/sujawonList";
+	// 수자원시설물 정보 삭제(is_deleted 값 수정) by 나희
+	@PostMapping(value = "sujawonDelete.do")
+	public String sujawonDelete(Siseol siseol, Model model) {
+		log.info("sujawonDelete Start...");
+		int result = 0;
+		String url = "";
+		try {
+			int siseolId = siseol.getSiseol_id();
+			result = siseolSerivce.siseolDelete(siseolId);
+			log.info("sujawonDelete result => " + result);
+			// delete한 result 값에 따라 다른 msg 출력
+			if(result == 1) {
+				model.addAttribute("msg", "성공적으로 삭제하였습니다.");
+				url = "sluice/sujawonList";
+			} else {
+				// model.addAttribute("failMsg", "삭제에 실패하였습니다.");
+				// url = "forward:/sujawonDetail.do?siseolId="+siseolId;
+				model.addAttribute("msg", "삭제에 실패하였습니다.");
+				url = "sluice/sujawonList";
+			}
+		} catch (Exception e) {
+			log.info("sujawonDelete " + e.getMessage());
+		} finally {
+			log.info("sujawonDelete End...");
+		}
+		return url;
 	}
 
 	@RequestMapping(value = "sujawonStatistics.do")
 	public String sujawonStatistics() {
-		return "sujawonStatistics";
+		return "sluice/sujawonStatistics";
 	}
 
 	

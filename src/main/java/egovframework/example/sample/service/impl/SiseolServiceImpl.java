@@ -139,6 +139,51 @@ public class SiseolServiceImpl extends EgovAbstractServiceImpl implements Siseol
 		}
 		return result;
 	}
+
+	// 입력한 수자원정보를 insert하는 메소드 by 나희
+	@Override
+	public int siseolInsert(Siseol siseol) {
+		log.info("siseolInsert Start...");
+		int result = 0;
+		try {
+			result = siseolMapper.siseolInsert(siseol);
+		} catch (Exception e) {
+			log.info("siseolInsert " + e.getMessage());
+		} finally {
+			log.info("siseolInsert End...");
+		}
+		return result;
+	}
+
+	// 입력한 수자원정보를 update하는 메소드 by 나희
+	@Override
+	public int siseolUpdate(Siseol siseol) {
+		log.info("siseolUpdate Start...");
+		int result = 0;
+		try {
+			result = siseolMapper.siseolUpdate(siseol);
+		} catch (Exception e) {
+			log.info("siseolUpdate " + e.getMessage());
+		} finally {
+			log.info("siseolUpdate End...");
+		}
+		return result;
+	}
+
+	// siseolId에 해당하는 수자원정보를 삭제하는 메소드 by 나희
+	@Override
+	public int siseolDelete(int siseolId) {
+		log.info("siseolDelete Start...");
+		int result = 0;
+		try {
+			result = siseolMapper.siseolDelete(siseolId);
+		} catch (Exception e) {
+			log.info("siseolDelete " + e.getMessage());
+		} finally {
+			log.info("siseolDelete End...");
+		}
+		return result;
+	}
 	
 	
 }
