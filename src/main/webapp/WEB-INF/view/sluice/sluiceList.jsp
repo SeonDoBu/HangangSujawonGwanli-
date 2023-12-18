@@ -4,6 +4,7 @@
 <%@ include file="../../components/header.jsp" %>
 <!DOCTYPE html>
 <html>
+<script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
  
 window.close();
@@ -14,8 +15,14 @@ window.close();
 	 
  }
 
- function showpopDetail(){
-	 window.open("sluiceDetail","pop","width=900,height=750,left=350,top=200");
+ function showpopDetail(slu){
+	
+/* 	 	alert("체크1"+$("#chk1")+${sluice.sluice_id});
+	 var slu = document.getElementById("chk1").getAttribute('data-value'); */
+	alert("slu값"+slu);
+	 window.open("sluiceDetail?sluice_id="+slu,"pop","width=900,height=750,left=350,top=200");
+	  
+	 
 	 
  }
 
@@ -76,7 +83,7 @@ window.close();
 <table class="table" style="margin-top: 30px; width: 900px;">
   <thead class="table-light">
     <tr>
-      <th scope="col">위도</th>
+      <th scope="col">연번</th>
      <th scope="col">관측소명</th>
      <th scope="col">표준코드</th>
      <th scope="col">위도</th>
@@ -87,19 +94,32 @@ window.close();
     </tr>
   </thead>
   <tbody class="table-group-divider">
-    <tr>
-      <th scope="row">1</th>
-      <td><a href="" onclick="showpopDetail()">관측소명</a></td>
-      <td>15613215</td>
-      <td>213.15615</td>
-      <td>37.156165</td>
-      <!-- choose or if -->
-      <td>강우량</td>
-      <td>관측</td>
-      <td><a href="sluiceTypeList"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+   <c:set var="num" value="1"/>
+   <c:forEach var="sul" items="${SluiceList}">
+   <tr>
+   	<td>${num }</td>
+   	<!--
+   	<input type="hidden" value="${sluice.sluice_id }">
+   	<form action="sluiceDetail" method="get"><input type="hidden" id="" value="${sul.sluice_id }">  -->
+   	<td><a href=""  onclick="showpopDetail(${sul.sluice_id})" id="" <%-- data-value="${sul.sluice_id } --%> > ${sul.sluice_id } ${sul.name}</a></td>
+   	<td>${sul.sluice_id }</td>
+   	<td>${sul.mapy }</td>
+   	<td>${sul.mapx }</td>
+   		<td>
+   	관측유형 조인 ㄱ 
+
+   	 </td>
+   	<td>운영기관 조인 ㄱ</td>
+       <td><a href="ObservDataList?sluice_id=${sul.sluice_id }&type=${sul.type}">
+       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 </svg></a></td>    
     </tr>
+   
+  <c:set var="num" value="${num +1}"/>
+   </c:forEach>
+   
+ 
     
   </tbody>
 </table>

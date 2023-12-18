@@ -10,9 +10,12 @@
 		<typeAlias alias="Bookmark"      type="egovframework.example.sample.dto.Bookmark"/>
 		<typeAlias alias="District"      type="egovframework.example.sample.dto.District"/>
 		<typeAlias alias="Commoncode"    type="egovframework.example.sample.dto.Commoncode"/>
-		<typeAlias alias="Gigwan"    	 type="egovframework.example.sample.dto.Gigwan"/>
 		<typeAlias alias="GojangRp"    	 type="egovframework.example.sample.dto.GojangRp"/>
 		<typeAlias alias="Alarm"    	 type="egovframework.example.sample.dto.Alarm"/>
 		<typeAlias alias="ActionRp"    	 type="egovframework.example.sample.dto.ActionRp"/>
+		<typeAlias alias="Gigwan"        type="egovframework.example.sample.dto.Gigwan"/>
+		<typeAlias alias="Users"         type="egovframework.example.sample.dto.Users"/>
+		<typeAlias alias="Notice"        type="egovframework.example.sample.dto.Notice"/>
+		<typeAlias alias="Inspection"    type="egovframework.example.sample.dto.Inspection"/>
     </typeAliases>
 </configuration>

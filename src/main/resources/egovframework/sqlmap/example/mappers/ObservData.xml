@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.example.sample.service.impl.ObservDataMapper">
+<!-- 	<resultMap type="egovframework.example.sample.dto.ObservData" id="obsData">
+		<result property="sluice_id" column="sluice_id"/>
+	</resultMap>
+	 -->
+	<select id="observCount" resultType="int">
+		SELECT COUNT(*)
+		FROM Observ_data
+	</select>
+
+	<select id="observDataList" resultType="ObservData" parameterType="ObservData">
+		SELECT *
+		from observ_data 
+		where sluice_id = #{sluice_id}
+		and type= #{type}
+	</select>
+	
+	<select id="observdataDetail" resultType="int">
+			SELECT *
+			FROM observ_data
+			where sluice_id = #{sluice_id}
+			and data_ymd = #{data_ymd};
+				
+	
+	</select>
+	
+
 
 </mapper>

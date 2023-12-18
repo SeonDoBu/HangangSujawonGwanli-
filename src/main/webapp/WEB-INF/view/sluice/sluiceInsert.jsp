@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="">
+<form action="sluiceInsert1" method="post">
 <div class="container" style="margin-top:50px;
  border: solid; 1px; border-color: black; ">
 
@@ -17,25 +17,20 @@
 
 <hr style="border-style: 3px;">
 
-
 <div class="container">
 <div>
-관측소명 <input class="col-5"  style="margin: 10px;" type="text">
+관측소 코드 <input type="number" name="sluice_id" > <br>
+관측소명 <input class="col-5" name="name" style="margin: 10px;" type="text">
 <div>
-관측 유형 <select style="margin-right: 40px; margin-left: 5px;">
-<option>강우량</option>
-<option>수위</option>
-<option>유량</option>
-</select>
-표준 코드 <input type="text">
+
 </div>
 <div style="margin: 10px;">
-위도 <input type="number" style="margin-right: 40px; margin-left: 30px;">
-경도 <input type="number">
+위도 <input type="number" step="0.0000000000000001"  name="mapy" style="margin-right: 40px; margin-left: 30px;">
+경도 <input type="number" step="0.0000000000000001" name="mapx">
 </div>
 <div style="margin: 10px;" >
-관측방식 <input type="text" style="margin-right: 40px;">
-운영기관 <input type="text">
+하천 주소 <input type="text" name="area" >
+하천 세부 주소 <input type="text" name="address">
 
 </div>
 <div class="cotainer" style="margin-top: 150px;">

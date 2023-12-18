@@ -2,16 +2,15 @@
 
 .admin-topbar-box {
 	background-color: #000042;
-	height: 100px;
+	height: 80px;
 	width: 100%;
 	display: flex;
 	align-items: center;
-		color: white;
+	color: white;
 }
 
 .admin-topbar-text-box {
 	margin-left: 20px;
-
 }
 
 .admin-topbar-text-first {
@@ -41,5 +40,288 @@
 }
 
 .admin-sidebar-box {
+	width: 250px;
+	height: 100%;
+	position: fixed;
+	background-color: #EBEDF5;
+	position: fixed;
+}
+
+.admin-sidebar-btn-box {
+	border-bottom: 2px solid white;
+}
+
+.admin-sidebar-btn-box a {
+	/* 	border: 1px solid red; */
+	width: 96%;
+	height: 8%;
+	font-size: 28px;
+	font-weight: bolder;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	border: none;
+}
+
+.admin-sidebar-btn-box a.btn:hover {
+	border: none;
+}
+
+.admin-sidebar-content-box {
+	border-top: 2px solid white;
+}
+
+.admin-sidebar-card-box {
+	background-color: #F4F4F4;
+	padding: 0px;
+	border: none;
+	border-radius: 0px;
+}
+
+.admin-sidebar-card-box a {
+	/* 	border: 1px solid green; */
+	background-color: #F4F4F4;
+	width: 100%;
+	height: 10%;
+	border: 1px solid white;
+	padding-left: 26px;
+	font-size: 24px;
+	font-weight: bolder;
+}
+
+.admin-sidebar-card-box a.btn:hover {
+	border: 1px solid white;
+}
+
+.admin-content-box {
+	/* 	border: 1px solid green; */
+	width: 100%;
+	height: 100%;
+	text-align: left;
+	padding: 10px;
+	margin: 0px 0px 0px 250px;
+	/* 	position: fixed; */
+}
+
+.admin-content-first-box {
+	height: 52px;
+	margin-left: -8px;
+	margin-bottom: 14px;
+	padding: 0px;
+}
+
+.admin-content-first-image-box {
+	width: 100px;
+	margin-left: 0px;
+	display: flex;
+	align-items: center;
+}
+
+.admin-content-first-image-box img {
+	width: 90px;
+	height: 48px;
+}
+
+.admin-content-first-title-box {
+	margin-left: -24px;
+	display: flex;
+	align-items: center;
+}
+
+.admin-content-first-title-box p {
+	font-size: 28px;
+	font-weight: bolder;
+	margin: 0px;
+}
+
+.admin-content-second-box {
+	width: 992px;
+	height: 140px;
+	margin: 0px 0px 0px 30px;
+	display: flex;
+	justify-content: flex-start;
+	display: flex;
+	border: 2px solid #D8D8D8;
+	border-radius: 20px;
+}
+
+.admin-content-hr {
+	width: 96%;
+	height: 0px;
+	border: 2px solid black;
+	background-color: black;
+	margin-left: 20px;
+}
+
+.admin-content-keyword-first-box {
+	display: flex;
+	align-items: center;
+	text-align: center;
+	border-radius: 20px;
+	padding: 0px;
+}
+
+.admin-content-keyword-first-box p {
+	font-size: 24px;
+	font-weight: bolder;
+	color: #353535;
+	margin: 0px;
+	width: 120px;
+}
+
+.admin-content-keyword-second-box {
+	display: flex;
+	align-items: center;
+	text-align: center;
+	border-radius: 20px;
+	padding: 0px;
+	margin-top: -40px;
+}
+
+.admin-content-keyword-second-box p {
+	font-size: 22px;
+	font-weight: bolder;
+	color: #353535;
+	margin: 0px;
+	width: 80px;
+}
+
+.admin-content-keyword-second-box select {
+	width: 100px;
+	height: 40px;
+	border: 2px solid #D8D8D8;
+	margin-right: 30px;
+}
+
+.admin-content-keyword-second-box input {
+	width: 200px;
+	height: 40px;
+	border: 2px solid #D8D8D8;
+	margin-left: 16px;
+}
+
+.admin-content-keyword-second-box button {
+	border: 2px solid #002266;
+	border-radius: 8px;
+	background-color: #002266;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	width: 90px;
+	margin-left: 80px;
+}
+
+.admin-content-third-box {
+	width: 992px;
+	height: 100%;
+	margin: 16px 0px 0px 30px;
+	text-align: center;
+}
+
+.admin-content-third-table {
+	height: 120px;
+	text-align: center;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+}
+
+.admin-content-third-table tr {
 	
+}
+
+.admin-content-third-table-title {
+	
+}
+
+.admin-content-third-table th {
+	background-color: #D8D8D8;
+	height: 44px;
+	font-size: 18px;
+	border: 2px solid #D8D8D8;
+	border-top: 2px solid black;
+	vertical-align: middle;
+}
+
+.admin-content-third-table td {
+	height: 42px;
+	font-size: 16px;
+	border: 2px solid #D8D8D8;
+	vertical-align: middle;
+}
+
+/* 페이징 영역 */
+.admin-paging-box {
+	width: 992px;
+	height: 100%;
+	margin: 0px;
+	text-align: center;
+}
+
+.admin-paging-nav-box {
+	display: flex;
+	justify-content: center;
+}
+
+.admin-paging-nav-box a {
+	background-color: transparent;
+}
+
+/* 모달창 영역 */
+.admin-modal-header-box {
+	border: none;
+}
+
+.admin-modal-header-box p {
+	margin-left: 170px;
+	font-size: 26px;
+	font-weight: bolder;
+}
+
+.admin-modal-content-box {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.admin-modal-content-box label {
+	text-align: end;
+	width: 120px;
+	font-size: 18px;
+	font-weight: bolder;
+}
+
+.admin-modal-content-box select {
+	width: 64%;
+	margin-left: 24px;
+}
+
+.admin-modal-content-box input {
+	width: 64%;
+	margin-left: 24px;
+}
+
+.admin-modal-btn-box {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+}
+
+.admin-modal-btn-box button {
+	border: 2px solid #002266;
+	border-radius: 8px;
+	background-color: #002266;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	width: 90px;
+}
+
+.admin-content-third-table button {
+	border: 2px solid #002266;
+	border-radius: 8px;
+	background-color: #002266;
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	width: 120px;
 }

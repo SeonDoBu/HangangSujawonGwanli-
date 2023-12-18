@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.example.sample.service.impl.SluiceMapper">
+	<select id="sluiceCount" resultType="int">
+		select count(*)
+		from sluice
+	</select>
+	<select id="sluiceList" resultType="Sluice">
+		select DISTINCT s.* , ob.type  
+		from  observ_data ob 
+		right JOIN 	sluice s 
+		ON  ob.sluice_id = s.sluice_id 
+		order by name 
+	</select>
+	<insert id="insertSluice" parameterType="Sluice">
+		INSERT INTO 
+		sluice (sluice_id,name,mapy,mapx,area,address)
+		values (#{sluice_id},#{name},#{mapy},#{mapx},#{area},#{address})
+	</insert>
+	<select id="sluiceDetail" parameterType="int" resultType="Sluice">
+		SELECT * 
+		FROM sluice
+		WHERE sluice_id = #{sluice_id}
+	</select>
+	<update id="updateSluice" parameterType="Sluice">
+		UPDATE sluice
+		SET
+		name = #{name},
+		mapy = #{mapy},
+		mapx = #{mapx},
+		area = #{area},
+		address = #{address},
+		is_deleted = #{is_deleted}
+		
+		WHERE sluice_id = #{sluice_id}
+	</update>
+
+
 
 </mapper>

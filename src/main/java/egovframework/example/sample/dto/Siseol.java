@@ -13,9 +13,12 @@ public class Siseol {
 	private double mapx;		// 경도
 	private double mapy;		// 위도
 	private String address;		// 주소
+	private String is_deleted;  // 삭제여부
 	
 	//조회용
+	private int    start;	private int end;  private int currentPage; // 페이징
 	private String siseolName;	   // 시설물명
 	private String gigwanName;	   // 기관명
 	private String districtName;   // 행정구역명
+	
 }
