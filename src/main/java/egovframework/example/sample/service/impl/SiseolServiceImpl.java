@@ -10,6 +10,7 @@ import egovframework.example.sample.dto.District;
 import egovframework.example.sample.dto.Gigwan;
 import egovframework.example.sample.dto.Inspection;
 import egovframework.example.sample.dto.Siseol;
+import egovframework.example.sample.dto.Users;
 import egovframework.example.sample.service.SiseolService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -131,7 +132,8 @@ public class SiseolServiceImpl extends EgovAbstractServiceImpl implements Siseol
 	public int inspectionInsert(Inspection inspection) {
 		System.out.println("SiseolServiceImpl inspectionInsert start...");
 		int result = 0;
-		try {
+		try { 
+			System.out.println("SiseolServiceImpl inspection.getUser_id()-->  " + inspection);
 			result = siseolMapper.inspectionInsert(inspection);
 			System.out.println("SiseolService inspectionInsert result---> " + result);
 		}catch (Exception e) {
@@ -139,6 +141,7 @@ public class SiseolServiceImpl extends EgovAbstractServiceImpl implements Siseol
 		}
 		return result;
 	}
+
 
 	// 입력한 수자원정보를 insert하는 메소드 by 나희
 	@Override
@@ -184,6 +187,48 @@ public class SiseolServiceImpl extends EgovAbstractServiceImpl implements Siseol
 		}
 		return result;
 	}
-	
+
+	@Override
+	public List<Users> userList() {
+		System.out.println("SiseolServiceImpl userList start...");
+		List<Users> userList = null;
+		try { 
+			userList = siseolMapper.userList();
+			System.out.println("SiseolService userList userList---> " + userList);
+		}catch (Exception e) {
+			System.out.println("SiseolServiceImpl userList Exception -> " + e.getMessage());
+		}
+		
+		return userList;
+	}
+
+	@Override
+	public List<Inspection> inspectionList(Inspection inspection) {
+		System.out.println("SiseolServiceImpl inspectionInsert start...");
+		List<Inspection> inspectionList = null;
+		try { 
+			inspectionList = siseolMapper.inspectionList(inspection);
+			System.out.println("SiseolService inspectionList inspectionList---> " + inspectionList);
+		}catch (Exception e) {
+			System.out.println("SiseolServiceImpl inspectionList Exception -> " + e.getMessage());
+		}
+		return inspectionList;
+	}
+
+	@Override
+	public int inspectionCount(Inspection inspection) {
+		System.out.println("SiseolServiceImpl inspectionCount start...");
+		int result = 0;
+		try { 
+			result = siseolMapper.inspectionCount(inspection);
+			System.out.println("SiseolService inspectionCount result---> " + result);
+		}catch (Exception e) {
+			System.out.println("SiseolServiceImpl inspectionCount Exception -> " + e.getMessage());
+		}
+		return result;
+	} 
+
+
+	 
 	
 }

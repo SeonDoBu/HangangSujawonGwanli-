@@ -13,6 +13,7 @@ import egovframework.example.sample.dto.Gigwan;
 import egovframework.example.sample.dto.Inspection;
 import egovframework.example.sample.dto.Paging;
 import egovframework.example.sample.dto.Siseol;
+import egovframework.example.sample.dto.Users;
 import egovframework.example.sample.service.SiseolService;
 import lombok.RequiredArgsConstructor;
 
@@ -105,8 +106,9 @@ public class HtController {
 	// 점검이력 작성폼
 	@RequestMapping("siseoulWriteAction.do")
 	public String siseoulWriteAction(Model model, Inspection inspection) {
+	//	public String siseoulWriteAction(Model model, Inspection inspection) {
 		System.out.println("htController siseoulWriteAction Start...");
-		
+		System.out.println("inspection.getUser_id()--> " + inspection.getUser_id());
 		//임시로 넣기
 		inspection.setDept("생산부");
 		inspection.setPosition("사원");
@@ -125,10 +127,50 @@ public class HtController {
 	}
 	
 	// 점검 이력조회
-	@RequestMapping("siseoulHistoryCheck.do")
-	public String kkk(Model model, String currentPage, Siseol siseol) {
-		
-		
-		return "/facility/siseoulHistoryCheck";
+	@RequestMapping("siseoulInspectionList.do")
+	public String siseoulInspectionList(Model model, String currentPage, Inspection inspection) {
+		System.out.println("htController siseoulList Start...");
+		try {
+			
+			int totalInspection = siseolService.inspectionCount(inspection);
+			// Paging 작업 
+			Paging page = new Paging(totalInspection, currentPage);
+			System.out.println("page.getStart()-->"+page.getStart() );
+			System.out.println("page.getEnd()-->"+page.getEnd() );
+			inspection.setStart(page.getStart());
+			inspection.setEnd(page.getEnd());
+			
+			// 점검 리스트
+			List<Inspection> inspectionList = siseolService.inspectionList(inspection);
+			System.out.println("htController inspectionList--> " + inspectionList);
+			
+			// 시설물 종류
+			List<Commoncode> commonList = siseolService.commonList();
+			System.out.println("htController commonList--> " + commonList);
+			
+			// 행정기관 종류
+			List<District> districtList = siseolService.districtList();
+			System.out.println("htController districtList--> " + districtList);
+			
+			// 관리기관 종류
+			List<Gigwan> gigwanList = siseolService.gigwanList();
+			System.out.println("htController districtList--> " + districtList);
+			
+			// 점검자 소속 리스트
+			List<Users> userList = siseolService.userList();
+			System.out.println("htController userList--> " + userList);
+
+			model.addAttribute("inspectionList", inspectionList);
+			model.addAttribute("commonList", commonList);
+			model.addAttribute("districtList", districtList);
+			model.addAttribute("gigwanList", gigwanList);
+			model.addAttribute("userList", userList);
+			model.addAttribute("inspection", inspection);
+			model.addAttribute("page", page);
+		} catch (Exception e) {
+			System.out.println("htController Exception -> " + e.getMessage());
+		}
+
+		return "/facility/siseolInspectionList";
 	}
 }
