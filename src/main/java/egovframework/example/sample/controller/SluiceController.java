@@ -47,7 +47,7 @@ public class SluiceController {
 	// 수자원시설물 목록으로 이동 by 나희
 	@GetMapping(value = "sujawonList.do")
 	public String sujawonList(Siseol siseol, String currentPage, Model model) {
-		log.info("sujawonList.do Start...");
+		log.info("sujawonList Start...");
 		try {
 			// 시설물 종류 select box 옵션 만들기
 			Commoncode cc = new Commoncode();
@@ -70,8 +70,10 @@ public class SluiceController {
 			
 			// 조건에 해당하는 시설물 리스트 가져오기
 			List<Siseol> siseolList = siseolSerivce.siseolList(siseol);
+			log.info("siseol_id"+siseol.getSiseol_id());
 			
 			model.addAttribute("page", page);
+			model.addAttribute("siseol", siseol);
 			model.addAttribute("totalSiseol", totalSiseol);
 			model.addAttribute("siseolType", siseolType);
 			model.addAttribute("gigwanList", gigwanList);
@@ -80,9 +82,9 @@ public class SluiceController {
 			model.addAttribute("currentPage", currentPage);
 			
 		} catch (Exception e) {
-			log.info("sujawonList.do" + e.getMessage());
+			log.info("sujawonList" + e.getMessage());
 		} finally {
-			log.info("sujawonList.do End...");
+			log.info("sujawonList End...");
 		}
 		return "sluice/sujawonList";
 	}
