@@ -31,7 +31,6 @@
 		area = #{area},
 		address = #{address},
 		is_deleted = #{is_deleted}
-		
 		WHERE sluice_id = #{sluice_id}
 	</update>
 

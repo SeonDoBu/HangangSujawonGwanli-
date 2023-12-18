@@ -2,7 +2,6 @@ package egovframework.example.sample.service.impl;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
 
 import egovframework.example.sample.dto.ObservData;
@@ -14,7 +13,9 @@ public interface ObservDataMapper {
 
 	List<ObservData> observDataList(ObservData observData);
 
-	ObservData observdataDetail(int sluice_id, String data_ymd);
+	int updateObserv(ObservData observData);
+
+	ObservData observdataDetail(ObservData observData);
 
 	
 

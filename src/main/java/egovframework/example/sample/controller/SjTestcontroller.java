@@ -15,19 +15,6 @@ public class SjTestcontroller {
 
 
 
-	@GetMapping(value = "/sluiceTypeList")
-	public String sumoonType(Model model) {
-		
-		
 
-		return "sluice/sluiceTypeList";	
-	}
-	@GetMapping(value = "/sluiceTypeUpdate")
-	public String sumoonTypeUpdate(Model model) {
-		
-		
-
-		return "sluice/sluiceTypeUpdate";	
-	}
 	
 }

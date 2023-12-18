@@ -106,10 +106,23 @@ window.close();
    	<td>${sul.mapy }</td>
    	<td>${sul.mapx }</td>
    		<td>
-   	관측유형 조인 ㄱ 
+   	<c:choose>
+   	<c:when test="${sul.type eq 1 }">
+   	강수량
+   	</c:when>
+   	<c:when test="${sul.type eq 2 }">
+   	수위
+   	</c:when>
+   	<c:when test="${sul.type eq 3 }">
+   	유량
+   	</c:when>
+   	<c:otherwise>
+   	관측중
+   	</c:otherwise>
+   	</c:choose>
 
    	 </td>
-   	<td>운영기관 조인 ㄱ</td>
+   	<td>구현중</td>
        <td><a href="ObservDataList?sluice_id=${sul.sluice_id }&type=${sul.type}">
        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -125,22 +138,29 @@ window.close();
 </table>
 
 <nav aria-label="Page navigation example text-center" style="margin-top: 20px; margin-left: 200px;">
-  <ul class="pagination">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+			<ul class="pagination">
+				<c:if test="${page.startPage > page.pageBlock}">
+					<li class="page-item">
+		
+						<a class="page-link" href="sluiceList?currentPage=${page.startPage - page.pageBlock}" aria-label="이전">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+					<li class="page-item">
+						<a class="page-link" href="sluiceList?currentPage=${i}">${i}</a>
+					</li>
+				</c:forEach>
+				<c:if test="${page.endPage < page.totalPage}">
+					<li class="page-item">
+						<a class="page-link" href="sluiceList?currentPage=${page.startPage + page.pageBlock}" aria-label="다음">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</c:if>
+			</ul>
+		</nav>
 
 
 

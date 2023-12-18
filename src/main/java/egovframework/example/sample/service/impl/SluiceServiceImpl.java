@@ -96,9 +96,7 @@ public class SluiceServiceImpl extends EgovAbstractServiceImpl implements Sluice
 			
 			log.info("updateSluice =>"+sluice.getSluice_id());
 			updateCount = sm.updateSluice(sluice);
-			
-			
-			
+
 		} catch (Exception e) {
 			System.out.println("SluiceListServiceImpl updateSluice e.getMessage()->"+e.getMessage());
 		}

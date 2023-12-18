@@ -242,7 +242,7 @@ public class SluiceController {
 	
 	
 	@GetMapping(value = "sluiceList")
-	public String SluiceList(Sluice sluice,ObservData observData, Model model) {
+	public String SluiceList(Sluice sluice,ObservData observData,String currentPage , Model model) {
 	
 
 		int SluiceCount = ss.sluiceCount();
@@ -253,10 +253,16 @@ public class SluiceController {
 		System.out.println("1234455"+observData.getType());
 		System.out.println("observDataList"+ObservDataList.getClass());
 		
+		Paging page = new Paging(SluiceCount, currentPage);
+		
 		
 		/* System.out.println(SluiceList); */
+		
+		model.addAttribute("page",page);
+		model.addAttribute("currentPage",currentPage);
+		
+		
 		//조회 
-	
 		model.addAttribute("SluiceList",SluiceList);
 		model.addAttribute("ObservDataList",ObservDataList);
 		model.addAttribute("ObservData",observData);
@@ -301,19 +307,7 @@ public class SluiceController {
 		return "sluice/sluiceDetail";
 	}
 
-	@PostMapping(value = "updateSluice")
-	public String updateSluice(@ModelAttribute Sluice sluice, Model model) {
-		
-		int updateCount = ss.updateSluice(sluice);
-		
-		System.out.println("updateSluice"+sluice.getMapx());
-		System.out.println("updateSluice"+sluice.getSluice_id());
-		model.addAttribute("upcnt",updateCount);
-		model.addAttribute("sluice",sluice);
-		
-		return "redirect:sluiceList";
-		
-	}
+	
 	
 
 	
@@ -344,10 +338,12 @@ public class SluiceController {
 		 * System.out.println("-------------");
 		 */
 		/* System.out.println(SluiceList); */
-		System.out.println("===================="+observData.getType());
-		System.out.println("================"+ObservDataList);
-		
-		
+		/*
+		 * System.out.println("====================는뭘까"+observData);
+		 * System.out.println("================는뭘까2"+ObservDataList);
+		 * System.out.println("============"+page.getRowPage());
+		 * System.out.println("=============="+page.getTotal());
+		 */
 		model.addAttribute("page",page);
 		model.addAttribute("currentPage",currentPage);
 		
@@ -358,24 +354,57 @@ public class SluiceController {
 		model.addAttribute("sluice",sluice2);
 		//count
 		model.addAttribute("SluiceCount",SluiceCount);
-		
 		model.addAttribute("ObservCount",ObservCount);
 		
 	return "sluice/sluiceTypeList";
 	
 	}
 	@GetMapping(value = "/observdataDetail")
-	public String observdataDetail(int sluice_id,String type,String data_ymd, Model model) {
+	public String observdataDetail(Sluice sluice, ObservData observData, int sluice_id,String type,String data_ymd, Model model) {
 		System.out.println("sluiceDetail start");
 
-		ObservData observDataD = obs.observdataDetail(sluice_id,type,data_ymd);
-
+		ObservData observDataD = obs.observdataDetail(observData);
+		//이름 가져오기 
+		Sluice sluice2 = ss.sluiceDetail(sluice_id);
+		System.out.println("observData--------------"+observData);
+		System.out.println("observDataD-------------"+observDataD);
+		model.addAttribute("sluice",sluice2);
 		model.addAttribute("observDataD", observDataD);
-
-		return "sluice/sluiceDetail";
+		model.addAttribute("observData",observData);
+		
+		return "sluice/sluiceTypeUpdate";
 	}
-
 	
+	@PostMapping(value = "observdataUpdate")
+	public String updateObserv(@ModelAttribute Sluice sluice,ObservData observData, Model model) {
+		
+		int updateCount = ss.updateSluice(sluice);
+		int updateCount2 = obs.updateObserv(observData);
+		ObservData observDataD = obs.observdataDetail(observData);
+		System.out.println("sssssssss----------"+updateCount2);
+		System.out.println("======================"+observData);
+		model.addAttribute("upcnt2",updateCount2);
+		model.addAttribute("sluice",sluice);
+		model.addAttribute("observData",observData);
+		model.addAttribute("observDataD", observDataD);
+		
+		return "redirect:sluiceTypeList";
+		
+		
+	}
+	@PostMapping(value = "updateSluice")
+	public String updateSluice(@ModelAttribute Sluice sluice, Model model) {
+		
+		int updateCount = ss.updateSluice(sluice);
+		
+		System.out.println("updateSluice"+sluice.getMapx());
+		System.out.println("updateSluice"+sluice.getSluice_id());
+		model.addAttribute("upcnt",updateCount);
+		model.addAttribute("sluice",sluice);
+		
+		return "redirect:sluiceList";
+		
+	}
 	
 	
 

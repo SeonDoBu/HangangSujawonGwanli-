@@ -40,13 +40,7 @@ public class ObservDataServiceImpl extends EgovAbstractServiceImpl implements Ob
 		System.out.println("ObservDataServiceImpl observDataList start...");
 		
 		try {
-			
 			observDataList = obm.observDataList(observData);
-			/*
-			 * System.out.println("observ_data --------------"+observData);
-			 * System.out.println("observ_data --------------List"+observDataList);
-			 */
-			
 		} catch (Exception e) {
 			System.out.println("ObservDataServiceImpl observDataList e.getMessage()->"+e.getMessage());
 		}
@@ -58,12 +52,12 @@ public class ObservDataServiceImpl extends EgovAbstractServiceImpl implements Ob
 	}
 
 	@Override
-	public ObservData observdataDetail(int sluice_id,String type, String data_ymd) {
+	public ObservData observdataDetail(ObservData observData) {
 		
 		ObservData observDataD = new ObservData();
-		
+		System.out.println("value00 service"+observData.getValue00());
 		try {
-			observDataD = obm.observdataDetail(sluice_id,data_ymd);
+			observDataD = obm.observdataDetail(observData);
 			
 			
 		} catch (Exception e) {
@@ -75,6 +69,26 @@ public class ObservDataServiceImpl extends EgovAbstractServiceImpl implements Ob
 		
 		return observDataD;
 	}
+
+	@Override
+	public int updateObserv(ObservData observData) {
+		int updateCount2 = 0;
+		
+		try {
+			log.info("updateobserv=>"+observData.getSluice_id());
+			updateCount2 = obm.updateObserv(observData);
+			
+		} catch (Exception e) {
+			System.out.println("ObservDataServiceImpl observDataList e.getMessage()->"+e.getMessage());
+		}
+		
+		
+
+		return updateCount2;
+	}
+
+
+
 
 	
 	

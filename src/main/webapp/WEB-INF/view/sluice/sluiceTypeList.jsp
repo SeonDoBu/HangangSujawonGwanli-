@@ -59,12 +59,12 @@
 <br>
 
 (단위: mm) <button type="button" style="float: right; margin-right: 10px;" class="btn btn-secondary">저장</button> 
-<button type="button"   onclick="locate()" class="btn" style="background-color: #000042; color: white; margin-right:20px; float: right;" >관리</button>
+<!-- <button type="button"   onclick="locate()" class="btn" style="background-color: #000042; color: white; margin-right:20px; float: right;" >관리</button> -->
 
 
 <br>
 
-<table class="table table-bordered" style="margin-top: 30px;">
+<table class="table table-bordered" style="margin-top: 30px; width: 1100px;">
   <thead class="table-light">
     <tr>
       <th scope="col" colspan="2">관측일시</th>
@@ -99,7 +99,7 @@
   <tbody>
   	<c:forEach var="obs" items="${ObservDataList}">
     <tr>  
-      <td scope="row" colspan="2">${obs.data_ymd }</td>
+      <td scope="row" colspan="2"><a href="observdataDetail?sluice_id=${obs.sluice_id }&type=${obs.type}&data_ymd=${obs.data_ymd}" >${obs.data_ymd }</a></td>
      		<td>${obs.value00}</td>
 			<td>${obs.value01}</td>
 			<td>${obs.value02}</td>

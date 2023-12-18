@@ -8,5 +8,8 @@ public interface ObservDataService {
 
 	int observCount();
 	List<ObservData> observDataList(ObservData observData);
-	ObservData observdataDetail(int sluice_id, String type, String data_ymd);
+
+	int updateObserv(ObservData observData);
+	ObservData observdataDetail(ObservData observData);
+
 }
