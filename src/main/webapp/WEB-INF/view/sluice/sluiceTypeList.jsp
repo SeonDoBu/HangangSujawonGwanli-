@@ -54,7 +54,21 @@
 
 <h1>시자료  </h1>
 
-<h1>관측소 명 :${sluice.name }  </h1>
+<h1>관측소 명 :${sluice.name }      
+	<c:choose>
+      <c:when test="${observData.type eq 1 }">
+      강수량관측소
+      </c:when>
+      <c:when test="${observData.type eq 2 }">
+      수위관측소
+      </c:when>
+      <c:when test="${observData.type eq 3 }">
+      유량관측소
+      </c:when>
+      <c:otherwise>
+      관측중
+      </c:otherwise>
+    </c:choose> </h1>
 
 <br>
 

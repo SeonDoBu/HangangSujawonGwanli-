@@ -28,6 +28,6 @@ public interface SiseolService {
 	List<Users>      userList();
 	List<Inspection> inspectionList(Inspection inspection);
 	int              inspectionCount(Inspection inspection);
-
+	int              getSiseolCount(int smallCode);
 
 }

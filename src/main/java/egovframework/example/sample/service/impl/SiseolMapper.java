@@ -28,9 +28,9 @@ public interface SiseolMapper {
 	int               siseolUpdate(Siseol siseol);
 	int               siseolDelete(int siseolId);
 
-	List<Users> userList();
-	List<Inspection> inspectionList(Inspection inspection);
-	int inspectionCount(Inspection inspection);
-
+	List<Users>       userList();
+	List<Inspection>  inspectionList(Inspection inspection);
+	int               inspectionCount(Inspection inspection);
+	int               getSiseolCount(int smallCode);
 	
 }

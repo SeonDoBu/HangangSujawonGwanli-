@@ -1,11 +1,11 @@
 package egovframework.example.sample.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import egovframework.example.sample.dto.Commoncode;
 import egovframework.example.sample.dto.District;
@@ -38,7 +38,7 @@ public class SluiceController {
 
 	private final CommoncodeService commoncodeService;
 	private final DistrictService   districtService;
-	private final SiseolService     siseolSerivce;
+	private final SiseolService     siseolService;
 	private final SluiceService 	ss;
 	private final ObservDataService obs;
 	private final GigwanService     gigwanService;
@@ -61,7 +61,7 @@ public class SluiceController {
 			List<District> districtList = districtService.districtList();
 			
 			// 조건에 해당하는 시설물 총 개수 구하기
-			int totalSiseol = siseolSerivce.count(siseol);
+			int totalSiseol = siseolService.count(siseol);
 			
 			// 페이징 처리
 			Paging page = new Paging(totalSiseol, currentPage);
@@ -69,7 +69,7 @@ public class SluiceController {
 			siseol.setEnd(page.getEnd());
 			
 			// 조건에 해당하는 시설물 리스트 가져오기
-			List<Siseol> siseolList = siseolSerivce.siseolList(siseol);
+			List<Siseol> siseolList = siseolService.siseolList(siseol);
 			log.info("siseol_id"+siseol.getSiseol_id());
 			
 			model.addAttribute("page", page);
@@ -106,7 +106,7 @@ public class SluiceController {
 			List<District> districtList = districtService.districtList();
 			
 			// siseolId에 해당하는 시설물 정보 가져오기
-			Siseol siseol = siseolSerivce.siseolDetail(siseolId);
+			Siseol siseol = siseolService.siseolDetail(siseolId);
 			
 			model.addAttribute("siseolType", siseolType);
 			model.addAttribute("gigwanList", gigwanList);
@@ -140,6 +140,7 @@ public class SluiceController {
 			model.addAttribute("siseolType", siseolType);
 			model.addAttribute("gigwanList", gigwanList);
 			model.addAttribute("districtList", districtList);
+			
 		} catch (Exception e) {
 			log.info("sujawonInsertForm " + e.getMessage());
 		} finally {
@@ -154,7 +155,7 @@ public class SluiceController {
 		log.info("sujawonInsert Start...");
 		int result = 0;
 		try {
-			result = siseolSerivce.siseolInsert(siseol);
+			result = siseolService.siseolInsert(siseol);
 			log.info("sujawonInsert result => " + result);
 			// insert한 result 값에 따라 다른 msg 출력
 			if(result == 1) {
@@ -177,7 +178,7 @@ public class SluiceController {
 		log.info("sujawonUpdate Start...");
 		int result = 0;
 		try {
-			result = siseolSerivce.siseolUpdate(siseol);
+			result = siseolService.siseolUpdate(siseol);
 			log.info("sujawonUpdate result => " + result);
 			// update한 result 값에 따라 다른 msg 출력
 			if(result == 1) {
@@ -204,7 +205,7 @@ public class SluiceController {
 		String url = "";
 		try {
 			int siseolId = siseol.getSiseol_id();
-			result = siseolSerivce.siseolDelete(siseolId);
+			result = siseolService.siseolDelete(siseolId);
 			log.info("sujawonDelete result => " + result);
 			// delete한 result 값에 따라 다른 msg 출력
 			if(result == 1) {
@@ -224,11 +225,32 @@ public class SluiceController {
 		return url;
 	}
 
-	@RequestMapping(value = "sujawonStatistics.do")
-	public String sujawonStatistics() {
+	// 수자원정보 통계 페이지로 이동 by 나희
+	@GetMapping(value = "sujawonStatistics.do")
+	public String sujawonStatistics(Model model) {
+		log.info("sujawonStatistics Start...");
+		try {
+			// todo: map 형태로 바꿔서 전달하기
+			// 수자원시설물 비율 파이 차트 데이터
+			int pieCnt1 = siseolService.getSiseolCount(1); // 댐 
+			int pieCnt2 = siseolService.getSiseolCount(2); // 저수지 
+			int pieCnt3 = siseolService.getSiseolCount(3); // 펌프장 
+			int pieCnt4 = siseolService.getSiseolCount(4); // 관개수로
+			
+			model.addAttribute("pieCnt1", pieCnt1);
+			model.addAttribute("pieCnt2", pieCnt2);
+			model.addAttribute("pieCnt3", pieCnt3);
+			model.addAttribute("pieCnt4", pieCnt4);
+			
+			// 행정구역별 수자원시설물 라인 차트 데이터
+			
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		} finally {
+			log.info("sujawonStatistics End...");
+		}
 		return "sluice/sujawonStatistics";
 	}
-
 	
 	
 	//수문 지도 메인 맵핑

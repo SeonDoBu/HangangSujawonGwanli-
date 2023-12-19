@@ -166,4 +166,12 @@
 		)b
 		WHERE rn BETWEEN #{start} and #{end}
 	</select>
+	
+	<!-- 시설물 종류별로 시설물 수 구하기 by 나희 -->
+	<select id="getSiseolCount" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM   siseol
+		WHERE  small_code = #{smallCode}
+	</select>
+
 </mapper>

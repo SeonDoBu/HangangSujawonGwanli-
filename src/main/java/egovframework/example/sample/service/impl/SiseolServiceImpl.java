@@ -226,9 +226,21 @@ public class SiseolServiceImpl extends EgovAbstractServiceImpl implements Siseol
 			System.out.println("SiseolServiceImpl inspectionCount Exception -> " + e.getMessage());
 		}
 		return result;
-	} 
+	}
 
+	// 시설물 종류(smallCode)에 따라 시설물 수를 구하는 메소드
+	@Override
+	public int getSiseolCount(int smallCode) {
+		log.info("getSiseolCount Start...");
+		int count = 0; 
+		try {
+			count = siseolMapper.getSiseolCount(smallCode);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		} finally {
+			log.info("getSiseolCount End...");
+		}
+		return count;
+	}
 
-	 
-	
 }
