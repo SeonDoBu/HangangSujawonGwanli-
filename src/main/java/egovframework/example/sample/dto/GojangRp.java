@@ -21,5 +21,8 @@ public class GojangRp {
 	private String 		file_name;		 // 첨부파일
 	private int			alarm_id;		 // 알람코드
 	
+	//조회
+	private Date		action_date;	 // 조치일
+	private int   		small_code;  	 // 소분류
 	private int 		rn;				 // 순번
 }

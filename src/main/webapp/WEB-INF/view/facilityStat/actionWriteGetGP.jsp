@@ -42,22 +42,14 @@
 
 <script>
     $(document).ready(function() {
-		// 고장일자 달력 함수
+        
+    	// 달력 함수
     	$("#datepicker").datepicker({
             dateFormat: 'yy-mm-dd' // 원하는 날짜 형식을 
         });
-        // 고장일자 아이콘 클릭 시 달력 출력
+        // 아이콘 클릭 시 달력 출력
         $("#calendarIcon").on("click", function() {
             $("#datepicker").datepicker("show");
-        });
-        
-    	// 조치/복구일자 달력 함수
-    	$("#datepicker2").datepicker({
-            dateFormat: 'yy-mm-dd' // 원하는 날짜 형식을 
-        });
-        // 조치/복구일자 아이콘 클릭 시 달력 출력
-        $("#calendarIcon2").on("click", function() {
-            $("#datepicker2").datepicker("show");
         });
    
         // 아이콘 클릭 시 파일 업로드 다이얼로그 열기
@@ -119,15 +111,12 @@ function siseolContent() {
             	siseolSelect.append("<option value='" + data[i] + "'>" + data[i] + "</option>");
             }
             
-
           //옵션을 선택했을 때 이벤트
           siseolSelect.on("change", function() {
               var selectedValue = $(this).val(); // 선택된 옵션 값
           		
               location.href= 'actionWriteGetGP.do?siseol_id=' + selectedValue;
           });
-            
-            
             
         },
         error: function(xhr, status, error) {
@@ -138,12 +127,6 @@ function siseolContent() {
 }
 </script>
 
-<script type="text/javascript">
-
-
-
-</script>
-
 </head>
 <body>
 
@@ -152,13 +135,17 @@ function siseolContent() {
 	</div>
 
 <div id="content">
+	<c:set value="${actionWriteGetGP }" var="gp"/>
+	<form action="Action.do" method="post">
+		<input type="hidden" name="gojang_id" value="${gp.gojang_id }"> 
+	
 		<div id="con-table">
 		 <table class="table">
 			<tr style="border-bottom: 1px;">
 				<td class="table-active" style="font-weight: bold;">시설물 종류</td>
 				<td>
 				<select class="form-select" id="small_code" name="small_code" onchange="siseolContent()" required="required">
-					<option>시설물 종류</option>
+					<option>--다시 선택--</option>
 					<option value="1">댐</option>
 					<option value="2">저수지</option>
 					<option value="3">펌프장</option>
@@ -170,7 +157,7 @@ function siseolContent() {
 				<td class="table-active" style="font-weight: bold;">시설물 코드</td>
 				<td>
 				    <select class="form-select" id="siseolSelect" name="siseol_id" required="required">
-						<option></option>
+						<option>${gp.siseol_id }</option>
 				    </select>
 				</td>
 				
@@ -182,18 +169,19 @@ function siseolContent() {
 			    <td class="table-active" style="font-weight: bold;">고장일자</td>
 			    <td>
 			       <div class="input-group">
-					    <input type="text"  class="form-control" readonly required="required">
-					    <span class="input-group-text" id="calendarIcon"><i class="bi bi-calendar-date"></i></span>
+					    <input type="text" value="${gp.gojang_date }" class="form-control" readonly required="required">
+					    <span class="input-group-text" ><i class="bi bi-calendar-date"></i></span>
 					</div>
 			    </td>
 			    	
 			    <td></td><td></td>
 			    	
-			     <td class="table-active" style="font-weight: bold;">조치/복구 일자</td>
+			    	
+			    <td class="table-active" style="font-weight: bold;">조치/복구 일자</td>
 			    <td>
 			       <div class="input-group">
-					    <input type="text" class="form-control" readonly required="required">
-					    <span class="input-group-text" id="calendarIcon2"><i class="bi bi-calendar-date"></i></span>
+					    <input type="text" id="datepicker" name="" class="form-control" readonly required="required">
+					    <span class="input-group-text" id="calendarIcon"><i class="bi bi-calendar-date"></i></span>
 					</div>
 			    </td>
 			    
@@ -202,21 +190,21 @@ function siseolContent() {
 			<tr>
 				<td class="table-active" style="font-weight: bold;">고장내역</td>
 				<td colspan="5">
-					<textarea rows="2" cols="" class="form-control" name="gojang_cause" required="required"></textarea>
+					<textarea rows="2" cols="" class="form-control" name="gojang_cause" required="required">${gp.curr_status }</textarea>
 				</td>
 			</tr>
 			
 			<tr>
 				<td class="table-active" style="font-weight: bold;">조치내역</td>
 				<td colspan="5">
-					<textarea rows="2" cols=""  class="form-control" name="curr_status" required="required"></textarea>
+					<textarea rows="2" cols=""  class="form-control" name="action_note" required="required"></textarea>
 				</td>
 			</tr>
 	
 			<tr>
 				<td class="table-active" style="font-weight: bold;">특이사항</td>
 				<td colspan="5">
-					<textarea rows="2" cols=""  class="form-control" name="curr_status" required="required"></textarea>
+					<textarea rows="2" cols=""  class="form-control" name="special_note" required="required"></textarea>
 				</td>
 			</tr>
 	
@@ -253,6 +241,7 @@ function siseolContent() {
 			<button type="submit" style="background: #000042; color: white;">저장</button>	
 		</div>
 		
+	</form>
 </div>	
 	
 	

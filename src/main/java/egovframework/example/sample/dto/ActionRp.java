@@ -22,5 +22,6 @@ public class ActionRp {
 	// 조회 
 	private Date 		created_at; 	 // 고장 보고서 작성일 
 	private int 		rn;				 // 순번
-	
+	private String		gojang_cause;	 // 고장 원인
+	private Date		gojang_date;	 // 고장일
 }

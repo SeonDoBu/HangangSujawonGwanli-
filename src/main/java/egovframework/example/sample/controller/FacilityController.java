@@ -103,10 +103,63 @@ public class FacilityController {
 	}
 	
 	// 조치 보고서 작성
-	@GetMapping("actionWrite.do")
-	public String actionWrite() {
+	@GetMapping("/actionWrite.do")
+	public String actionWrite(Model model) {
 			
 		return "facilityStat/actionWrite";
 	}
 	
+	// 고장보고서 시설물코드
+	@PostMapping("/selectSmallCodeGP.do")
+	@ResponseBody
+	public List<GojangRp> selectSmallCodeGP(@RequestParam int small_code){
+		List<GojangRp> selectSmallCodeGP = fs.selectSmallCodeGP(small_code);
+		
+		System.out.println(selectSmallCodeGP);
+		return selectSmallCodeGP;
+	}
+	
+	// 고장 보고서 상세 
+	@GetMapping("/gojangInfo.do")
+	public String gojangInfo(@RequestParam int siseol_id, Model model) {
+		
+		GojangRp gojangInfo = fs.gojangInfo(siseol_id);
+		
+		model.addAttribute("gojangInfo",gojangInfo);
+		
+		return "facilityStat/gojangInfo";
+	}
+	
+	// 조치 보고서 시설물 코드 선택시
+	@GetMapping("/actionWriteGetGP.do")
+	public String actionWriteGetGP(@RequestParam int siseol_id, Model model) {
+		
+		GojangRp actionWriteGetGP =  fs.gojangInfo(siseol_id);
+		
+		model.addAttribute("actionWriteGetGP",actionWriteGetGP);
+		
+		return "facilityStat/actionWriteGetGP";
+	}
+	
+	// 조치 보고서 등록
+	@PostMapping("/Action.do")
+	public String Action(@ModelAttribute ActionRp actionRp, Model model) {
+		
+		int Action = fs.Action(actionRp);
+		
+		model.addAttribute("actionList",Action);
+		
+		return "redirect:actionList.do";
+	}
+	
+	// 조치 보고서 상세 
+	@GetMapping("/actionInfo.do")
+	public String actionInfo(@RequestParam int action_id, Model model) {
+		
+		ActionRp actionInfo = fs.actionInfo(action_id);
+		
+		model.addAttribute("actionInfo",actionInfo);
+		
+		return "facilityStat/actionInfo";
+	}
 }

@@ -57,6 +57,30 @@ public class FacilityServiceImpl extends EgovAbstractServiceImpl implements Faci
 		List<ActionRp> actionList = fm.actionList();
 		return actionList;
 	}
+	// 고장보고서 시설물코드
+	@Override
+	public List<GojangRp> selectSmallCodeGP(int small_code) {
+		List<GojangRp> selectSmallCodeGP = fm.selectSmallCodeGP(small_code);
+		return selectSmallCodeGP;
+	}
+	// 고장 보고서 상세 
+	@Override
+	public GojangRp gojangInfo(int siseol_id) {
+		GojangRp gojangInfo = fm.gojangInfo(siseol_id);
+		return gojangInfo;
+	}
+	// 조치 보고서 등록
+	@Override
+	public int Action(ActionRp actionRp) {
+		int Action = fm.Action(actionRp);
+		return Action;
+	}
+	// 조치 보고서 상세
+	@Override
+	public ActionRp actionInfo(int action_id) {
+		ActionRp actionInfo = fm.actionInfo(action_id);
+		return actionInfo;
+	}
 	
 	
 

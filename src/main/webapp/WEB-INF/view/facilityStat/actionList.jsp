@@ -105,7 +105,7 @@
 					<td><fmt:formatDate value="${al.action_date }" pattern="yyyy-MM-dd"/></td>
 					<td>${al.user_id }</td>
 					<td>
-						<button id="openButton">열기</button>
+						<button id="openButton" onclick="location.href='actionInfo.do?action_id=${al.action_id}'">열기</button>
 					</td>
 				</tr>
 				</c:forEach>

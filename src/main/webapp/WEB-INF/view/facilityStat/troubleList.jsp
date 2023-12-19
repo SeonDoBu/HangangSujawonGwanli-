@@ -105,7 +105,7 @@
 					<td>${tl.title }</td>
 					<td>${tl.user_id }</td>
 					<td>
-						<button id="openButton">열기</button>
+						<button id="openButton" onclick="location.href='gojangInfo.do?siseol_id=${tl.siseol_id}'">열기</button>
 					</td>
 				</tr>
 				</c:forEach>

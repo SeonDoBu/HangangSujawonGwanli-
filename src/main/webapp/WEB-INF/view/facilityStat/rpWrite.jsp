@@ -195,7 +195,7 @@ function siseolContent() {
 				</td>
 				
 				<td class="table-active"  style="font-weight: bold;">작성자</td>
-				<td><input name="user_id" value="user5"  class="form-control" type="text" required="required"></td>
+				<td><input name="user_id" value="admin"  class="form-control" type="text" required="required"></td>
 			</tr>
 			
 			<tr>

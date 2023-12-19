@@ -49,5 +49,5 @@ public class EgovConfigCommon {
 		leaveaTrace.setTraceHandlerServices(new TraceHandlerService[] {traceHandlerService()});
 		return leaveaTrace;
 	}
-
+	
 }

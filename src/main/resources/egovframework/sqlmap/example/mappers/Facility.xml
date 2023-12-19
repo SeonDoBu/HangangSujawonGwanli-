@@ -9,7 +9,8 @@
 	</select>
 	
 	<select id="selectSmallCode" resultType="int">
-		select siseol_id from siseol where small_code  = #{small_code}
+		select siseol_id from siseol where small_code  = #{small_code} 
+		order by siseol_id asc
 	</select>
 	
 	<select id="siseolCodeList" resultType="Siseol">
@@ -24,8 +25,8 @@
 	</select>
 	
 	<insert id="rpWriteAction" parameterType="GojangRp">
-		insert into gojang_rp values
-			( #{siseol_id}, nextval('gojang_rp_seq'), #{user_id},
+		insert into gojang_rp values( 
+			 #{siseol_id}, nextval('gojang_rp_seq'), #{user_id},
 			 CURRENT_DATE, #{title}, #{gojang_date}, #{gojang_cause},
 			 #{curr_status}, #{immediate_action}, #{future_plan},#{file_name})
 	</insert>
@@ -33,11 +34,42 @@
 	<select id="actionList" resultType="ActionRp">
 		select row_number() 
 			over (order by created_at desc) 
-			as rn, grp.created_at, grp.siseol_id, arp.action_date, arp.user_id
+			as rn, grp.created_at, grp.siseol_id, arp.action_date, arp.action_id, arp.user_id
 		from gojang_rp grp
 			join action_rp arp
 		on grp.gojang_id = arp.gojang_id
 			order by created_at desc
+	</select>
+	
+	<select id="selectSmallCodeGP" resultType="int">
+		select gr.siseol_id, gr.gojang_date , gr.gojang_id 
+			from  gojang_rp gr
+		join siseol si
+			on gr.siseol_id = si.siseol_id
+		where si.small_code  = #{small_code}
+			order by si.siseol_id asc
+	</select>
+	
+	<select id="gojangInfo" parameterType="int" resultType="GojangRp">
+		select * from gojang_rp where siseol_id = #{siseol_id}
+	</select>
+	
+	<insert id="Action" parameterType="ActionRp">
+		insert into action_rp values(
+			#{siseol_id}, #{gojang_id}, nextval('action_rp_seq'), 
+			#{user_id}, #{action_date}, #{action_note},
+			#{special_note}, #{future_plan}, #{file_name})
+	</insert>
+	
+	<select id="actionInfo" parameterType="int" resultType="ActionRp">
+		select
+			gr.created_at, ar.siseol_id, ar.user_id ,
+			gr.gojang_cause, gr.gojang_date, ar.action_date,
+			ar.action_note, ar.special_note, ar.future_plan, ar.file_name
+		from action_rp ar
+		join gojang_rp gr
+		on ar.gojang_id = gr.gojang_id
+		where action_id  = #{action_id}
 	</select>
 	
 </mapper>
