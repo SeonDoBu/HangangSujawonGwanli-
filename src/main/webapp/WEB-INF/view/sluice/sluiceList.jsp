@@ -4,7 +4,6 @@
 <%@ include file="../../components/header.jsp" %>
 <!DOCTYPE html>
 <html>
-<script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
  
 window.close();
@@ -101,7 +100,7 @@ window.close();
    	<!--
    	<input type="hidden" value="${sluice.sluice_id }">
    	<form action="sluiceDetail" method="get"><input type="hidden" id="" value="${sul.sluice_id }">  -->
-   	<td><a href=""  onclick="showpopDetail(${sul.sluice_id})" id="" <%-- data-value="${sul.sluice_id } --%> > ${sul.sluice_id } ${sul.name}</a></td>
+   	<td><a href=""  onclick="showpopDetail(${sul.sluice_id})" id="" <%-- data-value="${sul.sluice_id } --%> >${sul.name}</a></td>
    	<td>${sul.sluice_id }</td>
    	<td>${sul.mapy }</td>
    	<td>${sul.mapx }</td>

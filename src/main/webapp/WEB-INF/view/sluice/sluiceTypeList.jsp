@@ -131,7 +131,7 @@
 
 </div>
 <div  >
-<nav aria-label="Page navigation example text-center" style="margin-top: 20px; margin-left: 200px;">
+<nav aria-label="Page navigation example text-center" style="margin-top: 20px; margin-left: 500px;">
 			<ul class="pagination">
 				<c:if test="${page.startPage > page.pageBlock}">
 					<li class="page-item">

@@ -6,11 +6,18 @@
 		from sluice
 	</select>
 	<select id="sluiceList" resultType="Sluice">
-		select DISTINCT s.* , ob.type  
+
+	SELECT b.*
+from
+(select 	ROW_NUMBER() OVER (ORDER BY sluice_id) rn , a.*
+from
+		(select DISTINCT s.* , ob.type  
 		from  observ_data ob 
 		right JOIN 	sluice s 
 		ON  ob.sluice_id = s.sluice_id 
-		order by name 
+		order by name) a 
+		) b 
+		where rn BETWEEN #{start} and #{end}
 	</select>
 	<insert id="insertSluice" parameterType="Sluice">
 		INSERT INTO 

@@ -37,8 +37,13 @@ public class SluiceServiceImpl extends EgovAbstractServiceImpl implements Sluice
 	@Override
 	public List<Sluice> sluiceList(Sluice sluice) {
 		List<Sluice> sluiceList = null;
-		System.out.println("SluiceListServiceImpl SuliceList Start...");
-		
+		/*
+		 * System.out.println("SluiceListServiceImpl SuliceList Start...");
+		 * System.out.println("SluiceListServiceImpl SuliceList get.start()->"+sluice.
+		 * getStart());
+		 * System.out.println("SluiceListServiceImpl SuliceList get.start()->"+sluice.
+		 * getClass());
+		 */
 		try {
 			
 			sluiceList = sm.sluiceList(sluice);

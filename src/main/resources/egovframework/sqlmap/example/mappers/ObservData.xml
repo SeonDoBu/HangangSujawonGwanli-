@@ -11,10 +11,17 @@
 	</select>
 
 	<select id="observDataList" resultType="ObservData" parameterType="ObservData">
-		SELECT *
+		SELECT b.*
+		from
+			(select 	ROW_NUMBER() OVER (ORDER BY sluice_id) rn , a.*
+		from	
+		(SELECT *
 		from observ_data 
 		where sluice_id = #{sluice_id}
-		and type= #{type}
+		and type= #{type}) a
+
+		 ) b
+		 where rn BETWEEN #{start} and #{end}
 		
 	</select>
 	

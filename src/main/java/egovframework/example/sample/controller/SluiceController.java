@@ -244,19 +244,26 @@ public class SluiceController {
 	
 	
 	@GetMapping(value = "sluiceList")
-	public String SluiceList(Sluice sluice,ObservData observData,String currentPage , Model model) {
+	public String SluiceList(Sluice sluice,ObservData observData,String currentPage, Model model) {
 	
 
 		int SluiceCount = ss.sluiceCount();
 		int ObservCount = obs.observCount();
-
-		List<Sluice> SluiceList = ss.sluiceList(sluice);
-		List<ObservData> ObservDataList = obs.observDataList(observData);
-		System.out.println("1234455"+observData.getType());
-		System.out.println("observDataList"+ObservDataList.getClass());
 		
 		Paging page = new Paging(SluiceCount, currentPage);
 		
+		sluice.setStart(page.getStart());
+		sluice.setEnd(page.getEnd());
+		
+		
+		List<Sluice> SluiceList = ss.sluiceList(sluice);
+		List<ObservData> ObservDataList = obs.observDataList(observData);
+		/*
+		 * System.out.println("1234455"+observData.getType());
+		 * System.out.println("observDataList"+ObservDataList.getClass());
+		 * System.out.println("SluiceList sluiceController get start()->"+sluice.
+		 * getStart());
+		 */
 		
 		/* System.out.println(SluiceList); */
 		
@@ -321,18 +328,20 @@ public class SluiceController {
 	
 		int SluiceCount = ss.sluiceCount();
 		int ObservCount = obs.observCount();
-		
-		
-		List<Sluice> SluiceList = ss.sluiceList(sluice);
-		List<ObservData> ObservDataList = obs.observDataList(observData);
-		System.out.println("SluiceList"+SluiceList);
-		System.out.println("sluice"+sluice);
+	
 		//이름 가져오기 
 		Sluice sluice2 = ss.sluiceDetail(sluice_id);
 		// 페이징 처리
 		Paging page = new Paging(ObservCount, currentPage);
 		observData.setStart(page.getStart());
 		observData.setEnd(page.getEnd());
+		
+		
+		List<Sluice> SluiceList = ss.sluiceList(sluice);
+		List<ObservData> ObservDataList = obs.observDataList(observData);
+		System.out.println("SluiceList"+SluiceList);
+		System.out.println("sluice"+sluice);
+	
 		/*
 		 * System.out.println("========================"+ObservDataList);
 		 * System.out.println("========================="+observData.getName());
@@ -361,7 +370,7 @@ public class SluiceController {
 	return "sluice/sluiceTypeList";
 	
 	}
-	@GetMapping(value = "/observdataDetail")
+	@GetMapping(value = "observdataDetail")
 	public String observdataDetail(Sluice sluice, ObservData observData, int sluice_id,String type,String data_ymd, Model model) {
 		System.out.println("sluiceDetail start");
 
@@ -378,21 +387,28 @@ public class SluiceController {
 	}
 	
 	@PostMapping(value = "observdataUpdate")
-	public String updateObserv(@ModelAttribute Sluice sluice,ObservData observData, Model model) {
+	public String updateObserv(Sluice sluice,ObservData observData, Model model) {
+		log.info("updateObserv start");
+		try {
+			int updateCount = ss.updateSluice(sluice);
+			int updateCount2 = obs.updateObserv(observData);
+			ObservData observDataD = obs.observdataDetail(observData);
+			System.out.println("sssssssss----------"+updateCount2);
+			System.out.println("======================"+observData);
+			model.addAttribute("upcnt2",updateCount2);
+			model.addAttribute("sluice",sluice);
+			model.addAttribute("observData",observData);
+			model.addAttribute("observDataD", observDataD);		
+			log.info("updateObserv");
+			
+			
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+	
 		
-		int updateCount = ss.updateSluice(sluice);
-		int updateCount2 = obs.updateObserv(observData);
-		ObservData observDataD = obs.observdataDetail(observData);
-		System.out.println("sssssssss----------"+updateCount2);
-		System.out.println("======================"+observData);
-		model.addAttribute("upcnt2",updateCount2);
-		model.addAttribute("sluice",sluice);
-		model.addAttribute("observData",observData);
-		model.addAttribute("observDataD", observDataD);
-		
-		return "redirect:sluiceTypeList";
-		
-		
+		return "sluice/sluiceTypeList";
+
 	}
 	@PostMapping(value = "updateSluice")
 	public String updateSluice(@ModelAttribute Sluice sluice, Model model) {
