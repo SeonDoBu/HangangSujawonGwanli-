@@ -43,6 +43,7 @@ public class SluiceController {
 	private final ObservDataService obs;
 	private final GigwanService     gigwanService;
 	
+	
 
 	// 수자원시설물 목록으로 이동 by 나희
 	@GetMapping(value = "sujawonList.do")
@@ -112,6 +113,7 @@ public class SluiceController {
 			model.addAttribute("gigwanList", gigwanList);
 			model.addAttribute("districtList", districtList);
 			model.addAttribute("siseol", siseol);
+			
 			
 		} catch (Exception e) {
 			log.info("sujawonDetail " + e.getMessage());
