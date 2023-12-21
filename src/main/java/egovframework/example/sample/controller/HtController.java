@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import egovframework.example.sample.dto.Commoncode;
@@ -172,5 +173,12 @@ public class HtController {
 		}
 
 		return "/facility/siseolInspectionList";
+	}
+	
+	@GetMapping("sluiceMain.do")
+	public String sluiceMain(Model model, String currentPage, Inspection inspection) {
+		System.out.println("htController sluiceMain Start...");
+		
+		return "/facility/mapTest2";
 	}
 }
