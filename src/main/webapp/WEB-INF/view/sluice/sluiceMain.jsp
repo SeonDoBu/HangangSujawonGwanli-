@@ -7,22 +7,58 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>지도</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<style type="text/css">
-.sidebar10 {
-	width: 80px;
-	background-color: #000042;
-	height: 1920px;
-	float: left;
-
-}
-
-</style>
-
-
-    <title>Hello, world!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<style type="text/css">
+		.sidebar10 {
+			width: 80px;
+			background-color: #000042;
+			height: 1920px;
+			float: left;
+		}
+		
+		/* 지도 크기 설정을 위한 css */
+		.map {
+      	height: 1000px;
+      	width: 100%;
+    	}
+	</style>
+	
+    <script src="https://code.jquery.com/jquery-3.6.0.js" 
+	 integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/js/ol.js"></script> <!-- OpenLayer 라이브러리 -->
+	<link href="/css/ol.css" rel="stylesheet" type="text/css" > <!-- OpenLayer css -->
+	<script type="text/javascript" src="/js/mapTest.js"></script> <!-- 지도 맵객체 생성을 위한 js-->
+	<script type="text/javascript">
+		$(function(){
+			console.log("sluiceMain.jsp");
+			 // 맵 객체에 레이어를 추가함
+			map.addLayer(wms2);
+			map.addLayer(wms3);
+			map.addLayer(wms4);
+		})
+		
+		function addLayer1() {
+	/* 		if(document.getElementById('chk').checked) {
+				
+			} else {
+				location.
+			} */
+			
+		/* 	var haha = $("#chk").val;
+			 console.log(haha); */
+			if(document.getElementById('chk').checked) {
+				console.log('하하');
+				map.addLayer(wms1);
+			} else {
+				console.log('메롱');
+				map.removeLayer(wms1);
+			}
+		}
+	</script>
   </head>
   <body>
 
@@ -123,6 +159,10 @@
     </tr>
   </tbody>
 </table>
+
+<!-- 메롱의메롱 -->
+<button type="button" onclick="addLayer1()">호호</button>
+<input type="checkbox" onclick="addLayer1()" id="chk"> 체크해봐유
   </div>
 </div>
 
@@ -181,9 +221,9 @@
 <div>
 
 <!-- 진짜 바디의 시작 -->
-<h1>지도들어가자위로 사이드바 컨텐츠 올라옴</h1>
-<h1 style="margin-left: 300px;">지도 나오는곳 </h1>
-
+	<div id="map" class="map" style="margin-left: 80px;">
+	<!-- 실제 지도가 표출 될 영역 -->
+	</div>
 
 </div>
     <!-- Optional JavaScript; choose one of the two! -->
