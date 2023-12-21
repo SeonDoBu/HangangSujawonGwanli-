@@ -40,7 +40,7 @@
 			map.addLayer(wms3);
 			map.addLayer(wms4);
 		})
-		
+		  
 		function addLayer1() {
 	/* 		if(document.getElementById('chk').checked) {
 				

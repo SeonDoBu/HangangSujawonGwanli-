@@ -21,6 +21,7 @@ $( document ).ready(function() {
 	      zoom: 9
 	    })
 	});
+	
 		wms1 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
 			url : 'http://localhost:8300/geoserver/sundo/wms?service=WMS', // 1. 레이어 URL
@@ -34,7 +35,7 @@ $( document ).ready(function() {
 			serverType : 'geoserver',
 		})
 	});
-	
+	console.log("wms2");
 		
 		wms2 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
