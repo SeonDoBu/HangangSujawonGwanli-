@@ -22,7 +22,7 @@
 		
 		/* 지도 크기 설정을 위한 css */
 		.map {
-      	height: 1000px;
+      	height: 1180px;
       	width: 100%;
     	}
 	</style>
@@ -33,14 +33,31 @@
 	<link href="/css/ol.css" rel="stylesheet" type="text/css" > <!-- OpenLayer css -->
 	<script type="text/javascript" src="/js/mapTest.js"></script> <!-- 지도 맵객체 생성을 위한 js-->
 	<script type="text/javascript">
-		$(function(){
+/* 		$(function(){
 			console.log("sluiceMain.jsp");
 			 // 맵 객체에 레이어를 추가함
 			map.addLayer(wms2);
 			map.addLayer(wms3);
 			map.addLayer(wms4);
-		})
-		  
+		}) */
+		/*전체 선택 할려고 했으나 값이 바뀌지않음  */
+/* 		$(document).ready(function() {
+			$("#chkAll").click(function() {
+				if($("#chkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
+				else $("input[name=chk]").prop("checked", false);
+			});
+
+			$("input[name=chk]").click(function() {
+				var total = $("input[name=chk]").length;
+				var checked = $("input[name=chk]:checked").length;
+
+				if(total != checked) $("#chkAll").prop("checked", false);
+				else $("#chkAll").prop("checked", true); 
+			});
+		});
+	 */
+
+		
 		function addLayer1() {
 	/* 		if(document.getElementById('chk').checked) {
 				
@@ -50,14 +67,65 @@
 			
 		/* 	var haha = $("#chk").val;
 			 console.log(haha); */
-			if(document.getElementById('chk').checked) {
+			if(document.getElementById('chk1').checked) {
 				console.log('하하');
 				map.addLayer(wms1);
 			} else {
 				console.log('메롱');
 				map.removeLayer(wms1);
-			}
+			}	
 		}
+		
+		function addLayer2() {
+		if(document.getElementById('chk2').checked) {
+			console.log('하하');
+			map.addLayer(wms2);
+		} else {
+			console.log('메롱');
+			map.removeLayer(wms2);
+		}
+		}
+		function addLayer3() {
+		if(document.getElementById('chk3').checked) {
+			console.log('하하');
+			map.addLayer(wms3);
+		} else {
+			console.log('메롱');
+			map.removeLayer(wms3);
+		}}
+		function addLayer4() {
+		if(document.getElementById('chk4').checked) {
+			console.log('하하');
+			map.addLayer(wms4);
+		} else {
+			console.log('메롱');
+			map.removeLayer(wms4);
+		}}
+		function addLayer5() {
+		if(document.getElementById('chk5').checked) {
+			console.log('하하');
+			map.addLayer(wms5);
+		} else {
+			console.log('메롱');
+			map.removeLayer(wms5);
+		}}
+		function addLayer6() {
+		if(document.getElementById('chk6').checked) {
+			console.log('하하');
+			map.addLayer(wms6);
+		} else {
+			console.log('메롱');
+			map.removeLayer(wms6);
+		}}
+		function addLayer7() {
+			if(document.getElementById('chk7').checked) {
+				console.log('하하');
+				map.addLayer(wms7);
+			} else {
+				console.log('메롱');
+				map.removeLayer(wms7);
+			}}
+		
 	</script>
   </head>
   <body>
@@ -123,47 +191,36 @@
  </button><br>
 <div class="offcanvas offcanvas-start" style="margin-top: 80px; margin-left: 80px; float: left;" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling2" aria-labelledby="offcanvasScrollingLabel">
   <!-- 사이드바 헤더  -->
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">사이드바 헤더2</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  <div class="offcanvas-header" style="float: right;">
+    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">레이어 
+    </h5>
+  <!--   <div>
+    <input type="checkbox" checked="checked" id="chkAll">
+    </div> -->
+    
+    
+    
+    <button type="button"  class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <!-- 사이드바 바디 리스트용  -->
   <div class="offcanvas-body">
-    <p>사이드바 테이블2 </p>
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-
+   
 <!-- 메롱의메롱 -->
-<button type="button" onclick="addLayer1()">호호</button>
-<input type="checkbox" onclick="addLayer1()" id="chk"> 체크해봐유
-  </div>
+<h4>행정구역</h4>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer5()" name="chk" id="chk5" checked="checked"> 행정구역 경기<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer6()" name="chk" id="chk6" checked="checked"> 행정구역 서울
+
+<h4 style="margin-top: 10px;">한강하천</h4>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer1()" name="chk" id="chk1" checked="checked"> 한강하천_서울<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer2()" name="chk" id="chk2" checked="checked"> 한강하천_경기<br>
+<h4 style="margin-top: 10px;">한강수계</h4>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer3()" name="chk"  id="chk3" checked="checked"> 한강수계_서울<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer4()" name="chk" id="chk4" checked="checked"> 한강수계_경기<br>
+
+<br><br><br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer7()" name="chk" id="chk7" checked="checked"> 관측소<br>
+
+ </div>
 </div>
 
 
