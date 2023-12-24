@@ -8,7 +8,7 @@ public class Users {
 	private int big_code;
 	private int small_code;
 	private int gigwan_id;
-	private int password;
+	private String password;
 	private String name;
 	private String email;
 	private String tel;

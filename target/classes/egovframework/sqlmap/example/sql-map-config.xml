@@ -11,4 +11,5 @@
 	<sqlMap resource="egovframework/sqlmap/example/mappers/District.xml"/>
 	<sqlMap resource="egovframework/sqlmap/example/mappers/Admin.xml"/>
 	<sqlMap resource="egovframework/sqlmap/example/mappers/Gigwan.xml"/>
+	<sqlMap resource="egovframework/sqlmap/example/mappers/Users.xml"/>
 </sqlMapConfig>

@@ -8,6 +8,14 @@
 <title>한강수자원관리플랫폼</title>
 
 <script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", function () {
+		var errorMsg = $('#errorMsg').value;
+		// 에러 메시지가 존재할 경우 alert창으로 표시
+		if(errorMsg !== null && errorMsg !== "" && errorMsg !== undefined) {
+			alert(errorMsg);
+		}
+	});
+	
 	function pageMove(id) {
 		console.log("실행");
 		if (id === 1) {
@@ -47,9 +55,28 @@
 		location.href = 'joinForm.do';
     }
     
-    function successLogin() {
-        console.log("로그인 성공!");
-		location.href = 'adminInfo.do';		
+    function loginCheck() {
+    	var id = document.getElementById('login_id');
+    	var pw = document.getElementById('password');
+    	
+    	// 아이디를 입력하지 않은 경우
+    	if(id.value === "") {
+    		alert("아이디를 입력해주세요.");
+    		event.preventDefault();
+    		id.focus();
+    		return false;
+    	}
+    	
+    	// 비밀번호를 입력하지 않은 경우
+    	if(pw.value === "") {
+    		alert("비밀번호를 입력해주세요.");
+    		event.preventDefault();
+    		pw.focus();
+    		return false;
+    	}
+    	
+    	// 모두 입력된 경우
+    	return true;
 	}
 
 </script>
@@ -73,6 +100,8 @@
 				</div>
 			</div>
 			
+			<input type="hidden" name="errorMsg" id="errorMsg" value="${errorMsg}">
+			
 			<div class="row row-cols-1 main-second-box">
 				<div class="col main-second-title-box">
 					<p>
@@ -80,6 +109,8 @@
 						<a role="button" onclick="signupLink()">회원가입</a></span>
 					</p>
 				</div>
+				
+				<!-- 로그인 -->
 				<div class="col main-second-md-title-box">
 					<p>권한선택</p>
 				</div>
@@ -94,25 +125,28 @@
 						<img alt="" src="/images/admin_icon4.png">
 					</div>
 				</div>
-				<div class="col main-second-id-box">
-					<p>ID</p>
-					<input type="text" name="user_id">
-				</div>
-				<div class="col main-second-pw-box">
-					<p>PASSWORD</p>
-					<input type="password" name="password">
-				</div>
-				<div class="col main-second-login-btn-box">
-					<button type="submit" onclick="successLogin()">L&nbsp;O&nbsp;G&nbsp;I&nbsp;N</button>
-				</div>
+				<form method="post" action="loginCheck.do">
+					<div class="col main-second-id-box">
+						<p>ID</p>
+						<input type="text" name="user_id" id="login_id">
+					</div>
+					<div class="col main-second-pw-box">
+						<p>PASSWORD</p>
+						<input type="password" name="password" id="password">
+					</div>
+					<div class="col main-second-login-btn-box">
+						<button type="submit" onclick="return loginCheck()">L&nbsp;O&nbsp;G&nbsp;I&nbsp;N</button>
+					</div>
+				</form>
 				<div class="col main-second-id-pw-search-box">
 					<p>
 						<a role="button" data-bs-toggle="modal"
-						   data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">ID찾기</a>&nbsp;|&nbsp; 
+						 data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">ID찾기</a>&nbsp;|&nbsp; 
 						<a role="button" data-bs-toggle="modal"
-						   data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap">PW찾기</a>
+						 data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap">PW찾기</a>
 					</p>
 				</div>
+				
 			</div>
 			
 			<!-- ID 모달창 -->
@@ -129,10 +163,10 @@
 							<form action="#">
 								<div class="mb-3 admin-modal-content-box">
 									<label for="authId" class="col-form-label">권한</label> 
-									<select class="form-select" id="authId" name="auth">
-										<option>권한1</option>
-										<option>권한2</option>
-										<option>관리자</option>
+									<select class="form-select" id="authId" name="small_code">
+										<option value="1">실시간수문정보관리시스템</option>
+										<option value="2">수문시설관리시스템</option>
+										<option value="3">관리자</option>
 									</select>
 								</div>
 								<div class="mb-3 admin-modal-content-box">
@@ -168,9 +202,9 @@
 								<div class="mb-3 admin-modal-content-box">
 									<label for="authPw" class="col-form-label">권한</label> 
 									<select class="form-select" id="authPw" name="auth">
-										<option>권한1</option>
-										<option>권한2</option>
-										<option>관리자</option>
+										<option value="1">실시간수문정보관리시스템</option>
+										<option value="2">수문시설관리시스템</option>
+										<option value="3">관리자</option>
 									</select>
 								</div>
 								<div class="mb-3 admin-modal-content-box">
