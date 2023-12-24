@@ -31,12 +31,14 @@
 	 integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="/js/ol.js"></script> <!-- OpenLayer 라이브러리 -->
 	<link href="/css/ol.css" rel="stylesheet" type="text/css" > <!-- OpenLayer css -->
+	<link rel="stylesheet" href="css/ol-ext.css" /> <!-- scale 표시 -->
+	<script type="text/javascript" src="js/ol-ext.js"></script> <!-- scale 표시 -->
 	<script type="text/javascript" src="/js/mapTest.js"></script> <!-- 지도 맵객체 생성을 위한 js-->
 	<script type="text/javascript">
 /* 		$(function(){
 			console.log("sluiceMain.jsp");
 			 // 맵 객체에 레이어를 추가함
-			map.addLayer(wms2);
+		/* 	map.addLayer(wms2);
 			map.addLayer(wms3);
 			map.addLayer(wms4);
 		}) */
@@ -57,14 +59,7 @@
 		});
 	 */
 
-		
-		function addLayer1() {
-	/* 		if(document.getElementById('chk').checked) {
-				
-			} else {
-				location.
-			} */
-			
+		function addLayer1() {			
 		/* 	var haha = $("#chk").val;
 			 console.log(haha); */
 			if(document.getElementById('chk1').checked) {
@@ -77,56 +72,84 @@
 		}
 		
 		function addLayer2() {
-		if(document.getElementById('chk2').checked) {
-			console.log('하하');
-			map.addLayer(wms2);
-		} else {
-			console.log('메롱');
-			map.removeLayer(wms2);
+			if(document.getElementById('chk2').checked) {
+				console.log('하하');
+				map.addLayer(wms2);
+			} else {
+				console.log('메롱');
+				map.removeLayer(wms2);
+			}
 		}
-		}
+		
 		function addLayer3() {
-		if(document.getElementById('chk3').checked) {
-			console.log('하하');
-			map.addLayer(wms3);
-		} else {
-			console.log('메롱');
-			map.removeLayer(wms3);
-		}}
+			if(document.getElementById('chk3').checked) {
+				console.log('하하');
+				map.addLayer(wms3);
+			} else {
+				console.log('메롱');
+				map.removeLayer(wms3);
+			}
+		}
+		
 		function addLayer4() {
-		if(document.getElementById('chk4').checked) {
-			console.log('하하');
-			map.addLayer(wms4);
-		} else {
-			console.log('메롱');
-			map.removeLayer(wms4);
-		}}
+			if(document.getElementById('chk4').checked) {
+				console.log('하하');
+				map.addLayer(wms4);
+			} else {
+				console.log('메롱');
+				map.removeLayer(wms4);
+			}
+		}
+		
 		function addLayer5() {
-		if(document.getElementById('chk5').checked) {
-			console.log('하하');
-			map.addLayer(wms5);
-		} else {
-			console.log('메롱');
-			map.removeLayer(wms5);
-		}}
+			if(document.getElementById('chk5').checked) {
+				console.log('하하');
+				map.addLayer(wms5);
+			} else {
+				console.log('메롱');
+				map.removeLayer(wms5);
+			}
+		}
+		
 		function addLayer6() {
-		if(document.getElementById('chk6').checked) {
-			console.log('하하');
-			map.addLayer(wms6);
-		} else {
-			console.log('메롱');
-			map.removeLayer(wms6);
-		}}
+			if(document.getElementById('chk6').checked) {
+				console.log('하하');
+				map.addLayer(wms6);
+			} else {
+				console.log('메롱');
+				map.removeLayer(wms6);
+			}
+		}
+		
 		function addLayer7() {
 			if(document.getElementById('chk7').checked) {
 				console.log('하하');
-				map.addLayer(wms7);
+				map.addLayer(markerVectorLayer);
 			} else {
 				console.log('메롱');
-				map.removeLayer(wms7);
-			}}
+				map.removeLayer(markerVectorLayer);
+			}
+		}
 		
+		function alert() {
+			log.info('부리부리 대마왕');
+		}
+
 	</script>
+	<style>
+		.__float-tbl {
+		border: 1px solid #2a5dc5;
+		border-radius: 5px;
+		background-color: #2a5dc5;
+		font-size: 15px;
+		color: white;
+		text-align: center;
+		position: absolute;
+		top: 30px;
+		left: -50px;
+		width:130px;
+		}
+	</style>
   </head>
   <body>
 
@@ -280,6 +303,10 @@
 <!-- 진짜 바디의 시작 -->
 	<div id="map" class="map" style="margin-left: 80px;">
 	<!-- 실제 지도가 표출 될 영역 -->
+	</div>
+	
+	<div id="popup">
+		<div id="popup-content"></div>
 	</div>
 
 </div>

@@ -15,6 +15,7 @@ import egovframework.example.sample.dto.Paging;
 import egovframework.example.sample.dto.ObservData;
 
 import egovframework.example.sample.dto.Siseol;
+import egovframework.example.sample.service.BookmarkService;
 import egovframework.example.sample.service.CommoncodeService;
 import egovframework.example.sample.service.DistrictService;
 import egovframework.example.sample.service.GigwanService;
@@ -24,6 +25,8 @@ import egovframework.example.sample.service.SiseolService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.example.sample.dto.Sluice;
 import egovframework.example.sample.service.SluiceService;
@@ -42,6 +45,7 @@ public class SluiceController {
 	private final SluiceService 	ss;
 	private final ObservDataService obs;
 	private final GigwanService     gigwanService;
+	private final BookmarkService   bookmarkService;
 	
 	
 
@@ -260,8 +264,19 @@ public class SluiceController {
 	public String SluiceMain(Model model) {
 	
 	
-	return "sluice/sluiceMain";
+		return "sluice/sluiceMain";
+	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/sluiceDataList")
+	public List<Sluice> sluiceDataList(Model model) {
+		log.info("안뇽");
+		Sluice sluice = new Sluice();
+		sluice.setStart(1);
+		sluice.setEnd(30);
+		List<Sluice> sluiceList = ss.sluiceList(sluice);
+		log.info("sluiceList"+sluiceList.size());
+		return sluiceList;
 	}
 	
 	

@@ -1,10 +1,18 @@
 var map;
 var wms1;
-var wms2;
+var mapOverlay;
+var container;
+var popupContent;
+var content;
+var coordinate;
+var markerVectorLayer;
+
+/*var wms2;
 var wms3;
 var wms4;
 var wms5;
-var wms6;
+var wms6;*/
+var wms7;
 
 $( document ).ready(function() {
 	map = new ol.Map({ // OpenLayer의 맵 객체를 생성한다.
@@ -18,16 +26,26 @@ $( document ).ready(function() {
 	    ],
 	    view: new ol.View({ // 지도가 보여 줄 중심좌표, 축소, 확대 등을 설정한다. 보통은 줌, 중심좌표를 설정하는 경우가 많다.
 	      center: ol.proj.fromLonLat([126.9784, 37.56681]),
-	      zoom: 9
+	      zoom: 9,
+		  minzoom: 5
 	    })
 	});
 	
+	var ctrl = new ol.control.Scale({});
+	map.addControl(ctrl);
+	map.addControl(new ol.control.ScaleLine());
+	
+	mapOverlay = new ol.Overlay(({element:container}));
+	container = document.getElementById('popup'); //팝업 컨테이너
+	popupContent = document.getElementById('popup-content'); //팝업 내용
+	
+	console.log("map");
 		wms1 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
-			url : 'http://localhost:8300/geoserver/sundo/wms?service=WMS', // 1. 레이어 URL
+			url : 'http://localhost:8383/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
 			params : {
 				'VERSION' : '1.1.0', // 2. 버전
-				'LAYERS' : 'sundo:LSMD_CONT_UJ201_11_202310', // 3. 작업공간:레이어 명
+				'LAYERS' : 'sundoB:LSMD_CONT_UJ201_11_202310', // 3. 작업공간:레이어 명
 				'BBOX' : [179271.578125, 437187.78125, 215578.53125, 465761.4375], 
 				'SRS' : 'EPSG:5174', // SRID
 				'FORMAT' : 'image/png' // 포맷
@@ -35,9 +53,64 @@ $( document ).ready(function() {
 			serverType : 'geoserver',
 		})
 	});
-	console.log("wms2");
-		
-		wms2 = new ol.layer.Tile({
+	map.addLayer(wms1); // 맵 객체에 레이어를 추가함
+	console.log("wms1 추가");
+	
+	var vectorSource = new ol.source.Vector();
+	markerVectorLayer = new ol.layer.Vector({
+		source: vectorSource,
+	});
+	
+	$.ajax({
+		url:"/sluiceDataList",
+		method:"GET",
+		dataType:'json',
+		success: function(sluiceData) {
+			console.log("컨트롤러 탔음");
+			console.log(sluiceData);
+			sluiceData.forEach(function(data) {
+				var id = data.sluice_id;
+				var marker = new ol.Feature({
+					geometry: new ol.geom.Point(
+						[data.mapx, data.mapy]
+					).transform('EPSG:4326', 'EPSG:3857'),
+					id: id
+				});
+				var iconStyle = new ol.style.Style({
+					image: new ol.style.Icon(({
+						anchor: [0.5, 0.96],
+						scale: 0.1,
+						src: 'images/pochaco.png'
+					})),
+					zindex: 10
+				});
+				marker.setStyle(iconStyle);
+				vectorSource.addFeature(marker);
+			});
+			console.log("관측소 정보 가져왔음");
+			map.addLayer(markerVectorLayer);
+			console.log("관측소 레이어 추가");
+		},
+		error: function() {
+			console.log("관측소 정보 가져오지 못했습니다.");
+		}
+	})
+
+	map.on('singleclick', function(evt) {
+		coordinate = evt.coordinate;
+		console.log(coordinate);
+		map.forEachFeatureAtPixel(evt.pixel, function(feature){
+			content = "<span class='__float-tbl'>관측소 번호 : "+feature.get('id')+" <button type='button' onclick='alert()'>북마크</button></span>";
+			popupContent.innerHTML = content;
+			mapOverlay.setPosition(coordinate);
+			map.addOverlay(mapOverlay);
+		});
+
+	})
+
+
+		/*
+	wms2 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
 			url : 'http://localhost:8300/geoserver/sundo/wms?service=WMS', // 1. 레이어 URL
 			params : {
@@ -53,7 +126,7 @@ $( document ).ready(function() {
 	
 	
 
-		wms3 = new ol.layer.Tile({
+	wms3 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
 			url : 'http://localhost:8300/geoserver/sundo/wms?service=WMS', // 1. 레이어 URL
 			params : {
@@ -69,7 +142,7 @@ $( document ).ready(function() {
 	
 	
 	
-			wms4 = new ol.layer.Tile({
+	wms4 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
 			url : 'http://localhost:8300/geoserver/sundo/wms?service=WMS', // 1. 레이어 URL
 			params : {
@@ -83,7 +156,7 @@ $( document ).ready(function() {
 		})
 	});
 	
-				wms5 = new ol.layer.Tile({
+	wms5 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
 			url : 'http://localhost:8300/geoserver/sundo/wms?service=WMS', // 1. 레이어 URL
 			params : {
@@ -97,7 +170,7 @@ $( document ).ready(function() {
 		})
 	});
 	
-					wms6 = new ol.layer.Tile({
+	wms6 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
 			url : 'http://localhost:8300/geoserver/sundo/wms?service=WMS', // 1. 레이어 URL
 			params : {
@@ -110,13 +183,28 @@ $( document ).ready(function() {
 			serverType : 'geoserver',
 		})
 	});
-	
-	
-	map.addLayer(wms1); // 맵 객체에 레이어를 추가함
-	map.addLayer(wms2); // 맵 객체에 레이어를 추가함
-	map.addLayer(wms3); // 맵 객체에 레이어를 추가함
+*/
+	wms7 = new ol.layer.Tile({
+		source : new ol.source.TileWMS({
+			url : 'http://localhost:8383/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
+			params : {
+				'VERSION' : '1.1.0', // 2. 버전
+				'LAYERS' : 'sundoB:sluice_map', // 3. 작업공간:레이어 명
+				'BBOX' : [126.66444396972656, 36.93333053588867, 127.71916961669922, 38.1238899230957], 
+				'SRS' : 'EPSG:4166', // SRID
+				'FORMAT' : 'image/png' // 포맷
+			},
+			serverType : 'geoserver',
+		})
+	});
+// map.addLayer(wms7); // 맵 객체에 레이어를 추가함	
+
+
+	//map.addLayer(wms2); // 맵 객체에 레이어를 추가함
+	/*map.addLayer(wms3); // 맵 객체에 레이어를 추가함
 	map.addLayer(wms4); // 맵 객체에 레이어를 추가함
 	map.addLayer(wms5); // 맵 객체에 레이어를 추가함
 	map.addLayer(wms6); // 맵 객체에 레이어를 추가함		
+*/
 });
 
