@@ -1,5 +1,6 @@
 var map;
 var wms1;
+
 var mapOverlay;
 var container;
 var popupContent;
@@ -7,11 +8,11 @@ var content;
 var coordinate;
 var markerVectorLayer;
 
-/*var wms2;
+var wms2;
 var wms3;
 var wms4;
 var wms5;
-var wms6;*/
+var wms6;
 var wms7;
 
 $( document ).ready(function() {
@@ -109,13 +110,13 @@ $( document ).ready(function() {
 	})
 
 
-		/*
+		
 	wms2 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
-			url : 'http://localhost:8300/geoserver/sundo/wms?service=WMS', // 1. 레이어 URL
+			url : 'http://localhost:8300/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
 			params : {
 				'VERSION' : '1.1.0', // 2. 버전
-				'LAYERS' : 'sundo:LSMD_CONT_UJ201_41_202310', // 3. 작업공간:레이어 명
+				'LAYERS' : 'sundoB:LSMD_CONT_UJ201_41_202310', // 3. 작업공간:레이어 명
 				'BBOX' : [158046.8125, 377790.5, 270626.21875, 526259.5], 
 				'SRS' : 'EPSG:5174', // SRID
 				'FORMAT' : 'image/png' // 포맷
@@ -128,10 +129,10 @@ $( document ).ready(function() {
 
 	wms3 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
-			url : 'http://localhost:8300/geoserver/sundo/wms?service=WMS', // 1. 레이어 URL
+			url : 'http://localhost:8300/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
 			params : {
 				'VERSION' : '1.1.0', // 2. 버전
-				'LAYERS' : 'sundo:LSMD_CONT_UM730_11_202310', // 3. 작업공간:레이어 명
+				'LAYERS' : 'sundoB:LSMD_CONT_UM730_11_202310', // 3. 작업공간:레이어 명
 				'BBOX' : [179119.90625, 436844.4375, 215834.421875, 465874.875], 
 				'SRS' : 'EPSG:5174', // SRID
 				'FORMAT' : 'image/png' // 포맷
@@ -144,10 +145,10 @@ $( document ).ready(function() {
 	
 	wms4 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
-			url : 'http://localhost:8300/geoserver/sundo/wms?service=WMS', // 1. 레이어 URL
+			url : 'http://localhost:8300/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
 			params : {
 				'VERSION' : '1.1.0', // 2. 버전
-				'LAYERS' : 'sundo:LSMD_CONT_UM730_41_202310', // 3. 작업공간:레이어 명
+				'LAYERS' : 'sundoB:LSMD_CONT_UM730_41_202310', // 3. 작업공간:레이어 명
 				'BBOX' : [157399.453125, 397699.84375, 271335.40625, 514954.8125], 
 				'SRS' : 'EPSG:5174', // SRID
 				'FORMAT' : 'image/png' // 포맷
@@ -158,10 +159,10 @@ $( document ).ready(function() {
 	
 	wms5 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
-			url : 'http://localhost:8300/geoserver/sundo/wms?service=WMS', // 1. 레이어 URL
+			url : 'http://localhost:8300/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
 			params : {
 				'VERSION' : '1.1.0', // 2. 버전
-				'LAYERS' : 'sundo:LARD_ADM_SECT_SGG_4112', // 3. 작업공간:레이어 명
+				'LAYERS' : 'sundoB:LARD_ADM_SECT_SGG_4112', // 3. 작업공간:레이어 명
 				'BBOX' : [900494.625, 1877294.5, 1030749.1875, 2039420.625], 
 				'SRS' : 'EPSG:5174', // SRID
 				'FORMAT' : 'image/png' // 포맷
@@ -172,10 +173,10 @@ $( document ).ready(function() {
 	
 	wms6 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
-			url : 'http://localhost:8300/geoserver/sundo/wms?service=WMS', // 1. 레이어 URL
+			url : 'http://localhost:8300/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
 			params : {
 				'VERSION' : '1.1.0', // 2. 버전
-				'LAYERS' : 'sundo:LARD_ADM_SECT_SGG_11S', // 3. 작업공간:레이어 명
+				'LAYERS' : 'sundoB:LARD_ADM_SECT_SGG_11S', // 3. 작업공간:레이어 명
 				'BBOX' : [935035.1875, 1936665.5, 972067.625, 1966987.25], 
 				'SRS' : 'EPSG:5174', // SRID
 				'FORMAT' : 'image/png' // 포맷
@@ -183,7 +184,7 @@ $( document ).ready(function() {
 			serverType : 'geoserver',
 		})
 	});
-*/
+
 	wms7 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
 			url : 'http://localhost:8383/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
@@ -197,14 +198,13 @@ $( document ).ready(function() {
 			serverType : 'geoserver',
 		})
 	});
-// map.addLayer(wms7); // 맵 객체에 레이어를 추가함	
+map.addLayer(wms7); // 맵 객체에 레이어를 추가함	관측소 점
 
 
-	//map.addLayer(wms2); // 맵 객체에 레이어를 추가함
-	/*map.addLayer(wms3); // 맵 객체에 레이어를 추가함
+	map.addLayer(wms2); // 맵 객체에 레이어를 추가함
+	map.addLayer(wms3); // 맵 객체에 레이어를 추가함
 	map.addLayer(wms4); // 맵 객체에 레이어를 추가함
 	map.addLayer(wms5); // 맵 객체에 레이어를 추가함
 	map.addLayer(wms6); // 맵 객체에 레이어를 추가함		
-*/
-});
 
+	});
