@@ -37,9 +37,9 @@
 하천 세부 주소 <input type="text" name="address" value="${sluice.address }">
 
 </div>
-<div class="cotainer" style="margin-top: 150px;">
+<div class="container" >
 
-<button type="submit" style="margin: 30px; background-color: #000042; color: white;" name="is_deleted" value="0"> 수정 </button>
+<button type="submit" style="margin-left:250px; margin-top:100px;  background-color: #000042; color: white;" name="is_deleted" value="0"> 수정 </button>
 
 <button type="submit" style="margin: 30px;" name="is_deleted"  value="1"> 삭제 </button>
 

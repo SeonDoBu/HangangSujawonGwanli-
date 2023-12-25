@@ -1,12 +1,15 @@
+
+
 var map;
 var wms1;
 
 var mapOverlay;
 var container;
-var popupContent;
+/*var popupContent;*/
 var content;
-var coordinate;
+/*var coordinate;*/
 var markerVectorLayer;
+var hover=null;
 
 var wms2;
 var wms3;
@@ -36,7 +39,13 @@ $( document ).ready(function() {
 	map.addControl(ctrl);
 	map.addControl(new ol.control.ScaleLine());
 	
-	mapOverlay = new ol.Overlay(({element:container}));
+	mapOverlay = new ol.Overlay({
+        element: container,
+        autoPan: true,
+        autoPanAnimation: {
+        duration: 250
+        }
+    });
 	container = document.getElementById('popup'); //팝업 컨테이너
 	popupContent = document.getElementById('popup-content'); //팝업 내용
 	
@@ -71,17 +80,21 @@ $( document ).ready(function() {
 			console.log(sluiceData);
 			sluiceData.forEach(function(data) {
 				var id = data.sluice_id;
+				var mapx = data.mapx;
+				var mapy = data.mapy;
 				var marker = new ol.Feature({
 					geometry: new ol.geom.Point(
 						[data.mapx, data.mapy]
 					).transform('EPSG:4326', 'EPSG:3857'),
-					id: id
+					id: id,
+					mapx:mapx,
+					mapy:mapy
 				});
 				var iconStyle = new ol.style.Style({
 					image: new ol.style.Icon(({
 						anchor: [0.5, 0.96],
-						scale: 0.1,
-						src: 'images/pochaco.png'
+						scale: 0.08,
+						src: 'images/free-icon.png'
 					})),
 					zindex: 10
 				});
@@ -97,23 +110,48 @@ $( document ).ready(function() {
 		}
 	})
 
-	map.on('singleclick', function(evt) {
-		coordinate = evt.coordinate;
-		console.log(coordinate);
-		map.forEachFeatureAtPixel(evt.pixel, function(feature){
-			content = "<span class='__float-tbl'>관측소 번호 : "+feature.get('id')+" <button type='button' onclick='alert()'>북마크</button></span>";
-			popupContent.innerHTML = content;
-			mapOverlay.setPosition(coordinate);
-			map.addOverlay(mapOverlay);
-		});
+	map.on('singleclick', function(evt) { //마우스 올렸을 때
+       var coordinate = evt.coordinate; //마우스가 올려진 좌표값
+		lon = coordinate[0];
+		lat = coordinate[1];
 
-	})
+	  map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer': '';
+	  
+    if(hover != null) {
+        	hover = null;
+        }
+
+       map.forEachFeatureAtPixel(evt.pixel, function(f) {
+            hover = f;
+            return true;
+        });		
+   if(hover){
+        var    content = "<div class='__float-tbl' id='my_div'>관측소 번호 : "+hover.get('id')
++"<br>경도:"+hover.get('mapx')+"<br>위도:"+hover.get('mapy')
++" <br><button style='background-color: #2a5dc5; border: 0px;' type='button' onclick='alert()'>"
++ '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16" style="background-color: #2a5dc5;">'
+ + '<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>'
++'</svg>'
++"</button>"
++"<input type='button'    value='닫기'  onclick='deleteDiv()'> </div>";
+			popupContent.innerHTML = content;
+		/*	mapOverlay.setPositioning(coordinate);*/
+	    	
+		
+		mapOverlay.setPosition([lon,lat]);
+		
+		map.addOverlay(mapOverlay);
+		console.log(mapOverlay);
+        }else{
+        	popupContent.innerHTML = '';
+    	}
+    });
 
 
 		
 	wms2 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
-			url : 'http://localhost:8300/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
+			url : 'http://localhost:8383/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
 			params : {
 				'VERSION' : '1.1.0', // 2. 버전
 				'LAYERS' : 'sundoB:LSMD_CONT_UJ201_41_202310', // 3. 작업공간:레이어 명
@@ -129,7 +167,7 @@ $( document ).ready(function() {
 
 	wms3 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
-			url : 'http://localhost:8300/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
+			url : 'http://localhost:8383/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
 			params : {
 				'VERSION' : '1.1.0', // 2. 버전
 				'LAYERS' : 'sundoB:LSMD_CONT_UM730_11_202310', // 3. 작업공간:레이어 명
@@ -145,7 +183,7 @@ $( document ).ready(function() {
 	
 	wms4 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
-			url : 'http://localhost:8300/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
+			url : 'http://localhost:8383/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
 			params : {
 				'VERSION' : '1.1.0', // 2. 버전
 				'LAYERS' : 'sundoB:LSMD_CONT_UM730_41_202310', // 3. 작업공간:레이어 명
@@ -159,10 +197,10 @@ $( document ).ready(function() {
 	
 	wms5 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
-			url : 'http://localhost:8300/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
+			url : 'http://localhost:8383/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
 			params : {
 				'VERSION' : '1.1.0', // 2. 버전
-				'LAYERS' : 'sundoB:LARD_ADM_SECT_SGG_4112', // 3. 작업공간:레이어 명
+				'LAYERS' : 'sundoB:LARD_ADM_SECT_SGG_41S', // 3. 작업공간:레이어 명
 				'BBOX' : [900494.625, 1877294.5, 1030749.1875, 2039420.625], 
 				'SRS' : 'EPSG:5174', // SRID
 				'FORMAT' : 'image/png' // 포맷
@@ -173,7 +211,7 @@ $( document ).ready(function() {
 	
 	wms6 = new ol.layer.Tile({
 		source : new ol.source.TileWMS({
-			url : 'http://localhost:8300/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
+			url : 'http://localhost:8383/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
 			params : {
 				'VERSION' : '1.1.0', // 2. 버전
 				'LAYERS' : 'sundoB:LARD_ADM_SECT_SGG_11S', // 3. 작업공간:레이어 명
@@ -190,7 +228,7 @@ $( document ).ready(function() {
 			url : 'http://localhost:8383/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
 			params : {
 				'VERSION' : '1.1.0', // 2. 버전
-				'LAYERS' : 'sundoB:sluice_map', // 3. 작업공간:레이어 명
+				'LAYERS' : 'sundoB:sluice1', // 3. 작업공간:레이어 명
 				'BBOX' : [126.66444396972656, 36.93333053588867, 127.71916961669922, 38.1238899230957], 
 				'SRS' : 'EPSG:4166', // SRID
 				'FORMAT' : 'image/png' // 포맷
@@ -198,8 +236,8 @@ $( document ).ready(function() {
 			serverType : 'geoserver',
 		})
 	});
-map.addLayer(wms7); // 맵 객체에 레이어를 추가함	관측소 점
-
+	
+	map.addLayer(wms7); // 맵 객체에 레이어를 추가함	관측소 점
 
 	map.addLayer(wms2); // 맵 객체에 레이어를 추가함
 	map.addLayer(wms3); // 맵 객체에 레이어를 추가함

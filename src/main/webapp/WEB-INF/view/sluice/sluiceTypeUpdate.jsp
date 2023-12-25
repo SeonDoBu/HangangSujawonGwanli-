@@ -22,7 +22,7 @@ width: 70px;
 </head>
 <body>
 <form action="observdataUpdate" method="post">
-<div>
+<div class="container">
 <div style="margin-left:40px; margin-top:30px; border: 1px; border-color: gray;">
 	
 	<input type="hidden" name="type" 			value="${observDataD.type}">

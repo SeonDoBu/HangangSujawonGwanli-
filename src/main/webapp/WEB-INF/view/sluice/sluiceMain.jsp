@@ -16,13 +16,17 @@
 		.sidebar10 {
 			width: 80px;
 			background-color: #000042;
-			height: 1920px;
+			height: 1100px;
 			float: left;
 		}
 		
+		.close {
+  float: right;
+  cursor: pointer;
+}
 		/* 지도 크기 설정을 위한 css */
 		.map {
-      	height: 1180px;
+      	height: 1000px;
       	width: 100%;
     	}
 	</style>
@@ -130,11 +134,6 @@
 				map.removeLayer(markerVectorLayer);
 			}
 		}
-		
-		function alert() {
-			log.info('부리부리 대마왕');
-		}
-
 		function addLayer8() {
 			if(document.getElementById('chk8').checked) {
 				console.log('하하');
@@ -144,7 +143,16 @@
 				map.removeLayer(wms7);
 			}
 		}
+		function deleteDiv() {
+			  const div = document.getElementById('my_div');
+			  
+			  div.remove();
+			} 
 		
+		function alert() {
+			console.log('부리부리 대마왕');
+		}
+
 	
 		
 	</script>
@@ -157,8 +165,8 @@
 	color: white;
 	text-align: center;
 	position: absolute;
-	top: 500px;
-	left: 500px;
+	top: 700px;
+	left: 900px;
 	z-index:10;
 	width:130px;
 	
@@ -255,8 +263,8 @@
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer4()" name="chk" id="chk4" checked="checked"> 한강수계_경기<br>
 
 <br><br><br>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer7()" name="chk" id="chk7" checked="checked"> 관측소포차코<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer8()" name="chk" id="chk8" checked="checked"> 관측소 레드포인트<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer7()" name="chk" id="chk7" checked="checked"> 관측소 Marker<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer8()" name="chk" id="chk8" checked="checked"> 관측소 RedPoint<br>
  </div>
 </div>
 
@@ -275,7 +283,7 @@
   <!-- 사이드바 헤더  -->
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasScrollingLabel">사이드바 헤더3</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <button  type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <!-- 사이드바 바디 리스트용  -->
   <div class="offcanvas-body">
@@ -318,6 +326,7 @@
 	<div id="map" class="map" style="margin-left: 80px;">
 	<!-- 실제 지도가 표출 될 영역 -->
 	<div id="popup">
+	 
 		<div id="popup-content"></div>
 	</div>
 	</div>

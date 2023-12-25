@@ -144,7 +144,7 @@
 </table>
 
 </div>
-<div  >
+<div class="container"  style="margin-top: 50px;">
 <nav aria-label="Page navigation example text-center" style="margin-top: 20px; margin-left: 500px;">
 			<ul class="pagination">
 				<c:if test="${page.startPage > page.pageBlock}">

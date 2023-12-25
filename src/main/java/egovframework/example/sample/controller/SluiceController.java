@@ -273,7 +273,7 @@ public class SluiceController {
 		log.info("안뇽");
 		Sluice sluice = new Sluice();
 		sluice.setStart(1);
-		sluice.setEnd(30);
+		sluice.setEnd(134);
 		List<Sluice> sluiceList = ss.sluiceList(sluice);
 		log.info("sluiceList"+sluiceList.size());
 		return sluiceList;
