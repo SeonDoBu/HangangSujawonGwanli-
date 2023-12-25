@@ -135,20 +135,34 @@
 			log.info('부리부리 대마왕');
 		}
 
+		function addLayer8() {
+			if(document.getElementById('chk8').checked) {
+				console.log('하하');
+				map.addLayer(wms7);
+			} else {
+				console.log('메롱');
+				map.removeLayer(wms7);
+			}
+		}
+		
+	
+		
 	</script>
 	<style>
-		.__float-tbl {
-		border: 1px solid #2a5dc5;
-		border-radius: 5px;
-		background-color: #2a5dc5;
-		font-size: 15px;
-		color: white;
-		text-align: center;
-		position: absolute;
-		top: 30px;
-		left: -50px;
-		width:130px;
-		}
+.__float-tbl{
+	border: 1px solid #2a5dc5;
+	border-radius: 5px;
+	background-color: #2a5dc5;
+	font-size: 15px;
+	color: white;
+	text-align: center;
+	position: absolute;
+	top: 500px;
+	left: 500px;
+	z-index:10;
+	width:130px;
+	
+	}
 	</style>
   </head>
   <body>
@@ -241,8 +255,8 @@
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer4()" name="chk" id="chk4" checked="checked"> 한강수계_경기<br>
 
 <br><br><br>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer7()" name="chk" id="chk7" checked="checked"> 관측소<br>
-
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer7()" name="chk" id="chk7" checked="checked"> 관측소포차코<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer8()" name="chk" id="chk8" checked="checked"> 관측소 레드포인트<br>
  </div>
 </div>
 
@@ -303,11 +317,12 @@
 <!-- 진짜 바디의 시작 -->
 	<div id="map" class="map" style="margin-left: 80px;">
 	<!-- 실제 지도가 표출 될 영역 -->
-	</div>
-	
 	<div id="popup">
 		<div id="popup-content"></div>
 	</div>
+	</div>
+	
+
 
 </div>
     <!-- Optional JavaScript; choose one of the two! -->
