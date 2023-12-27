@@ -109,9 +109,23 @@ public class SluiceServiceImpl extends EgovAbstractServiceImpl implements Sluice
 		return updateCount;
 	}
 
+	@Override
+	public List<Sluice> sluiceList1(Sluice sluice) {
+		List<Sluice> sluiceList1 = null;
+		try {
+			
+			sluiceList1 = sm.sluiceList1(sluice);
+			
+		} catch (Exception e) {
+			System.out.println("SluiceListServiceImpl SuliceList e.getmessage()->"+e.getMessage());
+		}
+		return sluiceList1;
+	}
+	}
 
 
+
 	
 	
 	
-}
+

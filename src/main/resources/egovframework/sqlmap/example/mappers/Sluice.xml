@@ -5,19 +5,47 @@
 		select count(*)
 		from sluice
 	</select>
-	<select id="sluiceList" resultType="Sluice">
-
-	SELECT b.*
-from
-(select 	ROW_NUMBER() OVER (ORDER BY sluice_id) rn , a.*
-from
-		(select DISTINCT s.* , ob.type  
-		from  observ_data ob 
-		right JOIN 	sluice s 
-		ON  ob.sluice_id = s.sluice_id 
-		order by name) a 
-		) b 
-		where rn BETWEEN #{start} and #{end}
+	<select id="sluiceList" parameterType="Sluice" resultType="Sluice">
+	select c.*
+		 from	
+				(SelECT b.*
+			from
+			(select 	ROW_NUMBER() OVER (ORDER BY sluice_id) rn , a.*
+			from
+					(select DISTINCT s.* , ob.type  
+					from  observ_data ob 
+					right JOIN 	sluice s 
+					ON  ob.sluice_id = s.sluice_id 
+					 order by name) a 
+					) b 
+					where 1=1
+					<choose>
+					<when test="type == 1">
+						and type = #{type}
+					</when>
+						<when test="type == 2">
+						and type = #{type}
+					</when>
+						<when test="type == 3">
+						and type = #{type}
+					</when>
+					</choose>
+					) c
+					where rn BETWEEN #{start} and #{end}
+	</select>
+	
+		<select id="sluiceList1" resultType="Sluice">
+				SELECT b.*
+			from
+			(select 	ROW_NUMBER() OVER (ORDER BY sluice_id) rn , a.*
+			from
+					(select DISTINCT s.* , ob.type  
+					from  observ_data ob 
+					right JOIN 	sluice s 
+					ON  ob.sluice_id = s.sluice_id 
+					order by name) a 
+					) b 
+					where type = #{type}
 	</select>
 	<insert id="insertSluice" parameterType="Sluice">
 		INSERT INTO 

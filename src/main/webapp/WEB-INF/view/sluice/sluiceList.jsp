@@ -119,7 +119,6 @@ window.close();
    	관측중
    	</c:otherwise>
    	</c:choose>
-
    	 </td>
    	<td>구현중</td>
        <td><a href="ObservDataList?sluice_id=${sul.sluice_id }&type=${sul.type}">
