@@ -125,20 +125,25 @@
 						<img alt="" src="/images/admin_icon4.png">
 					</div>
 				</div>
+				
 				<form method="post" action="loginCheck.do">
-					<div class="col main-second-id-box">
+				<div>
+					<div >
+					
 						<p>ID</p>
-						<input type="text" name="user_id" id="login_id">
+						<input type="text" style="width: 400px;" name="user_id" id="login_id">
 					</div>
-					<div class="col main-second-pw-box">
+					<div >
 						<p>PASSWORD</p>
-						<input type="password" name="password" id="password">
+						<input type="password" style="width: 400px;" name="password" id="password">
 					</div>
-					<div class="col main-second-login-btn-box">
-						<button type="submit" onclick="return loginCheck()">L&nbsp;O&nbsp;G&nbsp;I&nbsp;N</button>
+					<div class="">
+						<button type="submit" class="btn btn-primary" style="background-color: #050099; margin-left: 100px; width:220px; margin-top: 15px;" onclick="return loginCheck()">L&nbsp;O&nbsp;G&nbsp;I&nbsp;N</button>
 					</div>
+				</div>
 				</form>
-				<div class="col main-second-id-pw-search-box">
+				
+				<div class="">
 					<p>
 						<a role="button" data-bs-toggle="modal"
 						 data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">ID찾기</a>&nbsp;|&nbsp; 

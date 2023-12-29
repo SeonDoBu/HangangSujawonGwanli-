@@ -59,9 +59,16 @@
 				style="color: #FFFFFF;">사이트맵 |</a></li>
 
 			<li class="nav-item"><a class="nav-link" href="#"
-				style="color: #FFFFFF;">{user_name}님 |</a></li>
+				style="color: #FFFFFF;">
+				<% if(session.getAttribute("user_id") != null) {
+					 String user_name = (String)session.getAttribute("user_name"); 
+					 out.println(user_name); 
+				   } else {
+					 out.println("");
+				   }
+				%> 님 |</a></li>
 
-			<li class="nav-item"><a class="nav-link" href="#"
+			<li class="nav-item"><a class="nav-link" href="logout.do"
 				style="color: #FFFFFF;">로그아웃</a></li>
 
 		</ul>

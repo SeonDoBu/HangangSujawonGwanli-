@@ -4,8 +4,7 @@
 	<select id="getUserById" parameterType="Users" resultType="Users">
 		SELECT *
 		FROM   users
-		WHERE  small_code = #{small_code}
-		AND    user_id    = #{user_id}
+		WHERE  user_id    = #{user_id}
 		AND    password   = #{password}
 		AND    status     = '1'
 	</select>
