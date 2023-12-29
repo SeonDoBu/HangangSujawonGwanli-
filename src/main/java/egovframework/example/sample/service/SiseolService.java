@@ -1,6 +1,7 @@
 package egovframework.example.sample.service;
 
 import java.util.List;
+import java.util.Map;
 
 import egovframework.example.sample.dto.Commoncode;
 import egovframework.example.sample.dto.District;
@@ -29,5 +30,6 @@ public interface SiseolService {
 	List<Inspection> inspectionList(Inspection inspection);
 	int              inspectionCount(Inspection inspection);
 	int              getSiseolCount(int smallCode);
+	List<Siseol>     getSiseolData(Map<String, Object> siseolChkMap);
 
 }

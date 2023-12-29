@@ -1,6 +1,7 @@
 package egovframework.example.sample.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
 
@@ -32,5 +33,6 @@ public interface SiseolMapper {
 	List<Inspection>  inspectionList(Inspection inspection);
 	int               inspectionCount(Inspection inspection);
 	int               getSiseolCount(int smallCode);
+	List<Siseol>      getSiseolData(Map<String, Object> siseolChkMap);
 	
 }

@@ -1,6 +1,7 @@
 package egovframework.example.sample.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.egovframe.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import org.springframework.stereotype.Service;
@@ -241,6 +242,20 @@ public class SiseolServiceImpl extends EgovAbstractServiceImpl implements Siseol
 			log.info("getSiseolCount End...");
 		}
 		return count;
+	}
+
+	@Override
+	public List<Siseol> getSiseolData(Map<String, Object> siseolChkMap) {
+		log.info("getSiseolData Start...");
+		List<Siseol> siseolList = null;
+		try {
+			siseolList = siseolMapper.getSiseolData(siseolChkMap);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		} finally {
+			log.info("getSiseolData End...");
+		}
+		return siseolList;
 	}
 
 }

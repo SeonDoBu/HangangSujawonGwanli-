@@ -191,7 +191,7 @@
 			} 
 		
 		function alert() {
-			console.log('부리부리 대마왕');
+			console.info('부리부리 대마왕');
 		}
 
 	
@@ -209,7 +209,6 @@
 
 	z-index:10;
 	width:130px;
-	
 	}
 	</style>
   </head>
@@ -319,11 +318,18 @@
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer4()" name="chk" id="chk4" > 한강수계_경기<br>
 
 <br><br><br>
+
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer7()" name="chk" id="chk7" > 관측소 RedPoint<br>
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer8()" name="chk" id="chk8" > 관측소 Marker<br>
 &nbsp;&nbsp;<input type="checkbox" onclick="chkLayer()" name="type" id="chk9"  value="1"> 강수량1 Marker<br>
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer10()" name="type" id="chk10" value="2"> 수위2  Marker<br>
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer11()" name="type" id="chk11" value="3"> 유량3  Marker<br>
+
+<h4 style="margin-top: 10px;">시설물</h4>
+&nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol1" checked="checked"> 댐<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol2" checked="checked"> 저수지<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol3" checked="checked"> 펌프장<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol4" checked="checked"> 관개수로<br>
  </div>
 </div>
 
@@ -489,6 +495,7 @@
 	</div>
 	</div>
 	
+
 
 
 </div>

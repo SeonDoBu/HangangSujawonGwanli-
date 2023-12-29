@@ -173,5 +173,23 @@
 		FROM   siseol
 		WHERE  small_code = #{smallCode}
 	</select>
+	
+	<select id="getSiseolData" parameterType="map" resultType="Siseol">
+		SELECT *
+		FROM   siseol
+		WHERE  1=0
+		<if test="sc1 == 1">
+			OR small_code = 1
+		</if>
+		<if test="sc2 == 1">
+			OR small_code = 2
+		</if>
+		<if test="sc3 == 1">
+			OR small_code = 3
+		</if>
+		<if test="sc4 == 1">
+			OR small_code = 4
+		</if>
+	</select>
 
 </mapper>

@@ -25,7 +25,9 @@ import egovframework.example.sample.service.SiseolService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.example.sample.dto.Sluice;
@@ -256,6 +258,24 @@ public class SluiceController {
 			log.info("sujawonStatistics End...");
 		}
 		return "sluice/sujawonStatistics";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/siseolDataList", method = RequestMethod.POST)
+	public List<Siseol> siseolDataList(@RequestBody Map<String, Object> siseolChkMap, Model model) {
+		log.info("siseolDataList Start...");
+		log.info(siseolChkMap.toString());
+		List<Siseol> siseolList = null;
+		try {
+			siseolList = siseolService.getSiseolData(siseolChkMap);
+			log.info("siseolList"+siseolList.size());
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		} finally {
+			log.info("siseolDataList End...");
+		}
+		return siseolList;
 	}
 	
 	
