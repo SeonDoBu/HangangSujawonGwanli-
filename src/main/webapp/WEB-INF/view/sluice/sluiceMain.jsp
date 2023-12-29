@@ -323,23 +323,16 @@
 <br><br><br>
 
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer7()" name="chk" id="chk7" > 관측소 RedPoint<br>
-<<<<<<< Updated upstream
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer8()" name="chk" id="chk8" > 관측소 Marker<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="chkLayer()" name="type" id="chk9"  value="1"> 강수량1 Marker<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer10()" name="type" id="chk10" value="2"> 수위2  Marker<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer11()" name="type" id="chk11" value="3"> 유량3  Marker<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer8()" name="" id="chk8" value="4"> 관측소 Marker<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="chkLayer()" name="" id="chk9"  value="1"> 강수량1 Marker<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer10()" name="" id="chk10" value="2"> 수위2  Marker<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer11()" name="" id="chk11" value="3"> 유량3  Marker<br>
 
 <h4 style="margin-top: 10px;">시설물</h4>
 &nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol1" checked="checked"> 댐<br>
 &nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol2" checked="checked"> 저수지<br>
 &nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol3" checked="checked"> 펌프장<br>
 &nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol4" checked="checked"> 관개수로<br>
-=======
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer8()" name="" id="chk8" value="4"> 관측소 Marker<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="chkLayer()" name="" id="chk9"  value="1"> 강수량1 Marker<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer10()" name="" id="chk10" value="2"> 수위2  Marker<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer11()" name="" id="chk11" value="3"> 유량3  Marker<br>
->>>>>>> Stashed changes
  </div>
 </div>
 

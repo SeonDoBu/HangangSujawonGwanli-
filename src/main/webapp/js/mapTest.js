@@ -24,7 +24,6 @@ var wms7;
    });
 
 function sluiceval() {
-<<<<<<< Updated upstream
       var type5 = $("#chk9").val();   
       var  type1 = $("#chk10").val();   
       var type4 = $("#chk8").val();
@@ -143,126 +142,6 @@ function sluiceval() {
          console.log("관측소 정보 가져오지 못했습니다.");
       }
    })
-=======
-		var type5 = $("#chk9").val();	
-		var  type1 = $("#chk10").val();	
-		var type4 = $("#chk8").val();
-		
-	/*	type5 = $("#chk9").val();		
-		 type1 = $("#chk10").val();		
-		 type4 = $("#chk8").val();	 */
-
-/*	if (type5 == "1") {
-			var	type5 = $("#chk9").val();
-			}else if (type4 == "4") {
-			var	type4 = $("#chk8").val();		
-			}else if (type1 == "2") {
-			var	type1 = $("#chk10").val();
-			} else {
-			 console.log("왜안돼");
-			}*/
-		console.log(type5); //1
-		console.log(type1);  //2
-			console.log(type4); //4 
-			jQuery.ajaxSettings.traditional = true;
-		$.ajax({
-		url: "/sluiceDataList",
-		data: {type5 : type5, type1 : type1,type4 : type4},
-		method: "GET",
-		dataType: 'json',
-		success: function(sluiceData) {
-			console.log("컨트롤러 탔음");
-			console.log(sluiceData);
-			console.log(type5);
-			console.log(type1);
-			console.log(type4);
-			sluiceData.forEach(function(data) {
-				var id = data.sluice_id;
-				var mapx = data.mapx;
-				var mapy = data.mapy;
-				var type = data.type;
-				var name = data.name;
-				var data_ymd = data.data_ymd;
-				var	value00	=	data.value00;
-				var	value01	=	data.value01;
-				var	value02	=	data.value02;
-				var	value03	=	data.value03;
-				var	value04	=	data.value04;
-				var	value05	=	data.value05;
-				var	value06	=	data.value06;
-				var	value07	=	data.value07;
-				var	value08	=	data.value08;
-				var	value09	=	data.value09;
-				var	value10	=	data.value10;
-				var	value11	=	data.value11;
-				var	value12	=	data.value12;
-				var	value13	=	data.value13;
-				var	value14	=	data.value14;
-				var	value15	=	data.value15;
-				var	value16	=	data.value16;
-				var	value17	=	data.value17;
-				var	value18	=	data.value18;
-				var	value19	=	data.value19;
-				var	value20	=	data.value20;
-				var	value21	=	data.value21;
-				var	value22	=	data.value22;
-				var	value23	=	data.value23;
-				
-				var marker = new ol.Feature({
-					geometry: new ol.geom.Point(
-						[data.mapx, data.mapy]
-					).transform('EPSG:4326', 'EPSG:3857'),
-					id: id,
-					mapx: mapx,
-					mapy: mapy,
-					type: type,
-					data_ymd:data_ymd,
-					name:name,
-					value00	:	value00	,
-					value01	:	value01	,
-					value02	:	value02	,
-					value03	:	value03	,
-					value04	:	value04	,
-					value05	:	value05	,
-					value06	:	value06	,
-					value07	:	value07	,
-					value08	:	value08	,
-					value09	:	value09	,
-					value10	:	value10	,
-					value11	:	value11	,
-					value12	:	value12	,
-					value13	:	value13	,
-					value14	:	value14	,
-					value15	:	value15	,
-					value16	:	value16	,
-					value17	:	value17	,
-					value18	:	value18	,
-					value19	:	value19	,
-					value20	:	value20	,
-					value21	:	value21	,
-					value22	:	value22	,
-					value23	:	value23	
-				});
-				var iconStyle = new ol.style.Style({
-					image: new ol.style.Icon(({
-						anchor: [0.5, 0.96],
-						scale: 0.1,
-						src: 'images/free-icon.png'
-					})),
-					zindex: 10
-				});
-				marker.setStyle(iconStyle);
-				vectorSource.addFeature(marker);
-			});
-			console.log("관측소 정보 가져왔음");
-			/*	map.addLayer(markerVectorLayer);*/
-			console.log("관측소 레이어 추가");
-		},
-		error: function() {
-			console.log("관측소 정보 가져오지 못했습니다.");
-		}
-	})
->>>>>>> Stashed changes
 }
 
 $(document).ready(function() {
@@ -296,7 +175,6 @@ $(document).ready(function() {
    container = document.getElementById('popup'); //팝업 컨테이너
    popupContent = document.getElementById('popup-content'); //팝업 내용
 
-<<<<<<< Updated upstream
    console.log("map");
    wms1 = new ol.layer.Tile({
       source: new ol.source.TileWMS({
@@ -311,22 +189,6 @@ $(document).ready(function() {
          serverType: 'geoserver',
       })
    });
-=======
-	console.log("map");
-	wms1 = new ol.layer.Tile({
-		source: new ol.source.TileWMS({
-			url: 'http://localhost:8383/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
-			params: {
-				'VERSION': '1.1.0', // 2. 버전
-				'LAYERS': 'sundoB:LSMD_CONT_UJ201_11_202310', // 3. 작업공간:레이어 명
-				'BBOX': [179271.578125, 437187.78125, 215578.53125, 465761.4375],
-				'SRS': 'EPSG:5174', // SRID
-				'FORMAT': 'image/png' // 포맷
-			},
-			serverType: 'geoserver',
-		})
-	});
->>>>>>> Stashed changes
 
    console.log("wms1 추가");
 
@@ -341,7 +203,6 @@ $(document).ready(function() {
          hover = null;
       }
 
-<<<<<<< Updated upstream
       map.forEachFeatureAtPixel(evt.pixel, function(f) {
          hover = f;
          return true;
@@ -370,36 +231,6 @@ $(document).ready(function() {
          popupContent.innerHTML = '';
       }
    });
-=======
-		map.forEachFeatureAtPixel(evt.pixel, function(f) {
-			hover = f;
-			return true;
-		});
-		if (hover) {
-			var content = '<form action="ObservDataList" method="POST">'
-			+ "<div class='__float-tbl' id='my_div'>관측소 번호 : " + hover.get('id')
-				+ "<br>경도:" + hover.get('mapx') + "<br>위도:" + hover.get('mapy')
-			/*	+"<div>type = 1 강수량만 나오게 </div>"*/
-				+ " <br><button style='background-color: #2a5dc5; border: 0px;' type='button' onclick='alert()'>"
-				+ '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16" style="background-color: #2a5dc5;">'
-				+ '<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>'
-				+ '</svg>'
-				+ "</button>"
-				+ "<input type='button'    value='닫기'  onclick='deleteDiv()'>"
-			/*	+'	 <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal1">'	
-				+"강수량</button>'"*/
-	+'	</form></div>';
-			popupContent.innerHTML = content;
-			mapOverlay.setPosition(lon, lat);
-			mapOverlay.setOffset(lon, lat);
-			mapOverlay.setPositioning(lon, lat);
-			map.addOverlay(mapOverlay);
-			console.log(mapOverlay);
-		} else {
-			popupContent.innerHTML = '';
-		}
-	});
->>>>>>> Stashed changes
 
 
 
@@ -477,13 +308,12 @@ $(document).ready(function() {
       })
    });
 
-<<<<<<< Updated upstream
    wms7 = new ol.layer.Tile({
       source: new ol.source.TileWMS({
          url: 'http://localhost:8383/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
          params: {
             'VERSION': '1.1.0', // 2. 버전
-            'LAYERS': 'sundoB:sluice_map', // 3. 작업공간:레이어 명
+            'LAYERS': 'sundoB:sluice3', // 3. 작업공간:레이어 명
             'BBOX': [126.66444396972656, 36.93333053588867, 127.71916961669922, 38.1238899230957],
             'SRS': 'EPSG:4166', // SRID
             'FORMAT': 'image/png' // 포맷
@@ -491,21 +321,6 @@ $(document).ready(function() {
          serverType: 'geoserver',
       })
    });
-=======
-	wms7 = new ol.layer.Tile({
-		source: new ol.source.TileWMS({
-			url: 'http://localhost:8383/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
-			params: {
-				'VERSION': '1.1.0', // 2. 버전
-				'LAYERS': 'sundoB:sluice3', // 3. 작업공간:레이어 명
-				'BBOX': [126.66444396972656, 36.93333053588867, 127.71916961669922, 38.1238899230957],
-				'SRS': 'EPSG:4166', // SRID
-				'FORMAT': 'image/png' // 포맷
-			},
-			serverType: 'geoserver',
-		})
-	});
->>>>>>> Stashed changes
 
    /*   map.addLayer(wms7); // 맵 객체에 레이어를 추가함   관측소 점
    map.addLayer(wms1); // 맵 객체에 레이어를 추가함
