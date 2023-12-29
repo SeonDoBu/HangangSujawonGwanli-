@@ -21,7 +21,7 @@ width: 70px;
 </style>
 </head>
 <body>
-<form action="observdataUpdate" method="post">
+<form action="observdataUpdate" method="POST">
 <div class="container">
 <div style="margin-left:40px; margin-top:30px; border: 1px; border-color: gray;">
 	

@@ -4,6 +4,7 @@
 	<select id="sluiceCount" resultType="int">
 		select count(*)
 		from sluice
+		where 1=1 
 	</select>
 	<select id="sluiceList" parameterType="Sluice" resultType="Sluice">
 	select c.*
@@ -33,20 +34,7 @@
 					) c
 					where rn BETWEEN #{start} and #{end}
 	</select>
-	
-		<select id="sluiceList1" resultType="Sluice">
-				SELECT b.*
-			from
-			(select 	ROW_NUMBER() OVER (ORDER BY sluice_id) rn , a.*
-			from
-					(select DISTINCT s.* , ob.type  
-					from  observ_data ob 
-					right JOIN 	sluice s 
-					ON  ob.sluice_id = s.sluice_id 
-					order by name) a 
-					) b 
-					where type = #{type}
-	</select>
+
 	<insert id="insertSluice" parameterType="Sluice">
 		INSERT INTO 
 		sluice (sluice_id,name,mapy,mapx,area,address)

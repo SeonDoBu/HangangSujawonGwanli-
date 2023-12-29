@@ -16,9 +16,5 @@ public interface SluiceService {
 
 	int updateSluice(Sluice sluice);
 
-	List<Sluice> sluiceList1(Sluice sluice);
-
-
-	
 	
 }

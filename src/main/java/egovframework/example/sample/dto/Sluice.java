@@ -1,5 +1,7 @@
 package egovframework.example.sample.dto;
 
+import javax.management.loading.PrivateClassLoader;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,9 +19,9 @@ public class Sluice {
 	private String is_deleted; //삭제여부
 	
 	//조회용
-	private int    start;	private int end;  private int currentPage; // 페이징
-	private String data_ymd;
-	private String type;
+	private int    	start;	private int end;  private int currentPage; // 페이징
+	private String 	data_ymd;
+	private String 	type;
 	private int 	value00;
 	private int 	value01;
 	private int 	value02;
@@ -44,7 +46,10 @@ public class Sluice {
 	private int 	value21;
 	private int 	value22;
 	private int 	value23;
+	private String[] typeList;
+	private String 	type1;
+	private String 	type4;
+	private String 	type5;
 
-	
 	
 }

@@ -15,6 +15,6 @@ public interface SluiceMapper {
 	int insertSluice(Sluice sluice);
 	Sluice sluiceDetail(int sluice_id);
 	int updateSluice(Sluice sluice);
-	List<Sluice> sluiceList1(Sluice sluice);
+
 	
 }

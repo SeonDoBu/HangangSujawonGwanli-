@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -41,6 +42,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SluiceController {
 
+	private static final int String = 0;
 	private final CommoncodeService commoncodeService;
 	private final DistrictService   districtService;
 	private final SiseolService     siseolService;
@@ -303,34 +305,55 @@ public class SluiceController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/sluiceDataList")
-	public List<Sluice> sluiceDataList(Sluice sluice,String type,String type1, Model model) {
+	public List<Sluice> sluiceDataList(Sluice sluice,String type5,String type1,String type4, Model model) {
+		int sluiceCnt = ss.sluiceCount();
 		log.info("안뇽");
 		/* Sluice sluice = new Sluice(); */
 		sluice.setStart(1);
-		sluice.setEnd(134);
-		sluice.setType(type);
-		sluice.setType(type1);
-		System.out.println("valvalval"+type.getClass().getName());
-		System.out.println("vlavlaval"+sluice.getType());
-		System.out.println("valvalval"+type);
+		sluice.setEnd(sluiceCnt);
+		/*
+		 * String[] typeList = new String[4]; typeList[0] = type5; typeList[1] = type1;
+		 * typeList[2] = type5; typeList[3] = type4;
+		 * System.out.println("typeList->"+typeList[1]);
+		 * System.out.println("typeList->"+typeList[3]);
+		 * System.out.println("typeList->"+typeList[0]);
+		 * System.out.println("typeList->"+typeList[2]);
+		 * 
+		 * sluice.setTypeList(typeList);
+		 * 
+		 * 
+		 * if (type5 == "1") { sluice.setType(type5); }else if (type4 == "4") {
+		 * sluice.setType(type4); }else if (type1 == "2") { sluice.setType(type1); }
+		 * else {
+		 * 
+		 * }
+		 */
+		
+		
+		System.out.println("valvalval"+type5.getClass().getName());
+		
+		/*
+		 * System.out.println("vlavlavalget.type1->"+sluice.getType1());
+		 * System.out.println("vlavlavalget.type4->"+sluice.getType4());
+		 * System.out.println("vlavlavalget.type5->"+sluice.getType5());
+		 */
+		System.out.println("valvalval value 2 -->"+type5);
+		System.out.println("valvalval1 value 4 -> "+type1);
+		System.out.println("valvalval4"+type4);
+		System.out.println("vlavlavalget.type->"+sluice.getType());
+
+		
+	
+
+
+		
 		model.addAttribute(sluice);
 		List<Sluice> sluiceList = ss.sluiceList(sluice);
 		return sluiceList;
 	}
 	
 	
-	@ResponseBody
-	@RequestMapping(value = "/sluiceDataList1")
-	public List<Sluice> sluiceDataList1(Model model) {
-		log.info("안뇽");
-		Sluice sluice = new Sluice();
-		sluice.setStart(1);
-		sluice.setEnd(134);
-	
-		List<Sluice> sluiceList1 = ss.sluiceList1(sluice);
-		log.info("sluiceList"+sluiceList1.size());
-		return sluiceList1;
-	}
+
 	
 	
 	
@@ -473,9 +496,10 @@ public class SluiceController {
 	public String updateObserv(Sluice sluice,ObservData observData, Model model) {
 		log.info("updateObserv start");
 		try {
+			ObservData observDataD = obs.observdataDetail(observData);
 			int updateCount = ss.updateSluice(sluice);
 			int updateCount2 = obs.updateObserv(observData);
-			ObservData observDataD = obs.observdataDetail(observData);
+			
 			System.out.println("sssssssss----------"+updateCount2);
 			System.out.println("======================"+observData);
 			model.addAttribute("upcnt2",updateCount2);

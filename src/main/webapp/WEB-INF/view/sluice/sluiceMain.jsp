@@ -139,6 +139,8 @@
 		function addLayer8() {
 			if(document.getElementById('chk8').checked) {
 				console.log('하하');
+				var type4 = $("#chk8").val();
+				sluiceval();
 				map.addLayer(markerVectorLayer);
 			} else {
 				console.log('메롱');
@@ -149,10 +151,10 @@
 		
 		function chkLayer() {
 			if(document.getElementById('chk9').checked) {
-				var type = $("#chk9").val();
+				var type5 = $("#chk9").val();
 			/* 	var num2 = parseInt(num1); */
 				
-				console.log(type);
+				console.log(type5);
 			/* 	console.log(num2); */
 				sluiceval();
 				map.addLayer(markerVectorLayer);
@@ -206,7 +208,8 @@
 	color: white;
 	text-align: center;
 	position: absolute;
-
+	top: 600px;
+	left: 1000px;
 	z-index:10;
 	width:130px;
 	}
@@ -320,6 +323,7 @@
 <br><br><br>
 
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer7()" name="chk" id="chk7" > 관측소 RedPoint<br>
+<<<<<<< Updated upstream
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer8()" name="chk" id="chk8" > 관측소 Marker<br>
 &nbsp;&nbsp;<input type="checkbox" onclick="chkLayer()" name="type" id="chk9"  value="1"> 강수량1 Marker<br>
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer10()" name="type" id="chk10" value="2"> 수위2  Marker<br>
@@ -330,6 +334,12 @@
 &nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol2" checked="checked"> 저수지<br>
 &nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol3" checked="checked"> 펌프장<br>
 &nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol4" checked="checked"> 관개수로<br>
+=======
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer8()" name="" id="chk8" value="4"> 관측소 Marker<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="chkLayer()" name="" id="chk9"  value="1"> 강수량1 Marker<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer10()" name="" id="chk10" value="2"> 수위2  Marker<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer11()" name="" id="chk11" value="3"> 유량3  Marker<br>
+>>>>>>> Stashed changes
  </div>
 </div>
 
