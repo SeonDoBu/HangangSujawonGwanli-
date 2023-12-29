@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="sluiceMapHeader.jsp" %>    
+<%@ include file="../../components/header.jsp" %>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -37,7 +39,7 @@
 	<link href="/css/ol.css" rel="stylesheet" type="text/css" > <!-- OpenLayer css -->
 	<link rel="stylesheet" href="css/ol-ext.css" /> <!-- scale 표시 -->
 	<script type="text/javascript" src="js/ol-ext.js"></script> <!-- scale 표시 -->
-	<script type="text/javascript" src="/js/mapTest.js"></script> <!-- 지도 맵객체 생성을 위한 js-->
+	<script type="text/javascript" src="/js/mapTest.js?ver=1"></script> <!-- 지도 맵객체 생성을 위한 js-->
 	<script type="text/javascript">
 /* 		$(function(){
 			console.log("sluiceMain.jsp");
@@ -128,21 +130,60 @@
 		function addLayer7() {
 			if(document.getElementById('chk7').checked) {
 				console.log('하하');
-				map.addLayer(markerVectorLayer);
-			} else {
-				console.log('메롱');
-				map.removeLayer(markerVectorLayer);
-			}
-		}
-		function addLayer8() {
-			if(document.getElementById('chk8').checked) {
-				console.log('하하');
 				map.addLayer(wms7);
 			} else {
 				console.log('메롱');
 				map.removeLayer(wms7);
 			}
 		}
+		function addLayer8() {
+			if(document.getElementById('chk8').checked) {
+				console.log('하하');
+				map.addLayer(markerVectorLayer);
+			} else {
+				console.log('메롱');
+				map.removeLayer(markerVectorLayer);
+			}
+		}
+	
+		
+		function chkLayer() {
+			if(document.getElementById('chk9').checked) {
+				var type = $("#chk9").val();
+			/* 	var num2 = parseInt(num1); */
+				
+				console.log(type);
+			/* 	console.log(num2); */
+				sluiceval();
+				map.addLayer(markerVectorLayer);
+			}else {
+				console.log('메롱');
+				map.removeLayer(markerVectorLayer);
+			}	
+			}
+		
+		function addLayer10() {
+			if(document.getElementById('chk10').checked) {
+				var type1 = $("#chk10").val();
+				console.log('하하');
+				sluiceval();
+				map.addLayer(markerVectorLayer);
+			} else {
+				console.log('메롱');
+				map.removeLayer(markerVectorLayer);
+			}
+		}
+		function addLayer11() {
+			if(document.getElementById('chk11').checked) {
+				console.log('하하');
+				map.addLayer(markerVectorLayer);
+			} else {
+				console.log('메롱');
+				map.removeLayer(markerVectorLayer);
+			}
+		}
+		
+		
 		function deleteDiv() {
 			  const div = document.getElementById('my_div');
 			  
@@ -165,8 +206,7 @@
 	color: white;
 	text-align: center;
 	position: absolute;
-	top: 700px;
-	left: 900px;
+
 	z-index:10;
 	width:130px;
 	
@@ -185,42 +225,56 @@
 <div class="offcanvas offcanvas-start" style="margin-top: 80px; margin-left: 80px; float: left;" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
   <!-- 사이드바 헤더  -->
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">사이드바 헤더</h5>
+    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">관측소 수 : ${sluiceCnt }</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <!-- 사이드바 바디 리스트용  -->
   <div class="offcanvas-body">
-    <p>사이드바 테이블 </p>
+
+    <h1>관측소 목록</h1>
     <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">관측소명</th>
     </tr>
   </thead>
+
   <tbody>
+<c:forEach var="SL" items="${SluiceList }">
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+      <td scope="row">${SL.name}</td>
+	</tr>
+</c:forEach>
+
   </tbody>
+  
 </table>
+  <nav aria-label="Page navigation example text-center" style="margin-top: 20px;">
+			<ul class="pagination">
+				<c:if test="${page.startPage > page.pageBlock}">
+					<li class="page-item">
+						<a class="page-link" href="sluiceList?currentPage=${page.startPage - page.pageBlock}" aria-label="이전">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+				</c:if>
+				<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+					<li class="page-item">
+						<a class="page-link" href="#">${i}</a>
+					</li>
+				</c:forEach>
+				<c:if test="${page.endPage < page.totalPage}">
+					<li class="page-item">
+						<a class="page-link" href="sluiceList?currentPage=${page.startPage + page.pageBlock}" aria-label="다음">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</c:if>
+			</ul>
+		</nav>
   </div>
+  
+  
 </div>
 <!-- 사이드바 끝  -->
 
@@ -233,10 +287,12 @@
 </svg>
  <small>레이어</small>
  
+
  </button><br>
 <div class="offcanvas offcanvas-start" style="margin-top: 80px; margin-left: 80px; float: left;" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling2" aria-labelledby="offcanvasScrollingLabel">
   <!-- 사이드바 헤더  -->
   <div class="offcanvas-header" style="float: right;">
+  
     <h5 class="offcanvas-title" id="offcanvasScrollingLabel">레이어 
     </h5>
   <!--   <div>
@@ -252,19 +308,22 @@
    
 <!-- 메롱의메롱 -->
 <h4>행정구역</h4>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer5()" name="chk" id="chk5" checked="checked"> 행정구역 경기<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer6()" name="chk" id="chk6" checked="checked"> 행정구역 서울
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer5()" name="chk" id="chk5" > 행정구역 경기<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer6()" name="chk" id="chk6" > 행정구역 서울
 
 <h4 style="margin-top: 10px;">한강하천</h4>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer1()" name="chk" id="chk1" checked="checked"> 한강하천_서울<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer2()" name="chk" id="chk2" checked="checked"> 한강하천_경기<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer1()" name="chk" id="chk1" > 한강하천_서울<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer2()" name="chk" id="chk2" > 한강하천_경기<br>
 <h4 style="margin-top: 10px;">한강수계</h4>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer3()" name="chk"  id="chk3" checked="checked"> 한강수계_서울<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer4()" name="chk" id="chk4" checked="checked"> 한강수계_경기<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer3()" name="chk"  id="chk3" > 한강수계_서울<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer4()" name="chk" id="chk4" > 한강수계_경기<br>
 
 <br><br><br>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer7()" name="chk" id="chk7" checked="checked"> 관측소 Marker<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer8()" name="chk" id="chk8" checked="checked"> 관측소 RedPoint<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer7()" name="chk" id="chk7" > 관측소 RedPoint<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer8()" name="chk" id="chk8" > 관측소 Marker<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="chkLayer()" name="type" id="chk9"  value="1"> 강수량1 Marker<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer10()" name="type" id="chk10" value="2"> 수위2  Marker<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer11()" name="type" id="chk11" value="3"> 유량3  Marker<br>
  </div>
 </div>
 
@@ -326,7 +385,106 @@
 	<div id="map" class="map" style="margin-left: 80px;">
 	<!-- 실제 지도가 표출 될 영역 -->
 	<div id="popup">
-	 
+<!-- Modal -->
+<div class="modal fade" id="Modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <h1>관측소 명 :${sluice.name }      
+	<c:choose>
+      <c:when test="${observData.type eq 1 }">
+      강수량관측소
+      </c:when>
+      <c:when test="${observData.type eq 2 }">
+      수위관측소
+      </c:when>
+      <c:when test="${observData.type eq 3 }">
+      유량관측소
+      </c:when>
+      <c:otherwise>
+      관측중
+      </c:otherwise>
+    </c:choose> </h1>
+<br>
+(단위: mm) <button type="button" style="float: right; margin-right: 10px;" class="btn btn-secondary">저장</button> 
+<!-- <button type="button"   onclick="locate()" class="btn" style="background-color: #000042; color: white; margin-right:20px; float: right;" >관리</button> -->
+<br>
+<table class="table table-bordered" style="margin-top: 30px; width: 1100px;">
+  <thead class="table-light">
+    <tr>
+      <th scope="col" colspan="2">관측일시</th>
+      
+     <th>0</th>
+     <th>1</th>
+     <th>2</th>
+     <th>3</th>
+     <th>4</th>
+     <th>5</th>
+     <th>6</th>
+     <th>7</th>
+     <th>8</th>
+     <th>9</th>
+     <th>10</th>
+     <th>11</th>
+     <th>12</th>
+     <th>13</th>
+     <th>14</th>
+     <th>15</th>
+     <th>16</th>
+     <th>17</th>
+     <th>18</th>
+     <th>19</th>
+     <th>20</th>
+     <th>21</th>
+     <th>22</th>
+     <th>23</th>
+     
+    </tr>
+  </thead>
+  <tbody>
+  	<c:forEach var="obs" items="${ObservDataList}">
+    <tr>  
+      <td scope="row" colspan="2">${obs.data_ymd }</td>
+     		<td>${obs.value00}</td>
+			<td>${obs.value01}</td>
+			<td>${obs.value02}</td>
+			<td>${obs.value03}</td>
+			<td>${obs.value04}</td>
+			<td>${obs.value05}</td>
+			<td>${obs.value06}</td>
+			<td>${obs.value07}</td>
+			<td>${obs.value08}</td>
+			<td>${obs.value09}</td>
+			<td>${obs.value10}</td>
+			<td>${obs.value11}</td>
+			<td>${obs.value12}</td>
+			<td>${obs.value13}</td>
+			<td>${obs.value14}</td>
+			<td>${obs.value15}</td>
+			<td>${obs.value16}</td>
+			<td>${obs.value17}</td>
+			<td>${obs.value18}</td>
+			<td>${obs.value19}</td>
+			<td>${obs.value20}</td>
+			<td>${obs.value21}</td>
+			<td>${obs.value22}</td>
+			<td>${obs.value23}</td>
+    </tr>
+ 	</c:forEach>
+  </tbody>
+</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 		<div id="popup-content"></div>
 	</div>
 	</div>

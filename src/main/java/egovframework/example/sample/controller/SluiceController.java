@@ -261,40 +261,66 @@ public class SluiceController {
 	
 	//수문 지도 메인 맵핑
 	@GetMapping(value = "/sluiceMain")
-	public String SluiceMain(Model model) {
-	
-	
+	public String SluiceMain(Sluice sluice,  Model model,String currentPage) {
+				
+		int sluiceCnt = ss.sluiceCount();
+
+		
+		Paging page = new Paging(sluiceCnt, currentPage);
+		
+		sluice.setStart(page.getStart());
+		sluice.setEnd(page.getEnd());
+		
+		List<Sluice> SluiceList = ss.sluiceList(sluice);
+		
+		model.addAttribute("page",page);
+		model.addAttribute("currentPage",currentPage);
+		
+				model.addAttribute("sluiceCnt", sluiceCnt);
+				model.addAttribute("SluiceList",SluiceList);
 		return "sluice/sluiceMain";
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/sluiceDataList")
-	public List<Sluice> sluiceDataList(Model model) {
+	public List<Sluice> sluiceDataList(Sluice sluice,String type,String type1, Model model) {
+		log.info("안뇽");
+		/* Sluice sluice = new Sluice(); */
+		sluice.setStart(1);
+		sluice.setEnd(134);
+		sluice.setType(type);
+		sluice.setType(type1);
+		System.out.println("valvalval"+type.getClass().getName());
+		System.out.println("vlavlaval"+sluice.getType());
+		System.out.println("valvalval"+type);
+		model.addAttribute(sluice);
+		List<Sluice> sluiceList = ss.sluiceList(sluice);
+		return sluiceList;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/sluiceDataList1")
+	public List<Sluice> sluiceDataList1(Model model) {
 		log.info("안뇽");
 		Sluice sluice = new Sluice();
 		sluice.setStart(1);
 		sluice.setEnd(134);
-		List<Sluice> sluiceList = ss.sluiceList(sluice);
-		log.info("sluiceList"+sluiceList.size());
-		return sluiceList;
-	}
 	
+		List<Sluice> sluiceList1 = ss.sluiceList1(sluice);
+		log.info("sluiceList"+sluiceList1.size());
+		return sluiceList1;
+	}
 	
 	
 	
 	@GetMapping(value = "sluiceList")
 	public String SluiceList(Sluice sluice,ObservData observData,String currentPage, Model model) {
-	
-
 		int SluiceCount = ss.sluiceCount();
 		int ObservCount = obs.observCount();
-		
 		Paging page = new Paging(SluiceCount, currentPage);
-		
 		sluice.setStart(page.getStart());
 		sluice.setEnd(page.getEnd());
-		
-		
 		List<Sluice> SluiceList = ss.sluiceList(sluice);
 		List<ObservData> ObservDataList = obs.observDataList(observData);
 		/*
@@ -308,8 +334,6 @@ public class SluiceController {
 		
 		model.addAttribute("page",page);
 		model.addAttribute("currentPage",currentPage);
-		
-		
 		//조회 
 		model.addAttribute("SluiceList",SluiceList);
 		model.addAttribute("ObservDataList",ObservDataList);
