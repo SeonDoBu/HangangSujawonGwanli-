@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import egovframework.example.sample.dto.Notice;
@@ -86,22 +88,14 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "adminNoticeDetail.do")
-	public String adminNoticeDetail(Notice notice, String currentPage, Model model) {
+	public String adminNoticeDetail(Notice notice,int noticeId ,  Model model) {
 		log.info("AdminController adminNoticeDetail start!");
-		int countNotice = as.getNoticeAllCount();
-		List<Notice> noticeAllList = null;
-		
-		Paging page = new Paging(countNotice, currentPage);
-		notice.setStart(page.getStart());
-		notice.setEnd(page.getEnd());
-		log.info("AdminController adminNoticeDetail page : {}", page);
-		
+
+		Notice noticeFindOne = null;
 		try {
-			noticeAllList = as.getNoticeAllList();
-			log.info("AdminController noticeAllList.size : {}", noticeAllList.size());
+		noticeFindOne  = as.getNoticeFindOne(noticeId);
 			
-			model.addAttribute("noticeAllList", noticeAllList);
-			model.addAttribute("page", page);
+			model.addAttribute("noticeFindOne", noticeFindOne);
 		} catch (Exception e) {
 			log.error("AdminController adminNoticeDetail Error : {}", e.getMessage());
 		}
@@ -109,4 +103,20 @@ public class AdminController {
 		
 		return "admin/adminNoticeDetail";
 	}
+	@PostMapping(value = "updateadNoti.do")
+	public String updateAdNoti(Notice notice, Model model) {
+		System.out.println("AdMinController updateAdNoti start");
+		 
+		int updateCount = as.updateAdNoti(notice);
+		
+		System.out.println("updateadNoti "+ notice.getTitle());
+		System.out.println("updateadNoti"+notice.getNotice_id());
+		System.out.println("updateadNoti notice"+notice.getCreated_date());
+		
+		model.addAttribute("updateCount", updateCount);
+		model.addAttribute("notice", notice);		
+			return "redirect:adminNotice.do";
+	}
+	
+	
 }

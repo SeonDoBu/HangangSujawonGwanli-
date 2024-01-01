@@ -7,26 +7,66 @@
 <meta charset="UTF-8">
 <title>관리자시스템_공지사항</title>
 <script type="text/javascript">
-	function adminPageMobe(pageId) {
-		console.log("page move start!");
-		
-		var pageCode = pageId;
-		
-		if (pageCode == 1) {
-			location.href = 'adminInfo.do?pageId=' + pageCode;
-		} else if (pageCode == 2) {
-			location.href = 'adminInfo.do?pageId=' + pageCode;
-		} else if (pageCode == 3) {
-			location.href = 'adminNotice.do';
-		} else {
-			location.href = 'home.do';
-		} 
-	}
+function adminPageMobe(pageId) {
+	console.log("page move start!");
+	
+	var pageCode = pageId;
+	
+	if (pageCode == 1) {
+		location.href = 'adminInfo.do?pageId=' + pageCode;
+	} else if (pageCode == 2) {
+		location.href = 'adminInfo.do?pageId=' + pageCode;
+	} else if (pageCode == 3) {
+		location.href = 'adminNotice.do';
+	} else {
+		location.href = 'home.do';
+	} 
+}
+function pageMove() {
+		location.href="adminNotice.do";
+	
+}
+
+
+function checkUser_id(user_id) {
+    console.log("checkUser_id start!");
+
+    var userId = user_id;
+
+    $.ajax({
+        type: 'GET',
+        url: 'userDetail.do',
+        data: { userId: userId },
+        success: function(response) {
+            console.log("Ajax success!");
+
+            var data = $(response);
+            console.log(data);
+            
+            $('#content').val(data.find('#content').val());
+            $('#user_id').val(data.find('#user_id').val());
+            $('#name').val(data.find('#name').val());
+            $('#gigiwan').val(data.find('#gigiwan').val());
+            $('#dept').val(data.find('#dept').val());
+            $('#tel').val(data.find('#tel').val());
+            $('#email').val(data.find('#email').val());
+            $('#status').val(data.find('#status').val());
+            var test = $('#content').val(data.find('#content').val());
+            console.log(test);
+
+            // Show the modal
+            $('#exampleModal').modal('show');
+        },
+        error: function(error) {
+            console.error("Ajax error:", error);
+        }
+    });
+}
 </script>
 
 </head>
 <body>
-	<!-- 상단바 제목 -->
+<!-- 상단바 제목 -->
 	<div class="admin-topbar-box">
 		<div class="row row-col-2 admin-topbar-text-box">
 			<div class="cols admin-topbar-text-first">
@@ -76,96 +116,58 @@
 	</div>
 
 	<!-- content -->
-	<div class="cols admin-content-box">
-		<div class="row row-cols-2 admin-content-first-box">
-			<div class="cols admin-content-first-image-box">
-				<img alt="..." src="/images/admin_icon5.png">
+	
+	<div class="container notcieDetail-container">
+		<div class="row row-cols-1 notcieDetail-content-box">
+			<div class="row row-cols-2 notcieDetail-first-box">
+				<div class="cols notcieDetail-first-image-box">
+					<img alt="..." src="/images/info_icon1.png">
+				</div>
+				<div class="cols notcieDetail-first-title-box">
+					<p>공지사항</p>
+				</div>
 			</div>
-			<div class="cols admin-content-first-title-box">
-				<p>공지사항</p>					
-			</div>
-		</div>
-
-		<!-- keyword -->
-		<div class="row row-cols-1 admin-content-second-box">
-			<div class="cols admin-content-keyword-first-box">
-				<p>검색조건</p>
-			</div>
-			<hr class="admin-content-hr">
-			<div class="cols admin-content-keyword-second-box">
-				<p>조건</p>
-				<select>
-					<option>전체</option>
-					<option>제목</option>
-					<option>제목+내용</option>
-				</select>
-				<input type="text" name="" placeholder="검색어를 입력하세요."
-					   style="width: 400px; margin-left:-10px;">
-				<button style="margin-left: 276px;">&nbsp;조회&nbsp;</button>
-			</div>
-		</div>
-		
-		<!-- 글번호 Logic -->
-		<c:set var="num" value="${page.total-page.start+1 }"/>
-		
-		<!-- 사용자 리스트 -->
-		<div class="row row-cols-1 admin-content-third-box">
-			<table class="table admin-content-third-table">
-				<tr>
-					<th colspan="6"
-						style="background-color: transparent; border: none; border-top: 2px solid white; text-align: start; font-size: 24px; font-weight: bolder;">
-						공지사항목록</th>	
-					<th style="background-color: transparent; border: none; border-top: 2px solid white; text-align: end; font-size: 24px; font-weight: bolder;">
-					<button>&nbsp;신규등록&nbsp;</button></th>						
-				</tr>
-				<tr>
-					<th colspan="2">제목</th>
-					<th>등록일</th>
-					<th>조회수</th>
-					<th>등록자</th>
-					<th colspan="2">첨부파일</th>
-				</tr>
-				<c:forEach var="notices" items="${noticeAllList }">
+		<form action="updateadNoti.do" method="post">
+			<div class="row row-cols-1 notcieDetail-second-box">
+			<%-- 	<input type="hidden" name="created_date" value="${noticeFindOne.created_date}">  --%>
+				<input type="hidden" name="notice_id" value="${noticeFindOne.notice_id}">
+				<table class="table notcieDetail-second-table">
 					<tr>
-						<td>${num }</td>
-						<c:set var="num" value="${num -1 }"/>	
-						<td>${notices.title }</td>
-						<td>
-							<fmt:formatDate value="${notices.created_date }" type="date"
-										    pattern="YYYY-MM-dd hh:mm:ss"/>						
-						</td>
-						<td>${notices.readcount }</td>
-						<td>${notices.user_id }</td>
-						<td colspan="2">-</td>
+						<th>제목</th>
+						<td colspan="3"><input type="text" name="title" value="${noticeFindOne.title }"></td>
 					</tr>
-				</c:forEach>				
-			</table>		
-			<!-- 페이징 처리 구간 -->
-			<div class="row row-cols-1 admin-paging-box">			
-				<nav aria-label="Page navigation example admin-paging-nav-box"
-					 style="display: flex; justify-content: center;">
-					<ul class="pagination">	
-						<c:if test="${page.startPage > page.pageBlock}">
-							<li class="page-item">
-							<a href="adminNotice.do?currentPage=${page.startPage-page.pageBlock}"
-							   class="pageblock page-link">[이전]</a></li>
-						</c:if>
-						<c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
-							<li class="page-item">
-							<a href="adminNotice.do?currentPage=${i}" 
-							   class="pageblock page-link ${page.currentPage == i ? 'active':'' }">${i}</a>
-							</li>
-						</c:forEach>
-						<c:if test="${page.endPage < page.totalPage}">
-							<li class="page-item">
-							<a href="adminNotice.do?currentPage=${page.startPage+page.pageBlock}"
-							   class="pageblock page-link">[다음]</a></li>
-						</c:if>	
-					</ul>
-				</nav>
+					<tr>
+						<th>작성자</th>
+						<td><input type="text" name="user_id" value="${noticeFindOne.user_id }"></td>
+						<th>작성일자</th>
+						<!-- Data pattern 변환 -->
+						 <fmt:formatDate var="created_date"   value="${noticeFindOne.created_date}" pattern="yyyy-MM-dd" />
+						<td><input type="text" name="created_date" value="${noticeFindOne.created_date}">  </td>
+					</tr>
+					<tr>
+						<th>첨부파일</th>
+						<td colspan="3"><input type="text" name="file_name" value="${noticeFindOne.file_name }"></td>
+					</tr>
+				</table>
 			</div>
-		</div>		
-	<!-- content end -->
+			<div class="row row-cols-1 notcieDetail-third-box">
+				<table class="table notcieDetail-third-table">
+					<tr>
+						<td><input type="text" name="content" value="${noticeFindOne.content }"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="row row-cols-1 notcieDetail-fourth-box">
+				<button onclick="pageMove()">&nbsp;&nbsp;목록으로&nbsp;&nbsp;</button>
+				
+				<button type="submit" style="margin-left: 20px; margin-right: 20px;"> 수정</button>
+				
+				<button> 삭제</button>
+			</div>
+			</form>
+		</div>
+		
 	</div>
+	
 </body>
 </html>

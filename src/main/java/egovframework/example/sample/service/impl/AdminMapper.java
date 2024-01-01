@@ -22,5 +22,7 @@ public interface AdminMapper {
 
 	Notice getNoticeFindOne(int noticeId);
 
+	int updateAdNoti(Notice notice);
+
 
 }

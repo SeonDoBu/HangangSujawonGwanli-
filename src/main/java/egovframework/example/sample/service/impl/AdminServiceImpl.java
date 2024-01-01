@@ -1,5 +1,6 @@
 package egovframework.example.sample.service.impl;
 
+
 import java.util.List;
 
 import org.egovframe.rte.fdl.cmmn.EgovAbstractServiceImpl;
@@ -9,9 +10,11 @@ import egovframework.example.sample.dto.Notice;
 import egovframework.example.sample.dto.Users;
 import egovframework.example.sample.service.AdminService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AdminServiceImpl extends EgovAbstractServiceImpl implements AdminService {
 
 	private final AdminMapper adminDao;
@@ -54,5 +57,17 @@ public class AdminServiceImpl extends EgovAbstractServiceImpl implements AdminSe
 	public Notice getNoticeFindOne(int noticeId) {
 		Notice noticeFindOne = adminDao.getNoticeFindOne(noticeId);
 		return noticeFindOne;
+	}
+
+	@Override
+	public int updateAdNoti(Notice notice) {
+		int updateCount = 0 ;
+		try {
+			log.info("updateAdNoti=>"+notice.getNotice_id());
+			updateCount = adminDao.updateAdNoti(notice);
+		} catch (Exception e) {
+			System.out.println("AdminServiceImpl updateAdNoti e.getMessage()->"+e.getMessage());
+		}
+		return updateCount;
 	}
 }

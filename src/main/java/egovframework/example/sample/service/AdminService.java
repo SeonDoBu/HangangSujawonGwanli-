@@ -19,6 +19,8 @@ public interface AdminService {
 
 	Notice getNoticeFindOne(int noticeId);
 
+	int updateAdNoti(Notice notice);
+
 
 
 }

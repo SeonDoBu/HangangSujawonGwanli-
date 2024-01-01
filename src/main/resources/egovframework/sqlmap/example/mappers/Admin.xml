@@ -72,4 +72,15 @@
 		from notice
 		where notice_id = #{noticeId}
 	</select>	
+	<update id="updateAdNoti" parameterType="Notice">
+	UPDATE notice
+	SET 
+	title = #{title},
+	content = #{content},
+	created_date = #{created_date},
+	file_name = #{file_name}
+	where notice_id = #{notice_id}
+	and user_id = #{user_id}
+	
+	</update>
 </mapper>

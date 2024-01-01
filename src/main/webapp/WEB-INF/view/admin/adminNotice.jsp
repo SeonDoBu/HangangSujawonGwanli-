@@ -107,7 +107,7 @@
 		
 		<!-- 글번호 Logic -->
 		<c:set var="num" value="${page.total-page.start+1 }"/>
-		
+		<form action="adminNoticeDetail.do" method="get">
 		<!-- 사용자 리스트 -->
 		<div class="row row-cols-1 admin-content-third-box">
 			<table class="table admin-content-third-table">
@@ -118,6 +118,7 @@
 					<th style="background-color: transparent; border: none; border-top: 2px solid white; text-align: end; font-size: 24px; font-weight: bolder;">
 					<button>&nbsp;신규등록&nbsp;</button></th>						
 				</tr>
+				
 				<tr>
 					<th colspan="2">제목</th>
 					<th>등록일</th>
@@ -125,14 +126,17 @@
 					<th>등록자</th>
 					<th colspan="2">첨부파일</th>
 				</tr>
+			
 				<c:forEach var="notices" items="${noticeAllList }">
 					<tr>
 						<td>${num }</td>
 						<c:set var="num" value="${num -1 }"/>	
-						<td><a href="adminNoticeDetail.do?id=${notices.notice_id}">${notices.title }</a></td>
+						
+						<td><a href="adminNoticeDetail.do?noticeId=${notices.notice_id}">${notices.title }</a></td>
+						
 						<td>
 							<fmt:formatDate value="${notices.created_date }" type="date"
-										    pattern="YYYY-MM-dd hh:mm:ss"/>						
+										    pattern="YYYY-MM-dd"/>						
 						</td>
 						<td>${notices.readcount }</td>
 						<td>${notices.user_id }</td>
@@ -140,6 +144,7 @@
 					</tr>
 				</c:forEach>				
 			</table>		
+			</form>
 			<!-- 페이징 처리 구간 -->
 			<div class="row row-cols-1 admin-paging-box">			
 				<nav aria-label="Page navigation example admin-paging-nav-box"

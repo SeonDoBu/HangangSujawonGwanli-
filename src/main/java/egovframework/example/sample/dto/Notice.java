@@ -1,7 +1,7 @@
 package egovframework.example.sample.dto;
 
-import java.util.Date;
 
+import java.sql.Date;
 import lombok.Data;
 
 @Data
