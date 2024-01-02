@@ -63,16 +63,7 @@
 </head>
 <body>
 	<!-- 상단바 제목 -->
-	<div class="admin-topbar-box">
-		<div class="row row-col-2 admin-topbar-text-box">
-			<div class="cols admin-topbar-text-first">
-				<p>관리자시스템</p>
-			</div>
-			<div class="cols admin-topbar-text-second">
-				<p>관리자&nbsp;&nbsp;|&nbsp;&nbsp;로그아웃</p>
-			</div>
-		</div>
-	</div>
+	<%@ include file="adminHeader.jsp" %>
 
 	<!-- Sidebar -->
 	<div class="admin-sidebar-box">
@@ -252,7 +243,7 @@
 								</div>
 								<div class="mb-3 admin-modal-content-box">
 									<label for="gigiwan" class="col-form-label">기관ID</label> 
-									<input type="number" class="form-control" step="0.0000001" name="gigwan_id" id="gigwan_id" value="${userFind.gigwan_id}" >
+									<input type="number" class="form-control" min="1" max="10" name="gigwan_id" id="gigwan_id" value="${userFind.gigwan_id}" >
 								</div>
 								<div class="mb-3 admin-modal-content-box">
 									<label for="dept" class="col-form-label">소속부서</label> 

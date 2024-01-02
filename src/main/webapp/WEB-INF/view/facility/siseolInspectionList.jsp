@@ -123,7 +123,7 @@
 						<option selected>전체</option>
 						<c:forEach var="list" items="${commonList}">
 							<option <c:if test ="${inspection.small_code eq list.small_code}"> selected="selected"</c:if>
-							value="${inspection.small_code}">${inspection.content}</option>
+							value="${list.small_code}">${list.content}</option>
 						</c:forEach>
 					</select>&nbsp;&nbsp;&nbsp;
 					

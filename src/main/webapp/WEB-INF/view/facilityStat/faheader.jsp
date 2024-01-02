@@ -76,22 +76,21 @@
                 <nav class="navbar navbar-expand-lg  border-bottom" id="head">
                     <div class="container-fluid">
 
-						<div style="background: #000042; color: white; font-weight: bold;">
-							<h4>수자원시설물관리정보시스템</h4>
+						<div style="background: #000042; font-weight: bold;">
+							<h4><a href="siseoulList.do" style="text-decoration: none; color: white;">수자원시설물관리정보시스템</a></h4>
 						</div>
 						
                     	<!-- 화면 축소시 메뉴아이콘 -->
                         <button class="navbar-toggler" style="background: white;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                     	
-                    	    
                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                                 <li class="nav-item active">
-                                	<a class="nav-link" href="siseoulList.do" style="color: white; font-weight: bold;">점검결과작성</a>
+                                  <a class="nav-link" href="siseoulList.do" style="color: white; font-weight: bold;">점검결과작성</a>
                                 </li>
                                 
                                 <li class="nav-item">
-                              	  <a class="nav-link" href="#!" style="color: white; font-weight: bold;">점검이력조회</a>
+                              	  <a class="nav-link" href="siseoulInspectionList.do" style="color: white; font-weight: bold;">점검이력조회</a>
                                 </li>
                                 
                                 <li class="nav-item">
@@ -99,7 +98,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                              	  <a class="nav-link" href="troubleList.do" style="color: white; font-weight: bold;" ><u>고장/조치결과보고</u></a>
+                              	  <a class="nav-link" href="troubleList.do" style="color: white; font-weight: bold;" >고장/조치결과보고</a>
                                 </li>
 
                             </ul>
@@ -112,19 +111,25 @@
                                 </li>
                                 
                                 <li class="nav-item">
-                              	  <a class="nav-link" href="#!" style="color: white;">사용자 &nbsp;|</a>
+                              	  <a class="nav-link" href="#!" style="color: white;">
+	                              	  <% if(session.getAttribute("user_id") != null) {
+										 String user_name = (String)session.getAttribute("user_name"); 
+										 out.println(user_name); 
+									   } else {
+										 out.println("");
+									   }
+									  %> 님 &nbsp;|</a>
                                 </li>
                                 
                                 <li class="nav-item">
-                              	  <a class="nav-link" href="#!" style="color: white;">로그아웃</a>
+                              	  <a class="nav-link" href="logout.do" style="color: white;">로그아웃</a>
                                 </li>
                                 
                             </ul>
                         </div>
                     
                     </div>
-                </nav>
-                
-				<!-- 내용시작 -->	
+                </nav>               
+			<!-- 내용시작 -->	
 				
       
