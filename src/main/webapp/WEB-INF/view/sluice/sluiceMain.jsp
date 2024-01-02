@@ -23,9 +23,9 @@
 		}
 		
 		.close {
-  float: right;
-  cursor: pointer;
-}
+		  float: right;
+		  cursor: pointer;
+		}
 		/* 지도 크기 설정을 위한 css */
 		.map {
       	height: 1000px;
@@ -136,6 +136,7 @@
 				map.removeLayer(wms7);
 			}
 		}
+		
 		function addLayer8() {
 			if(document.getElementById('chk8').checked) {
 				console.log('하하');
@@ -158,11 +159,11 @@
 			/* 	console.log(num2); */
 				sluiceval();
 				map.addLayer(markerVectorLayer);
-			}else {
+			} else {
 				console.log('메롱');
 				map.removeLayer(markerVectorLayer);
 			}	
-			}
+		}
 		
 		function addLayer10() {
 			if(document.getElementById('chk10').checked) {
@@ -175,6 +176,7 @@
 				map.removeLayer(markerVectorLayer);
 			}
 		}
+		
 		function addLayer11() {
 			if(document.getElementById('chk11').checked) {
 				console.log('하하');
@@ -200,18 +202,18 @@
 		
 	</script>
 	<style>
-.__float-tbl{
-	border: 1px solid #2a5dc5;
-	border-radius: 5px;
-	background-color: #2a5dc5;
-	font-size: 15px;
-	color: white;
-	text-align: center;
-	position: absolute;
-	top: 600px;
-	left: 1000px;
-	z-index:10;
-	width:130px;
+	.__float-tbl{
+		border: 1px solid #2a5dc5;
+		border-radius: 5px;
+		background-color: #2a5dc5;
+		font-size: 15px;
+		color: white;
+		text-align: center;
+		position: absolute;
+		top: 600px;
+		left: 1000px;
+		z-index:10;
+		width:130px;
 	}
 	</style>
   </head>
@@ -319,20 +321,19 @@
 <h4 style="margin-top: 10px;">한강수계</h4>
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer3()" name="chk"  id="chk3" > 한강수계_서울<br>
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer4()" name="chk" id="chk4" > 한강수계_경기<br>
-
-<br><br><br>
-
+<br>
+<h4 style="margin-top: 10px;">관측소</h4>
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer7()" name="chk" id="chk7" > 관측소 RedPoint<br>
 &nbsp;&nbsp;<input type="checkbox" onclick="addLayer8()" name="" id="chk8" value="4"> 관측소 Marker<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="chkLayer()" name="" id="chk9"  value="1"> 강수량1 Marker<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer10()" name="" id="chk10" value="2"> 수위2  Marker<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="addLayer11()" name="" id="chk11" value="3"> 유량3  Marker<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="chkLayer()" name="" id="chk9"  value="1"> 강수량 Marker<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer10()" name="" id="chk10" value="2"> 수위 Marker<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="addLayer11()" name="" id="chk11" value="3"> 유량 Marker<br>
 
 <h4 style="margin-top: 10px;">시설물</h4>
-&nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol1" checked="checked"> 댐<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol2" checked="checked"> 저수지<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol3" checked="checked"> 펌프장<br>
-&nbsp;&nbsp;<input type="checkbox" onclick="updateSiseolLayer()" name="chk" id="chkSiseol4" checked="checked"> 관개수로<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="getSiseolLayer()" name="chk" id="chkSiseol1"> 댐<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="getSiseolLayer()" name="chk" id="chkSiseol2"> 저수지<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="getSiseolLayer()" name="chk" id="chkSiseol3"> 펌프장<br>
+&nbsp;&nbsp;<input type="checkbox" onclick="getSiseolLayer()" name="chk" id="chkSiseol4"> 관개수로<br>
  </div>
 </div>
 

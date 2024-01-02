@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.example.sample.dto.Sluice;
@@ -264,13 +265,18 @@ public class SluiceController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/siseolDataList", method = RequestMethod.POST)
-	public List<Siseol> siseolDataList(@RequestBody Map<String, Object> siseolChkMap, Model model) {
+	@RequestMapping(value = "siseolDataList", method = RequestMethod.GET)
+	public List<Siseol> siseolDataList(String sc1, String sc2, String sc3, String sc4) {
 		log.info("siseolDataList Start...");
-		log.info(siseolChkMap.toString());
 		List<Siseol> siseolList = null;
 		try {
-			siseolList = siseolService.getSiseolData(siseolChkMap);
+			Map<String, Object> chkMap = new HashMap<String, Object>();
+			chkMap.put("sc1", sc1);
+			chkMap.put("sc2", sc2);
+			chkMap.put("sc3", sc3);
+			chkMap.put("sc4", sc4);
+			log.info(chkMap.toString());
+			siseolList = siseolService.getSiseolData(chkMap);
 			log.info("siseolList"+siseolList.size());
 		} catch (Exception e) {
 			log.error(e.getMessage());

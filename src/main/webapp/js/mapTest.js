@@ -1,5 +1,3 @@
-
-
 var map;
 var wms1;
 
@@ -9,6 +7,7 @@ var container;
 var content;
 /*var coordinate;*/
 var markerVectorLayer;
+var siseolVectorLayer;
 var hover = null;
 
 var wms2;
@@ -18,10 +17,16 @@ var wms5;
 var wms6;
 var wms7;
 
-   var vectorSource = new ol.source.Vector();
-   markerVectorLayer = new ol.layer.Vector({
-      source: vectorSource,
-   });
+var vectorSource = new ol.source.Vector();
+markerVectorLayer = new ol.layer.Vector({
+   source: vectorSource,
+});
+
+var siseolVectorSource = new ol.source.Vector();
+siseolVectorLayer = new ol.layer.Vector({
+   source: siseolVectorSource,
+});
+
 
 function sluiceval() {
       var type5 = $("#chk9").val();   
@@ -145,19 +150,22 @@ function sluiceval() {
 }
 
 $(document).ready(function() {
+	console.log("document.ready");
    map = new ol.Map({ // OpenLayer의 맵 객체를 생성한다.
       target: 'map', // 맵 객체를 연결하기 위한 target으로 <div>의 id값을 지정해준다.
       layers: [ // 지도에서 사용 할 레이어의 목록을 정희하는 공간이다.
          new ol.layer.Tile({
             source: new ol.source.OSM({
-               url: 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png' // vworld의 지도를 가져온다.
+               url: 'https://api.vworld.kr/req/wmts/1.0.0/828A2304-9683-3843-9B9B-3D3660554AC8/Base/{z}/{y}/{x}.png'
+					// vworld의 지도를 가져온다.
             })
          })
       ],
       view: new ol.View({ // 지도가 보여 줄 중심좌표, 축소, 확대 등을 설정한다. 보통은 줌, 중심좌표를 설정하는 경우가 많다.
          center: ol.proj.fromLonLat([126.9784, 37.56681]),
          zoom: 9,
-         minzoom: 5
+         minZoom: 7,
+		 maxZoom: 18
       })
    });
 
@@ -210,6 +218,7 @@ $(document).ready(function() {
       if (hover) {
          var content = '<form action="ObservDataList" method="POST">'
          + "<div class='__float-tbl' id='my_div'>관측소 번호 : " + hover.get('id')
+			+ "<input type='hidden' name='sluice_id' value='"+hover.get('id')+"'>"
             + "<br>경도:" + hover.get('mapx') + "<br>위도:" + hover.get('mapy')
          /*   +"<div>type = 1 강수량만 나오게 </div>"*/
             + " <br><button style='background-color: #2a5dc5; border: 0px;' type='button' onclick='alert()'>"
@@ -313,7 +322,7 @@ $(document).ready(function() {
          url: 'http://localhost:8383/geoserver/sundoB/wms?service=WMS', // 1. 레이어 URL
          params: {
             'VERSION': '1.1.0', // 2. 버전
-            'LAYERS': 'sundoB:sluice3', // 3. 작업공간:레이어 명
+            'LAYERS': 'sundoB:sluice_map', // 3. 작업공간:레이어 명
             'BBOX': [126.66444396972656, 36.93333053588867, 127.71916961669922, 38.1238899230957],
             'SRS': 'EPSG:4166', // SRID
             'FORMAT': 'image/png' // 포맷
@@ -329,5 +338,93 @@ $(document).ready(function() {
       map.addLayer(wms4); // 맵 객체에 레이어를 추가함
       map.addLayer(wms5); // 맵 객체에 레이어를 추가함
       map.addLayer(wms6); // 맵 객체에 레이어를 추가함      */
+	
+	getSiseolLayer();
 
 });
+
+function getSiseolLayer() {
+	map.removeLayer(siseolVectorLayer);
+	
+	var siseolVectorSource = new ol.source.Vector();
+	siseolVectorLayer = new ol.layer.Vector({
+	   source: siseolVectorSource,
+	});
+	
+	let sc1; let sc2; let sc3; let sc4;
+	
+	if(document.getElementById('chkSiseol1').checked) {
+		sc1 = "1";
+	} else {
+		sc1 = "0";
+	}
+	
+	if(document.getElementById('chkSiseol2').checked) {
+		sc2 = "1";
+	} else {
+		sc2 = "0";
+	}
+	
+	if(document.getElementById('chkSiseol3').checked) {
+		sc3 = "1";
+	} else {
+		sc3 = "0";
+	}
+	
+	if(document.getElementById('chkSiseol4').checked) {
+		sc4 = "1";
+	} else {
+		sc4 = "0";
+	}
+	
+	$.ajax({
+		url:"/siseolDataList",
+		method:"GET",
+		data:{sc1:sc1, sc2:sc2, sc3:sc3, sc4:sc4},
+		dataType:"json",
+		success: function(siseolData) {
+			console.log(siseolData);
+			siseolData.forEach(function(data) {
+				var id = data.siseol_id;
+				var mapx = data.mapx;
+				var mapy = data.mapy;
+				var marker = new ol.Feature({
+					geometry: new ol.geom.Point(
+						[data.mapx, data.mapy]
+					).transform('EPSG:4326', 'EPSG:3857'),
+					id: id,
+					mapx:mapx,
+					mapy:mapy,
+				});
+				
+				var src; 
+				if(data.small_code == '1') {
+					src = 'images/pochaco1.png'
+				} else if(data.small_code == '2') {
+					src = 'images/pochaco2.png'
+				} else if(data.small_code == '3') {
+					src = 'images/pochaco3.png'
+				} else if(data.small_code == '4') {
+					src = 'images/pochaco4.png'
+				}
+				
+				var iconStyle = new ol.style.Style({
+					image: new ol.style.Icon(({
+						anchor: [0.5, 0.96],
+						scale: 0.1,
+						src: src
+					})),
+					zindex: 10
+				});
+				marker.setStyle(iconStyle);
+				siseolVectorSource.addFeature(marker);
+			});
+			map.addLayer(siseolVectorLayer);
+			console.log("시설물 레이어 추가");
+		},
+		error: function() {
+			console.log("시설물 정보 가져오지 못했습니다.");
+		}
+	});
+
+}
