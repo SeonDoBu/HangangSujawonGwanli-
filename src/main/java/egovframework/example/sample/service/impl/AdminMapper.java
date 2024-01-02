@@ -18,11 +18,15 @@ public interface AdminMapper {
 	
 	int getNoticeAllCount();
 
-	List<Notice> getNoticeAllList();
 
 	Notice getNoticeFindOne(int noticeId);
 
 	int updateAdNoti(Notice notice);
 
+	int insertNotice(Notice notice);
+
+	List<Notice> getNoticeAllList(Notice notice);
+
+	int updateUser(Users users);
 
 }

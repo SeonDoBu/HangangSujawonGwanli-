@@ -41,7 +41,7 @@ public class MainController {
 		log.info("MainController notice page : {}", page);
 
 		try {
-			noticeAllList = as.getNoticeAllList();
+			noticeAllList = as.getNoticeAllList(notice);
 			log.info("MainController noticeAllList.size : {}", noticeAllList.size());
 
 			model.addAttribute("noticeAllList", noticeAllList);

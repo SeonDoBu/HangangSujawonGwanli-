@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>관리자시스템_공지사항</title>
 <script type="text/javascript">
+window.close();
 	function adminPageMobe(pageId) {
 		console.log("page move start!");
 		
@@ -21,6 +22,12 @@
 		} else {
 			location.href = 'home.do';
 		} 
+	}
+	
+	function showpop(){
+		
+		window.open("AdNoticeInsert.do","pop","width=900px, height=800px,left=350,top=200" )
+		
 	}
 </script>
 
@@ -106,8 +113,8 @@
 		</div>
 		
 		<!-- 글번호 Logic -->
-		<c:set var="num" value="${page.total-page.start+1 }"/>
-		<form action="adminNoticeDetail.do" method="get">
+		<c:set var="num" value="1"/>
+		
 		<!-- 사용자 리스트 -->
 		<div class="row row-cols-1 admin-content-third-box">
 			<table class="table admin-content-third-table">
@@ -116,9 +123,9 @@
 						style="background-color: transparent; border: none; border-top: 2px solid white; text-align: start; font-size: 24px; font-weight: bolder;">
 						공지사항목록</th>	
 					<th style="background-color: transparent; border: none; border-top: 2px solid white; text-align: end; font-size: 24px; font-weight: bolder;">
-					<button>&nbsp;신규등록&nbsp;</button></th>						
+					<button type="button" onclick="showpop()"  >&nbsp;신규등록&nbsp;</button></th>						
 				</tr>
-				
+				<form action="adminNoticeDetail.do" method="get">
 				<tr>
 					<th colspan="2">제목</th>
 					<th>등록일</th>
@@ -130,7 +137,7 @@
 				<c:forEach var="notices" items="${noticeAllList }">
 					<tr>
 						<td>${num }</td>
-						<c:set var="num" value="${num -1 }"/>	
+						<c:set var="num" value="${num +1 }"/>	
 						
 						<td><a href="adminNoticeDetail.do?noticeId=${notices.notice_id}">${notices.title }</a></td>
 						

@@ -233,7 +233,7 @@
 								aria-label="Close"></button>
 						</div>
 						<div class="modal-body" id="userDetailModalBody">
-							<form action="#">
+							<form action="updateUser.do" method="post">
 								<div class="mb-3 admin-modal-content-box">
 									<label for="content" class="col-form-label">권한</label> 
 									<select class="form-select" id="content" >									
@@ -244,37 +244,38 @@
 								</div>
 								<div class="mb-3 admin-modal-content-box">
 									<label for="user_id" class="col-form-label">ID</label> 
-									<input type="text" class="form-control" id="user_id" value="${userFind.user_id }">
+									<input type="text" class="form-control" name="user_id" id="user_id" value="${userFind.user_id }">
 								</div>
 								<div class="mb-3 admin-modal-content-box">
 									<label for="name" class="col-form-label">성명</label> 
-									<input type="text" class="form-control" id="name" value="${userFind.name }">
+									<input type="text" class="form-control" name="name" id="name" value="${userFind.name }">
 								</div>
 								<div class="mb-3 admin-modal-content-box">
-									<label for="gigiwan" class="col-form-label">기관명</label> 
-									<input type="text" class="form-control" id="gigiwan" >
+									<label for="gigiwan" class="col-form-label">기관ID</label> 
+									<input type="number" class="form-control" step="0.0000001" name="gigwan_id" id="gigwan_id" value="${userFind.gigwan_id}" >
 								</div>
 								<div class="mb-3 admin-modal-content-box">
 									<label for="dept" class="col-form-label">소속부서</label> 
-									<input type="text" class="form-control" id="dept" value="${userFind.dept }">
+									<input type="text" class="form-control" id="dept" name="dept" value="${userFind.dept }">
 								</div>
 								<div class="mb-3 admin-modal-content-box">
 									<label for="tel" class="col-form-label">TEL</label> 
-									<input type="text" class="form-control" id="tel" value="${userFind.tel }">
+									<input type="text" class="form-control" id="tel" name="tel" value="${userFind.tel }">
 								</div>
 								<div class="mb-3 admin-modal-content-box">
 									<label for="email" class="col-form-label">EMAIL</label> 
-									<input type="text" class="form-control" id="email" value="${userFind.email }">
+									<input type="text" class="form-control" id="email" name="email" value="${userFind.email }">
 								</div>
 								<div class="mb-3 admin-modal-content-box">
 									<label for="status" class="col-form-label">사용여부</label> 
-									<input type="text" class="form-control" id="status" value="${userFind.status }">
+									<input type="text" class="form-control" id="status" name="status" value="${userFind.status }">
 								</div>
-							</form>
+							
 						</div>
 						<div class="modal-footer admin-modal-btn-box">
 							<button type="submit">수정</button>
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>

@@ -7,6 +7,19 @@
 <meta charset="UTF-8">
 <title>관리자시스템_공지사항</title>
 <script type="text/javascript">
+/* function submitfuc(index) {
+	if(index == 1){
+		document.submitform.action = 'updateadNoti.do';	
+	}
+	if(index == 2){
+		document.submitform.action = "adminNotice.do";
+		
+	}
+	
+	document.submitform.submit();
+} */
+
+
 function adminPageMobe(pageId) {
 	console.log("page move start!");
 	
@@ -61,7 +74,10 @@ function checkUser_id(user_id) {
             console.error("Ajax error:", error);
         }
     });
+
 }
+
+
 </script>
 
 </head>
@@ -161,8 +177,9 @@ function checkUser_id(user_id) {
 				<button onclick="pageMove()">&nbsp;&nbsp;목록으로&nbsp;&nbsp;</button>
 				
 				<button type="submit" style="margin-left: 20px; margin-right: 20px;"> 수정</button>
-				
-				<button> 삭제</button>
+
+				<button type="button"> 삭제</button>
+			
 			</div>
 			</form>
 		</div>

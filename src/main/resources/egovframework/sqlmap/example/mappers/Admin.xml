@@ -59,11 +59,16 @@
 	<select id="getNoticeAllCount" resultType="int">
 		select count(*)
 		from notice
+		where 1=1
 	</select>
 	
-	<select id="getNoticeAllList" resultType="Notice">
-		select *
+	<select id="getNoticeAllList" resultType="Notice" parameterType="Notice">
+		select a.*
+		from (
+		select ROW_NUMBER() OVER (ORDER BY notice_id) rn , *
 		from notice
+		) a
+		where rn BETWEEN #{start} and #{end}
 	</select>
 
 	<select id="getNoticeFindOne" parameterType="int"
@@ -81,6 +86,24 @@
 	file_name = #{file_name}
 	where notice_id = #{notice_id}
 	and user_id = #{user_id}
-	
 	</update>
+	<insert id="insertNotice" parameterType="Notice">
+	INSERT INTO 
+	notice (notice_id , user_id ,title ,content ,created_date, file_name, readcount)
+	values (nextval('notice_id_seq') ,#{user_id},#{title},#{content},#{created_date},#{file_name},0)
+
+	</insert>
+		<update id="updateUser" parameterType="Users">
+		UPDATE users 
+		SET 
+		name = #{name},
+		gigwan_id = #{gigwan_id},
+		dept = #{dept},
+		tel = #{tel},
+		email = #{email},
+		status = #{status}	
+		where user_id = #{user_id}
+	</update>
+	
+	
 </mapper>

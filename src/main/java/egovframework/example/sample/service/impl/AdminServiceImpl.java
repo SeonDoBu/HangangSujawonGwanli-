@@ -48,8 +48,9 @@ public class AdminServiceImpl extends EgovAbstractServiceImpl implements AdminSe
 	}
 
 	@Override
-	public List<Notice> getNoticeAllList() {
-		List<Notice> noticeAllList = adminDao.getNoticeAllList();
+	public List<Notice> getNoticeAllList(Notice notice) {
+		List<Notice> noticeAllList = adminDao.getNoticeAllList(notice);
+		
 		return noticeAllList;
 	}
 	
@@ -68,6 +69,37 @@ public class AdminServiceImpl extends EgovAbstractServiceImpl implements AdminSe
 		} catch (Exception e) {
 			System.out.println("AdminServiceImpl updateAdNoti e.getMessage()->"+e.getMessage());
 		}
+		return updateCount;
+	}
+
+	@Override
+	public int insertNotice(Notice notice) {
+		int insertNotice = 0; 
+		
+		try {
+			insertNotice = adminDao.insertNotice(notice);
+			
+			
+		} catch (Exception e) {
+			System.out.println("insertNotice e.getMessage()->"+ e.getMessage());
+		}
+		return insertNotice;
+	}
+
+	@Override
+	public int updateUser(Users users) {
+		int updateCount = 0;
+		
+		try {
+			
+			updateCount = adminDao.updateUser(users);
+			
+		} catch (Exception e) {
+			System.out.println("updateUser e.getMessage()->"+e.getMessage());
+		}
+		
+		
+		
 		return updateCount;
 	}
 }
