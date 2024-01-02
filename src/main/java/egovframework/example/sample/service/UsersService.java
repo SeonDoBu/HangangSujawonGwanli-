@@ -6,4 +6,6 @@ public interface UsersService {
 
 	Users getUserById(Users userInfo);
 
+	int   checkDuplicateId(String id);
+
 }

@@ -28,4 +28,18 @@ public class UsersServiceImpl implements UsersService {
 		return user;
 	}
 
+	@Override
+	public int checkDuplicateId(String id) {
+		log.info("checkDuplicateId Start...");
+		int result = 0;
+		try {
+			result = usersDao.checkDuplicateId(id);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		} finally {
+			log.info("checkDuplicateId End...");
+		}
+		return result;
+	}
+
 }

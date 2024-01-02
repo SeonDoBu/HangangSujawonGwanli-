@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class Users {
 	private String user_id;
-	private int big_code;
-	private int small_code;
-	private int gigwan_id;
+	private int    big_code;
+	private int    small_code;
+	private int    gigwan_id;
 	private String password;
 	private String name;
 	private String email;
@@ -22,6 +22,6 @@ public class Users {
 	private String search;
 	private String keyword;
 	private String pageNum;
-	private int start;
-	private int end;
+	private int    start;
+	private int    end;
 }

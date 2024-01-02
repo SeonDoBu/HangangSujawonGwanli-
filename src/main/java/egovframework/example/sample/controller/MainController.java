@@ -71,25 +71,5 @@ public class MainController {
 		log.info("MainController noticeDetail end..");
 		return "noticeDetail";
 	}
-
-	@RequestMapping(value = "findId.do")
-	public String findIdForm() {
-		return "findIdPwForm";
-	}
-
-	@RequestMapping(value = "findPw.do")
-	public String findPwForm(Model model) {
-		int searchPw = 1;
-
-		model.addAttribute("searchPw", searchPw);
-		return "findIdPwForm";
-	}
-
-	@RequestMapping(value = "joinForm.do")
-	public String joinForm(Model model) {
-		int searchPw = 1;
-
-		model.addAttribute("searchPw", searchPw);
-		return "joinForm";
-	}
+	
 }

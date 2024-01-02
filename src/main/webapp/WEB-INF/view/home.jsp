@@ -9,9 +9,9 @@
 
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded", function () {
-		var errorMsg = $('#errorMsg').value;
+		const errorMsg = document.getElementById('errorMsg').value;
 		// 에러 메시지가 존재할 경우 alert창으로 표시
-		if(errorMsg !== null && errorMsg !== "" && errorMsg !== undefined) {
+		if(errorMsg != null && errorMsg != "" && errorMsg != undefined) {
 			alert(errorMsg);
 		}
 	});
@@ -62,7 +62,6 @@
     	// 아이디를 입력하지 않은 경우
     	if(id.value === "") {
     		alert("아이디를 입력해주세요.");
-    		event.preventDefault();
     		id.focus();
     		return false;
     	}
@@ -70,13 +69,12 @@
     	// 비밀번호를 입력하지 않은 경우
     	if(pw.value === "") {
     		alert("비밀번호를 입력해주세요.");
-    		event.preventDefault();
     		pw.focus();
     		return false;
     	}
     	
     	// 모두 입력된 경우
-    	return true;
+		return true;
 	}
 
 </script>
@@ -100,8 +98,6 @@
 				</div>
 			</div>
 			
-			<input type="hidden" name="errorMsg" id="errorMsg" value="${errorMsg}">
-			
 			<div class="row row-cols-1 main-second-box">
 				<div class="col main-second-title-box">
 					<p>
@@ -111,36 +107,40 @@
 				</div>
 				
 				<!-- 로그인 -->
-				<div class="col main-second-md-title-box">
-					<p>권한선택</p>
-				</div>
-				<div class="row row-col-3 main-second-select-box">
-					<div class="col main-second-select-first">
-						<img alt="" src="/images/admin_icon4.png">
-					</div>
-					<div class="col main-second-select-second">
-						<img alt="" src="/images/admin_icon4.png">
-					</div>
-					<div class="col main-second-select-third">
-						<img alt="" src="/images/admin_icon4.png">
-					</div>
-				</div>
-				
 				<form method="post" action="loginCheck.do">
-				<div>
-					<div >
-					
-						<p>ID</p>
-						<input type="text" style="width: 400px;" name="user_id" id="login_id">
+					<input type="hidden" name="errorMsg" id="errorMsg" value="${errorMsg}">
+					<div>
+						<div>
+							<p>권한선택</p>
+						</div>
+						<div>
+							<select name="small_code" style="width: 400px; height: 38px;">
+								<option value="1">실시간수문관리</option>
+								<option value="2">수자원시설물관리</option>
+								<option value="3">관리자</option>
+							</select>
+						<!-- <div class="col main-second-select-first">
+							<img alt="" src="/images/admin_icon4.png">
+						</div>
+						<div class="col main-second-select-second">
+							<img alt="" src="/images/admin_icon4.png">
+						</div>
+						<div class="col main-second-select-third">
+							<img alt="" src="/images/admin_icon4.png">
+						</div> -->
+						</div>
+						<div>
+							<p>ID</p>
+							<input type="text" style="width: 400px;" name="user_id" id="login_id">
+						</div>
+						<div>
+							<p>PASSWORD</p>
+							<input type="password" style="width: 400px;" name="password" id="password">
+						</div>
+						<div class="">
+							<button type="submit" class="btn btn-primary" style="background-color: #050099; margin-left: 100px; width:220px; margin-top: 15px;" onclick="return loginCheck()">L&nbsp;O&nbsp;G&nbsp;I&nbsp;N</button>
+						</div>
 					</div>
-					<div >
-						<p>PASSWORD</p>
-						<input type="password" style="width: 400px;" name="password" id="password">
-					</div>
-					<div class="">
-						<button type="submit" class="btn btn-primary" style="background-color: #050099; margin-left: 100px; width:220px; margin-top: 15px;" onclick="return loginCheck()">L&nbsp;O&nbsp;G&nbsp;I&nbsp;N</button>
-					</div>
-				</div>
 				</form>
 				
 				<div class="">
