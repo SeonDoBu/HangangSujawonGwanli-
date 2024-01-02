@@ -16,4 +16,9 @@
 		WHERE  user_id = #{id}
 	</select>
 	
+	<insert id="joinUser" parameterType="Users">
+		INSERT INTO users(user_id,big_code,small_code,gigwan_id,password,name,email,tel,dept,position,status)
+		VALUES(#{user_id},1,#{small_code},#{gigwan_id},#{password},#{name},#{email},#{tel},#{dept},#{position},'1')
+	</insert>
+	
 </mapper>

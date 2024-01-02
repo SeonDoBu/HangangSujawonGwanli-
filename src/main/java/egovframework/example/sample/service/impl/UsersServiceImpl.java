@@ -42,4 +42,18 @@ public class UsersServiceImpl implements UsersService {
 		return result;
 	}
 
+	@Override
+	public int joinUser(Users user) {
+		log.info("joinUser Start...");
+		int result = 0;
+		try {
+			result = usersDao.joinUser(user);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		} finally {
+			log.info("joinUser End...");
+		}
+		return result;
+	}
+
 }

@@ -8,4 +8,6 @@ public interface UsersService {
 
 	int   checkDuplicateId(String id);
 
+	int   joinUser(Users user);
+
 }

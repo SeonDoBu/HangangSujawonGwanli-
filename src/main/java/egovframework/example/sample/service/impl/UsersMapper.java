@@ -11,4 +11,6 @@ public interface UsersMapper {
 
 	int   checkDuplicateId(String id);
 
+	int   joinUser(Users user);
+
 }

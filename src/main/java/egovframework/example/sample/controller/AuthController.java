@@ -117,19 +117,38 @@ public class AuthController {
 		return "joinForm";
 	}
 	
+	@PostMapping(value = "join.do")
+	public String joinUser(Users user, Model model) {
+		log.info("joinUser Start...");
+		String url = "";
+		try {
+			int result = us.joinUser(user);
+			// result에 따라 다른 페이지 이동
+			if(result > 0) {
+				model.addAttribute("msg", "성공적으로 가입되었습니다.");
+				url = "redirect:home.do";
+			} else {
+				model.addAttribute("msg", "회원가입에 실패하였습니다.");
+				url = "redirect:joinForm.do";
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		} finally {
+			log.info("joinUser End...");
+		}
+		
+		return url;
+	}
+	
 	@ResponseBody
-	@RequestMapping(value = "checkDuplicateId", method = RequestMethod.POST)
+	@RequestMapping(value = "checkDuplicateId", method = RequestMethod.GET)
 	public String checkDuplicateId(String id) {
 		log.info("checkDuplicateId Start...");
 		String msg = "";
 		
 		try {
 			int result = us.checkDuplicateId(id);
-			if(result == 0) {
-				msg = "사용 가능한 아이디입니다.";
-			} else {
-				msg = "중복된 아이디입니다.";
-			}
+			msg = Integer.toString(result);
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		} finally {

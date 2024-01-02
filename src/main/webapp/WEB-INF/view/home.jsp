@@ -6,6 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>한강수자원관리플랫폼</title>
+<style type="text/css">
+	.input-label {
+		font-size: 24px;
+		font-weight: bolder;
+		color: black;
+		margin-bottom: 0px;
+		margin-top: 4px;
+	}
+	
+	.input-box {
+		width: 345px;
+		height: 46px !important;
+		border: 2px solid #8C8C8C;
+   	 	margin-left: 0px;
+	}
+</style>
 
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded", function () {
@@ -98,7 +114,7 @@
 				</div>
 			</div>
 			
-			<div class="row row-cols-1 main-second-box">
+			<div class="row row-cols-1 main-second-box" style="height: 910px;">
 				<div class="col main-second-title-box">
 					<p>
 						<a role="button" onclick="loginLink()">로그인</a>&nbsp;&nbsp;&nbsp;<span>
@@ -109,48 +125,44 @@
 				<!-- 로그인 -->
 				<form method="post" action="loginCheck.do">
 					<input type="hidden" name="errorMsg" id="errorMsg" value="${errorMsg}">
-					<div>
-						<div>
-							<p>권한선택</p>
-						</div>
-						<div>
-							<select name="small_code" style="width: 400px; height: 38px;">
+					<div class="my-4 row justify-content-center">
+						<label class="input-label col-sm-3 text-end">권한</label>
+						<div class="col-sm-8">
+							<select name="small_code" class="input-box form-select">
 								<option value="1">실시간수문관리</option>
 								<option value="2">수자원시설물관리</option>
 								<option value="3">관리자</option>
 							</select>
-						<!-- <div class="col main-second-select-first">
-							<img alt="" src="/images/admin_icon4.png">
 						</div>
-						<div class="col main-second-select-second">
-							<img alt="" src="/images/admin_icon4.png">
+					</div>
+					<div class="my-4 row justify-content-center">
+						<label class="input-label col-sm-3 text-end">ID</label>
+						<div class="col-sm-8">
+							<input type="text" class="input-box form-control" name="user_id" id="login_id">
 						</div>
-						<div class="col main-second-select-third">
-							<img alt="" src="/images/admin_icon4.png">
-						</div> -->
+					</div>
+					<div class="my-4 row justify-content-center">
+						<label class="input-label col-sm-3 text-end">PW</label>
+						<div class="col-sm-8">
+							<input type="password" class="input-box form-control" name="password" id="password">
 						</div>
-						<div>
-							<p>ID</p>
-							<input type="text" style="width: 400px;" name="user_id" id="login_id">
-						</div>
-						<div>
-							<p>PASSWORD</p>
-							<input type="password" style="width: 400px;" name="password" id="password">
-						</div>
-						<div class="">
-							<button type="submit" class="btn btn-primary" style="background-color: #050099; margin-left: 100px; width:220px; margin-top: 15px;" onclick="return loginCheck()">L&nbsp;O&nbsp;G&nbsp;I&nbsp;N</button>
-						</div>
+					</div>
+					<div class="col main-second-join-btn-box container row justify-content-center my-5">
+						<button type="submit" class="btn btn-primary" style="background-color: #050099; width:220px; margin-top: 15px;"
+						 onclick="return loginCheck()">L&nbsp;O&nbsp;G&nbsp;I&nbsp;N</button>
+					</div>
+					<div style="height: 200px;">
 					</div>
 				</form>
 				
-				<div class="">
+<!-- 				<div class="">
 					<p>
 						<a role="button" data-bs-toggle="modal"
 						 data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">ID찾기</a>&nbsp;|&nbsp; 
 						<a role="button" data-bs-toggle="modal"
 						 data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap">PW찾기</a>
 					</p>
-				</div>
+				</div> -->
 				
 			</div>
 			

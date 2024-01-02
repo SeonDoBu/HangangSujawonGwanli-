@@ -8,13 +8,13 @@
 	if(session.getAttribute("user_id") != null) {
 		user_id   = (String)session.getAttribute("user_id");
 		user_name = (String)session.getAttribute("user_name");
-		user_role = (String)session.getAttribute("user_role"); 
-		
+		user_role = String.valueOf(session.getAttribute("user_role")); 
+		/* 
 		if(user_role == "3") {
 			
 		} else {
 			ModelAndView modelAndView = new ModelAndView("redirect:home.do");
-		}
+		} */
 	}	
 %>
 	<div class="admin-topbar-box">
