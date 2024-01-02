@@ -2,6 +2,7 @@ package egovframework.example.sample.service;
 
 import java.util.List;
 
+import egovframework.example.sample.dto.Gigwan;
 import egovframework.example.sample.dto.Notice;
 import egovframework.example.sample.dto.Users;
 
@@ -25,6 +26,15 @@ public interface AdminService {
 	List<Notice> getNoticeAllList(Notice notice);
 
 	int updateUser(Users users);
+
+	int countgigwan();
+
+	List<Gigwan> gigwanList(Gigwan gigwan);
+
+	Gigwan gigwanDetail(int gigwan_id);
+
+	int updateGigwan(Gigwan gigwan);
+
 
 
 

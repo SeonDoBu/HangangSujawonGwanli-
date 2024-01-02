@@ -6,6 +6,7 @@ import java.util.List;
 import org.egovframe.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import org.springframework.stereotype.Service;
 
+import egovframework.example.sample.dto.Gigwan;
 import egovframework.example.sample.dto.Notice;
 import egovframework.example.sample.dto.Users;
 import egovframework.example.sample.service.AdminService;
@@ -102,4 +103,46 @@ public class AdminServiceImpl extends EgovAbstractServiceImpl implements AdminSe
 		
 		return updateCount;
 	}
+
+	@Override
+	public int countgigwan() {
+		
+		int countgigwan = adminDao.countgigwan();
+		return countgigwan;
+	}
+
+	@Override
+	public List<Gigwan> gigwanList(Gigwan gigwan) {
+	List<Gigwan> gigwanList = adminDao.gigwanList(gigwan);
+		
+		return gigwanList;
+	}
+
+	@Override
+	public Gigwan gigwanDetail(int gigwan_id) {
+		Gigwan gigwan = new Gigwan();
+		
+		try {
+			gigwan = adminDao.gigwanDetail(gigwan_id);
+		} catch (Exception e) {
+			System.out.println("adminServiceImpl gigwanDetail e.getMessage()->>"+e.getMessage());
+		}
+		
+		
+		
+		return gigwan;
+	}
+
+	@Override
+	public int updateGigwan(Gigwan gigwan) {
+		int updateCount = 0;
+		try {
+			log.info("updateGigwan=>"+gigwan.getGigwan_id());
+			updateCount = adminDao.updateGigwan(gigwan);
+		} catch (Exception e) {
+			System.out.println("AdminServiceImpl updateAdNoti e.getMessage()->"+e.getMessage());
+		}
+		return updateCount;
+	}
+
 }

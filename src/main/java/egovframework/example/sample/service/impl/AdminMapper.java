@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.egovframe.rte.psl.dataaccess.mapper.Mapper;
 
+import egovframework.example.sample.dto.Gigwan;
 import egovframework.example.sample.dto.Notice;
 import egovframework.example.sample.dto.Users;
 
@@ -28,5 +29,13 @@ public interface AdminMapper {
 	List<Notice> getNoticeAllList(Notice notice);
 
 	int updateUser(Users users);
+
+	int countgigwan();
+
+	List<Gigwan> gigwanList(Gigwan gigwan);
+
+	Gigwan gigwanDetail(int gigwan_id);
+
+	int updateGigwan(Gigwan gigwan);
 
 }

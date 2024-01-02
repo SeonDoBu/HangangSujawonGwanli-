@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자시스템</title>
+<title>사용자관리_기관관리</title>
 
 <script type="text/javascript">
 	function adminPageMobe(pageId) {
@@ -24,31 +24,30 @@
 		} 
 	}
 	
-	function checkUser_id(user_id) {
-	    console.log("checkUser_id start!");
+	function checkgigwan_id(gigwan_id) {
+	    console.log("checkgigwan_id start!");
 
-	    var userId = user_id;
-
-	    $.ajax({
+	    var gigwan_id = gigwan_id;
+   $.ajax({
 	        type: 'GET',
-	        url: 'userDetail.do',
-	        data: { userId: userId },
+	        url: 'gigwanDetail.do',
+	        data: { gigwan_id: gigwan_id },
 	        success: function(response) {
 	            console.log("Ajax success!");
 
 	            var data = $(response);
 	            console.log(data);
 	            
-	            $('#content').val(data.find('#content').val());
-	            $('#user_id').val(data.find('#user_id').val());
+	            /* $('#content').val(data.find('#content').val()); */
+	            $('#gigwan_id').val(data.find('#gigwan_id').val());
 	            $('#name').val(data.find('#name').val());
-	            $('#gigiwan').val(data.find('#gigiwan').val());
-	            $('#dept').val(data.find('#dept').val());
+	            $('#address').val(data.find('#address').val());
+	           /*  $('#dept').val(data.find('#dept').val()); */
 	            $('#tel').val(data.find('#tel').val());
-	            $('#email').val(data.find('#email').val());
-	            $('#status').val(data.find('#status').val());
+	            $('#info').val(data.find('#info').val());
+	           /*  $('#status').val(data.find('#status').val());
 	            var test = $('#content').val(data.find('#content').val());
-	            console.log(test);
+	            console.log(test); */
 
 	            // Show the modal
 	            $('#exampleModal').modal('show');
@@ -57,7 +56,7 @@
 	            console.error("Ajax error:", error);
 	        }
 	    });
-	}
+	} 
 
 </script>
 </head>
@@ -118,23 +117,15 @@
 				<img alt="..." src="/images/admin_icon5.png">
 			</div>
 			<div class="cols admin-content-first-title-box">
-				<c:choose>
-					<c:when test="${pageCode eq 1}">
-						<p>사용자관리</p>
-					</c:when>
-					<c:when test="${pageCode eq 2}">
+			
 						<p>기관관리</p>
-					</c:when>
-					<c:otherwise>
-						<p>사용자관리</p>					
-					</c:otherwise>
-				</c:choose>
+		
 
 			</div>
 		</div>
 
 		<!-- keyword -->
-		<div class="row row-cols-1 admin-content-second-box">
+		<div class="row row-cols-1 admin-content-second-box" style="width: 1200px;">
 			<div class="cols admin-content-keyword-first-box">
 				<p>검색조건</p>
 			</div>
@@ -158,41 +149,38 @@
 		<!-- 글번호 Logic -->
 		<c:set var="num" value="1"/>
 		
-		<!-- 사용자 리스트 -->
-		<div class="row row-cols-1 admin-content-third-box">
-			<table class="table admin-content-third-table">
+		<!-- 기관 리스트 -->
+		<div class="row row-cols-1 admin-content-third-box" style="width: 1200px;">
+			<table class="table admin-content-third-table" >
 				<tr>
-					<th colspan="7"
+					<th colspan="8"
 						style="background-color: transparent; border: none; border-top: 2px solid white; text-align: start; font-size: 24px; font-weight: bolder;">
-						사용자목록</th>
+						기관 목록</th>
 				</tr>
 				<tr>
-					<th colspan="2">권한</th>
-					<th>성명</th>
-					<th>아이디</th>
-					<th>휴대전화</th>
-					<th>이메일</th>
-					<th>사용여부</th>
+					<th colspan="2">기관 ID</th>
+					<th>기관명</th>
+					<th>주소</th>
+					<th>전화번호</th>
+					<th>정보</th>
+					
+					
+					
 				</tr>
-				<c:forEach var="users" items="${userAllList }">
+				<c:forEach var="GL" items="${gigwanList }">
 					<tr>
 						<td>${num }</td>
 						<c:set var="num" value="${num +1 }"/>	
-						<td>${users.content }</td>
-						<td><a onclick="checkUser_id('${users.user_id }')" role="button" data-bs-toggle="modal"
+						
+						<td><a onclick="checkgigwan_id('${GL.gigwan_id }')" role="button" data-bs-toggle="modal"
 							   data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
-								${users.name }</a></td>
-						<td>${users.user_id }</td>
-						<td>${users.tel }</td>
-						<td>${users.email }</td>
-						<c:choose>
-							<c:when test="${users.status eq 0 }">
-								<td>N</td>							
-							</c:when>
-							<c:otherwise>
-								<td>Y</td>										
-							</c:otherwise>
-						</c:choose>
+								${GL.gigwan_id }</a></td>
+								
+						<td>${GL.name }</td>		
+						<td>${GL.address }</td>
+						<td>${GL.tel }</td>
+						<td>${GL.info }</td>
+					
 					</tr>
 				</c:forEach>				
 			</table>
@@ -228,47 +216,32 @@
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header admin-modal-header-box">
-							<p class="modal-title" id="exampleModalLabel">사용자&nbsp;상세</p>
+							<p class="modal-title" id="exampleModalLabel">기관&nbsp;상세</p>
 							<button type="button" class="btn-close" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 						</div>
 						<div class="modal-body" id="userDetailModalBody">
-							<form action="updateUser.do" method="post">
+							<form action="updateGigwan.do" method="post">
+							
 								<div class="mb-3 admin-modal-content-box">
-									<label for="content" class="col-form-label">권한</label> 
-									<select class="form-select" id="content" >									
-										<option value="1">수자원시설물관리</option>
-										<option value="2">실시간수문정보관리</option>
-										<option value="3">관리자</option>
-									</select>
+									<label for="gigwan_id" class="col-form-label">기관ID</label> 
+									<input type="text" class="form-control" name="gigwan_id" id="gigwan_id" value="${gigwan.gigwan_id }">
 								</div>
 								<div class="mb-3 admin-modal-content-box">
-									<label for="user_id" class="col-form-label">ID</label> 
-									<input type="text" class="form-control" name="user_id" id="user_id" value="${userFind.user_id }">
+									<label for="name" class="col-form-label">기관명</label> 
+									<input type="text" class="form-control" name="name" id="name" value="${gigwan.name }">
 								</div>
 								<div class="mb-3 admin-modal-content-box">
-									<label for="name" class="col-form-label">성명</label> 
-									<input type="text" class="form-control" name="name" id="name" value="${userFind.name }">
+									<label for="gigiwan" class="col-form-label">주소</label> 
+									<input type="text" class="form-control"  name="address" id="address" value="${gigwan.address}" >
 								</div>
 								<div class="mb-3 admin-modal-content-box">
-									<label for="gigiwan" class="col-form-label">기관ID</label> 
-									<input type="number" class="form-control" step="0.0000001" name="gigwan_id" id="gigwan_id" value="${userFind.gigwan_id}" >
+									<label for="dept" class="col-form-label">전화 번호</label> 
+									<input type="text" class="form-control" id="tel" name="tel" value="${gigwan.tel }">
 								</div>
 								<div class="mb-3 admin-modal-content-box">
-									<label for="dept" class="col-form-label">소속부서</label> 
-									<input type="text" class="form-control" id="dept" name="dept" value="${userFind.dept }">
-								</div>
-								<div class="mb-3 admin-modal-content-box">
-									<label for="tel" class="col-form-label">TEL</label> 
-									<input type="text" class="form-control" id="tel" name="tel" value="${userFind.tel }">
-								</div>
-								<div class="mb-3 admin-modal-content-box">
-									<label for="email" class="col-form-label">EMAIL</label> 
-									<input type="text" class="form-control" id="email" name="email" value="${userFind.email }">
-								</div>
-								<div class="mb-3 admin-modal-content-box">
-									<label for="status" class="col-form-label">사용여부</label> 
-									<input type="text" class="form-control" id="status" name="status" value="${userFind.status }">
+									<label for="tel" class="col-form-label">정보</label> 
+									<input type="text" style="width: 300px; height: 200px;" class="form-control" id="info" name="info" value="${gigwan.info }">
 								</div>
 							
 						</div>

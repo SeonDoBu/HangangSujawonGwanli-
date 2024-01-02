@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import egovframework.example.sample.dto.Gigwan;
 import egovframework.example.sample.dto.Notice;
 import egovframework.example.sample.dto.Paging;
 import egovframework.example.sample.dto.Users;
@@ -46,6 +47,66 @@ public class AdminController {
 		log.info("AdminController adminInfo end..");
 		return "admin/adminInfo";
 	}
+	@RequestMapping(value = "gigwan.do")
+	public String gigwanList(Gigwan gigwan, Users users, String userId, String currentPage, Model model) {
+		log.info("AdminController gigwanList start!");
+		int countgigwan = as.countgigwan();
+		System.out.println("AdminController countgigwan.size()=??>"+countgigwan);
+		log.info("AdminController gigwanList countUsers : {}", countgigwan);
+		List<Gigwan> gigwanList = null;
+
+		Paging page = new Paging(countgigwan, currentPage);
+		users.setStart(page.getStart());
+		users.setEnd(page.getEnd());
+		log.info("AdminController gigwanList page : {}", page);
+		try {
+			gigwanList = as.gigwanList(gigwan);
+			log.info("AdminController gigwanList gigwanList.size : {}", gigwanList.size());
+
+			model.addAttribute("gigwanList", gigwanList);
+			model.addAttribute("page", page);
+		} catch (Exception e) {
+
+		}
+		log.info("AdminController gigwanList end..");
+		return "admin/gigwanList";
+	}
+	
+	@RequestMapping(value = "gigwanDetail.do")
+	public String gigwanDetail(int gigwan_id, Model model) {
+		log.info("AdminController gigwanDetail start!");
+		log.info("AdminController gigwanDetail userId : {}", gigwan_id);
+		Gigwan gigwanDetail = null;
+		try {
+			gigwanDetail = as.gigwanDetail(gigwan_id);
+			log.info("AdminController gigwanDetail gigwanDetail.getName : {}", gigwanDetail.getGigwan_id());
+			model.addAttribute("gigwan", gigwanDetail);
+		} catch (Exception e) {
+			log.error("AdminController gigwanDetail Error : {}", e.getMessage());
+		}
+
+		return "admin/gigwanList";
+	}
+	@PostMapping(value = "updateGigwan.do")
+	public String updateGigwan(Gigwan gigwan, Model model) {
+		System.out.println("AdMinController updateAdNoti start");
+		 
+		int updateCount = as.updateGigwan(gigwan);
+		
+		System.out.println("updateGigwan "+ gigwan.getGigwan_id());
+		System.out.println("updateGigwan"+gigwan.getAddress());
+		System.out.println("updateGigwan gigwan"+gigwan.getName());
+		System.out.println("updateGigwan gigwan"+gigwan.getTel());
+		
+		model.addAttribute("updateCount", updateCount);
+		model.addAttribute("gigwan", gigwan);		
+		return "redirect:gigwan.do";
+	}
+	
+	
+	
+	
+	
 	@PostMapping(value = "updateUser.do")
 	public String updateUser(@ModelAttribute Users users , Model model) {
 		

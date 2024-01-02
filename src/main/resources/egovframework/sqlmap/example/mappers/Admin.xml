@@ -105,5 +105,29 @@
 		where user_id = #{user_id}
 	</update>
 	
+	<select id="countgigwan" resultType="int">
+	select count(*)
+	from gigwan
+	</select>
+	<select id="gigwanList" resultType="Gigwan" parameterType="Gigwan">
+	select * 
+	from gigwan
+	</select>
+	<select id="gigwanDetail" parameterType="int" resultType="Gigwan">
+	select * 
+	FROM gigwan
+	where gigwan_id = #{gigwan_id}
+	
+	</select>
+	<update id="updateGigwan" parameterType="Gigwan">
+	UPDATE gigwan
+	SET 
+	name = #{name},
+	address = #{address},
+	tel = #{tel},
+	info = #{info}
+	where gigwan_id = #{gigwan_id}
+	</update>
+	
 	
 </mapper>
