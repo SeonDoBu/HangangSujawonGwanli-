@@ -30,7 +30,7 @@ siseolVectorLayer = new ol.layer.Vector({
 
 function sluiceval() {
       var type5 = $("#chk9").val();   
-      var  type1 = $("#chk10").val();   
+      var type1 = $("#chk10").val();   
       var type4 = $("#chk8").val();
       
    /*   type5 = $("#chk9").val();      
@@ -399,19 +399,19 @@ function getSiseolLayer() {
 				
 				var src; 
 				if(data.small_code == '1') {
-					src = 'images/pochaco1.png'
+					src = 'images/siseol_marker_1.png'
 				} else if(data.small_code == '2') {
-					src = 'images/pochaco2.png'
+					src = 'images/siseol_marker_2.png'
 				} else if(data.small_code == '3') {
-					src = 'images/pochaco3.png'
+					src = 'images/siseol_marker_3.png'
 				} else if(data.small_code == '4') {
-					src = 'images/pochaco4.png'
+					src = 'images/siseol_marker_4.png'
 				}
 				
 				var iconStyle = new ol.style.Style({
 					image: new ol.style.Icon(({
 						anchor: [0.5, 0.96],
-						scale: 0.1,
+						scale: 0.5,
 						src: src
 					})),
 					zindex: 10
