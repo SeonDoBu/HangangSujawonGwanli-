@@ -4,10 +4,16 @@
 	<select id="getUserById" parameterType="Users" resultType="Users">
 		SELECT *
 		FROM   users
-		WHERE  small_code = #{small_code}
+		WHERE  status     = '1'
+		<if test="small_code != 0">
+		AND    small_code = #{small_code}
+		</if>
+		<if test="user_id != '' and user_id != null">
 		AND    user_id    = #{user_id}
-		AND    password   = #{password}
-		AND    status     = '1'
+		</if>
+		<if test="password != '' and password != null">
+		AND    password   = #{password}  
+		</if>
 	</select>
 
 	<select id="checkDuplicateId" parameterType="String" resultType="int">

@@ -110,13 +110,13 @@
 						<option>비</option>
 					</select>&nbsp;&nbsp;&nbsp;
 					
-					점검자 소속 : ${inspection.dept}
+					점검자 소속 : <input type="hidden" name="dept" value="${dept}">${dept}
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					
-					직급 : ${inspection.position}
+					직급 : <input type="hidden" name="position" value="${position}">${position}
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					
-					이름 : ${inspection.name}
+					이름 : <input type="hidden" name="user_id" value="${user_id}">${user_name}
 					
 				</div>	
 		  </div>

@@ -3,6 +3,8 @@ package egovframework.example.sample.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import egovframework.example.sample.dto.Paging;
 import egovframework.example.sample.dto.Siseol;
 import egovframework.example.sample.dto.Users;
 import egovframework.example.sample.service.SiseolService;
+import egovframework.example.sample.service.UsersService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -23,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class HtController {
 
 	private final SiseolService siseolService;
+	private final UsersService  usersService;
 
 	@RequestMapping("test.do")
 	public String test(Model model, Siseol siseol) {
@@ -86,17 +90,27 @@ public class HtController {
 	
 	// 점검이력 작성폼
 	@RequestMapping("siseoulWriteForm.do")
-	public String siseoulWriteForm(Model model, String currentPage, Inspection inspection) {
+	public String siseoulWriteForm(Model model, String currentPage, Inspection inspection, HttpSession session) {
 		System.out.println("htController siseoulWriteForm Start...");
 		
-		//임시로 넣기
-		inspection.setDept("생산부");
-		inspection.setPosition("사원");
-		inspection.setName("조형택");
-		inspection.setUser_id("user1");
+		/*
+		 * //임시로 넣기 inspection.setDept("생산부"); inspection.setPosition("사원");
+		 * inspection.setName("조형택"); inspection.setUser_id("user1");
+		 */
 		
 		try {
-			model.addAttribute("inspection", inspection);
+			String user_id = (String)session.getAttribute("user_id");
+			Users userInfo = new Users();
+			userInfo.setUser_id(user_id);
+			Users user = usersService.getUserById(userInfo);
+			String user_name = user.getName();
+			String dept = user.getDept();
+			String position = user.getPosition();
+			// model.addAttribute("inspection", inspection);
+			model.addAttribute("user_id", user_id);
+			model.addAttribute("user_name", user_name);
+			model.addAttribute("dept", dept);
+			model.addAttribute("position", position);
 		}catch (Exception e) {
 			System.out.println("htController siseoulWriteForm Exception -> " + e.getMessage());
 		}
@@ -110,10 +124,10 @@ public class HtController {
 	//	public String siseoulWriteAction(Model model, Inspection inspection) {
 		System.out.println("htController siseoulWriteAction Start...");
 		System.out.println("inspection.getUser_id()--> " + inspection.getUser_id());
-		//임시로 넣기
-		inspection.setDept("생산부");
-		inspection.setPosition("사원");
-		inspection.setName("조형택");
+		/*
+		 * //임시로 넣기 inspection.setDept("생산부"); inspection.setPosition("사원");
+		 * inspection.setName("조형택");
+		 */
 		
 		try {
 			int result = siseolService.inspectionInsert(inspection);

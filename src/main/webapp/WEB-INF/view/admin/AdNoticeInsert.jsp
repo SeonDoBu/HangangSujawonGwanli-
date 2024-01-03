@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/components/header.jsp"%>
+<%  String user_id   = "";
+	String user_name = "";
+	String user_role = "";
+	
+	if(session.getAttribute("user_id") != null) {
+		user_id   = (String)session.getAttribute("user_id");
+		user_name = (String)session.getAttribute("user_name");
+		user_role = String.valueOf(session.getAttribute("user_role")); 
+	}	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,7 +104,7 @@ function checkUser_id(user_id) {
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<td><input type="text" name="user_id" ></td>
+						<td><input type="text" name="user_id" value="<% out.println(user_id); %>"></td>
 						<th>작성일자</th>
 						<!-- Data pattern 변환 -->
 						
@@ -109,7 +119,7 @@ function checkUser_id(user_id) {
 			<div class="row row-cols-1 notcieDetail-third-box">
 				<table class="table notcieDetail-third-table">
 					<tr>
-						<td><textarea type="text" rows="25" cols="110"  name="content"></textarea></td>
+						<td><textarea rows="25" cols="110"  name="content"></textarea></td>
 					</tr>
 				</table>
 			</div>

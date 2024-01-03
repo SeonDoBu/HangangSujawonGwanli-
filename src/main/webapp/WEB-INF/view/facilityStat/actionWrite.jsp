@@ -1,7 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="faheader.jsp" %>    
-
+<%  String user_id   = "";
+	String user_name = "";
+	String user_role = "";
+	
+	if(session.getAttribute("user_id") != null) {
+		user_id   = (String)session.getAttribute("user_id");
+		user_name = (String)session.getAttribute("user_name");
+		user_role = String.valueOf(session.getAttribute("user_role")); 
+	}	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -175,7 +184,7 @@ function siseolContent() {
 				</td>
 				
 				<td class="table-active"  style="font-weight: bold;">작성자</td>
-				<td><input name="user_id" value="admin"  class="form-control" type="text" required="required"></td>
+				<td><input name="user_id" value="<% out.println(user_id); %>"  class="form-control" type="text" required="required"></td>
 			</tr>
 			
 			<tr>
