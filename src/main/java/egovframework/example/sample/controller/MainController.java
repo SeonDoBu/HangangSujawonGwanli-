@@ -20,7 +20,11 @@ public class MainController {
 	private final AdminService as;
 
 	@RequestMapping(value = "home.do")
-	public String home() {
+	public String home(String errorMsg, Model model) {
+		if(errorMsg == null || errorMsg == "") {
+			errorMsg = "";
+		}
+		model.addAttribute("errorMsg", errorMsg);
 		return "home";
 	}
 

@@ -25,9 +25,9 @@
 
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded", function () {
-		const errorMsg = document.getElementById('errorMsg').value;
 		// 에러 메시지가 존재할 경우 alert창으로 표시
-		if(errorMsg != null && errorMsg != "" && errorMsg != undefined) {
+		var errorMsg = "<c:out value='${errorMsg}'/>";
+		if(errorMsg != null && errorMsg != undefined && errorMsg != "") {
 			alert(errorMsg);
 		}
 	});

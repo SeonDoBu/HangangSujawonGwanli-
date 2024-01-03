@@ -10,4 +10,6 @@ public class Bookmark {
 	private int    bookmark_id;	// 북마크ID(PK)
 	private int    siseol_id;	// 시설물코드
 	private int    sluice_id;	// 수문코드
+	
+	private String keyword; // 조회용
 }

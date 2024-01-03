@@ -17,7 +17,6 @@ var wms5;
 var wms6;
 var wms7;
 
-
 $(document).ready(function() {
 	console.log("document.ready");
    map = new ol.Map({ // OpenLayer의 맵 객체를 생성한다.
@@ -85,12 +84,13 @@ $(document).ready(function() {
          return true;
       });
       if (hover) {
+		if(hover.get('code') == 1) {
          var content = '<form action="ObservDataList" method="POST">'
          + "<div class='__float-tbl' id='my_div'>관측소 번호 : " + hover.get('id')
-			+ "<input type='hidden' name='sluice_id' value='"+hover.get('id')+"'>"
+			+ "<input type='hidden' name='sluice_id' id='sluice_id' value='"+hover.get('id')+"'>"
             + "<br>경도:" + hover.get('mapx') + "<br>위도:" + hover.get('mapy')
          /*   +"<div>type = 1 강수량만 나오게 </div>"*/
-            + " <br><button style='background-color: #2a5dc5; border: 0px;' type='button' onclick='alert()'>"
+            + " <br><button style='background-color: #2a5dc5; border: 0px;' type='button' onclick='saveBookmarkSl()'>"
             + '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16" style="background-color: #2a5dc5;">'
             + '<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>'
             + '</svg>'
@@ -99,6 +99,17 @@ $(document).ready(function() {
          /*   +'    <input type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal1">'   
             +"강수량</button>'"*/
    +'   </form></div>';
+		} else if(hover.get('code') == 2) {
+			var content = "<div class='__float-tbl' id='my_div'>시설물 번호 : " + hover.get('id')
+			+ "<input type='hidden' name='siseol_id' id='siseol_id' value='"+hover.get('id')+"'>"
+            + "<br>경도:" + hover.get('mapx') + "<br>위도:" + hover.get('mapy')
+            + " <br><button style='background-color: #2a5dc5; border: 0px;' type='button' onclick='saveBookmarkSs()'>"
+            + '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16" style="background-color: #2a5dc5;">'
+            + '<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>'
+            + '</svg>'
+            + "</button>"
+            + "<input type='button'    value='닫기'  onclick='deleteDiv()'></div>";
+		}
          popupContent.innerHTML = content;
          mapOverlay.setPosition(lon, lat);
          mapOverlay.setOffset(lon, lat);
@@ -340,7 +351,8 @@ function sluiceval() {
                value20   :   value20   ,
                value21   :   value21   ,
                value22   :   value22   ,
-               value23   :   value23   
+               value23   :   value23   ,
+			   code: 1
             });
             var iconStyle = new ol.style.Style({
                image: new ol.style.Icon(({
@@ -419,6 +431,7 @@ function getSiseolLayer() {
 					id: id,
 					mapx:mapx,
 					mapy:mapy,
+					code: 2
 				});
 				
 				var src; 

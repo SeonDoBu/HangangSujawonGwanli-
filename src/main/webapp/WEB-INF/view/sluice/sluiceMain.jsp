@@ -186,10 +186,52 @@
 			  div.remove();
 			} 
 		
-		function alert() {
-			console.info('부리부리 대마왕');
+		function saveBookmarkSs() {
+			const id = document.getElementById('siseol_id').value;
+			if(confirm('북마크에 저장하시겠습니까?')) {
+				location.href = "saveBookmarkSs.do?siseol_id="+id;	
+			}
 		}
-
+		
+		function saveBookmarkSl() {
+			const id = document.getElementById('sluice_id').value;
+			if(confirm('북마크에 저장하시겠습니까?')) {
+				location.href = "saveBookmarkSl.do?sluice_id="+id;	
+			}
+		}
+		
+		function updateBookmarkList() {
+			const option = document.getElementById('bookmarkSelect').value;
+			const user_id = "${user_id}";
+			
+			$.ajax({
+				url:"updateBookmarkList",
+				data:{option: option, user_id: user_id},
+				method:'GET',
+				dataType:'json',
+				success: function(bookmarkList) {
+					$('#bookmarkListTable').empty();
+					bookmarkList.forEach(function(b) {
+						if(b.sluice_id != 0 && b.sluice_id != null) {
+							$("#bookmarkListTable").append("<tr><td scope='row'>" + b.sluice_id + "</td></tr>");
+						} else if(b.siseol_id != 0 && b.siseol_id != null) {
+							$("#bookmarkListTable").append("<tr><td scope='row'>" + b.siseol_id + "</td></tr>");
+						}
+					})
+				},
+				error: function() {
+					alert("북마크 정보를 가져오지 못했습니다.");
+				}
+			})
+		}
+		
+		$(document).ready(function() {
+			var msg = "<c:out value='${msg}'/>";
+			if(msg != null && msg != undefined && msg != "") {
+				alert(msg);
+			}
+			updateBookmarkList();
+		})
 	
 		
 	</script>
@@ -337,47 +379,46 @@
   <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
 </svg>
  <small>북마크</small>
- 
- 
 </button>
+
 <div class="offcanvas offcanvas-start" style="margin-top: 80px; margin-left: 80px; float: left;" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling3" aria-labelledby="offcanvasScrollingLabel">
-  <!-- 사이드바 헤더  -->
+  <!-- 사이드바 헤더 -->
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">사이드바 헤더3</h5>
+    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">북마크</h5>
     <button  type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <!-- 사이드바 바디 리스트용  -->
   <div class="offcanvas-body">
-    <p>사이드바 테이블3 </p>
+    <div>
+    	<select name="keyword" id="bookmarkSelect" onchange="updateBookmarkList()">
+    		<option value="1">전체</option>
+    		<option value="2">관측소</option>
+    		<option value="3">시설물</option>
+    	</select>
+    	<span class="text-end" id="totalBookmark"></span><!-- 총 개수 -->
+    </div>
     <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+	    <thead>
+	    	<tr>
+	    		<th scope="col">시설물명</th>
+	    	</tr>
+	    </thead>
+		
+		<tbody id="bookmarkListTable">
+<%-- 			<c:forEach var="bookmark" items="${bookmarkList}">
+				<c:if test="${bookmark.siseol_id != 0 && bookmark.siseol_id != null}">
+					<tr>
+						<td scope="row">${bookmark.siseol_id}</td>
+					</tr>	
+				</c:if>	
+				<c:if test="${bookmark.sluice_id != 0 && bookmark.sluice_id != null}">
+					<tr>
+						<td scope="row">${bookmark.sluice_id}</td>
+					</tr>	
+				</c:if>	
+			</c:forEach> --%>
+		</tbody>
+	</table>
   </div>
 </div>
 </div>
@@ -490,9 +531,6 @@
 		<div id="popup-content"></div>
 	</div>
 	</div>
-	
-
-
 
 </div>
     <!-- Optional JavaScript; choose one of the two! -->

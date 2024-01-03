@@ -1,5 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.example.sample.service.impl.BookmarkMapper">
-
+	<insert id="saveBookmarkSs" parameterType="Bookmark">
+		INSERT INTO bookmark(user_id, bookmark_id
+		<if test="siseol_id != 0">, siseol_id</if>
+		<if test="sluice_id != 0">, sluice_id</if>)
+		VALUES(#{user_id}, nextval('bookmark_id_seq')
+		<if test="siseol_id != 0">, #{siseol_id}</if>
+		<if test="sluice_id != 0">, #{sluice_id}</if>)
+	</insert>
+	
+	<select id="getBookmarkListUser" parameterType="Bookmark" resultType="Bookmark">
+		SELECT *
+		FROM   bookmark
+		WHERE  user_id = #{user_id}
+		<if test="sluice_id != 0">
+			AND sluice_id = #{sluice_id}
+		</if>
+		<if test="siseol_id != 0">
+			AND siseol_id = #{siseol_id}
+		</if>
+		<if test="keyword != null and keyword != ''">
+			<choose>
+				<when test="keyword == 2">
+					AND sluice_id IS NOT NULL
+					AND siseol_id IS NULL
+				</when>
+				<when test="keyword == 3">
+					AND sluice_id IS NULL
+					AND siseol_id IS NOT NULL
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	<select id="bookmarkUserCount" parameterType="Bookmark" resultType="int">
+		SELECT *
+		FROM   bookmark
+		WHERE  user_id = #{user_id}
+		<if test="sluice_id != 0">
+			AND sluice_id = #{sluice_id}
+		</if>
+		<if test="siseol_id != 0">
+			AND siseol_id = #{siseol_id}
+		</if>
+		<if test="keyword != null and keyword != ''">
+			<choose>
+				<when test="keyword == 2">
+					AND sluice_id IS NOT NULL
+					AND siseol_id IS NULL
+				</when>
+				<when test="keyword == 3">
+					AND sluice_id IS NULL
+					AND siseol_id IS NOT NULL
+				</when>
+			</choose>
+		</if>
+	</select>
 </mapper>

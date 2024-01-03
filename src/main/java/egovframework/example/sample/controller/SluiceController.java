@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import egovframework.example.sample.dto.Bookmark;
 import egovframework.example.sample.dto.Commoncode;
 import egovframework.example.sample.dto.District;
 import egovframework.example.sample.dto.Gigwan;
@@ -286,26 +289,129 @@ public class SluiceController {
 		return siseolList;
 	}
 	
+	@RequestMapping(value = "saveBookmarkSs.do")
+	public String saveBookmarkSs(String siseol_id, HttpSession session, Model model) {
+		log.info("saveBookmarkSs Start...");
+		String msg = "";
+		try {
+			String user_id = (String)session.getAttribute("user_id");
+			Bookmark bookmark = new Bookmark();
+			bookmark.setUser_id(user_id);
+			bookmark.setSiseol_id(Integer.parseInt(siseol_id));
+			
+			int count = bookmarkService.bookmarkUserCount(bookmark);
+			if(count == 0) {
+				int result = bookmarkService.saveBookmarkSs(bookmark);
+				if(result > 0) {
+					msg = "성공적으로 저장되었습니다.";
+				} else {
+					msg = "저장에 실패하였습니다. 다시 시도해주세요.";
+				}
+			} else {
+				msg = "이미 저장된 시설물입니다.";
+			}
+			model.addAttribute("msg", msg);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		} finally {
+			log.info("saveBookmarkSs End...");
+		}
+		
+		return "redirect:sluiceMain";
+	}
+	
+	@RequestMapping(value = "saveBookmarkSl.do")
+	public String saveBookmarkSl(String sluice_id, HttpSession session, Model model) {
+		log.info("saveBookmarkSl Start...");
+		String msg = "";
+		try {
+			String user_id = (String)session.getAttribute("user_id");
+			Bookmark bookmark = new Bookmark();
+			bookmark.setUser_id(user_id);
+			bookmark.setSluice_id(Integer.parseInt(sluice_id));
+			
+			int count = bookmarkService.bookmarkUserCount(bookmark);
+			if(count == 0) {
+				int result = bookmarkService.saveBookmarkSs(bookmark);
+				if(result > 0) {
+					msg = "성공적으로 저장되었습니다.";
+				} else {
+					msg = "저장에 실패하였습니다. 다시 시도해주세요.";
+				}
+			} else {
+				msg = "이미 저장된 관측소입니다.";
+			}
+			model.addAttribute("msg", msg);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		} finally {
+			log.info("saveBookmarkSl End...");
+		}
+		
+		return "redirect:sluiceMain";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "updateBookmarkList")
+	public List<Bookmark> updateBookmarkList(String option, String user_id) {
+		log.info("updateBookmarkList Start...");
+		List<Bookmark> bookmarkList = null;
+		try {
+			Bookmark bookmark = new Bookmark();
+			bookmark.setUser_id(user_id);
+			bookmark.setKeyword(option);
+			bookmarkList = bookmarkService.getBookmarkListUser(bookmark);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		} finally {
+			log.info("updateBookmarkList End...");
+		}
+		return bookmarkList;
+	}
+	
 	
 	//수문 지도 메인 맵핑
 	@GetMapping(value = "/sluiceMain")
-	public String SluiceMain(Sluice sluice,  Model model,String currentPage) {
-				
-		int sluiceCnt = ss.sluiceCount();
-
+	public String SluiceMain(Sluice sluice,  Model model,String currentPage, String msg
+							 , Bookmark bookmark, HttpSession session) {
+		log.info("sluiceMain Start...");
+		try {
+			String user_id = (String)session.getAttribute("user_id");
+			
+			int sluiceCnt = ss.sluiceCount();
+			
+			Paging page = new Paging(sluiceCnt, currentPage);
+			
+			sluice.setStart(page.getStart());
+			sluice.setEnd(page.getEnd());
+			
+			List<Sluice> SluiceList = ss.sluiceList(sluice);
+			
+			model.addAttribute("page",page);
+			model.addAttribute("currentPage",currentPage);
+			
+			model.addAttribute("sluiceCnt", sluiceCnt);
+			model.addAttribute("SluiceList",SluiceList);
+			
+			// msg가 있으면 출력할 수 있도록 모델에 저장
+			if(msg == null || msg == "") {
+				msg = "";
+			}
+			model.addAttribute("msg", msg);
+			model.addAttribute("user_id", user_id);
+			
+			// 회원의 북마크 목록 가져오기
+			bookmark.setUser_id(user_id);
+			int bookmarkCount = bookmarkService.bookmarkUserCount(bookmark);
+			List<Bookmark> bookmarkList = bookmarkService.getBookmarkListUser(bookmark);
+			model.addAttribute("bookmarkList", bookmarkList);
+			model.addAttribute("bookmarkCount", bookmarkCount);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		} finally {
+			log.info("sluiceMain End...");
+		}
 		
-		Paging page = new Paging(sluiceCnt, currentPage);
-		
-		sluice.setStart(page.getStart());
-		sluice.setEnd(page.getEnd());
-		
-		List<Sluice> SluiceList = ss.sluiceList(sluice);
-		
-		model.addAttribute("page",page);
-		model.addAttribute("currentPage",currentPage);
-		
-				model.addAttribute("sluiceCnt", sluiceCnt);
-				model.addAttribute("SluiceList",SluiceList);
 		return "sluice/sluiceMain";
 	}
 	
@@ -497,7 +603,7 @@ public class SluiceController {
 	}
 	
 	@PostMapping(value = "observdataUpdate")
-	public String updateObserv(Sluice sluice,ObservData observData, Model model) {
+	public String updateObserv(Sluice sluice, ObservData observData, Model model) {
 		log.info("updateObserv start");
 		try {
 			
@@ -511,13 +617,14 @@ public class SluiceController {
 			model.addAttribute("observData",observData);	
 			log.info("updateObserv");
 			
-			
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
+
 		return "sluice/sluiceMain";
 
 	}
+	
 	@PostMapping(value = "updateSluice")
 	public String updateSluice(@ModelAttribute Sluice sluice, Model model) {
 		
