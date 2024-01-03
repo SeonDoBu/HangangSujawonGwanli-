@@ -168,14 +168,18 @@ function checkUser_id(user_id) {
 				<button onclick="pageMove()">&nbsp;&nbsp;목록으로&nbsp;&nbsp;</button>
 				
 				<button type="submit" style="margin-left: 20px; margin-right: 20px;"> 수정</button>
-
-				<button type="button"> 삭제</button>
-			
+</form>	
 			</div>
-			</form>
+			
+		<form action="adminInfo.do" method="post">
+				<button type="submit"> 삭제</button>
+	</form>
 		</div>
+					</div>
+			
+	
 		
-	</div>
+
 	
 </body>
 </html>
