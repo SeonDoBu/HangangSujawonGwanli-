@@ -91,8 +91,11 @@
 	INSERT INTO 
 	notice (notice_id , user_id ,title ,content ,created_date, file_name, readcount)
 	values (nextval('notice_id_seq') ,#{user_id},#{title},#{content},#{created_date},#{file_name},0)
-
 	</insert>
+	<delete id="deleteAdNoti" parameterType="Notice">
+	DELETE from notice 
+	where notice_id = #{notice_id}
+	</delete>
 		<update id="updateUser" parameterType="Users">
 		UPDATE users 
 		SET 

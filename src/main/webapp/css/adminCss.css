@@ -42,9 +42,10 @@
 .admin-sidebar-box {
 	width: 250px;
 	height: 100%;
-	position: fixed;
 	background-color: #EBEDF5;
-	position: fixed;
+	float: left;
+
+	
 }
 
 .admin-sidebar-btn-box {

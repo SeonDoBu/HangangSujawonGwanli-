@@ -60,7 +60,7 @@
 	</script>
 </head>
 <body>
-	<div class="container col-10">
+	<div class="container col-12" style="margin-left: 200px;">
 		<br>
 		<!-- section1: 탭 -->
 		<div>
@@ -112,7 +112,7 @@
 			</form>
 		</div>
 		
-		<div class="text-end" style="margin-right: 200px; margin-top: 20px;">
+		<div class="" style="margin-right: 200px; margin-top: 20px;">
 			<button type="button" style="background-color: #000042; color: white;" onclick="insertPopup()">등록</button>
 			<button type="button" style="background-color: gray;">저장</button>
 		</div>
@@ -137,7 +137,7 @@
 					<tr>
 						<td>${num}</td>
 						<td><input type="hidden" name="small_code" value="${siseol.small_code}">${siseol.siseolName}</td>
-						<td><a onclick="detailPopup(this.textContent)">${siseol.siseol_id}</a></td>
+						<td><a href="" onclick="detailPopup(this.textContent)">${siseol.siseol_id}</a></td>
 						<td>${siseol.mapy}</td>
 						<td>${siseol.mapx}</td>
 						<td><input type="hidden" name="district_id" value="${siseol.district_id}">${siseol.districtName}</td>

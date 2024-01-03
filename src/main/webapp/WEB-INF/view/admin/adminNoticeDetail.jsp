@@ -157,23 +157,32 @@ function checkUser_id(user_id) {
 					</tr>
 				</table>
 			</div>
-			<div class="row row-cols-1 notcieDetail-third-box">
+			<div class="row row-cols-1 notcieDetail-third-box" style="height: 600px;">
 				<table class="table notcieDetail-third-table">
 					<tr>
-						<td><input type="text" name="content" value="${noticeFindOne.content }"></td>
+						<td><textarea rows="25" cols="150" type="text" name="content">${noticeFindOne.content }</textarea></td>
 					</tr>
 				</table>
 			</div>
 			<div class="row row-cols-1 notcieDetail-fourth-box">
 				<button onclick="pageMove()">&nbsp;&nbsp;목록으로&nbsp;&nbsp;</button>
-				
 				<button type="submit" style="margin-left: 20px; margin-right: 20px;"> 수정</button>
 </form>	
+			
+				<form action="deleteNoti.do" method="post">
+				<div class="text-end" style="margin-right: 100px;"> 
+				<button  type="submit" style="background-color: red;" name="notice_id" value="${noticeFindOne.notice_id }"> 삭제</button>
+				</div>
+	</form>
+
+
+
 			</div>
 			
-		<form action="adminInfo.do" method="post">
-				<button type="submit"> 삭제</button>
-	</form>
+		
+				
+
+	
 		</div>
 					</div>
 			

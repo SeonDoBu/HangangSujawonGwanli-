@@ -189,8 +189,24 @@ public class AdminController {
 		
 		model.addAttribute("updateCount", updateCount);
 		model.addAttribute("notice", notice);		
-			return "redirect:adminNotice.do";
+		
+		return "redirect:adminNotice.do";
 	}
+	@PostMapping(value = "deleteNoti.do")
+	public String deleteNoti(Notice notice, Model model) {
+		System.out.println("AdMinController deleteNoti start");
+		
+		int deleteCount = as.deleteAdNoti(notice);
+		
+		System.out.println("delete adNoti");
+		
+		model.addAttribute("deleteCount", deleteCount);
+		model.addAttribute("notice", notice);
+		
+		return "redirect:adminNotice.do";
+	}
+	
+	
 	
 	@GetMapping(value = "AdNoticeInsert.do")
 	public String NoticeInsertMove(Model model) {

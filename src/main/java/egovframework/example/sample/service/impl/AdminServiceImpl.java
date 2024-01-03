@@ -145,4 +145,19 @@ public class AdminServiceImpl extends EgovAbstractServiceImpl implements AdminSe
 		return updateCount;
 	}
 
+	@Override
+	public int deleteAdNoti(Notice notice) {
+		int deleteCount = 0;
+		
+		try {
+			log.info("deleteAdNoti"+notice.getNotice_id());
+			deleteCount = adminDao.deleteAdNoti(notice);
+		} catch (Exception e) {
+			System.out.println("AdminServiceImpl deleteAdNoti e.getMessage()->"+e.getMessage());
+		}
+		
+		
+		return deleteCount;
+	}
+
 }

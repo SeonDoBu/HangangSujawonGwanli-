@@ -38,4 +38,6 @@ public interface AdminMapper {
 
 	int updateGigwan(Gigwan gigwan);
 
+	int deleteAdNoti(Notice notice);
+
 }
