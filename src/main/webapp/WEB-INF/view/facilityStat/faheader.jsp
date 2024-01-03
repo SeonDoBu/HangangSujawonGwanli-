@@ -93,9 +93,9 @@
                               	  <a class="nav-link" href="siseoulInspectionList.do" style="color: white; font-weight: bold;">점검이력조회</a>
                                 </li>
                                 
-                                <li class="nav-item">
+                            <!--     <li class="nav-item">
                               	  <a class="nav-link" href="faBreak" style="color: white; font-weight: bold;">점검이력통계</a>
-                                </li>
+                                </li> -->
 
                                 <li class="nav-item">
                               	  <a class="nav-link" href="troubleList.do" style="color: white; font-weight: bold;" >고장/조치결과보고</a>

@@ -16,7 +16,7 @@
 	}
 	
 	.input-box {
-		width: 345px;
+		width: 320px;
 		height: 46px !important;
 		border: 2px solid #8C8C8C;
    	 	margin-left: 0px;

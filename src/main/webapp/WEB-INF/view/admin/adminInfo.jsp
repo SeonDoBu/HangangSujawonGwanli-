@@ -223,7 +223,7 @@
 							<button type="button" class="btn-close" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 						</div>
-						<div class="modal-body" id="userDetailModalBody">
+						<div class="modal-body" id="userDetailModalBody" style="padding-bottom: 0px;">
 							<form action="updateUser.do" method="post">
 								<div class="mb-3 admin-modal-content-box">
 									<label for="content" class="col-form-label">권한</label> 
@@ -263,7 +263,7 @@
 								</div>
 							
 						</div>
-						<div class="modal-footer admin-modal-btn-box">
+						<div class="modal-footer admin-modal-btn-box" style="padding: 0px; margin-bottom: 10px;">
 							<button type="submit">수정</button>
 						</div>
 						</form>

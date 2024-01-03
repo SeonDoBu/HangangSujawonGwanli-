@@ -18,8 +18,8 @@ window.close();
 	
 /* 	 	alert("체크1"+$("#chk1")+${sluice.sluice_id});
 	 var slu = document.getElementById("chk1").getAttribute('data-value'); */
-	alert("slu값"+slu);
-	 window.open("sluiceDetail?sluice_id="+slu,"pop","width=900,height=750,left=350,top=200");
+	/* alert("slu값"+slu); */
+	 window.open("sluiceDetail?sluice_id="+slu,"pop","width=900,height=700,left=350,top=200");
 	  
 	 
 	 
@@ -34,7 +34,7 @@ window.close();
 </head>
 <body>
 
-<div class="container col-10">
+<div class="container col-12" style="margin-left: 200px;">
 <br>
 
 <h1>관측소 목록</h1>
@@ -71,7 +71,7 @@ window.close();
 </form>
 </div>
 
-<div class="text-end" style="margin-right: 200px; margin-top: 20px;">
+<div class="" style="margin-right: 200px; margin-top: 20px;">
 
 <button type="button" style="background-color: #000042; color: white;" onclick="showpopup()"> 등록</button>
 

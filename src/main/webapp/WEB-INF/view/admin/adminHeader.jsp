@@ -22,7 +22,7 @@
 			<div class="cols admin-topbar-text-first">
 				<p><a href="adminInfo.do" style="text-decoration: none; color: white;">관리자시스템</a></p>
 			</div>
-			<div class="cols admin-topbar-text-second">
+			<div class="cols admin-topbar-text-second" style="margin-left: 380px;">
 				<p>관리자 <% out.println(user_name); %> 님 &nbsp;&nbsp;|&nbsp;&nbsp;
 				   <a href="logout.do" style="text-decoration: none; color: white;">로그아웃</a></p>
 			</div>

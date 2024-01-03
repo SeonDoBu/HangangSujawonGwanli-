@@ -12,29 +12,49 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+h1 {
+   margin: 20px;
+}
+
+div {
+margin: 10px;
+margin-left: 0px;
+}
+p {
+margin-top: 15px;
+margin-bottom: 15px;
+}
+input {
+width: 280px;
+
+
+}
+</style>
 </head>
+
 <body>
 <form action="updateSluice" method="post">
 <div class="container" style="margin-top:50px;
  border: solid; 1px; border-color: black; ">
-<h1 style="margin-top: 10px;">관측소 정보 </h1>
+<h1 style="">관측소 정보 </h1>
 <hr style="border-style: 3px;">
 <div class="container">
 <div>
 
-관측소 코드 ${sluice.sluice_id }<br> 
-관측소명 <input class="col-5" name="name" value="${sluice.name }" style="margin: 10px;" type="text">
+<p>관측소 코드: ${sluice.sluice_id }</p>
+<p>관측소명:<input style="margin-left: 10px;" name="name"  value="${sluice.name }" type="text"></p>
 <div>
 
-표준 코드 <input type="text" name="sluice_id" value="${sluice.sluice_id }">
+표준 코드: <input type="text" name="sluice_id" value="${sluice.sluice_id }">
 </div>
-<div style="margin: 10px;">
-위도 <input type="number" step="0.000000001" name="mapy" value="${sluice.mapy }" style="margin-right: 40px; margin-left: 30px;">
-경도 <input type="number" step="0.000000001" name="mapx" value="${sluice.mapx }" >
+<div>
+<p>위도: <input style="margin-left: 38px;" type="number" step="0.000000001" name="mapy" value="${sluice.mapy }" ></p>
+<p>경도:<input style="margin-left: 42px;" type="number" step="0.000000001" name="mapx" value="${sluice.mapx }" ></p>
 </div>
-<div style="margin: 10px;" >
-하천 주소 <input type="text" name="area" value="${sluice.area }">
-하천 세부 주소 <input type="text" name="address" value="${sluice.address }">
+<div  >
+<p>하천 주소: <input type="text" name="area" value="${sluice.area }"></p>
+하천 세부 주소: <input type="text" name="address" value="${sluice.address }">
 
 </div>
 <div class="container" >

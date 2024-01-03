@@ -27,11 +27,13 @@
 	}
 	
 	.input-box {
-		width: 345px;
+		width: 320px;
 		height: 46px !important;
 		border: 2px solid #8C8C8C;
    	 	margin-left: 0px;
 	}
+
+	
 </style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -255,7 +257,7 @@
 </script>
 </head>
 <body>
-	<div class="container main-container">
+	<div class="container main-container" style="height: 1000px;">
 		<div class="row row-cols-2 main-content-container">
 			<div class="row row-cols-1 main-first-box">
 				<div class="col main-first-title-box">
@@ -272,7 +274,7 @@
 					<button onclick="pageMove(2)">&nbsp;&nbsp;공지사항&nbsp;&nbsp;</button>
 				</div>
 			</div>
-			<div class="row row-cols-1 main-second-box" style="height: 910px;">
+			<div class="row row-cols-1 main-second-box" style="height: 1000px;">
 				<div class="col main-second-title-box">
 					<p>
 						<a onclick="loginLink()">로그인</a>&nbsp;&nbsp;&nbsp; <span><a
@@ -294,9 +296,10 @@
 					<div class="my-4 row justify-content-center">
 						<label class="input-label col-sm-3 text-end">ID</label>
 						<div class="col-sm-8">
-							<input type="text" name="user_id" id="id" class="input-box form-control" style="width: 220px;">
+						<!-- 	<input type="text" name="user_id" id="id" class="input-box form-control" style="width: 220px;"> -->
 							<div class="d-flex" style="width: 110px;">
-								<button type="button" id="checkId" onclick="checkDuplicateId()" class="col-sm-1 mx-1">중복체크</button>
+							<input type="text" name="user_id" id="id" class="input-box form-control" style="width: 220px;">
+								<button type="button" id="checkId" onclick="checkDuplicateId()" class="col-sm-1 mx-1" style="height: 46px;">중복체크</button>
 								<input type="hidden" id="checkIdVal" value="0">
 							</div>			
 							<p id="idValidationMsg" style="margin-bottom: 0px;">*영어 소문자 및 숫자로 이루어진 4~16자리</p>
@@ -384,7 +387,7 @@
 					</div>
 					
 					<div class="col main-second-join-btn-box container row justify-content-center my-5">
-						<button type="submit" onclick="return checkJoinForm()">회원가입</button>
+						<button type="submit" onclick="return checkJoinForm()" style="margin-top: 3px;">회원가입</button>
 					</div>
 				</form>
 

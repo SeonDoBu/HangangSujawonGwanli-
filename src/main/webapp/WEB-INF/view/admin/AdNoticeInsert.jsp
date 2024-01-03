@@ -109,7 +109,7 @@ function checkUser_id(user_id) {
 			<div class="row row-cols-1 notcieDetail-third-box">
 				<table class="table notcieDetail-third-table">
 					<tr>
-						<td><textarea type="text" rows="25" cols="125"  name="content"></textarea></td>
+						<td><textarea type="text" rows="25" cols="110"  name="content"></textarea></td>
 					</tr>
 				</table>
 			</div>

@@ -24,7 +24,7 @@
 		<ul class="nav nav-underline"
 			style="background-color: #000042; height: 80px;">
 			<li class="nav-item">
-				<h2 style="margin-left: 150px;">
+				<h2 style="margin-left: 75px;">
 					<a href="sluiceMain" style="text-decoration: none; color: #FFFFFF;">실시간 수문정보 관리 시스템</a></h2>
 			</li>
 			<li class="nav-item" style="margin-left: 10px;"><a

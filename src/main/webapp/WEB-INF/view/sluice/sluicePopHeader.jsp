@@ -31,7 +31,7 @@
   
   <body>
 <div>
-<ul class="nav nav-underline" style="background-color: #000042; height: 80px; " >
+<ul class="nav nav-underline" style="background-color: #000042; height: 80px;" >
   <li class="nav-item">
     <h2 style="color: #FFFFFF; margin-left: 150px;" >실시간 수문정보 관리  시스템</h2>
   </li>

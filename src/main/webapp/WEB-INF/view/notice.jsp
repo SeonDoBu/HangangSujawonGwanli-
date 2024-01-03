@@ -25,7 +25,7 @@
 					<p>공지사항</p>
 				</div>
 			</div>
-			<div class="row row-cols-4 notice-second-box">
+			<div class="row row-cols-4 notice-second-box" style="margin-bottom: 10px;">
 				<div class="cols notice-second-keyword-box">
 					<p>조건</p>
 					<select>
@@ -39,7 +39,7 @@
 			</div>
 			
 			<!-- 글번호 Logic -->
-			<c:set var="num" value="${page.total-page.start+1 }"/>
+			<c:set var="num" value="1"/>
 			
 			<div class="row row-cols-1 notice-third-box">
 				<table class="table notice-third-table">
@@ -52,7 +52,7 @@
 					<c:forEach var="notices" items="${noticeAllList }">
 						<tr>
 							<td>${num }</td>
-							<c:set var="num" value="${num -1 }"/>	
+							<c:set var="num" value="${num +1 }"/>	
 							<td><a href="noticeDetail.do?noticeId=${notices.notice_id }">${notices.title }</a></td>
 							<td>
 								<fmt:formatDate value="${notices.created_date }" type="date"
@@ -63,13 +63,16 @@
 								<c:when test="${notices.file_name eq null}">
 									<td>-</td>
 								</c:when>
+								<c:otherwise>
+								<td>-</td>
+								</c:otherwise>
 							</c:choose>
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
 			<div class="row row-cols-1 notice-fourth-box">
-				<button onclick="pageMove()">&nbsp;&nbsp;메인으로&nbsp;&nbsp;</button>
+				<button onclick="pageMove()" style="margin-top: 10px;">&nbsp;&nbsp;메인으로&nbsp;&nbsp;</button>
 			</div>
 		</div>
 	</div>

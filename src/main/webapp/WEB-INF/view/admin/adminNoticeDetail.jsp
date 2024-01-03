@@ -124,7 +124,7 @@ function checkUser_id(user_id) {
 
 	<!-- content -->
 	
-	<div class="container notcieDetail-container">
+	<div class="container notcieDetail-container" style="margin-left:300px;">
 		<div class="row row-cols-1 notcieDetail-content-box">
 			<div class="row row-cols-2 notcieDetail-first-box">
 				<div class="cols notcieDetail-first-image-box">
