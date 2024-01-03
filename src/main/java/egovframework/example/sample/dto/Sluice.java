@@ -1,5 +1,7 @@
 package egovframework.example.sample.dto;
 
+import java.util.Map;
+
 import javax.management.loading.PrivateClassLoader;
 
 import lombok.Data;
@@ -50,6 +52,7 @@ public class Sluice {
 	private String 	type1;
 	private String 	type4;
 	private String 	type5;
+	private Map<String, Object> chkmap;
 
 	
 }

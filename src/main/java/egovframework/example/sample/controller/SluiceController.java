@@ -311,12 +311,13 @@ public class SluiceController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/sluiceDataList")
-	public List<Sluice> sluiceDataList(Sluice sluice,String type5,String type1,String type4, Model model) {
+	public List<Sluice> sluiceDataList(Sluice sluice, String type1, String type2, String type3, String type4, Model model) {
 		int sluiceCnt = ss.sluiceCount();
 		log.info("안뇽");
 		/* Sluice sluice = new Sluice(); */
-		sluice.setStart(1);
-		sluice.setEnd(sluiceCnt);
+		/*
+		 * sluice.setStart(1); sluice.setEnd(sluiceCnt);
+		 */
 		/*
 		 * String[] typeList = new String[4]; typeList[0] = type5; typeList[1] = type1;
 		 * typeList[2] = type5; typeList[3] = type4;
@@ -334,35 +335,32 @@ public class SluiceController {
 		 * 
 		 * }
 		 */
-		
-		
-		System.out.println("valvalval"+type5.getClass().getName());
+
+		//System.out.println("valvalval"+type5.getClass().getName());
 		
 		/*
 		 * System.out.println("vlavlavalget.type1->"+sluice.getType1());
 		 * System.out.println("vlavlavalget.type4->"+sluice.getType4());
 		 * System.out.println("vlavlavalget.type5->"+sluice.getType5());
 		 */
-		System.out.println("valvalval value 2 -->"+type5);
+		// System.out.println("valvalval value 2 -->"+type5);
 		System.out.println("valvalval1 value 4 -> "+type1);
 		System.out.println("valvalval4"+type4);
 		System.out.println("vlavlavalget.type->"+sluice.getType());
 
-		
-	
-
-
-		
-		model.addAttribute(sluice);
+		Map<String, Object> chkmap = new HashMap<String, Object>();
+		chkmap.put("type1", type1);
+		chkmap.put("type2", type2);
+		chkmap.put("type3", type3);
+		chkmap.put("type4", type4);
+		sluice.setChkmap(chkmap); 
+		/* model.addAttribute(sluice); */
 		List<Sluice> sluiceList = ss.sluiceList(sluice);
+		log.info(sluiceList.toString());
 		return sluiceList;
 	}
 	
-	
 
-	
-	
-	
 	@GetMapping(value = "sluiceList")
 	public String SluiceList(Sluice sluice,ObservData observData,String currentPage, Model model) {
 		int SluiceCount = ss.sluiceCount();

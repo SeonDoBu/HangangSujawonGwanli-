@@ -98,9 +98,9 @@
 	
 	    if (params.length > 0) {
 	      var paramString = params.join("&");
-	      location.href = "siseoulList.do?currentPage=" + currentPage + "&" + paramString;
+	      location.href = "siseoulInspectionList.do?currentPage=" + currentPage + "&" + paramString;
 	    } else {
-	      location.href = "siseoulList.do?currentPage=" + currentPage;
+	      location.href = "siseoulInspectionList.do?currentPage=" + currentPage;
 	    }
 	}
  	
@@ -115,7 +115,7 @@
 	<div id="con">
 	 <div class="card card-product ">
         <div class="card-body py-8 ">
-			<form action="siseoulList.do" id="frm" onsubmit="return chk()">
+			<form action="siseoulInspectionList.do" id="frm" onsubmit="return chk()">
 				<input type="hidden" name="big_code" value="${commonList[0].big_code}"> 
 				<div id="con-text">
 					시설물 종류 : 	

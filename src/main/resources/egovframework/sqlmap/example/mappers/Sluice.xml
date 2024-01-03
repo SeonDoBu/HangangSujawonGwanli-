@@ -20,19 +20,22 @@
 					 order by name) a 
 					) b 
 					where 1=1
-					<choose>
-					<when test="type == 1">
-						and type = #{type}
-					</when>
-						<when test="type == 2">
-						and type = #{type}
-					</when>
-						<when test="type == 3">
-						and type = #{type}
-					</when>
-					</choose>
+					<if test='chkmap != null and chkmap.type4 == "0"'>
+						and 1=0
+					</if>
+					<if test='chkmap != null and chkmap.type1 != "0"'>
+						or type = '1'
+					</if>
+					<if test='chkmap != null and chkmap.type2 != "0"'>
+						or type = '2'
+					</if>
+					<if test='chkmap != null and chkmap.type3 != "0"'>
+						or type = '3'
+					</if>
 					) c
-					where rn BETWEEN #{start} and #{end}
+					<if test="start != 0 and end != 0">
+						where rn BETWEEN #{start} and #{end}
+					</if>
 	</select>
 
 	<insert id="insertSluice" parameterType="Sluice">

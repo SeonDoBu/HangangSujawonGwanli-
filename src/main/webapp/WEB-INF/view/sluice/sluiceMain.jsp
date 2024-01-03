@@ -140,37 +140,29 @@
 		function addLayer8() {
 			if(document.getElementById('chk8').checked) {
 				console.log('하하');
-				var type4 = $("#chk8").val();
+
 				sluiceval();
-				map.addLayer(markerVectorLayer);
+				
 			} else {
 				console.log('메롱');
 				map.removeLayer(markerVectorLayer);
 			}
 		}
-	
 		
 		function chkLayer() {
 			if(document.getElementById('chk9').checked) {
-				var type5 = $("#chk9").val();
-			/* 	var num2 = parseInt(num1); */
-				
-				console.log(type5);
-			/* 	console.log(num2); */
 				sluiceval();
-				map.addLayer(markerVectorLayer);
 			} else {
-				console.log('메롱');
 				map.removeLayer(markerVectorLayer);
-			}	
+			}
 		}
 		
 		function addLayer10() {
 			if(document.getElementById('chk10').checked) {
-				var type1 = $("#chk10").val();
+				
 				console.log('하하');
 				sluiceval();
-				map.addLayer(markerVectorLayer);
+				
 			} else {
 				console.log('메롱');
 				map.removeLayer(markerVectorLayer);
@@ -180,7 +172,7 @@
 		function addLayer11() {
 			if(document.getElementById('chk11').checked) {
 				console.log('하하');
-				map.addLayer(markerVectorLayer);
+				sluiceval();
 			} else {
 				console.log('메롱');
 				map.removeLayer(markerVectorLayer);

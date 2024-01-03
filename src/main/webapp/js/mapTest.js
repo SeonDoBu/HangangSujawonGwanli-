@@ -17,137 +17,6 @@ var wms5;
 var wms6;
 var wms7;
 
-var vectorSource = new ol.source.Vector();
-markerVectorLayer = new ol.layer.Vector({
-   source: vectorSource,
-});
-
-var siseolVectorSource = new ol.source.Vector();
-siseolVectorLayer = new ol.layer.Vector({
-   source: siseolVectorSource,
-});
-
-
-function sluiceval() {
-      var type5 = $("#chk9").val();   
-      var type1 = $("#chk10").val();   
-      var type4 = $("#chk8").val();
-      
-   /*   type5 = $("#chk9").val();      
-       type1 = $("#chk10").val();      
-       type4 = $("#chk8").val();    */
-
-/*   if (type5 == "1") {
-         var   type5 = $("#chk9").val();
-         }else if (type4 == "4") {
-         var   type4 = $("#chk8").val();      
-         }else if (type1 == "2") {
-         var   type1 = $("#chk10").val();
-         } else {
-          console.log("왜안돼");
-         }*/
-      console.log(type5); //1
-      console.log(type1);  //2
-         console.log(type4); //4 
-         jQuery.ajaxSettings.traditional = true;
-      $.ajax({
-      url: "/sluiceDataList",
-      data: {type5 : type5, type1 : type1,type4 : type4},
-      method: "GET",
-      dataType: 'json',
-      success: function(sluiceData) {
-         console.log("컨트롤러 탔음");
-         console.log(sluiceData);
-         console.log(type5);
-         console.log(type1);
-         console.log(type4);
-         sluiceData.forEach(function(data) {
-            var id = data.sluice_id;
-            var mapx = data.mapx;
-            var mapy = data.mapy;
-            var type = data.type;
-            var name = data.name;
-            var data_ymd = data.data_ymd;
-            var   value00   =   data.value00;
-            var   value01   =   data.value01;
-            var   value02   =   data.value02;
-            var   value03   =   data.value03;
-            var   value04   =   data.value04;
-            var   value05   =   data.value05;
-            var   value06   =   data.value06;
-            var   value07   =   data.value07;
-            var   value08   =   data.value08;
-            var   value09   =   data.value09;
-            var   value10   =   data.value10;
-            var   value11   =   data.value11;
-            var   value12   =   data.value12;
-            var   value13   =   data.value13;
-            var   value14   =   data.value14;
-            var   value15   =   data.value15;
-            var   value16   =   data.value16;
-            var   value17   =   data.value17;
-            var   value18   =   data.value18;
-            var   value19   =   data.value19;
-            var   value20   =   data.value20;
-            var   value21   =   data.value21;
-            var   value22   =   data.value22;
-            var   value23   =   data.value23;
-            
-            var marker = new ol.Feature({
-               geometry: new ol.geom.Point(
-                  [data.mapx, data.mapy]
-               ).transform('EPSG:4326', 'EPSG:3857'),
-               id: id,
-               mapx: mapx,
-               mapy: mapy,
-               type: type,
-               data_ymd:data_ymd,
-               name:name,
-               value00   :   value00   ,
-               value01   :   value01   ,
-               value02   :   value02   ,
-               value03   :   value03   ,
-               value04   :   value04   ,
-               value05   :   value05   ,
-               value06   :   value06   ,
-               value07   :   value07   ,
-               value08   :   value08   ,
-               value09   :   value09   ,
-               value10   :   value10   ,
-               value11   :   value11   ,
-               value12   :   value12   ,
-               value13   :   value13   ,
-               value14   :   value14   ,
-               value15   :   value15   ,
-               value16   :   value16   ,
-               value17   :   value17   ,
-               value18   :   value18   ,
-               value19   :   value19   ,
-               value20   :   value20   ,
-               value21   :   value21   ,
-               value22   :   value22   ,
-               value23   :   value23   
-            });
-            var iconStyle = new ol.style.Style({
-               image: new ol.style.Icon(({
-                  anchor: [0.5, 0.96],
-                  scale: 0.1,
-                  src: 'images/free-icon.png'
-               })),
-               zindex: 10
-            });
-            marker.setStyle(iconStyle);
-            vectorSource.addFeature(marker);
-         });
-         console.log("관측소 정보 가져왔음");
-         /*   map.addLayer(markerVectorLayer);*/
-         console.log("관측소 레이어 추가");
-      },
-      error: function() {
-         console.log("관측소 정보 가져오지 못했습니다.");
-      }
-   })
-}
 
 $(document).ready(function() {
 	console.log("document.ready");
@@ -338,10 +207,161 @@ $(document).ready(function() {
       map.addLayer(wms4); // 맵 객체에 레이어를 추가함
       map.addLayer(wms5); // 맵 객체에 레이어를 추가함
       map.addLayer(wms6); // 맵 객체에 레이어를 추가함      */
-	
-	getSiseolLayer();
 
 });
+
+function sluiceval() {
+/*	var type4 = $("#chk8").val();
+    var type5 = $("#chk9").val();   
+    var type1 = $("#chk10").val();*/
+	map.removeLayer(markerVectorLayer);
+	/*vectorSource = new ol.source.Vector();*/
+
+	let type1; let type2; let type3; let type4;
+	if(document.getElementById('chk8').checked) {
+		type4 = document.getElementById('chk8').value;
+	} else {
+		type4 = "0";
+	}
+	
+	if(document.getElementById('chk9').checked) {
+		type1 = document.getElementById('chk9').value;
+	} else {
+		type1 = "0";
+	}
+	
+	if(document.getElementById('chk10').checked) {
+		type2 = document.getElementById('chk10').value;
+	} else {
+		type2 = "0";
+	} 
+	
+	if(document.getElementById('chk11').checked) {
+		type3 = document.getElementById('chk11').value;
+	} else {
+		type3 = "0";
+	} 
+      
+   /*   type5 = $("#chk9").val();      
+       type1 = $("#chk10").val();      
+       type4 = $("#chk8").val();    */
+
+/*   if (type5 == "1") {
+         var   type5 = $("#chk9").val();
+         }else if (type4 == "4") {
+         var   type4 = $("#chk8").val();      
+         }else if (type1 == "2") {
+         var   type1 = $("#chk10").val();
+         } else {
+          console.log("왜안돼");
+         }*/
+      //console.log(type5); //1
+      console.log(type1);  //2
+      console.log(type4); //4 
+/*       jQuery.ajaxSettings.traditional = true;*/
+      
+	$.ajax({
+      url: "/sluiceDataList",
+      data: {type1 : type1, type2 : type2, type3 : type3, type4 : type4},
+      method: "GET",
+      dataType: 'json',
+      success: function(sluiceData) {
+         console.log("컨트롤러 탔음");
+         console.log(sluiceData);
+         // console.log(type5);
+         console.log(type1);
+         console.log(type4);
+		 var vectorSource = new ol.source.Vector();
+		 markerVectorLayer = new ol.layer.Vector({
+		    source: vectorSource,
+		 });
+         sluiceData.forEach(function(data) {
+            var id = data.sluice_id;
+            var mapx = data.mapx;
+            var mapy = data.mapy;
+            var type = data.type;
+            var name = data.name;
+            var data_ymd = data.data_ymd;
+            var   value00   =   data.value00;
+            var   value01   =   data.value01;
+            var   value02   =   data.value02;
+            var   value03   =   data.value03;
+            var   value04   =   data.value04;
+            var   value05   =   data.value05;
+            var   value06   =   data.value06;
+            var   value07   =   data.value07;
+            var   value08   =   data.value08;
+            var   value09   =   data.value09;
+            var   value10   =   data.value10;
+            var   value11   =   data.value11;
+            var   value12   =   data.value12;
+            var   value13   =   data.value13;
+            var   value14   =   data.value14;
+            var   value15   =   data.value15;
+            var   value16   =   data.value16;
+            var   value17   =   data.value17;
+            var   value18   =   data.value18;
+            var   value19   =   data.value19;
+            var   value20   =   data.value20;
+            var   value21   =   data.value21;
+            var   value22   =   data.value22;
+            var   value23   =   data.value23;
+            
+            var marker = new ol.Feature({
+               geometry: new ol.geom.Point(
+                  [data.mapx, data.mapy]
+               ).transform('EPSG:4326', 'EPSG:3857'),
+               id: id,
+               mapx: mapx,
+               mapy: mapy,
+               type: type,
+               data_ymd:data_ymd,
+               name:name,
+               value00   :   value00   ,
+               value01   :   value01   ,
+               value02   :   value02   ,
+               value03   :   value03   ,
+               value04   :   value04   ,
+               value05   :   value05   ,
+               value06   :   value06   ,
+               value07   :   value07   ,
+               value08   :   value08   ,
+               value09   :   value09   ,
+               value10   :   value10   ,
+               value11   :   value11   ,
+               value12   :   value12   ,
+               value13   :   value13   ,
+               value14   :   value14   ,
+               value15   :   value15   ,
+               value16   :   value16   ,
+               value17   :   value17   ,
+               value18   :   value18   ,
+               value19   :   value19   ,
+               value20   :   value20   ,
+               value21   :   value21   ,
+               value22   :   value22   ,
+               value23   :   value23   
+            });
+            var iconStyle = new ol.style.Style({
+               image: new ol.style.Icon(({
+                  anchor: [0.5, 0.96],
+                  scale: 0.1,
+                  src: 'images/free-icon.png'
+               })),
+               zindex: 20
+            });
+            marker.setStyle(iconStyle);
+            vectorSource.addFeature(marker);
+         });
+         console.log("관측소 정보 가져왔음");
+         map.addLayer(markerVectorLayer);
+         console.log("관측소 레이어 추가"+markerVectorLayer);
+      },
+      error: function() {
+         console.log("관측소 정보 가져오지 못했습니다.");
+      }
+   })
+}
 
 function getSiseolLayer() {
 	map.removeLayer(siseolVectorLayer);
@@ -384,6 +404,10 @@ function getSiseolLayer() {
 		dataType:"json",
 		success: function(siseolData) {
 			console.log(siseolData);
+			var siseolVectorSource = new ol.source.Vector();
+			siseolVectorLayer = new ol.layer.Vector({
+			   source: siseolVectorSource,
+			});
 			siseolData.forEach(function(data) {
 				var id = data.siseol_id;
 				var mapx = data.mapx;
@@ -399,13 +423,13 @@ function getSiseolLayer() {
 				
 				var src; 
 				if(data.small_code == '1') {
-					src = 'images/siseol_marker_1.png'
+					src = 'images/siseol_pin1.png'
 				} else if(data.small_code == '2') {
-					src = 'images/siseol_marker_2.png'
+					src = 'images/siseol_pin2.png'
 				} else if(data.small_code == '3') {
-					src = 'images/siseol_marker_3.png'
+					src = 'images/siseol_pin3.png'
 				} else if(data.small_code == '4') {
-					src = 'images/siseol_marker_4.png'
+					src = 'images/siseol_pin4.png'
 				}
 				
 				var iconStyle = new ol.style.Style({
