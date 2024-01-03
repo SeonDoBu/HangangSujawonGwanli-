@@ -353,20 +353,23 @@ public class SluiceController {
 	
 	@ResponseBody
 	@RequestMapping(value = "updateBookmarkList")
-	public List<Bookmark> updateBookmarkList(String option, String user_id) {
+	public Map<String, Object> updateBookmarkList(String option, String user_id) {
 		log.info("updateBookmarkList Start...");
-		List<Bookmark> bookmarkList = null;
+		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			Bookmark bookmark = new Bookmark();
 			bookmark.setUser_id(user_id);
 			bookmark.setKeyword(option);
-			bookmarkList = bookmarkService.getBookmarkListUser(bookmark);
+			int count = bookmarkService.bookmarkUserCount(bookmark);
+			List<Bookmark> bookmarkList = bookmarkService.getBookmarkListUser(bookmark);
+			map.put("count", count);
+			map.put("bookmarkList", bookmarkList);
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		} finally {
 			log.info("updateBookmarkList End...");
 		}
-		return bookmarkList;
+		return map;
 	}
 	
 	

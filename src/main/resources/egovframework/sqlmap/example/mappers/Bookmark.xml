@@ -11,7 +11,11 @@
 	</insert>
 	
 	<select id="getBookmarkListUser" parameterType="Bookmark" resultType="Bookmark">
-		SELECT *
+		SELECT *, 
+		       (SELECT name FROM sluice WHERE sluice.sluice_id = bookmark.sluice_id) AS sluiceName,
+		       (SELECT c.content FROM siseol s, commoncode c 
+		        WHERE  s.big_code = c.big_code AND s.small_code = c.small_code
+		        AND    s.siseol_id = bookmark.siseol_id) AS siseolName 
 		FROM   bookmark
 		WHERE  user_id = #{user_id}
 		<if test="sluice_id != 0">
@@ -35,7 +39,7 @@
 	</select>
 	
 	<select id="bookmarkUserCount" parameterType="Bookmark" resultType="int">
-		SELECT *
+		SELECT count(*)
 		FROM   bookmark
 		WHERE  user_id = #{user_id}
 		<if test="sluice_id != 0">

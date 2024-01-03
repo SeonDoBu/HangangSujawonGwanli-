@@ -201,25 +201,33 @@
 		}
 		
 		function updateBookmarkList() {
-			const option = document.getElementById('bookmarkSelect').value;
+			const option  = document.getElementById('bookmarkSelect').value;
 			const user_id = "${user_id}";
 			
 			$.ajax({
-				url:"updateBookmarkList",
-				data:{option: option, user_id: user_id},
-				method:'GET',
-				dataType:'json',
-				success: function(bookmarkList) {
+				url      : "updateBookmarkList",
+				data     : {option: option, user_id: user_id},
+				method   : 'GET',
+				dataType : 'json',
+				success  : function(map) {
+					$('#totalBookmark').empty();
 					$('#bookmarkListTable').empty();
-					bookmarkList.forEach(function(b) {
-						if(b.sluice_id != 0 && b.sluice_id != null) {
-							$("#bookmarkListTable").append("<tr><td scope='row'>" + b.sluice_id + "</td></tr>");
-						} else if(b.siseol_id != 0 && b.siseol_id != null) {
-							$("#bookmarkListTable").append("<tr><td scope='row'>" + b.siseol_id + "</td></tr>");
+					var count = map.count;
+					$('#totalBookmark').append("총 "+count+"개");
+					var bookmarkList = map.bookmarkList;
+					for(var i = 0; i < bookmarkList.length; i++) {
+						if(bookmarkList[i].sluice_id != 0 && bookmarkList[i].sluice_id != null) {
+							var id = "<td scope='row'>" + bookmarkList[i].sluice_id + "</td>";
+							var name = "<td scope='row'>" + bookmarkList[i].sluiceName + " 관측소</td>";
+							$("#bookmarkListTable").append("<tr>"+name+id+"</tr>");
+						} else if(bookmarkList[i].siseol_id != 0 && bookmarkList[i].siseol_id != null) {
+							var id = "<td scope='row'>" + bookmarkList[i].siseol_id + "</td>";
+							var name = "<td scope='row'>" + bookmarkList[i].siseolName + "</td>";
+							$("#bookmarkListTable").append("<tr>"+name+id+"</tr>");
 						}
-					})
+					}
 				},
-				error: function() {
+				error : function() {
 					alert("북마크 정보를 가져오지 못했습니다.");
 				}
 			})
@@ -390,17 +398,18 @@
   <!-- 사이드바 바디 리스트용  -->
   <div class="offcanvas-body">
     <div>
-    	<select name="keyword" id="bookmarkSelect" onchange="updateBookmarkList()">
-    		<option value="1">전체</option>
-    		<option value="2">관측소</option>
-    		<option value="3">시설물</option>
-    	</select>
-    	<span class="text-end" id="totalBookmark"></span><!-- 총 개수 -->
+	    <select name="keyword" id="bookmarkSelect" onchange="updateBookmarkList()">
+	    	<option value="1">전체</option>
+	    	<option value="2">관측소</option>
+	    	<option value="3">시설물</option>
+	    </select>
+    	<span id="totalBookmark"></span><!-- 총 개수 -->
     </div>
     <table class="table">
 	    <thead>
 	    	<tr>
-	    		<th scope="col">시설물명</th>
+	    		<th scope="col">이름</th>
+	    		<th scope="col">코드</th>
 	    	</tr>
 	    </thead>
 		

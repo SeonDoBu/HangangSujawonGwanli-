@@ -11,5 +11,9 @@ public class Bookmark {
 	private int    siseol_id;	// 시설물코드
 	private int    sluice_id;	// 수문코드
 	
-	private String keyword; // 조회용
+	// 조회용
+	private String keyword; 
+	private int    count;
+	private String siseolName;
+	private String sluiceName;
 }
