@@ -77,8 +77,8 @@ input {
 							name="is_deleted" value="0">수정</button>
 
 						<button type="submit"
-							style="width: 80px; height: 30px; border: 0px;" name="is_deleted"
-							value="1">삭제</button>
+							style="width: 80px; height: 30px; margin-bottom:20px; border: 0px; background-color: red; color: white; "  name="is_deleted"
+							 value="1">삭제</button>
 
 					</div>
 				</div>

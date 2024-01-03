@@ -114,7 +114,7 @@
 		
 		<div class="" style="margin-right: 200px; margin-top: 20px;">
 			<button type="button" style="background-color: #000042; color: white;" onclick="insertPopup()">등록</button>
-			<button type="button" style="background-color: gray;">저장</button>
+<!-- 			<button type="button" style="background-color: gray;">저장</button> -->
 		</div>
 		
 		<!-- section3: 목록 테이블 -->

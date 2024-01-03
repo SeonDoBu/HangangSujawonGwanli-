@@ -500,25 +500,22 @@ public class SluiceController {
 	public String updateObserv(Sluice sluice,ObservData observData, Model model) {
 		log.info("updateObserv start");
 		try {
-			ObservData observDataD = obs.observdataDetail(observData);
+			
 			int updateCount = ss.updateSluice(sluice);
 			int updateCount2 = obs.updateObserv(observData);
 			
 			System.out.println("sssssssss----------"+updateCount2);
 			System.out.println("======================"+observData);
-			model.addAttribute("upcnt2",updateCount2);
+		
 			model.addAttribute("sluice",sluice);
-			model.addAttribute("observData",observData);
-			model.addAttribute("observDataD", observDataD);		
+			model.addAttribute("observData",observData);	
 			log.info("updateObserv");
 			
 			
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
-	
-		
-		return "sluice/sluiceTypeList";
+		return "sluice/sluiceMain";
 
 	}
 	@PostMapping(value = "updateSluice")

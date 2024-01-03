@@ -20,9 +20,7 @@ window.close();
 	 var slu = document.getElementById("chk1").getAttribute('data-value'); */
 	/* alert("slu값"+slu); */
 	 window.open("sluiceDetail?sluice_id="+slu,"pop","width=900,height=700,left=350,top=200");
-	  
-	 
-	 
+
  }
 
  
@@ -75,7 +73,7 @@ window.close();
 
 <button type="button" style="background-color: #000042; color: white;" onclick="showpopup()"> 등록</button>
 
-<button type="button" style="background-color: gray;"> 저장</button>
+<!-- <button type="button" style="background-color: gray;"> 저장</button> -->
 </div>
 
 <!--리스트 테이블 foreach  -->
