@@ -54,7 +54,35 @@
 			var lineChart = new Chart(ctx2, {
 				type: 'line',
 				data: {
-					labels: ["서울","경기"]		
+					labels: ["서울","경기"],
+					datasets: [{
+						label: '댐',
+						data: [17, 117],
+						borderColor: 'rgba(255, 99, 132, 1.5)',
+						borderWidth: 2,
+						fill: false
+					},
+					{
+						label: '저수지',
+						data: [17, 117],
+						borderColor: 'rgba(54, 162, 235, 1.5)',
+						borderWidth: 2,
+						fill: false
+					},
+					{
+						label: '펌프장',
+						data: [17, 117],
+						borderColor: 'rgba(255, 206, 86, 1.5)',
+						borderWidth: 2,
+						fill: false
+					},
+					{
+						label: '관개수로',
+						data: [17, 117],
+						borderColor: 'rgba(71, 200, 62, 1.5)',
+						borderWidth: 2,
+						fill: false
+					}]
 				}
 			})
 		
@@ -65,12 +93,12 @@
 	<div class="container">
 		<div class="blank" style="height: 100px;"></div>
 		<div class="chartjs d-flex justify-content-center">
-			<div class="piechart" style="height: 600px; width: 600px;">
+			<div class="piechart" style="height: 700px; width: 700px;">
 				<h4 style="text-align: center;">수자원시설물 비율</h4>
 				<canvas id="piechart"></canvas>
 			</div>
 			
-			<div class="linechart" style="height: 600px; width: 600px; margin-left: 100px;">
+			<div class="linechart" style="height: 700px; width: 700px; margin-left: 100px;">
 				<h4 style="text-align: center;">행정구역별 수자원시설물</h4>
 				<canvas id="linechart"></canvas>
 			</div>

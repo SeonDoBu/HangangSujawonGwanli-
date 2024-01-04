@@ -28,7 +28,7 @@
 		}
 		/* 지도 크기 설정을 위한 css */
 		.map {
-      	height: 1090px;
+      	height: 860px;
       	width: 100%;
     	}
 	</style>

@@ -48,9 +48,9 @@ width: 70px;
 <br>
 (단위: mm) 
 <br>
-	<input type="text" name="type" 		value="${observDataD.type}">
-	<input type="text" name="data_ymd"	value="${observDataD.data_ymd}">
-	<input type="text" name="sluice_id"	value="${observDataD.sluice_id}">
+	<input type="hidden" name="type" 		value="${observDataD.type}">
+	<input type="hidden" name="data_ymd"	value="${observDataD.data_ymd}">
+	<input type="hidden" name="sluice_id"	value="${observDataD.sluice_id}">
 
 
 <table class="table table-bordered" style="margin-top: 30px; width: 1100px;">
@@ -124,13 +124,13 @@ width: 70px;
 </div>
 <div style="float: left; margin-left: 500px; margin-top: 30px;">
 
-<button type="submit" style="background-color: #000042; margin-right:30px; color: white;">수정</button> 
+<button type="submit" style="background-color: #000042; margin-right:30px; width:80px; height:40px; color: white;">수정</button> 
 
 </div>
 </form>
 
 <div>
-<button type="button" style="background-color: #000042; color: white;" onclick="onback()"> 닫기</button>
+<button type="button" style="background-color: #000042; margin-top:30px; width:80px; height:40px; color: white;" onclick="onback()"> 닫기</button>
 </div>
 
 </div>

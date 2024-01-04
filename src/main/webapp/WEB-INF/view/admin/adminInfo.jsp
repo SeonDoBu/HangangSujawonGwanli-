@@ -170,7 +170,7 @@
 						<td>${num }</td>
 						<c:set var="num" value="${num +1 }"/>	
 						<td>${users.content }</td>
-						<td><a onclick="checkUser_id('${users.user_id }')" role="button" data-bs-toggle="modal"
+						<td><a href="" onclick="checkUser_id('${users.user_id }')" role="button" data-bs-toggle="modal"
 							   data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
 								${users.name }</a></td>
 						<td>${users.user_id }</td>

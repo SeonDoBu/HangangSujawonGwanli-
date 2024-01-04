@@ -163,7 +163,7 @@
 						<td>${num }</td>
 						<c:set var="num" value="${num +1 }"/>	
 						
-						<td><a onclick="checkgigwan_id('${GL.gigwan_id }')" role="button" data-bs-toggle="modal"
+						<td><a href="" onclick="checkgigwan_id('${GL.gigwan_id }')" role="button" data-bs-toggle="modal"
 							   data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
 								${GL.gigwan_id }</a></td>
 								
