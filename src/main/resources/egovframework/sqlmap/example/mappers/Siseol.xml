@@ -6,6 +6,16 @@
 		select count(*)
 		from    siseol
 		<where>
+			<if test="keyword != '' and keyword != null">
+				<choose>
+					<when test="keyword == 2">
+						small_code = 5							
+					</when>
+					<when test="keyword == 3">
+						small_code != 5
+					</when>
+				</choose>
+			</if>
 			<if test="big_code != 0">
 				 big_code = #{big_code}
 			</if>
@@ -28,17 +38,31 @@
 		SELECT b.*
 		FROM
 		(
-			SELECT  ROW_NUMBER() OVER (ORDER BY siseol_id) AS rn, a.*
+			SELECT  ROW_NUMBER() OVER (ORDER BY small_code, siseol_id) AS rn, a.*
 			FROM
 			   (
 				SELECT s.*, d.name AS districtName, g.name AS gigwanName, c.content AS siseolName
+				<if test="keyword == 2 or small_code == 5">
+					, (SELECT name FROM sluice WHERE s.siseol_id = sluice.sluice_id) AS sluiceName
+				</if>
 				FROM SISEOL s
 				JOIN COMMONCODE c ON s.small_code = c.small_code AND s.big_code = c.big_code
 				JOIN DISTRICT d ON s.district_id = d.district_id
 				JOIN GIGWAN g ON s.gigwan_id = g.gigwan_id
 				<where>
+					1=1
+					<if test="keyword != '' and keyword != null">
+						<choose>
+							<when test="keyword == 2">
+								AND s.small_code = 5
+							</when>
+							<when test="keyword == 3">
+								AND s.small_code != 5
+							</when>
+						</choose>
+					</if>
 					<if test="big_code != 0">
-						 s.big_code = #{big_code}
+						 AND  s.big_code = #{big_code}
 					</if>
 					<if test="small_code != 0">
 						  AND s.small_code = #{small_code}
@@ -55,7 +79,9 @@
 				</where> 
 				)a
 		)b
+		<if test="start != 0 and end != 0">
 		WHERE rn BETWEEN #{start} and #{end}
+		</if>
 	</select>
 	
 	<select id="commonList" resultType="Commoncode">

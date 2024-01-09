@@ -212,17 +212,17 @@
 				success  : function(map) {
 					$('#totalBookmark').empty();
 					$('#bookmarkListTable').empty();
-					var count = map.count;
+					const count = map.count;
 					$('#totalBookmark').append("총 "+count+"개");
-					var bookmarkList = map.bookmarkList;
-					for(var i = 0; i < bookmarkList.length; i++) {
+					const bookmarkList = map.bookmarkList;
+					for(let i = 0; i < bookmarkList.length; i++) {
 						if(bookmarkList[i].sluice_id != 0 && bookmarkList[i].sluice_id != null) {
-							var id = "<td scope='row'>" + bookmarkList[i].sluice_id + "</td>";
-							var name = "<td scope='row'>" + bookmarkList[i].sluiceName + " 관측소</td>";
+							const id = "<td scope='row'>" + bookmarkList[i].sluice_id + "</td>";
+							const name = "<td scope='row'>" + bookmarkList[i].sluiceName + " 관측소</td>";
 							$("#bookmarkListTable").append("<tr>"+name+id+"</tr>");
 						} else if(bookmarkList[i].siseol_id != 0 && bookmarkList[i].siseol_id != null) {
-							var id = "<td scope='row'>" + bookmarkList[i].siseol_id + "</td>";
-							var name = "<td scope='row'>" + bookmarkList[i].siseolName + "</td>";
+							const id = "<td scope='row'>" + bookmarkList[i].siseol_id + "</td>";
+							const name = "<td scope='row'>" + bookmarkList[i].siseolName + "</td>";
 							$("#bookmarkListTable").append("<tr>"+name+id+"</tr>");
 						}
 					}
@@ -233,12 +233,45 @@
 			})
 		}
 		
+		function updateListData() {
+			const option  = document.getElementById('listOption').value;
+			
+			$.ajax({
+				url      : "updateListData",
+				data     : {option: option},
+				method   : 'GET',
+				dataType : 'json',
+				success  : function(map) {
+					$('#totalListCnt').empty();
+					$('#listTable').empty();
+					const count = map.count;
+					$('#totalListCnt').append("총 "+count+"개");
+					let listData = map.listData;
+					for(let i = 0; i < listData.length; i++) {
+						if(listData[i].small_code == 5) {
+							const id = "<td scope='row'>" + listData[i].siseol_id + "</td>";
+							const name = "<td scope='row'>" + listData[i].sluiceName + " 관측소</td>";
+							$("#listTable").append("<tr>"+name+id+"</tr>");
+						} else {
+							const id = "<td scope='row'>" + listData[i].siseol_id + "</td>";
+							const name = "<td scope='row'>" + listData[i].siseolName + "</td>";
+							$("#listTable").append("<tr>"+name+id+"</tr>");
+						}
+					}
+				},
+				error : function() {
+					alert("리스트 정보를 가져오지 못했습니다.");
+				}
+			})
+		}
+		
 		$(document).ready(function() {
 			var msg = "<c:out value='${msg}'/>";
 			if(msg != null && msg != undefined && msg != "") {
 				alert(msg);
 			}
 			updateBookmarkList();
+			updateListData();
 		})
 	
 		
@@ -271,30 +304,30 @@
 <div class="offcanvas offcanvas-start" style="margin-top: 80px; margin-left: 80px; float: left;" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
   <!-- 사이드바 헤더  -->
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">관측소 수 : ${sluiceCnt }</h5>
+    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">관측소/시설물 목록</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <!-- 사이드바 바디 리스트용  -->
   <div class="offcanvas-body">
-
-    <h1>관측소 목록</h1>
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">관측소명</th>
-    </tr>
-  </thead>
-
-  <tbody>
-<c:forEach var="SL" items="${SluiceList }">
-    <tr>
-      <td scope="row">${SL.name}</td>
-	</tr>
-</c:forEach>
-
-  </tbody>
+    <div>
+	    <select name="listOption" id="listOption" onchange="updateListData()">
+	    	<option value="1">전체</option>
+	    	<option value="2">관측소</option>
+	    	<option value="3">시설물</option>
+	    </select>
+    	<span id="totalListCnt"></span><!-- 총 개수 -->
+    </div>
+	<table class="table">
+	    <thead>
+	    	<tr>
+	    		<th scope="col">이름</th>
+	    		<th scope="col">코드</th>
+	    	</tr>
+	    </thead>
   
-</table>
+  		<tbody id="listTable">
+  		</tbody>
+	</table>
   <nav aria-label="Page navigation example text-center" style="margin-top: 20px;">
 			<ul class="pagination">
 				<c:if test="${page.startPage > page.pageBlock}">

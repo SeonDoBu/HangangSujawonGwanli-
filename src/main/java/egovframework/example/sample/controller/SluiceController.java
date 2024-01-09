@@ -372,6 +372,26 @@ public class SluiceController {
 		return map;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "updateListData")
+	public Map<String, Object> updateListData(String option) {
+		log.info("updateListData Start...");
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			Siseol siseol = new Siseol();
+			siseol.setKeyword(option);
+			int count = siseolService.count(siseol);
+			List<Siseol> listData = siseolService.siseolList(siseol);
+			map.put("count", count);
+			map.put("listData", listData);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		} finally {
+			log.info("updateListData End...");
+		}
+		return map;
+	}
+	
 	
 	//수문 지도 메인 맵핑
 	@GetMapping(value = "/sluiceMain")
@@ -395,6 +415,23 @@ public class SluiceController {
 			
 			model.addAttribute("sluiceCnt", sluiceCnt);
 			model.addAttribute("SluiceList",SluiceList);
+			
+			Siseol siseol = new Siseol();
+			int siseolCnt = siseolService.count(siseol);
+			
+			Paging siseolPage = new Paging(siseolCnt, currentPage);
+			
+			siseol.setStart(siseolPage.getStart());
+			siseol.setEnd(siseolPage.getEnd());
+			
+			List<Siseol> siseolList = siseolService.siseolList(siseol);
+			
+			int listOption = 0; 
+			
+			model.addAttribute("siseolPage", siseolPage);
+			model.addAttribute("siseolCnt", siseolCnt);
+			model.addAttribute("siseolList", siseolList);
+			model.addAttribute("listOption", listOption);
 			
 			// msg가 있으면 출력할 수 있도록 모델에 저장
 			if(msg == null || msg == "") {
